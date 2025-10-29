@@ -2,6 +2,7 @@ package core;
 
 import model.*;
 import util.RandomUtils;
+import io.FileOutputManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
  *  - Initialize all traffic sources.
  *  - Populate the event queue with initial events.
  *  - Process events in chronological order.
- *  - Collect and display aggregate traffic statistics.
+ *  - Log events and collect traffic statistics.
+ *  - Display and save output summaries.
  */
 public class Simulator {
 
@@ -35,6 +37,9 @@ public class Simulator {
     // Statistics collector to record aggregate traffic activity.
     private final StatisticsCollector stats;
 
+    // File output manager for logs and summaries.
+    private final FileOutputManager outputManager;
+
     /**
      * Constructs a Simulator with the specified parameters.
      *
@@ -48,19 +53,21 @@ public class Simulator {
     public Simulator(double totalSimulationTime, int numSources,
                      double onShape, double onScale,
                      double offShape, double offScale) {
+
         this.totalSimulationTime = totalSimulationTime;
         this.numSources = numSources;
         this.eventQueue = new EventQueue();
         this.sources = new ArrayList<>();
-        this.stats = new StatisticsCollector(1.0); // sample every 1 second
+        this.stats = new StatisticsCollector(1.0); // sample every 1s
+        this.outputManager = new FileOutputManager();
         this.currentTime = 0.0;
 
-        // Initialize sources
+        // Initialize all sources
         for (int i = 0; i < numSources; i++) {
             TrafficSource src = new TrafficSource(i, onShape, onScale, offShape, offScale);
             sources.add(src);
 
-            // Schedule each source's first event randomly to avoid synchronization
+            // Schedule first ON event randomly to prevent synchronization artifacts
             double initialOffset = RandomUtils.uniform(0, 5.0);
             eventQueue.addEvent(new Event(initialOffset, i, EventType.ON));
         }
@@ -68,6 +75,9 @@ public class Simulator {
 
     /**
      * Runs the simulation until the total time is reached.
+     * <p>
+     * Processes events in chronological order, updates source states,
+     * records statistics, and logs each event to file.
      */
     public void run() {
         System.out.println("Starting simulation...");
@@ -78,34 +88,42 @@ public class Simulator {
 
             currentTime = event.getTime();
 
-            // Stop if we exceed the total simulation duration
+            // Stop if simulation time exceeded
             if (currentTime > totalSimulationTime) break;
 
-            // Process the event (source ON/OFF toggle)
+            // Process this event
             TrafficSource src = sources.get(event.getSourceId());
             src.processEvent(event);
 
-            // Schedule the next event for this source
+            // Log the event for external inspection
+            outputManager.logEvent(event);
+
+            // Schedule the next state-change event
             Event next = src.generateNextEvent(currentTime);
             eventQueue.addEvent(next);
 
-            // Compute the number of active (ON) sources
+            // Compute aggregate rate (fraction of ON sources)
             long onCount = sources.stream().filter(TrafficSource::isOn).count();
             double rate = (double) onCount / numSources;
 
-            // Record this sample in the statistics collector
+            // Record a sample for statistics
             stats.recordSample(currentTime, rate);
 
-            // Optional: progress update every 100 seconds
+            // Optional progress display every ~100 seconds
             if (((int) currentTime) % 100 == 0) {
-                System.out.printf("[t=%.1f] Active sources: %d/%d%n", currentTime, onCount, numSources);
+                System.out.printf("[t=%.1f] Active sources: %d/%d%n",
+                        currentTime, onCount, numSources);
             }
         }
 
         System.out.println("Simulation complete!");
 
-        // Print and export summary statistics
+        // Print summary to console and export results
         stats.printSummary();
         stats.exportToCSV("output/traffic_data.csv");
+
+        // Save summary and close log files
+        outputManager.saveSummary(stats);
+        outputManager.close();
     }
 }
