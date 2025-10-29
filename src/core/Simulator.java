@@ -4,6 +4,7 @@ import model.*;
 import util.RandomUtils;
 import io.FileOutputManager;
 import util.HurstEstimator;
+import util.FGNGenerator;           //  FGN generator
 import extensions.NetworkQueue;
 
 import java.util.ArrayList;
@@ -18,11 +19,13 @@ import java.util.List;
  *  - Process events in chronological order.
  *  - Log events and collect traffic statistics.
  *  - Drive a simple single-server NetworkQueue (bonus).
+ *  - (Bonus) Modulate arrivals with Fractional Gaussian Noise (FGN) for an
+ *    alternative self-similar traffic method.
  *  - Display and save output summaries (CSV + text).
  */
 public class Simulator {
 
-    // ---- Core configuration ----
+    //  Core configuration
 
     /** Total time to simulate (seconds). */
     private final double totalSimulationTime;
@@ -30,7 +33,7 @@ public class Simulator {
     /** Number of traffic sources to simulate. */
     private final int numSources;
 
-    // ---- Core runtime state ----
+    // Core runtime state -
 
     /** Event queue holding upcoming ON/OFF transitions. */
     private final EventQueue eventQueue;
@@ -47,7 +50,7 @@ public class Simulator {
     /** File output manager for event log + summary file. */
     private final FileOutputManager outputManager;
 
-    // ---- Bonus: simple network queue element ----
+    // Bonus: simple network queue element
 
     /**
      * A single-server FIFO queue that receives packet arrivals driven by the
@@ -55,11 +58,28 @@ public class Simulator {
      */
     private final NetworkQueue netQueue;
 
-    /** For converting ON activity into packet arrivals. */
+    /** For converting ON activity into packet arrivals (packets per second contributed by each ON source). */
     private final double packetsPerSecondPerOnSource = 5.0; // tweak as desired
 
     /** Internal tracker to compute arrival volume between events. */
     private double lastQueueUpdateTime = 0.0;
+
+    //  Bonus: FGN-based rate modulator (alternative self-similar generator)
+
+    /** Enable/disable multiplicative FGN modulation of arrivals. */
+    private final boolean useFgnModulator = true;
+
+    /** Hurst parameter for FGN (0 < H < 1), H>0.5 => long-range dependence. */
+    private final double fgnH = 0.80;
+
+    /** Seed for reproducibility. */
+    private final long fgnSeed = 12345L;
+
+    /** Sampling interval for the FGN series (seconds). */
+    private final double fgnSampleInterval = 1.0;
+
+    /** Precomputed FGN series mapped to [0,1] for use as a multiplicative factor over time. */
+    private double[] fgnFactor01;
 
     /**
      * Constructs a Simulator with the specified parameters.
@@ -78,11 +98,21 @@ public class Simulator {
         this.totalSimulationTime = totalSimulationTime;
         this.numSources = numSources;
 
-        this.eventQueue   = new EventQueue();
-        this.sources      = new ArrayList<>();
-        this.stats        = new StatisticsCollector(1.0);  // sample every 1s
+        this.eventQueue    = new EventQueue();
+        this.sources       = new ArrayList<>();
+        this.stats         = new StatisticsCollector(1.0);  // sample every 1s
         this.outputManager = new FileOutputManager();
-        this.currentTime  = 0.0;
+        this.currentTime   = 0.0;
+
+        // (Bonus) Precompute FGN based rate modulator series
+        if (useFgnModulator) {
+            int nSamples = (int) Math.ceil(totalSimulationTime / fgnSampleInterval) + 1;
+            double[] fgn = FGNGenerator.generateFGN(nSamples, fgnH, fgnSeed); // zero-mean, unit-variance
+            fgnFactor01 = FGNGenerator.toUnitInterval(fgn);                   // map to [0,1]
+            System.out.printf("FGN rate modulator enabled: H=%.2f, samples=%d%n", fgnH, nSamples);
+        } else {
+            fgnFactor01 = null;
+        }
 
         // Bonus queue: service rate = 50 packets/sec, buffer capacity = 200 (<=0 means infinite)
         this.netQueue = new NetworkQueue(50.0, 200);
@@ -117,7 +147,7 @@ public class Simulator {
             // Stop if simulation time exceeded
             if (currentTime > totalSimulationTime) break;
 
-            // ---- Process the ON/OFF state transition for this source ----
+            // Process the ON/OFF state transition for this source
             TrafficSource src = sources.get(event.getSourceId());
             src.processEvent(event);
 
@@ -128,34 +158,37 @@ public class Simulator {
             Event next = src.generateNextEvent(currentTime);
             eventQueue.addEvent(next);
 
-            // ---- Compute aggregate activity (fraction of ON sources) ----
+            //  Compute aggregate activity (fraction of ON sources)
             long onCount = sources.stream().filter(TrafficSource::isOn).count();
             double rate = (double) onCount / numSources;
 
             // Record a sample for statistics (time-series of activity)
             stats.recordSample(currentTime, rate);
 
-            // ---- Bonus: drive the simple network queue ----
+            // -Bonus: drive the simple network queue
             // First, process any service completions up to 'currentTime'
             netQueue.processUntil(currentTime);
 
             // Approximate the number of arrivals since the last queue update:
-            //   arrivals ≈ (dt seconds) × (#ON sources) × (pps per ON)
+            // arrivals ≈ dt * (#ON sources) * (pps per ON) * FGN_factor
             double dt = Math.max(0.0, currentTime - lastQueueUpdateTime);
-            int arrivals = (int) Math.floor(dt * onCount * packetsPerSecondPerOnSource);
+            double fgnFactor = fgnFactorAt(currentTime); // ∈ [0,1]
+            int arrivals = (int) Math.floor(dt * onCount * packetsPerSecondPerOnSource * fgnFactor);
+
             netQueue.enqueueBulk(currentTime, arrivals);
             lastQueueUpdateTime = currentTime;
 
             // Optional progress display every ~100 seconds
             if (((int) currentTime) % 100 == 0) {
-                System.out.printf("[t=%.1f] Active sources: %d/%d%n", currentTime, onCount, numSources);
+                System.out.printf("[t=%.1f] Active sources: %d/%d, FGN=%.2f%n",
+                        currentTime, onCount, numSources, fgnFactor);
                 System.out.println("           " + netQueue.toString());
             }
         }
 
         System.out.println("Simulation complete!");
 
-        // ---- Output summaries ----
+        //  Output summaries
         stats.printSummary();
         stats.exportToCSV("output/traffic_data.csv");
 
@@ -169,5 +202,19 @@ public class Simulator {
 
         // Final queue summary line
         System.out.println("Queue Summary: " + netQueue.toString());
+    }
+
+    // helpers
+
+    /**
+     * Returns the precomputed FGN modulator value in [0,1] for the given time.
+     * If FGN modulation is disabled, returns 1.0 (no effect).
+     */
+    private double fgnFactorAt(double timeSeconds) {
+        if (!useFgnModulator || fgnFactor01 == null) return 1.0;
+        int idx = (int) Math.floor(timeSeconds / fgnSampleInterval);
+        if (idx < 0) idx = 0;
+        if (idx >= fgnFactor01.length) idx = fgnFactor01.length - 1;
+        return fgnFactor01[idx];
     }
 }
