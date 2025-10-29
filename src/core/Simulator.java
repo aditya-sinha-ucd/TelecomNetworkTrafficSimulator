@@ -3,7 +3,7 @@ package core;
 import model.*;
 import util.RandomUtils;
 import io.FileOutputManager;
-
+import util.HurstEstimator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,7 +122,11 @@ public class Simulator {
         stats.printSummary();
         stats.exportToCSV("output/traffic_data.csv");
 
-        // Save summary and close log files
+        // BONUS: Estimate Hurst exponent
+        double hurst = HurstEstimator.estimateHurst(stats.getActivityRates());
+        System.out.printf("Estimated Hurst exponent: %.3f%n", hurst);
+
+        // Save summary + logs
         outputManager.saveSummary(stats);
         outputManager.close();
     }
