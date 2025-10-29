@@ -32,8 +32,8 @@ public class Simulator {
     // Simulation clock tracking current time.
     private double currentTime;
 
-    // Records time-series of total number of ON sources.
-    private final List<Double> aggregateRates;
+    // Statistics collector to record aggregate traffic activity.
+    private final StatisticsCollector stats;
 
     /**
      * Constructs a Simulator with the specified parameters.
@@ -52,13 +52,14 @@ public class Simulator {
         this.numSources = numSources;
         this.eventQueue = new EventQueue();
         this.sources = new ArrayList<>();
-        this.aggregateRates = new ArrayList<>();
+        this.stats = new StatisticsCollector(1.0); // sample every 1 second
         this.currentTime = 0.0;
 
         // Initialize sources
         for (int i = 0; i < numSources; i++) {
             TrafficSource src = new TrafficSource(i, onShape, onScale, offShape, offScale);
             sources.add(src);
+
             // Schedule each source's first event randomly to avoid synchronization
             double initialOffset = RandomUtils.uniform(0, 5.0);
             eventQueue.addEvent(new Event(initialOffset, i, EventType.ON));
@@ -70,45 +71,41 @@ public class Simulator {
      */
     public void run() {
         System.out.println("Starting simulation...");
+
         while (!eventQueue.isEmpty() && currentTime < totalSimulationTime) {
             Event event = eventQueue.nextEvent();
             if (event == null) break;
 
             currentTime = event.getTime();
 
-            // Process event only if within simulation time
-            if (currentTime > totalSimulationTime)
-                break;
+            // Stop if we exceed the total simulation duration
+            if (currentTime > totalSimulationTime) break;
 
+            // Process the event (source ON/OFF toggle)
             TrafficSource src = sources.get(event.getSourceId());
             src.processEvent(event);
 
-            // After processing, schedule the next event for that source
+            // Schedule the next event for this source
             Event next = src.generateNextEvent(currentTime);
             eventQueue.addEvent(next);
 
-            // Compute aggregate rate (number of ON sources)
+            // Compute the number of active (ON) sources
             long onCount = sources.stream().filter(TrafficSource::isOn).count();
             double rate = (double) onCount / numSources;
-            aggregateRates.add(rate);
 
-            // Print progress occasionally
-            if (((int) currentTime) % 100 == 0)
+            // Record this sample in the statistics collector
+            stats.recordSample(currentTime, rate);
+
+            // Optional: progress update every 100 seconds
+            if (((int) currentTime) % 100 == 0) {
                 System.out.printf("[t=%.1f] Active sources: %d/%d%n", currentTime, onCount, numSources);
+            }
         }
-        System.out.println("Simulation complete!");
-        printSummary();
-    }
 
-    /**
-     * Prints a simple summary of the simulation results.
-     * (This can later be replaced or extended by StatisticsCollector.)
-     */
-    private void printSummary() {
-        double avg = aggregateRates.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
-        double peak = aggregateRates.stream().mapToDouble(Double::doubleValue).max().orElse(0.0);
-        System.out.printf("Average activity rate: %.4f%n", avg);
-        System.out.printf("Peak activity rate: %.4f%n", peak);
-        System.out.printf("Total samples: %d%n", aggregateRates.size());
+        System.out.println("Simulation complete!");
+
+        // Print and export summary statistics
+        stats.printSummary();
+        stats.exportToCSV("output/traffic_data.csv");
     }
 }
