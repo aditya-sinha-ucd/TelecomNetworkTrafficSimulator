@@ -1,4 +1,5 @@
 package model;
 
-public class Distribution {
+public interface Distribution {
+    double draw();
 }
