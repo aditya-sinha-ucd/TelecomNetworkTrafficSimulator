@@ -2,7 +2,6 @@ package io;
 
 import core.Event;
 import core.StatisticsCollector;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,13 +13,13 @@ import java.time.format.DateTimeFormatter;
 /**
  * Handles all file output operations for the simulator.
  * <p>
- * This includes:
- *  - Writing detailed event logs
- *  - Saving summary statistics
- *  - Managing file naming and directories
+ * Responsibilities:
+ *  - Write detailed event logs.
+ *  - Save summary statistics.
+ *  - Manage output directory and file naming.
  * <p>
- * By isolating file operations, we avoid cluttering the core
- * simulation code with I/O logic.
+ * By isolating file operations, this class prevents I/O code
+ * from cluttering the simulation logic.
  */
 public class FileOutputManager {
 
@@ -44,11 +43,12 @@ public class FileOutputManager {
         try {
             Files.createDirectories(Path.of(OUTPUT_DIR));
         } catch (IOException e) {
-            System.err.println("Warning: Unable to create output directory: " + e.getMessage());
+            ErrorHandler.handleError("Unable to create output directory.", e);
         }
 
         // Generate time-stamped filenames to avoid overwriting old runs
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String timestamp = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         this.eventLogPath = OUTPUT_DIR + "event_log_" + timestamp + ".txt";
         this.summaryPath = OUTPUT_DIR + "summary_" + timestamp + ".txt";
 
@@ -56,7 +56,7 @@ public class FileOutputManager {
             eventWriter = new PrintWriter(new FileWriter(eventLogPath, true));
             eventWriter.printf("# Telecom Network Traffic Simulator Event Log%n# Created: %s%n%n", timestamp);
         } catch (IOException e) {
-            System.err.println("Error opening event log file: " + e.getMessage());
+            ErrorHandler.handleError("Error opening event log file.", e);
         }
     }
 
@@ -86,7 +86,7 @@ public class FileOutputManager {
             writer.write("=================================================\n");
             System.out.println("Summary saved to: " + summaryPath);
         } catch (IOException e) {
-            System.err.println("Error writing summary file: " + e.getMessage());
+            ErrorHandler.handleError("Failed to write summary file.", e);
         }
     }
 

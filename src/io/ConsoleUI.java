@@ -119,8 +119,7 @@ public class ConsoleUI {
             System.out.println("\nSimulation finished successfully!");
             System.out.println("Results saved in the output/ directory.");
         } catch (Exception e) {
-            System.err.println("\nAn error occurred during simulation: " + e.getMessage());
-            e.printStackTrace();
+            ErrorHandler.fatal("Unexpected error during simulation.", e);
         }
     }
 }
