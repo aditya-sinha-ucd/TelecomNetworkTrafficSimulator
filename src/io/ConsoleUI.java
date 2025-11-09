@@ -78,6 +78,35 @@ public class ConsoleUI {
     }
 
     /**
+     * Reads a double value within a specific range (exclusive of boundaries).
+     * Keeps prompting until a valid number in (min, max) is entered.
+     * Accepts 'quit' or 'q' to exit at any prompt.
+     */
+    private double readDoubleInRange(String prompt, double min, double max) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
+                System.out.println("Exiting simulator...");
+                System.exit(0);
+            }
+
+            try {
+                double value = Double.parseDouble(input);
+                if (value > min && value < max) {
+                    return value;
+                } else {
+                    System.out.printf("Value must be in range (%.2f, %.2f). Try again.%n", min, max);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Please enter a valid value.");
+            }
+        }
+    }
+
+
+    /**
      * Starts the console-driven interaction and launches the simulator.
      */
     public void start() {
@@ -94,7 +123,7 @@ public class ConsoleUI {
         // =====================================================
         if (modeChoice.equals("2")) {
             System.out.println("\n=== Fractional Gaussian Noise Mode ===");
-            double H = readPositiveDouble("Enter Hurst exponent (0.5 < H < 1.0): ");
+            double H = readDoubleInRange("Enter Hurst exponent (0.5 < H < 1.0): ", 0.5, 1.0);
             double sigma = readPositiveDouble("Enter standard deviation (σ): ");
             double mean = 0.0;
             int samples = readPositiveInt("Enter number of samples to generate: ");
@@ -116,6 +145,7 @@ public class ConsoleUI {
             }
             return;
         }
+
 
         // =====================================================
         // === Pareto ON/OFF Mode (default) ===
