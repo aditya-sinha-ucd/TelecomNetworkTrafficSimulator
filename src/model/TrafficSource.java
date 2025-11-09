@@ -2,82 +2,62 @@ package model;
 
 import core.Event;
 import core.EventType;
-import util.RandomUtils;
 
 /**
  * Represents a single ON/OFF traffic source in the simulation.
  * <p>
- * Each TrafficSource alternates between two states:
- * <ul>
- *     <li>ON: actively generating traffic (e.g., sending packets)</li>
- *     <li>OFF: idle state, generating no traffic</li>
- * </ul>
- * <p>
- * Durations of ON and OFF periods follow heavy-tailed (Pareto)
- * distributions to produce self-similar aggregated traffic when
- * multiple sources are combined.
+ * Each TrafficSource alternates between active (ON) and idle (OFF) states.
+ * The ON and OFF durations are sampled from Pareto distributions to model
+ * self-similar network traffic.
  */
 public class TrafficSource {
 
-    // Unique identifier for this source (0 based index).
+    /** Unique identifier for this source. */
     private final int id;
 
-    // Current state of this source (ON or OFF).
+    /** Current state of the source (ON or OFF). */
     private SourceState state;
 
-    // Shape and scale parameters for Pareto-distributed ON durations.
-    private final double onShape, onScale;
+    /** Distributions for ON and OFF durations. */
+    private final Distribution onDist;
+    private final Distribution offDist;
 
-    // Shape and scale parameters for Pareto-distributed OFF durations.
-    private final double offShape, offScale;
-
-    // The simulation time of the next scheduled state change.
+    /** Time of next scheduled event. */
     private double nextEventTime;
 
     /**
-     * Constructs a new ON/OFF traffic source.
-     *
-     * @param id        the source ID
-     * @param onShape   Pareto alpha parameter for ON duration
-     * @param onScale   Pareto scale (minimum) parameter for ON duration
-     * @param offShape  Pareto alpha parameter for OFF duration
-     * @param offScale  Pareto scale (minimum) parameter for OFF duration
+     * Constructs a new TrafficSource with given Pareto parameters.
      */
-    public TrafficSource(int id, double onShape, double onScale, double offShape, double offScale) {
+    public TrafficSource(int id, double onShape, double onScale,
+                         double offShape, double offScale) {
         this.id = id;
-        this.onShape = onShape;
-        this.onScale = onScale;
-        this.offShape = offShape;
-        this.offScale = offScale;
-        this.state = SourceState.OFF; // default start state
+        this.state = SourceState.OFF;
+        this.onDist = new ParetoDistribution(onShape, onScale);
+        this.offDist = new ParetoDistribution(offShape, offScale);
         this.nextEventTime = 0.0;
     }
 
     /**
-     * Generates the next event (ON→OFF or OFF→ON) for this source.
+     * Generates the next event for this source based on its current state.
      *
      * @param currentTime the current simulation time
-     * @return the next event for this source
+     * @return the next event (ON or OFF)
      */
     public Event generateNextEvent(double currentTime) {
         double duration;
-
-        // Determine the duration of the next period based on the current state
         if (state == SourceState.OFF) {
-            duration = RandomUtils.samplePareto(onShape, onScale);
+            duration = onDist.sample();
             nextEventTime = currentTime + duration;
             return new Event(nextEventTime, id, EventType.ON);
         } else {
-            duration = RandomUtils.samplePareto(offShape, offScale);
+            duration = offDist.sample();
             nextEventTime = currentTime + duration;
             return new Event(nextEventTime, id, EventType.OFF);
         }
     }
 
     /**
-     * Handles a state change when an event occurs.
-     *
-     * @param event the event to process
+     * Processes a state change event (ON or OFF).
      */
     public void processEvent(Event event) {
         if (event.getType() == EventType.ON) {
@@ -87,17 +67,17 @@ public class TrafficSource {
         }
     }
 
-    // @return true if the source is currently ON (active)
+    /** @return true if the source is currently ON. */
     public boolean isOn() {
         return state == SourceState.ON;
     }
 
-    // @return the ID of this source
+    /** @return the ID of this source. */
     public int getId() {
         return id;
     }
 
-    // @return the simulation time of the next scheduled event
+    /** @return the time of the next scheduled event. */
     public double getNextEventTime() {
         return nextEventTime;
     }

@@ -2,82 +2,71 @@ package core;
 
 import model.*;
 import util.RandomUtils;
-import io.FileOutputManager;
 import util.HurstEstimator;
+import io.FileOutputManager;
+import extensions.MultiSourceManager;
+import extensions.NetworkQueue;
+import io.ErrorHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The main controller class that runs the event-driven simulation.
+ * Main controller class that runs the event-driven simulation.
  * <p>
  * Responsibilities:
  *  - Initialize all traffic sources.
- *  - Populate the event queue with initial events.
- *  - Process events in chronological order.
- *  - Log events and collect traffic statistics.
- *  - Display and save output summaries.
+ *  - Manage the event queue.
+ *  - Process events and advance simulation time.
+ *  - Log events and record statistics.
+ *  - Integrate optional queue and source management features.
  */
 public class Simulator {
 
-    // Total time to simulate (seconds).
     private final double totalSimulationTime;
-
-    // Number of traffic sources to simulate.
     private final int numSources;
-
-    // Event queue holding upcoming ON/OFF transitions.
     private final EventQueue eventQueue;
-
-    // List of all traffic sources.
     private final List<TrafficSource> sources;
-
-    // Central simulation clock to keep consistent time across components.
     private final SimulationClock clock;
-
-    // Statistics collector to record aggregate traffic activity.
     private final StatisticsCollector stats;
-
-    // File output manager for logs and summaries.
     private final FileOutputManager outputManager;
 
-    /**
-     * Constructs a Simulator with the specified parameters.
-     *
-     * @param totalSimulationTime total time to run the simulation (seconds)
-     * @param numSources          number of independent ON/OFF sources
-     * @param onShape             Pareto shape parameter for ON durations
-     * @param onScale             Pareto scale parameter for ON durations
-     * @param offShape            Pareto shape parameter for OFF durations
-     * @param offScale            Pareto scale parameter for OFF durations
-     */
-    public Simulator(double totalSimulationTime, int numSources,
-                     double onShape, double onScale,
-                     double offShape, double offScale) {
+    // Optional advanced components
+    private final MultiSourceManager multiSourceManager;
+    private final NetworkQueue networkQueue;
 
-        this.totalSimulationTime = totalSimulationTime;
-        this.numSources = numSources;
+    /**
+     * Constructs a Simulator using given simulation parameters.
+     */
+    public Simulator(SimulationParameters params) {
+        this.totalSimulationTime = params.totalSimulationTime;
+        this.numSources = params.numberOfSources;
         this.eventQueue = new EventQueue();
         this.sources = new ArrayList<>();
-        this.clock = new SimulationClock(); // NEW: centralized time management
-        this.stats = new StatisticsCollector(1.0); // sample every 1 second
+        this.clock = new SimulationClock();
+        this.stats = new StatisticsCollector(params.samplingInterval);
         this.outputManager = new FileOutputManager();
 
-        // Initialize all sources
-        for (int i = 0; i < numSources; i++) {
-            TrafficSource src = new TrafficSource(i, onShape, onScale, offShape, offScale);
-            sources.add(src);
+        this.multiSourceManager = new MultiSourceManager();
+        this.networkQueue = new NetworkQueue(5.0); // Example: 5 packets/sec service rate
 
-            // Schedule first ON event randomly to prevent synchronization artifacts
-            double initialOffset = RandomUtils.uniform(0, 5.0);
-            eventQueue.addEvent(new Event(initialOffset, i, EventType.ON));
+        // Initialize sources (with ±15% variation)
+        sources.addAll(
+                multiSourceManager.generateSources(numSources,
+                        params.onShape, params.onScale,
+                        params.offShape, params.offScale,
+                        0.15)
+        );
+
+        // Schedule each source's first ON event at a random offset
+        for (int i = 0; i < sources.size(); i++) {
+            double offset = RandomUtils.uniform(0, 5.0);
+            eventQueue.addEvent(new Event(offset, i, EventType.ON));
         }
     }
 
     /**
-     * Runs the simulation until the total time is reached.
-     * <p>
-     * Processes events in chronological order, updates source states,
-     * records statistics, and logs each event to file.
+     * Runs the full event-driven simulation.
      */
     public void run() {
         System.out.println("Starting simulation...");
@@ -86,48 +75,48 @@ public class Simulator {
             Event event = eventQueue.nextEvent();
             if (event == null) break;
 
-            // Advance the clock to this event's time
             clock.advanceTo(event.getTime());
-
-            // Stop if simulation time exceeded
             if (clock.getTime() > totalSimulationTime) break;
 
-            // Process this event
-            TrafficSource src = sources.get(event.getSourceId());
-            src.processEvent(event);
+            try {
+                TrafficSource src = sources.get(event.getSourceId());
+                src.processEvent(event);
+                outputManager.logEvent(event);
 
-            // Log the event for external inspection
-            outputManager.logEvent(event);
+                // Schedule next event for this source
+                Event next = src.generateNextEvent(clock.getTime());
+                eventQueue.addEvent(next);
 
-            // Schedule the next state-change event for this source
-            Event next = src.generateNextEvent(clock.getTime());
-            eventQueue.addEvent(next);
+                // Compute aggregate rate
+                long onCount = sources.stream().filter(TrafficSource::isOn).count();
+                double rate = (double) onCount / numSources;
+                stats.recordSample(clock.getTime(), rate);
 
-            // Compute aggregate rate (fraction of ON sources)
-            long onCount = sources.stream().filter(TrafficSource::isOn).count();
-            double rate = (double) onCount / numSources;
+                // Simulate packet arrivals into the network queue
+                if (rate > 0) networkQueue.enqueue(clock.getTime());
 
-            // Record a sample for statistics
-            stats.recordSample(clock.getTime(), rate);
+                // Optional progress output
+                if (((int) clock.getTime()) % 100 == 0) {
+                    System.out.printf("[t=%.1f] Active sources: %d/%d%n",
+                            clock.getTime(), onCount, numSources);
+                    System.out.printf("[Queue] t=%.1f, Avg delay: %.4fs, Processed: %d%n",
+                            clock.getTime(), networkQueue.getAverageDelay(), networkQueue.getProcessedPackets());
+                }
 
-            // Optional progress display every ~100 seconds
-            if (((int) clock.getTime()) % 100 == 0) {
-                System.out.printf("[t=%.1f] Active sources: %d/%d%n",
-                        clock.getTime(), onCount, numSources);
+            } catch (Exception e) {
+                ErrorHandler.handleError("Error processing event: " + e.getMessage(), false);
             }
         }
 
         System.out.println("Simulation complete!");
 
-        // Print summary to console and export results
         stats.printSummary();
         stats.exportToCSV("output/traffic_data.csv");
 
-        // BONUS: Estimate Hurst exponent
         double hurst = HurstEstimator.estimateHurst(stats.getActivityRates());
         System.out.printf("Estimated Hurst exponent: %.3f%n", hurst);
 
-        // Save summary + logs
+        System.out.printf("Average queue delay: %.4f s%n", networkQueue.getAverageDelay());
         outputManager.saveSummary(stats);
         outputManager.close();
     }

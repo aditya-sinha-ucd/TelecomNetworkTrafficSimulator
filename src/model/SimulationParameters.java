@@ -3,8 +3,7 @@ package model;
 /**
  * Holds all configuration parameters for a simulation run.
  * <p>
- * This allows settings to be passed between the UI, file loader,
- * and simulator without using long parameter lists.
+ * Used to pass values between ConsoleUI, ConfigFileLoader, and Simulator.
  */
 public class SimulationParameters {
 
@@ -28,12 +27,17 @@ public class SimulationParameters {
         this.offScale = offScale;
     }
 
+    /** Convenience builder for ConsoleUI input */
+    public static SimulationParameters fromUserInput(double totalTime, int numSources,
+                                                     double onShape, double onScale,
+                                                     double offShape, double offScale) {
+        return new SimulationParameters(totalTime, numSources, onShape, onScale, offShape, offScale);
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "SimulationParameters [time=%.2fs, sources=%d, " +
-                        "ON(alpha=%.2f, scale=%.2f), OFF(alpha=%.2f, scale=%.2f)]",
-                totalSimulationTime, numberOfSources,
-                onShape, onScale, offShape, offScale);
+                "SimulationParameters [time=%.2fs, sources=%d, ON(alpha=%.2f, scale=%.2f), OFF(alpha=%.2f, scale=%.2f)]",
+                totalSimulationTime, numberOfSources, onShape, onScale, offShape, offScale);
     }
 }

@@ -1,23 +1,24 @@
 package io;
 
 import core.Simulator;
+import model.SimulationParameters;
+
+import java.util.Map;
 import java.util.Scanner;
 
 /**
  * Handles all console interaction with the user.
  * <p>
  * Responsibilities:
- *  - Prompt for simulation parameters.
+ *  - Prompt for simulation parameters or load from file.
  *  - Validate and sanitize user input.
  *  - Display help and status messages.
  *  - Allow the user to quit gracefully.
  */
 public class ConsoleUI {
 
-    /** Shared Scanner instance for reading console input. */
     private final Scanner scanner;
 
-    /** Constructs a ConsoleUI ready for user input. */
     public ConsoleUI() {
         this.scanner = new Scanner(System.in);
     }
@@ -31,7 +32,7 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /** Reads a positive double value from the console. */
+    /** Reads a positive double from the console. */
     private double readPositiveDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -52,7 +53,7 @@ public class ConsoleUI {
         }
     }
 
-    /** Reads a positive integer value from the console. */
+    /** Reads a positive integer from the console. */
     private int readPositiveInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -73,11 +74,49 @@ public class ConsoleUI {
         }
     }
 
-    /** Starts the console-driven interaction and launches the simulator. */
+    /**
+     * Starts the console-driven interaction and launches the simulator.
+     */
     public void start() {
         printBanner();
 
-        // Prompt for core simulation parameters
+        System.out.print("Type 'load' to load a config file or press Enter to continue: ");
+        String firstInput = scanner.nextLine().trim();
+
+        // === Load parameters from config file ===
+        if (firstInput.equalsIgnoreCase("load")) {
+            System.out.print("Enter path to configuration file (e.g., config.txt): ");
+            String filePath = scanner.nextLine().trim();
+
+            try {
+                Map<String, Double> params = ConfigFileLoader.loadConfig(filePath);
+                ConfigFileLoader.printLoadedParameters(params);
+
+                SimulationParameters simParams = new SimulationParameters(
+                        params.get("totalTime"),
+                        params.get("numSources").intValue(),
+                        params.get("onShape"), params.get("onScale"),
+                        params.get("offShape"), params.get("offScale")
+                );
+
+                System.out.println("\nStarting simulation with loaded parameters...");
+                System.out.println(simParams.toString());
+                System.out.println("-----------------------------------------------");
+
+                Simulator simulator = new Simulator(simParams);
+                simulator.run();
+
+                System.out.println("\nSimulation finished successfully!");
+                System.out.println("Results saved in the output/ directory.");
+                return;
+
+            } catch (Exception e) {
+                System.err.println("Error loading configuration file: " + e.getMessage());
+                System.out.println("Falling back to manual input mode...\n");
+            }
+        }
+
+        // === Manual input mode ===
         double totalTime = readPositiveDouble("Enter total simulation time (seconds): ");
         int numSources = readPositiveInt("Enter number of traffic sources: ");
         double onShape = readPositiveDouble("Enter Pareto shape parameter for ON duration (alpha): ");
@@ -85,19 +124,16 @@ public class ConsoleUI {
         double offShape = readPositiveDouble("Enter Pareto shape parameter for OFF duration (alpha): ");
         double offScale = readPositiveDouble("Enter Pareto scale (minimum) for OFF duration: ");
 
+        SimulationParameters params = SimulationParameters.fromUserInput(
+                totalTime, numSources, onShape, onScale, offShape, offScale);
+
         System.out.println();
         System.out.println("Starting simulation with parameters:");
-        System.out.printf("  Total time: %.1fs%n", totalTime);
-        System.out.printf("  Sources: %d%n", numSources);
-        System.out.printf("  ON (shape=%.2f, scale=%.2f)%n", onShape, onScale);
-        System.out.printf("  OFF (shape=%.2f, scale=%.2f)%n", offShape, offScale);
+        System.out.println(params.toString());
         System.out.println("-----------------------------------------------");
 
         try {
-            // Create and run simulator
-            Simulator simulator = new Simulator(totalTime, numSources,
-                    onShape, onScale,
-                    offShape, offScale);
+            Simulator simulator = new Simulator(params);
             simulator.run();
 
             System.out.println("\nSimulation finished successfully!");
