@@ -31,8 +31,8 @@ public class Simulator {
     // List of all traffic sources.
     private final List<TrafficSource> sources;
 
-    // Simulation clock tracking current time.
-    private double currentTime;
+    // Central simulation clock to keep consistent time across components.
+    private final SimulationClock clock;
 
     // Statistics collector to record aggregate traffic activity.
     private final StatisticsCollector stats;
@@ -58,9 +58,9 @@ public class Simulator {
         this.numSources = numSources;
         this.eventQueue = new EventQueue();
         this.sources = new ArrayList<>();
-        this.stats = new StatisticsCollector(1.0); // sample every 1s
+        this.clock = new SimulationClock(); // NEW: centralized time management
+        this.stats = new StatisticsCollector(1.0); // sample every 1 second
         this.outputManager = new FileOutputManager();
-        this.currentTime = 0.0;
 
         // Initialize all sources
         for (int i = 0; i < numSources; i++) {
@@ -82,14 +82,15 @@ public class Simulator {
     public void run() {
         System.out.println("Starting simulation...");
 
-        while (!eventQueue.isEmpty() && currentTime < totalSimulationTime) {
+        while (!eventQueue.isEmpty() && clock.getTime() < totalSimulationTime) {
             Event event = eventQueue.nextEvent();
             if (event == null) break;
 
-            currentTime = event.getTime();
+            // Advance the clock to this event's time
+            clock.advanceTo(event.getTime());
 
             // Stop if simulation time exceeded
-            if (currentTime > totalSimulationTime) break;
+            if (clock.getTime() > totalSimulationTime) break;
 
             // Process this event
             TrafficSource src = sources.get(event.getSourceId());
@@ -98,8 +99,8 @@ public class Simulator {
             // Log the event for external inspection
             outputManager.logEvent(event);
 
-            // Schedule the next state-change event
-            Event next = src.generateNextEvent(currentTime);
+            // Schedule the next state-change event for this source
+            Event next = src.generateNextEvent(clock.getTime());
             eventQueue.addEvent(next);
 
             // Compute aggregate rate (fraction of ON sources)
@@ -107,12 +108,12 @@ public class Simulator {
             double rate = (double) onCount / numSources;
 
             // Record a sample for statistics
-            stats.recordSample(currentTime, rate);
+            stats.recordSample(clock.getTime(), rate);
 
             // Optional progress display every ~100 seconds
-            if (((int) currentTime) % 100 == 0) {
+            if (((int) clock.getTime()) % 100 == 0) {
                 System.out.printf("[t=%.1f] Active sources: %d/%d%n",
-                        currentTime, onCount, numSources);
+                        clock.getTime(), onCount, numSources);
             }
         }
 

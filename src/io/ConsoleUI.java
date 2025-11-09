@@ -1,8 +1,6 @@
 package io;
 
 import core.Simulator;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -24,9 +22,7 @@ public class ConsoleUI {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Displays a banner at program start.
-     */
+    /** Displays a banner at program start. */
     private void printBanner() {
         System.out.println("===============================================");
         System.out.println("     TELECOM NETWORK TRAFFIC SIMULATOR 2025     ");
@@ -35,12 +31,7 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /**
-     * Reads a positive double value from the console.
-     *
-     * @param prompt message shown to user
-     * @return validated positive double
-     */
+    /** Reads a positive double value from the console. */
     private double readPositiveDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -61,12 +52,7 @@ public class ConsoleUI {
         }
     }
 
-    /**
-     * Reads a positive integer value from the console.
-     *
-     * @param prompt message shown to user
-     * @return validated positive integer
-     */
+    /** Reads a positive integer value from the console. */
     private int readPositiveInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -87,9 +73,7 @@ public class ConsoleUI {
         }
     }
 
-    /**
-     * Starts the console-driven interaction and launches the simulator.
-     */
+    /** Starts the console-driven interaction and launches the simulator. */
     public void start() {
         printBanner();
 

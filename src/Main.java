@@ -1,6 +1,6 @@
 
 import io.ConsoleUI;
-// this is a test
+
 /**
  * Entry point of the Telecom Network Traffic Simulator program.
  * <p>

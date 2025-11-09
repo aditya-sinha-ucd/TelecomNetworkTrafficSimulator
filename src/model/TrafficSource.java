@@ -19,7 +19,7 @@ import util.RandomUtils;
  */
 public class TrafficSource {
 
-    // Unique identifier for this source (0-based index).
+    // Unique identifier for this source (0 based index).
     private final int id;
 
     // Current state of this source (ON or OFF).
