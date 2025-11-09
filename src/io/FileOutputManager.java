@@ -14,57 +14,55 @@ import java.time.format.DateTimeFormatter;
 /**
  * Handles all file output operations for the simulator.
  * <p>
- * This includes:
- *  - Writing detailed event logs
- *  - Saving summary statistics
- *  - Managing file naming and directories
+ * Responsibilities:
+ *  - Manage per-run output directories
+ *  - Write detailed event logs
+ *  - Save summary statistics
  * <p>
- * By isolating file operations, we avoid cluttering the core
- * simulation code with I/O logic.
+ * Centralizing I/O ensures clean separation between simulation logic
+ * and file management, improving maintainability.
  */
 public class FileOutputManager {
 
-    /** Default output directory. */
-    private static final String OUTPUT_DIR = "output/";
+    /** Root output directory. */
+    private static final String OUTPUT_ROOT = "output/";
+
+    /** Directory specific to this simulation run. */
+    private final String runDir;
 
     /** Path to the event log file. */
     private final String eventLogPath;
-
-    /** Path to the summary file. */
-    private final String summaryPath;
 
     /** Writer for appending event logs efficiently. */
     private PrintWriter eventWriter;
 
     /**
-     * Constructs a FileOutputManager and ensures the output
-     * directory exists before writing any files.
+     * Constructs a FileOutputManager for a unique simulation run.
+     * Automatically creates a timestamped folder to contain all
+     * generated files for this run.
      */
     public FileOutputManager() {
-        try {
-            Files.createDirectories(Path.of(OUTPUT_DIR));
-        } catch (IOException e) {
-            System.err.println("Warning: Unable to create output directory: " + e.getMessage());
-        }
-
-        // Generate time-stamped filenames to avoid overwriting old runs
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-        this.eventLogPath = OUTPUT_DIR + "event_log_" + timestamp + ".txt";
-        this.summaryPath = OUTPUT_DIR + "summary_" + timestamp + ".txt";
+        // Create timestamped run folder
+        String timestamp = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        this.runDir = OUTPUT_ROOT + "run_" + timestamp + "/";
+        this.eventLogPath = runDir + "event_log.txt";
 
         try {
+            Files.createDirectories(Path.of(runDir));
             eventWriter = new PrintWriter(new FileWriter(eventLogPath, true));
             eventWriter.printf("# Telecom Network Traffic Simulator Event Log%n# Created: %s%n%n", timestamp);
         } catch (IOException e) {
-            System.err.println("Error opening event log file: " + e.getMessage());
+            System.err.println("Error initializing event log file: " + e.getMessage());
         }
     }
 
-    /**
-     * Logs a simulation event to the event log file.
-     *
-     * @param event the event to log
-     */
+    /** Returns this run's directory path. */
+    public String getRunDirectory() {
+        return runDir;
+    }
+
+    /** Writes a single event record to the event log. */
     public void logEvent(Event event) {
         if (eventWriter == null) return;
         eventWriter.printf("t=%.3f, source=%d, type=%s%n",
@@ -72,17 +70,19 @@ public class FileOutputManager {
     }
 
     /**
-     * Saves a summary of the simulation statistics to a text file.
+     * Saves a simulation summary file inside the run folder.
      *
-     * @param stats the StatisticsCollector containing summary data
+     * @param stats StatisticsCollector with summary data
      */
     public void saveSummary(StatisticsCollector stats) {
+        String summaryPath = runDir + "summary.txt";
         try (FileWriter writer = new FileWriter(summaryPath)) {
             writer.write("=== Telecom Network Traffic Simulator Summary ===\n");
+            writer.write(String.format("Samples Recorded: %d%n", stats.getSampleCount()));
             writer.write(String.format("Average Rate: %.4f%n", stats.getAverageRate()));
             writer.write(String.format("Peak Rate: %.4f%n", stats.getPeakRate()));
             writer.write(String.format("Std Dev: %.4f%n", stats.getStdDevRate()));
-            writer.write(String.format("Samples Recorded: %d%n", stats.getSampleCount()));
+            writer.write(String.format("Estimated Hurst Exponent: %.4f%n", stats.getHurstExponent()));
             writer.write("=================================================\n");
             System.out.println("Summary saved to: " + summaryPath);
         } catch (IOException e) {
@@ -90,11 +90,7 @@ public class FileOutputManager {
         }
     }
 
-    /**
-     * Closes the log writer and flushes all buffered data to disk.
-     * <p>
-     * This should be called at the end of the simulation.
-     */
+    /** Closes the event writer and flushes remaining data to disk. */
     public void close() {
         if (eventWriter != null) {
             eventWriter.flush();

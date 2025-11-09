@@ -16,8 +16,7 @@ import java.util.Scanner;
  *  - Prompt for simulation parameters or load from file.
  *  - Allow switching between Pareto ON/OFF and FGN modes.
  *  - Validate and sanitize user input.
- *  - Display help and status messages.
- *  - Allow the user to quit gracefully.
+ *  - Allow the user to quit gracefully at any prompt.
  */
 public class ConsoleUI {
 
@@ -27,26 +26,33 @@ public class ConsoleUI {
         this.scanner = new Scanner(System.in);
     }
 
-    /** Displays a banner at program start. */
+    /** Displays the simulator banner. */
     private void printBanner() {
         System.out.println("===============================================");
         System.out.println("     TELECOM NETWORK TRAFFIC SIMULATOR 2025     ");
         System.out.println("===============================================");
-        System.out.println("Type 'quit' at any prompt to exit.");
+        System.out.println("Type 'quit' or 'q' at any prompt to exit.");
         System.out.println();
+    }
+
+    /**
+     * Reads user input from the console.
+     * Exits gracefully if the user types 'quit' or 'q'.
+     */
+    private String readInput(String prompt) {
+        System.out.print(prompt);
+        String input = scanner.nextLine().trim();
+        if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
+            System.out.println("Exiting simulator...");
+            System.exit(0);
+        }
+        return input;
     }
 
     /** Reads a positive double from the console. */
     private double readPositiveDouble(String prompt) {
         while (true) {
-            System.out.print(prompt);
-            String input = scanner.nextLine().trim();
-
-            if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
-                System.out.println("Exiting simulator...");
-                System.exit(0);
-            }
-
+            String input = readInput(prompt);
             try {
                 double value = Double.parseDouble(input);
                 if (value > 0) return value;
@@ -60,14 +66,7 @@ public class ConsoleUI {
     /** Reads a positive integer from the console. */
     private int readPositiveInt(String prompt) {
         while (true) {
-            System.out.print(prompt);
-            String input = scanner.nextLine().trim();
-
-            if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
-                System.out.println("Exiting simulator...");
-                System.exit(0);
-            }
-
+            String input = readInput(prompt);
             try {
                 int value = Integer.parseInt(input);
                 if (value > 0) return value;
@@ -88,8 +87,7 @@ public class ConsoleUI {
         System.out.println("Select simulation mode:");
         System.out.println("1 - Pareto ON/OFF (event-driven traffic model)");
         System.out.println("2 - Fractional Gaussian Noise (FGN generator)");
-        System.out.print("Enter choice (1 or 2): ");
-        String modeChoice = scanner.nextLine().trim();
+        String modeChoice = readInput("Enter choice (1 or 2): ");
 
         // =====================================================
         // === FGN Mode ===
@@ -122,13 +120,11 @@ public class ConsoleUI {
         // =====================================================
         // === Pareto ON/OFF Mode (default) ===
         // =====================================================
-        System.out.print("Type 'load' to load a config file or press Enter to continue: ");
-        String firstInput = scanner.nextLine().trim();
+        String firstInput = readInput("Type 'load' to load a config file or press Enter to continue: ");
 
         // === Load parameters from config file ===
         if (firstInput.equalsIgnoreCase("load")) {
-            System.out.print("Enter path to configuration file (e.g., config.txt): ");
-            String filePath = scanner.nextLine().trim();
+            String filePath = readInput("Enter path to configuration file (e.g., config.txt): ");
 
             try {
                 Map<String, Double> params = ConfigFileLoader.loadConfig(filePath);
@@ -142,7 +138,7 @@ public class ConsoleUI {
                 );
 
                 System.out.println("\nStarting simulation with loaded parameters...");
-                System.out.println(simParams.toString());
+                System.out.println(simParams);
                 System.out.println("-----------------------------------------------");
 
                 Simulator simulator = new Simulator(simParams);
@@ -171,7 +167,7 @@ public class ConsoleUI {
 
         System.out.println();
         System.out.println("Starting simulation with parameters:");
-        System.out.println(params.toString());
+        System.out.println(params);
         System.out.println("-----------------------------------------------");
 
         try {
