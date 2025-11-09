@@ -2,7 +2,10 @@ package io;
 
 import core.Simulator;
 import model.SimulationParameters;
+import util.FractionalGaussianNoise;
+import util.HurstEstimator;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ import java.util.Scanner;
  * <p>
  * Responsibilities:
  *  - Prompt for simulation parameters or load from file.
+ *  - Allow switching between Pareto ON/OFF and FGN modes.
  *  - Validate and sanitize user input.
  *  - Display help and status messages.
  *  - Allow the user to quit gracefully.
@@ -80,6 +84,44 @@ public class ConsoleUI {
     public void start() {
         printBanner();
 
+        // === Choose simulation mode ===
+        System.out.println("Select simulation mode:");
+        System.out.println("1 - Pareto ON/OFF (event-driven traffic model)");
+        System.out.println("2 - Fractional Gaussian Noise (FGN generator)");
+        System.out.print("Enter choice (1 or 2): ");
+        String modeChoice = scanner.nextLine().trim();
+
+        // =====================================================
+        // === FGN Mode ===
+        // =====================================================
+        if (modeChoice.equals("2")) {
+            System.out.println("\n=== Fractional Gaussian Noise Mode ===");
+            double H = readPositiveDouble("Enter Hurst exponent (0.5 < H < 1.0): ");
+            double sigma = readPositiveDouble("Enter standard deviation (σ): ");
+            double mean = 0.0;
+            int samples = readPositiveInt("Enter number of samples to generate: ");
+
+            try {
+                FractionalGaussianNoise fgn = new FractionalGaussianNoise(
+                        H, sigma, mean, System.currentTimeMillis());
+                double[] series = fgn.generate(samples);
+                double estH = HurstEstimator.estimateHurst(Arrays.stream(series).boxed().toList());
+
+                System.out.println("\nGenerated FGN sequence successfully!");
+                System.out.printf("Target Hurst exponent: %.3f%n", H);
+                System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
+                System.out.println("FGN data generated in memory (can be exported later).");
+                System.out.println("-----------------------------------------------");
+
+            } catch (Exception e) {
+                System.err.println("Error generating FGN sequence: " + e.getMessage());
+            }
+            return;
+        }
+
+        // =====================================================
+        // === Pareto ON/OFF Mode (default) ===
+        // =====================================================
         System.out.print("Type 'load' to load a config file or press Enter to continue: ");
         String firstInput = scanner.nextLine().trim();
 
