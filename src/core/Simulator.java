@@ -12,62 +12,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Main controller class that runs the event-driven simulation.
- * <p>
- * Responsibilities:
- *  - Initialize all traffic sources.
- *  - Manage the event queue.
- *  - Process events and advance simulation time.
- *  - Log events and record statistics.
- *  - Integrate optional queue and source management features.
+ * Main controller for the event-driven simulation.
  */
 public class Simulator {
 
+    private final SimulationParameters params;
     private final double totalSimulationTime;
     private final int numSources;
+
     private final EventQueue eventQueue;
-    private final List<TrafficSource> sources;
     private final SimulationClock clock;
     private final StatisticsCollector stats;
     private final FileOutputManager outputManager;
-
-    // Optional advanced components
     private final MultiSourceManager multiSourceManager;
     private final NetworkQueue networkQueue;
 
-    /**
-     * Constructs a Simulator using given simulation parameters.
-     */
+    private final List<TrafficSource> sources = new ArrayList<>();
+
     public Simulator(SimulationParameters params) {
+        this.params = params;
         this.totalSimulationTime = params.totalSimulationTime;
         this.numSources = params.numberOfSources;
+
         this.eventQueue = new EventQueue();
-        this.sources = new ArrayList<>();
         this.clock = new SimulationClock();
         this.stats = new StatisticsCollector(params.samplingInterval);
         this.outputManager = new FileOutputManager();
 
         this.multiSourceManager = new MultiSourceManager();
-        this.networkQueue = new NetworkQueue(5.0); // Example: 5 packets/sec service rate
+        this.networkQueue = new NetworkQueue(5.0); // example µ
 
-        // Initialize sources (with ±15% variation)
-        sources.addAll(
-                multiSourceManager.generateSources(numSources,
-                        params.onShape, params.onScale,
-                        params.offShape, params.offScale,
-                        0.15)
-        );
+        // Choose model
+        if (params.trafficModel == SimulationParameters.TrafficModel.FGN_THRESHOLD) {
+            sources.addAll(multiSourceManager.generateFGNSources(params));
+        } else {
+            sources.addAll(
+                    multiSourceManager.generateSources(numSources,
+                            params.onShape, params.onScale,
+                            params.offShape, params.offScale,
+                            0.15)
+            );
+        }
 
-        // Schedule each source's first ON event at a random offset
+        // First event for each source at a small random offset.
         for (int i = 0; i < sources.size(); i++) {
             double offset = RandomUtils.uniform(0, 5.0);
             eventQueue.addEvent(new Event(offset, i, EventType.ON));
         }
     }
 
-    /**
-     * Runs the full event-driven simulation.
-     */
     public void run() {
         System.out.println("Starting simulation...");
 
@@ -83,19 +76,15 @@ public class Simulator {
                 src.processEvent(event);
                 outputManager.logEvent(event);
 
-                // Schedule next event for this source
                 Event next = src.generateNextEvent(clock.getTime());
                 eventQueue.addEvent(next);
 
-                // Compute aggregate rate
                 long onCount = sources.stream().filter(TrafficSource::isOn).count();
                 double rate = (double) onCount / numSources;
                 stats.recordSample(clock.getTime(), rate);
 
-                // Simulate packet arrivals into the network queue
                 if (rate > 0) networkQueue.enqueue(clock.getTime());
 
-                // Optional progress output
                 if (((int) clock.getTime()) % 100 == 0) {
                     System.out.printf("[t=%.1f] Active sources: %d/%d%n",
                             clock.getTime(), onCount, numSources);

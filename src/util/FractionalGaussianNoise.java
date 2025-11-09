@@ -3,8 +3,8 @@ package util;
 import java.util.Random;
 
 /**
- * Fractional Gaussian Noise (FGN) generator using a compact
- * circulant-embedding + radix-2 FFT. Good enough for coursework.
+ * Fractional Gaussian Noise generator (Davies–Harte style).
+ * Enough for our use: generate a long Gaussian series with H in (0.5,1).
  */
 public final class FractionalGaussianNoise {
 
@@ -22,26 +22,26 @@ public final class FractionalGaussianNoise {
         this.rng = new Random(seed);
     }
 
-    /** Generate n FGN samples. */
+    /** Make n samples. */
     public double[] generate(int n) {
         if (n < 2) throw new IllegalArgumentException("n must be >= 2");
 
-        // Build first row of the circulant matrix from the fGn autocovariance.
+        // Circulant first row from fGn autocovariance.
         int m = 1;
-        while (m < 2 * n) m <<= 1; // power-of-two ≥ 2n
+        while (m < 2 * n) m <<= 1; // power-of-two >= 2n
 
         double[] c = new double[m];
         for (int k = 0; k <= n - 1; k++) c[k] = gamma(k);
         for (int k = n; k < m; k++) c[k] = gamma(2 * n - k);
 
-        // FFT(c) → eigenvalues; small negatives are clipped to zero.
+        // FFT → eigenvalues (clip tiny negatives).
         double[] re = new double[m];
         double[] im = new double[m];
         System.arraycopy(c, 0, re, 0, m);
         fft(re, im, false);
         for (int i = 0; i < m; i++) if (re[i] < 0) re[i] = 0;
 
-        // Draw complex Gaussian with var = eigenvalue and enforce conjugate symmetry.
+        // Complex Gaussian with var = eigenvalue, conjugate symmetric.
         double[] Ur = new double[m];
         double[] Ui = new double[m];
 
@@ -63,10 +63,10 @@ public final class FractionalGaussianNoise {
             Ur[m - k] = rk;    Ui[m - k] = -ik;
         }
 
-        // IFFT → time domain. Our IFFT divides by N.
+        // IFFT (this divides by N).
         fft(Ur, Ui, true);
 
-        // Scale to sigma and add mean. Keep the first n samples.
+        // Scale to sigma, add mean, take first n.
         double[] out = new double[n];
         for (int i = 0; i < n; i++) out[i] = mean + sigma * Ur[i];
         return out;
