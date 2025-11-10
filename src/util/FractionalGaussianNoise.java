@@ -3,14 +3,16 @@ package util;
 import java.util.Random;
 
 /**
- * Generates Fractional Gaussian Noise (fGn) using the Davies–Harte method.
+ * Fractional Gaussian Noise (fGn) generator using the Davies–Harte method.
  * <p>
- * This class produces self-similar Gaussian processes with a specified
- * Hurst exponent H in (0.5, 1.0). It supports deterministic seeding for
- * reproducible results and follows OOP best practices for readability
- * and testability.
+ * Produces a Gaussian, long-range dependent sequence with Hurst exponent H in (0.5, 1.0).
+ * The implementation follows good SWE/OOP practices:
+ *  - clear parameter validation
+ *  - dependency injection of Random (reproducible tests)
+ *  - private helpers for each mathematical step
+ *  - guards to avoid numerical NaNs
  */
-public class FractionalGaussianNoise {
+public final class FractionalGaussianNoise {
 
     private final double hurst;
     private final double sigma;
@@ -18,12 +20,12 @@ public class FractionalGaussianNoise {
     private final Random rng;
 
     /**
-     * Constructs a FractionalGaussianNoise generator.
+     * Preferred constructor: inject a Random for reproducibility and tests.
      *
-     * @param hurst Hurst exponent (0.5 < H < 1.0)
-     * @param sigma Standard deviation (> 0)
-     * @param mean  Mean value (center of distribution)
-     * @param rng   Random generator (dependency-injected for reproducibility)
+     * @param hurst Hurst exponent (0.5 &lt; H &lt; 1.0)
+     * @param sigma Standard deviation (&gt; 0)
+     * @param mean  Mean value
+     * @param rng   Random generator
      */
     public FractionalGaussianNoise(double hurst, double sigma, double mean, Random rng) {
         validateParameters(hurst, sigma);
@@ -33,58 +35,97 @@ public class FractionalGaussianNoise {
         this.rng = rng;
     }
 
-    /** Alternate constructor for convenience with a seed. */
+    /**
+     * Convenience constructor with a seed.
+     */
     public FractionalGaussianNoise(double hurst, double sigma, double mean, long seed) {
         this(hurst, sigma, mean, new Random(seed));
     }
 
     /**
-     * Generates a fractional Gaussian noise sequence of length n.
+     * Generate an fGn sequence of length n.
      *
-     * @param n number of samples to generate (>= 2)
-     * @return double array of Gaussian samples
+     * @param n number of samples (n &ge; 2)
+     * @return array of length n containing the generated samples
      */
     public double[] generate(int n) {
         if (n < 2) throw new IllegalArgumentException("n must be >= 2");
 
-        int m = nextPowerOfTwo(2 * n);
-        double[] covariance = buildCovarianceVector(n, m);
-        double[] real = covariance.clone();
-        double[] imag = new double[m];
+        // FFT length m = next power of two >= 2n
+        final int m = nextPowerOfTwo(2 * n);
 
-        fft(real, imag, false);
-        clipNegatives(real);
+        // Build circulant covariance vector (safe for all m >= 2n)
+        double[] c = buildCovarianceVector(n, m);
 
-        double[] reNoise = new double[m];
-        double[] imNoise = new double[m];
-        buildComplexGaussian(real, reNoise, imNoise);
+        // Eigenvalues via FFT of covariance
+        double[] re = c.clone();
+        double[] im = new double[m];
+        fft(re, im, false);
 
-        fft(reNoise, imNoise, true); // inverse FFT (normalized)
-        return scaleAndTrim(reNoise, n);
+        // Clip tiny negative eigenvalues due to numerical noise
+        clipNegatives(re);
+
+        // Draw complex Gaussian with conjugate symmetry and variances = eigenvalues
+        double[] Ur = new double[m];
+        double[] Ui = new double[m];
+        buildComplexGaussian(re, Ur, Ui);
+
+        // IFFT to obtain real sequence with desired covariance
+        fft(Ur, Ui, true); // normalized in-place
+
+        // Scale to sigma, add mean, and trim to length n
+        return scaleAndTrim(Ur, n);
     }
 
-    // -----------------------------
-    // Internal Utility Methods
-    // -----------------------------
+    // ---------------------------------------------------------------------
+    // Validation and parameter helpers
 
-    /** Validates input parameters. */
-    private void validateParameters(double hurst, double sigma) {
-        if (hurst <= 0.5 || hurst >= 1.0)
+
+    private static void validateParameters(double hurst, double sigma) {
+        if (hurst <= 0.5 || hurst >= 1.0) {
             throw new IllegalArgumentException("Hurst exponent must be in (0.5, 1.0)");
-        if (sigma <= 0)
+        }
+        if (sigma <= 0.0) {
             throw new IllegalArgumentException("Sigma must be > 0");
+        }
     }
 
-    /** Builds the circulant covariance vector for fGn. */
+    // ---------------------------------------------------------------------
+    // Davies–Harte components
+
+    /**
+     * Build the circulant covariance vector c[0..m-1] used by the Davies–Harte method.
+     * We ensure:
+     *  - c[k] = gamma(k) for 0 <= k < n
+     *  - c[k] = gamma(2n - k) for n <= k <= 2n
+     *  - c[k] = 0 for k > 2n (safe zero-padding, prevents NaNs)
+     */
     private double[] buildCovarianceVector(int n, int m) {
         double[] c = new double[m];
-        for (int k = 0; k < n; k++) c[k] = gamma(k);
-        for (int k = n; k < m; k++) c[k] = gamma(2 * n - k);
+
+        // First half: direct autocovariance values
+        for (int k = 0; k < n; k++) {
+            c[k] = gamma(k);
+        }
+
+        // Mirror part up to 2n, then zero-pad
+        for (int k = n; k < m; k++) {
+            int t = 2 * n - k;
+            if (t >= 0) {
+                c[k] = gamma(t);
+            } else {
+                c[k] = 0.0; // zero padding beyond 2n keeps eigenvalues valid
+            }
+        }
         return c;
     }
 
-    /** fGn autocovariance function. */
+    /**
+     * fGn autocovariance for non-negative lag k:
+     * gamma(k) = 0.5 * (|k-1|^{2H} - 2|k|^{2H} + |k+1|^{2H}).
+     */
     private double gamma(int k) {
+        if (k < 0) throw new IllegalArgumentException("gamma(k) requires k >= 0");
         if (k == 0) return 1.0;
         double kp1 = Math.pow(k + 1.0, 2.0 * hurst);
         double km1 = Math.pow(Math.abs(k - 1.0), 2.0 * hurst);
@@ -92,69 +133,80 @@ public class FractionalGaussianNoise {
         return 0.5 * (km1 - 2.0 * k0 + kp1);
     }
 
-    /** Ensures no negative eigenvalues from FFT of covariance. */
-    private void clipNegatives(double[] re) {
-        for (int i = 0; i < re.length; i++) {
-            if (re[i] < 0) re[i] = 0;
+    private static void clipNegatives(double[] eigenvalues) {
+        for (int i = 0; i < eigenvalues.length; i++) {
+            if (eigenvalues[i] < 0.0) eigenvalues[i] = 0.0;
         }
     }
 
-    /** Constructs conjugate-symmetric complex Gaussian vector. */
+    /**
+     * Fill (Ur, Ui) with a conjugate-symmetric complex Gaussian vector whose
+     * per-frequency variance equals the eigenvalue at that bin.
+     */
     private void buildComplexGaussian(double[] eigenvalues, double[] Ur, double[] Ui) {
         int m = eigenvalues.length;
+
+        // DC and Nyquist (purely real)
         Ur[0] = Math.sqrt(eigenvalues[0]) * nextGaussian();
         Ui[0] = 0.0;
 
-        if ((m & 1) == 0) {
+        if ((m & 1) == 0) { // even length -> Nyquist bin
             Ur[m / 2] = Math.sqrt(eigenvalues[m / 2]) * nextGaussian();
             Ui[m / 2] = 0.0;
         }
 
-        int upper = (m & 1) == 0 ? m / 2 : (m / 2 + 1);
+        // Positive frequencies (1..upper-1), mirror to negatives
+        int upper = ((m & 1) == 0) ? (m / 2) : (m / 2 + 1);
         for (int k = 1; k < upper; k++) {
-            double lambda = eigenvalues[k];
-            double s = Math.sqrt(lambda / 2.0);
+            double lam = eigenvalues[k];
+            double s = Math.sqrt(lam / 2.0);
             double a = nextGaussian();
             double b = nextGaussian();
 
-            Ur[k] = s * a;
-            Ui[k] = s * b;
-            Ur[m - k] = s * a;
-            Ui[m - k] = -s * b;
+            double rk = s * a;
+            double ik = s * b;
+
+            Ur[k] = rk;          Ui[k] = ik;
+            Ur[m - k] = rk;      Ui[m - k] = -ik; // conjugate symmetry
         }
     }
 
-    /** Scales and trims the inverse FFT output. */
     private double[] scaleAndTrim(double[] data, int n) {
         double[] out = new double[n];
-        for (int i = 0; i < n; i++) out[i] = mean + sigma * data[i];
+        for (int i = 0; i < n; i++) {
+            out[i] = mean + sigma * data[i];
+        }
         return out;
     }
 
-    /** Generates one standard normal sample. */
     private double nextGaussian() {
+        // Box–Muller with guard to avoid log(0)
         double u1 = Math.max(1e-12, rng.nextDouble());
         double u2 = rng.nextDouble();
         return Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
     }
 
-    /** Next power of two >= value. */
     private static int nextPowerOfTwo(int value) {
         int m = 1;
         while (m < value) m <<= 1;
         return m;
     }
 
-    // -----------------------------
-    // Internal FFT Implementation
-    // -----------------------------
+    // Minimal in-place radix-2 FFT (forward/inverse)
 
-    /** In-place radix-2 complex FFT (forward or inverse). */
+
+    /**
+     * In-place complex FFT.
+     *
+     * @param re real part (modified in place)
+     * @param im imag part (modified in place)
+     * @param inverse true for inverse FFT (also normalizes by N)
+     */
     private static void fft(double[] re, double[] im, boolean inverse) {
         int n = re.length;
         if (n <= 1) return;
 
-        // bit reversal
+        // Bit reversal
         for (int i = 1, j = 0; i < n; i++) {
             int bit = n >>> 1;
             for (; (j & bit) != 0; bit >>>= 1) j &= ~bit;
@@ -165,16 +217,19 @@ public class FractionalGaussianNoise {
             }
         }
 
-        // Cooley–Tukey FFT
+        // Cooley–Tukey
         for (int len = 2; len <= n; len <<= 1) {
             double ang = 2.0 * Math.PI / len * (inverse ? -1.0 : 1.0);
             double wlenRe = Math.cos(ang);
             double wlenIm = Math.sin(ang);
+
             for (int i = 0; i < n; i += len) {
                 double wRe = 1.0, wIm = 0.0;
-                for (int j = 0; j < len / 2; j++) {
+                int half = len >>> 1;
+
+                for (int j = 0; j < half; j++) {
                     int u = i + j;
-                    int v = u + len / 2;
+                    int v = u + half;
 
                     double vr = re[v] * wRe - im[v] * wIm;
                     double vi = re[v] * wIm + im[v] * wRe;
@@ -185,15 +240,14 @@ public class FractionalGaussianNoise {
                     re[v] = ur - vr;  im[v] = ui - vi;
                     re[u] = ur + vr;  im[u] = ui + vi;
 
-                    double newRe = wRe * wlenRe - wIm * wlenIm;
-                    double newIm = wRe * wlenIm + wIm * wlenRe;
-                    wRe = newRe;
-                    wIm = newIm;
+                    double nwRe = wRe * wlenRe - wIm * wlenIm;
+                    double nwIm = wRe * wlenIm + wIm * wlenRe;
+                    wRe = nwRe; wIm = nwIm;
                 }
             }
         }
 
-        // Normalize if inverse FFT
+        // Normalize for inverse
         if (inverse) {
             for (int i = 0; i < n; i++) {
                 re[i] /= n;
@@ -202,11 +256,11 @@ public class FractionalGaussianNoise {
         }
     }
 
-    // -----------------------------
+
     // Getters
-    // -----------------------------
+
 
     public double getHurst() { return hurst; }
     public double getSigma() { return sigma; }
-    public double getMean() { return mean; }
+    public double getMean()  { return mean; }
 }

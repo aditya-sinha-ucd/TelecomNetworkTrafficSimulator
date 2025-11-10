@@ -5,18 +5,23 @@ import model.SimulationParameters;
 import util.FractionalGaussianNoise;
 import util.HurstEstimator;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Handles all console interaction with the user.
- * <p>
- * Responsibilities:
- *  - Prompt for simulation parameters or load from file.
- *  - Allow switching between Pareto ON/OFF and FGN modes.
- *  - Validate and sanitize user input.
- *  - Allow the user to quit gracefully at any prompt.
+ * - Prompt for simulation parameters or load from file.
+ * - Allow switching between Pareto ON/OFF and FGN modes.
+ * - Validate and sanitize user input.
+ * - Allow the user to quit gracefully at any prompt.
  */
 public class ConsoleUI {
 
@@ -35,10 +40,7 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /**
-     * Reads user input from the console.
-     * Exits gracefully if the user types 'quit' or 'q'.
-     */
+    /** Reads user input; exits on 'quit' or 'q'. */
     private String readInput(String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine().trim();
@@ -77,38 +79,21 @@ public class ConsoleUI {
         }
     }
 
-    /**
-     * Reads a double value within a specific range (exclusive of boundaries).
-     * Keeps prompting until a valid number in (min, max) is entered.
-     * Accepts 'quit' or 'q' to exit at any prompt.
-     */
+    /** Reads a double within (min, max). */
     private double readDoubleInRange(String prompt, double min, double max) {
         while (true) {
-            System.out.print(prompt);
-            String input = scanner.nextLine().trim();
-
-            if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
-                System.out.println("Exiting simulator...");
-                System.exit(0);
-            }
-
+            String input = readInput(prompt);
             try {
                 double value = Double.parseDouble(input);
-                if (value > min && value < max) {
-                    return value;
-                } else {
-                    System.out.printf("Value must be in range (%.2f, %.2f). Try again.%n", min, max);
-                }
+                if (value > min && value < max) return value;
+                System.out.printf("Value must be in range (%.2f, %.2f). Try again.%n", min, max);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid number. Please enter a valid value.");
             }
         }
     }
 
-
-    /**
-     * Starts the console-driven interaction and launches the simulator.
-     */
+    /** Starts the console-driven interaction and launches the simulator. */
     public void start() {
         printBanner();
 
@@ -123,21 +108,59 @@ public class ConsoleUI {
         // =====================================================
         if (modeChoice.equals("2")) {
             System.out.println("\n=== Fractional Gaussian Noise Mode ===");
+
+            // Strict range validation at UI level
             double H = readDoubleInRange("Enter Hurst exponent (0.5 < H < 1.0): ", 0.5, 1.0);
             double sigma = readPositiveDouble("Enter standard deviation (σ): ");
             double mean = 0.0;
             int samples = readPositiveInt("Enter number of samples to generate: ");
 
             try {
-                FractionalGaussianNoise fgn = new FractionalGaussianNoise(
-                        H, sigma, mean, System.currentTimeMillis());
+                // Generate FGN series
+                FractionalGaussianNoise fgn =
+                        new FractionalGaussianNoise(H, sigma, mean, System.currentTimeMillis());
                 double[] series = fgn.generate(samples);
-                double estH = HurstEstimator.estimateHurst(Arrays.stream(series).boxed().toList());
 
+                // Save data to CSV in a timestamped folder
+                String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String runDir = "output/fgn_run_" + ts;
+                new File(runDir).mkdirs();
+                Path csvPath = Path.of(runDir, "fgn_series.csv");
+
+                try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(csvPath))) {
+                    writer.println("Index,Value");
+                    for (int i = 0; i < series.length; i++) {
+                        writer.printf("%d,%.10f%n", i, series[i]);
+                    }
+                }
+
+                // Hurst estimation with safety checks
+                final int MIN_SAMPLES = 512;     // empirically stable
+                final double MIN_VAR = 1e-12;    // avoid log(0)
+
+                double meanVal = Arrays.stream(series).average().orElse(0.0);
+                double variance = Arrays.stream(series)
+                        .map(v -> (v - meanVal) * (v - meanVal))
+                        .average()
+                        .orElse(0.0);
+
+                Double estH = Double.NaN;
+                if (series.length >= MIN_SAMPLES && variance > MIN_VAR) {
+                    estH = HurstEstimator
+                            .estimateHurst(Arrays.stream(series)
+                                    .boxed()
+                                    .collect(Collectors.toList()));
+                }
+
+                // Console summary
                 System.out.println("\nGenerated FGN sequence successfully!");
                 System.out.printf("Target Hurst exponent: %.3f%n", H);
-                System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
-                System.out.println("FGN data generated in memory (can be exported later).");
+                if (estH.isNaN()) {
+                    System.out.println("Estimated Hurst exponent (validation): not computed (increase samples or σ)");
+                } else {
+                    System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
+                }
+                System.out.printf("FGN data exported to: %s%n", csvPath.toAbsolutePath());
                 System.out.println("-----------------------------------------------");
 
             } catch (Exception e) {
@@ -146,16 +169,14 @@ public class ConsoleUI {
             return;
         }
 
-
         // =====================================================
         // === Pareto ON/OFF Mode (default) ===
         // =====================================================
         String firstInput = readInput("Type 'load' to load a config file or press Enter to continue: ");
 
-        // === Load parameters from config file ===
+        // Load from config file
         if (firstInput.equalsIgnoreCase("load")) {
             String filePath = readInput("Enter path to configuration file (e.g., config.txt): ");
-
             try {
                 Map<String, Double> params = ConfigFileLoader.loadConfig(filePath);
                 ConfigFileLoader.printLoadedParameters(params);
@@ -184,7 +205,7 @@ public class ConsoleUI {
             }
         }
 
-        // === Manual input mode ===
+        // Manual input mode
         double totalTime = readPositiveDouble("Enter total simulation time (seconds): ");
         int numSources = readPositiveInt("Enter number of traffic sources: ");
         double onShape = readPositiveDouble("Enter Pareto shape parameter for ON duration (alpha): ");
