@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the NetworkQueue class (unlimited capacity version).
- *
  * This version matches the provided NetworkQueue implementation, which:
  *  - only has a single constructor (serviceRate)
  *  - does not drop packets (unlimited capacity)

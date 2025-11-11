@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration test for the Simulator class.
- *
  * Verifies that the simulation can run end-to-end without throwing exceptions.
  * This test uses a small, deterministic configuration so it executes quickly.
  */
