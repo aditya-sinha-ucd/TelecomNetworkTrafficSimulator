@@ -1,90 +1,73 @@
 package extensions;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-/**
- * Models a simple FIFO network queue.
- * <p>
- * Can be used to study how bursty traffic affects
- * average delay, waiting time, and queue length.
- */
 public class NetworkQueue {
 
-    private final Queue<QueueElement> queue;
-    private final double serviceRate;  // packets per second
-    private double currentTime;
-    private double busyUntil;
-    private double totalDelay;
-    private int processedPackets;
+    private final double serviceRate;
+    private final int capacity = Integer.MAX_VALUE; // default no limit
+    private final Deque<QueueElement> queue = new ArrayDeque<>();
 
-    /**
-     * Constructs a new network queue.
-     *
-     * @param serviceRate rate of service (packets per second)
-     */
+    private double lastProcessedTime = 0.0;
+    private double serverBusyUntil = 0.0;
+    private long totalArrived = 0;
+    private long totalServed = 0;
+    private long totalDropped = 0;
+    private double sumWaitingTime = 0.0;
+    private double sumSystemTime = 0.0;
+
     public NetworkQueue(double serviceRate) {
-        this.queue = new LinkedList<>();
+        if (serviceRate <= 0)
+            throw new IllegalArgumentException("Service rate must be > 0");
         this.serviceRate = serviceRate;
-        this.currentTime = 0.0;
-        this.busyUntil = 0.0;
-        this.totalDelay = 0.0;
-        this.processedPackets = 0;
     }
 
-    /**
-     * Simulates arrival of a packet to the queue.
-     *
-     * @param arrivalTime time at which packet arrives
-     */
-    public void enqueue(double arrivalTime) {
-        currentTime = arrivalTime;
-        QueueElement element = new QueueElement(arrivalTime);
+    public void processUntil(double t) {
+        if (t <= lastProcessedTime) return;
 
-        if (arrivalTime >= busyUntil) {
-            // Server is idle, start service immediately
-            element.setServiceStartTime(arrivalTime);
-        } else {
-            // Server busy, wait until it’s free
-            element.setServiceStartTime(busyUntil);
+        while (!queue.isEmpty()) {
+            QueueElement head = queue.peekFirst();
+            if (head.getServiceStartTime() < 0) {
+                head.setServiceStartTime(Math.max(lastProcessedTime, serverBusyUntil));
+                double serviceTime = 1.0 / serviceRate;
+                head.setDepartureTime(head.getServiceStartTime() + serviceTime);
+                serverBusyUntil = head.getDepartureTime();
+                sumWaitingTime += (head.getServiceStartTime() - head.getArrivalTime());
+            }
+            if (head.getDepartureTime() <= t) {
+                sumSystemTime += head.getTotalDelay();
+                totalServed++;
+                queue.removeFirst();
+            } else break;
         }
-
-        double serviceDuration = 1.0 / serviceRate;
-        element.setDepartureTime(element.getServiceStartTime() + serviceDuration);
-        busyUntil = element.getDepartureTime();
-
-        queue.add(element);
-        totalDelay += element.getTotalDelay();
-        processedPackets++;
+        lastProcessedTime = t;
     }
 
-    /**
-     * @return average delay (waiting + service)
-     */
-    public double getAverageDelay() {
-        return processedPackets == 0 ? 0.0 : totalDelay / processedPackets;
+    public void enqueueBulk(double t, int count) {
+        if (count <= 0) return;
+        totalArrived += count;
+        for (int i = 0; i < count; i++) {
+            queue.addLast(new QueueElement(t));
+        }
     }
 
-    /**
-     * @return number of packets processed so far
-     */
-    public int getProcessedPackets() {
-        return processedPackets;
+    /** Wrapper for single-packet enqueue to match Simulator.java */
+    public void enqueue(double t) {
+        enqueueBulk(t, 1);
     }
 
-    /**
-     * @return the number of packets currently in queue
-     */
-    public int getQueueLength() {
-        return queue.size();
-    }
+    public double getAvgWaitingTime() { return (totalServed == 0) ? 0 : sumWaitingTime / totalServed; }
+    public double getAvgSystemTime() { return (totalServed == 0) ? 0 : sumSystemTime / totalServed; }
 
-    /** Resets the queue metrics. */
-    public void reset() {
-        queue.clear();
-        currentTime = 0.0;
-        busyUntil = 0.0;
-        totalDelay = 0.0;
-        processedPackets = 0;
+    public int getQueueLength() { return queue.size(); }
+    public long getTotalServed() { return totalServed; }
+    public long getTotalDropped() { return totalDropped; }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Queue[arr=%d, served=%d, dropped=%d, avgWait=%.4f, avgSys=%.4f]",
+                totalArrived, totalServed, totalDropped, getAvgWaitingTime(), getAvgSystemTime());
     }
 }

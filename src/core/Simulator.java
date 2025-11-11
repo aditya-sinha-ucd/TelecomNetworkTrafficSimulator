@@ -107,7 +107,7 @@ public class Simulator {
                 double rate = (double) onCount / numSources;
                 stats.recordSample(clock.getTime(), rate);
 
-                // Queue arrivals (optional feature)
+                // Queue arrivals
                 if (rate > 0) networkQueue.enqueue(clock.getTime());
 
             } catch (Exception e) {
