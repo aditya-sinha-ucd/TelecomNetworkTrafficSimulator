@@ -32,7 +32,7 @@ public class Simulator {
     private final List<TrafficSource> sources;
 
     // Simulation clock tracking current time.
-    private final SimulationClock clock;
+    private double currentTime;
 
     // Statistics collector to record aggregate traffic activity.
     private final StatisticsCollector stats;
@@ -60,7 +60,7 @@ public class Simulator {
         this.sources = new ArrayList<>();
         this.stats = new StatisticsCollector(1.0); // sample every 1s
         this.outputManager = new FileOutputManager();
-        this.clock = new SimulationClock();
+        this.currentTime = 0.0;
 
         // Initialize all sources
         for (int i = 0; i < numSources; i++) {
@@ -82,14 +82,14 @@ public class Simulator {
     public void run() {
         System.out.println("Starting simulation...");
 
-        while (!eventQueue.isEmpty() && clock.getTime() < totalSimulationTime) {
+        while (!eventQueue.isEmpty() && currentTime < totalSimulationTime) {
             Event event = eventQueue.nextEvent();
             if (event == null) break;
 
-            clock.setTime(event.getTime());
+            currentTime = event.getTime();
 
             // Stop if simulation time exceeded
-            if (clock.getTime() > totalSimulationTime) break;
+            if (currentTime > totalSimulationTime) break;
 
             // Process this event
             TrafficSource src = sources.get(event.getSourceId());
@@ -99,7 +99,7 @@ public class Simulator {
             outputManager.logEvent(event);
 
             // Schedule the next state-change event
-            Event next = src.generateNextEvent(clock.getTime());
+            Event next = src.generateNextEvent(currentTime);
             eventQueue.addEvent(next);
 
             // Compute aggregate rate (fraction of ON sources)
@@ -107,12 +107,12 @@ public class Simulator {
             double rate = (double) onCount / numSources;
 
             // Record a sample for statistics
-            stats.recordSample(clock.getTime(), rate);
+            stats.recordSample(currentTime, rate);
 
             // Optional progress display every ~100 seconds
-            if (((int) clock.getTime()) % 100 == 0) {
+            if (((int) currentTime) % 100 == 0) {
                 System.out.printf("[t=%.1f] Active sources: %d/%d%n",
-                        clock.getTime(), onCount, numSources);
+                        currentTime, onCount, numSources);
             }
         }
 
