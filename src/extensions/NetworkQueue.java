@@ -58,6 +58,11 @@ public class NetworkQueue {
     public double getAvgWaitingTime() { return (totalServed == 0) ? 0 : sumWaitingTime / totalServed; }
     public double getAvgSystemTime() { return (totalServed == 0) ? 0 : sumSystemTime / totalServed; }
 
+    // Getter methods (read-only access for testing & stats)
+    public int getQueueLength() { return queue.size(); }
+    public long getTotalServed() { return totalServed; }
+    public long getTotalDropped() { return totalDropped; }
+
     @Override
     public String toString() {
         return String.format(
