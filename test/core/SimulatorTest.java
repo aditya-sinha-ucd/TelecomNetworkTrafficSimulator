@@ -13,7 +13,7 @@ public class SimulatorTest {
 
     @Test
     void testSimulatorRunsSuccessfully() {
-        // --- Step 1: Create simulation parameters ---
+        // Step 1: Create simulation parameters
         SimulationParameters params = new SimulationParameters(
                 50.0,   // total simulation time [s]
                 5,      // number of sources
@@ -26,19 +26,19 @@ public class SimulatorTest {
         // Optional fine-tuning
         params.samplingInterval = 1.0;
         params.trafficModel = SimulationParameters.TrafficModel.PARETO_ON_OFF;
-        params.randomSeed = 42L;  // deterministic runs for reproducibility
+        params.randomSeed = 42L;
 
-        // --- Step 2: Create simulator instance ---
+        // Step 2: Create simulator instance
         Simulator sim = new Simulator(params);
 
-        // --- Step 3: Verify that it runs without throwing any exceptions ---
+        // tep 3: Verify that it runs without throwing any exceptions -
         assertDoesNotThrow(sim::run,
                 "Simulator should complete a full run without exceptions");
     }
 
     @Test
     void testSimulatorHandlesFGNModel() {
-        // --- Step 1: Configure FGN-based model ---
+        // First Step: Configure FGN-based model
         SimulationParameters params = new SimulationParameters(
                 20.0,  // short run
                 3,     // fewer sources for faster test
@@ -50,7 +50,7 @@ public class SimulatorTest {
         params.fgnMean = 0.0;
         params.fgnThreshold = 0.0;
 
-        // --- Step 2: Run FGN simulation ---
+        // Second Step: Run FGN simulation
         Simulator sim = new Simulator(params);
 
         assertDoesNotThrow(sim::run,
