@@ -63,6 +63,7 @@ public class NetworkQueue {
     public int getQueueLength() { return queue.size(); }
     public long getTotalServed() { return totalServed; }
     public long getTotalDropped() { return totalDropped; }
+    public long getTotalArrived() { return totalArrived; }
 
     @Override
     public String toString() {

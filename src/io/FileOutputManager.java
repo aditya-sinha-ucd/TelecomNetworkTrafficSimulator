@@ -2,6 +2,7 @@ package io;
 
 import core.Event;
 import core.StatisticsCollector;
+import extensions.NetworkQueue;
 import util.HurstEstimator;
 
 import java.io.FileWriter;
@@ -23,6 +24,9 @@ import java.util.stream.Collectors;
  * Keeping all file operations here keeps the simulator logic clean and organized.
  */
 public class FileOutputManager {
+
+    /** Minimum samples needed for a reliable Hurst estimate in FGN mode. */
+    public static final int MIN_FGN_HURST_SAMPLES = 512;
 
     /** Base folder where all simulation results will be saved. */
     private static final String OUTPUT_ROOT = "output/";
@@ -76,7 +80,7 @@ public class FileOutputManager {
      * This includes the number of samples, average and peak rates, standard deviation,
      * and an estimated Hurst exponent.
      */
-    public void saveSummary(StatisticsCollector stats) {
+    public void saveSummary(StatisticsCollector stats, NetworkQueue queue) {
         String summaryPath = runDir + "summary.txt";
         try (FileWriter writer = new FileWriter(summaryPath)) {
             writer.write("=== Telecom Network Traffic Simulator Summary ===\n");
@@ -85,6 +89,12 @@ public class FileOutputManager {
             writer.write(String.format("Peak Rate: %.4f%n", stats.getPeakRate()));
             writer.write(String.format("Std Dev: %.4f%n", stats.getStdDevRate()));
             writer.write(String.format("Estimated Hurst Exponent: %.4f%n", stats.getHurstExponent()));
+            writer.write("--- Network Queue Metrics ---\n");
+            writer.write(String.format("Arrivals: %d%n", queue.getTotalArrived()));
+            writer.write(String.format("Served: %d%n", queue.getTotalServed()));
+            writer.write(String.format("Dropped: %d%n", queue.getTotalDropped()));
+            writer.write(String.format("Average Waiting Time: %.4f%n", queue.getAvgWaitingTime()));
+            writer.write(String.format("Average System Time: %.4f%n", queue.getAvgSystemTime()));
             writer.write("=================================================\n");
             System.out.println("Summary saved to: " + summaryPath);
         } catch (IOException e) {
@@ -97,7 +107,8 @@ public class FileOutputManager {
      * The generated time-series is written to a CSV file, and a short text summary
      * with the Hurst estimation is saved in the same folder.
      */
-    public void saveFGNResults(double[] series, double H, double sigma, double mean) {
+    public void saveFGNResults(double[] series, double H, double sigma,
+                               double samplingInterval, double threshold) {
         try {
             String csvPath = runDir + "traffic_data.csv";
             try (PrintWriter writer = new PrintWriter(new FileWriter(csvPath))) {
@@ -107,7 +118,8 @@ public class FileOutputManager {
                 }
             }
 
-            final int MIN_SAMPLES = 512;
+            writeFGNEventLog(series, samplingInterval, threshold);
+
             final double MIN_VAR = 1e-12;
 
             double meanVal = Arrays.stream(series).average().orElse(0.0);
@@ -116,7 +128,13 @@ public class FileOutputManager {
                     .average().orElse(0.0);
 
             Double estH = Double.NaN;
-            if (series.length >= MIN_SAMPLES && variance > MIN_VAR) {
+            String hurstNote = null;
+            if (series.length < MIN_FGN_HURST_SAMPLES) {
+                hurstNote = String.format("requires >= %d samples (generated %d)",
+                        MIN_FGN_HURST_SAMPLES, series.length);
+            } else if (variance <= MIN_VAR) {
+                hurstNote = "variance too low (increase σ or threshold spread)";
+            } else {
                 List<Double> data = Arrays.stream(series).boxed().collect(Collectors.toList());
                 estH = HurstEstimator.estimateHurst(data);
             }
@@ -127,9 +145,12 @@ public class FileOutputManager {
                 sw.printf("Samples Generated: %d%n", series.length);
                 sw.printf("Target Hurst (H): %.4f%n", H);
                 sw.printf("Sigma: %.6f%n", sigma);
-                sw.printf("Mean: %.6f%n", mean);
                 if (estH.isNaN()) {
-                    sw.println("Estimated Hurst: not computed (increase samples or σ)");
+                    if (hurstNote == null) {
+                        sw.println("Estimated Hurst: not computed (estimator returned NaN)");
+                    } else {
+                        sw.printf("Estimated Hurst: not computed (%s)%n", hurstNote);
+                    }
                 } else {
                     sw.printf("Estimated Hurst: %.4f%n", estH);
                 }
@@ -137,7 +158,11 @@ public class FileOutputManager {
             }
 
             if (estH.isNaN()) {
-                System.out.println("Estimated Hurst exponent could not be computed (try more samples or higher variance).");
+                if (hurstNote == null) {
+                    System.out.println("Estimated Hurst exponent could not be computed (estimator returned NaN).");
+                } else {
+                    System.out.printf("Estimated Hurst exponent skipped: %s.%n", hurstNote);
+                }
             } else {
                 System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
             }
@@ -149,6 +174,22 @@ public class FileOutputManager {
         } catch (IOException e) {
             System.err.println("Error saving FGN results: " + e.getMessage());
         }
+    }
+
+    /** Writes the generated FGN series to the event log for traceability. */
+    private void writeFGNEventLog(double[] series, double samplingInterval, double threshold) {
+        if (eventWriter == null) {
+            return;
+        }
+        eventWriter.println("# Fractional Gaussian Noise samples");
+        double time = 0.0;
+        for (int i = 0; i < series.length; i++) {
+            String state = series[i] >= threshold ? "ON" : "OFF";
+            eventWriter.printf("t=%.6f, sample=%d, value=%.10f, state=%s%n",
+                    time, i, series[i], state);
+            time += samplingInterval;
+        }
+        eventWriter.flush();
     }
 
     /** Flushes and closes the event log safely at the end of the run. */

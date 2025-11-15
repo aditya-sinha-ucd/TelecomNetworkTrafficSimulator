@@ -40,7 +40,7 @@ public final class FGNTrafficSource extends TrafficSource {
 
         long seed = params.fgnSeed + getId();
         FractionalGaussianNoise fgn = new FractionalGaussianNoise(
-                params.hurst, params.fgnSigma, params.fgnMean, seed);
+                params.hurst, params.fgnSigma, seed);
         double[] x = fgn.generate(n);
 
         boolean[] bin = new boolean[n];

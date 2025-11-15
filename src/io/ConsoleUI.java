@@ -1,25 +1,19 @@
 package io;
 
-import core.Simulator;
-import model.SimulationParameters;
-import util.FractionalGaussianNoise;
-
-import java.util.Map;
 import java.util.Scanner;
 
 /**
  * Handles all console interaction with the user.
- * - Prompt for simulation parameters or load from file.
- * - Allow switching between Pareto ON/OFF and FGN modes.
- * - Validate and sanitize user input.
- * - Allow the user to quit gracefully at any prompt.
+ * <p>
+ * The UI now delegates the actual workflows to dedicated mode handlers so the
+ * console loop simply selects a mode, runs it, and optionally repeats.
  */
 public class ConsoleUI {
 
-    private final Scanner scanner;
+    private final ConsolePrompter prompter;
 
     public ConsoleUI() {
-        this.scanner = new Scanner(System.in);
+        this.prompter = new ConsolePrompter(new Scanner(System.in));
     }
 
     /** Displays the simulator banner. */
@@ -31,164 +25,33 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /** Reads user input; exits on 'quit' or 'q'. */
-    private String readInput(String prompt) {
-        System.out.print(prompt);
-        String input = scanner.nextLine().trim();
-        if (input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("q")) {
-            System.out.println("Exiting simulator...");
-            System.exit(0);
-        }
-        return input;
-    }
-
-    /** Reads a positive double from the console. */
-    private double readPositiveDouble(String prompt) {
-        while (true) {
-            String input = readInput(prompt);
-            try {
-                double value = Double.parseDouble(input);
-                if (value > 0) return value;
-                System.out.println("Value must be positive. Try again.");
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid number. Please enter a valid positive value.");
-            }
-        }
-    }
-
-    /** Reads a positive integer from the console. */
-    private int readPositiveInt(String prompt) {
-        while (true) {
-            String input = readInput(prompt);
-            try {
-                int value = Integer.parseInt(input);
-                if (value > 0) return value;
-                System.out.println("Value must be positive. Try again.");
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid number. Please enter a valid positive integer.");
-            }
-        }
-    }
-
-    /** Reads a double within (min, max). */
-    private double readDoubleInRange(String prompt, double min, double max) {
-        while (true) {
-            String input = readInput(prompt);
-            try {
-                double value = Double.parseDouble(input);
-                if (value > min && value < max) return value;
-                System.out.printf("Value must be in range (%.2f, %.2f). Try again.%n", min, max);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid number. Please enter a valid value.");
-            }
-        }
-    }
-
     /** Starts the console-driven interaction and launches the simulator. */
     public void start() {
         printBanner();
+        boolean continueRunning = true;
+        while (continueRunning) {
+            SimulationModeHandler handler = selectMode();
+            handler.run();
+            continueRunning = prompter.promptYesNo("Would you like to run another simulation? (y/n): ");
+            System.out.println();
+        }
+        System.out.println("Thank you for using the Telecom Network Traffic Simulator. Goodbye!");
+    }
 
-        // === Choose simulation mode ===
+    private SimulationModeHandler selectMode() {
         System.out.println("Select simulation mode:");
         System.out.println("1 - Pareto ON/OFF (event-driven traffic model)");
         System.out.println("2 - Fractional Gaussian Noise (FGN generator)");
-        String modeChoice = readInput("Enter choice (1 or 2): ");
-
-        // =====================================================
-        // === FGN Mode ===
-        // =====================================================
-        if (modeChoice.equals("2")) {
-            System.out.println("\n=== Fractional Gaussian Noise Mode ===");
-
-            double H = readDoubleInRange("Enter Hurst exponent (0.5 < H < 1.0): ", 0.5, 1.0);
-            double sigma = readPositiveDouble("Enter standard deviation (σ): ");
-            double mean = 0.0;
-            int samples = readPositiveInt("Enter number of samples to generate: ");
-
-            try {
-                // Generate FGN time-series
-                FractionalGaussianNoise fgn =
-                        new FractionalGaussianNoise(H, sigma, mean, System.currentTimeMillis());
-                double[] series = fgn.generate(samples);
-
-                // Use FileOutputManager to handle all saving (CSV + summary)
-                FileOutputManager output = new FileOutputManager();
-                output.saveFGNResults(series, H, sigma, mean);
-                output.close();
-
-                System.out.println("\nFGN sequence generated and saved.");
-                System.out.printf("Results saved in the output directory under: %s%n",
-                        output.getRunDirectory());
-                System.out.println("Simulation finished successfully!");
-                System.out.println("-----------------------------------------------");
-
-            } catch (Exception e) {
-                System.err.println("Error generating FGN sequence: " + e.getMessage());
+        while (true) {
+            String choice = prompter.promptLine("Enter choice (1 or 2): ");
+            switch (choice) {
+                case "1":
+                    return new ParetoSimulationHandler(prompter);
+                case "2":
+                    return new FGNSimulationHandler(prompter);
+                default:
+                    System.out.println("Invalid choice. Please select 1 or 2.");
             }
-            return;
-        }
-
-        // =====================================================
-        // === Pareto ON/OFF Mode (default) ===
-        // =====================================================
-        String firstInput = readInput("Type 'load' to load a config file or press Enter to continue: ");
-
-        // Load from config file
-        if (firstInput.equalsIgnoreCase("load")) {
-            String filePath = readInput("Enter path to configuration file (e.g., config.txt): ");
-            try {
-                Map<String, Double> params = ConfigFileLoader.loadConfig(filePath);
-                ConfigFileLoader.printLoadedParameters(params);
-
-                SimulationParameters simParams = new SimulationParameters(
-                        params.get("totalTime"),
-                        params.get("numSources").intValue(),
-                        params.get("onShape"), params.get("onScale"),
-                        params.get("offShape"), params.get("offScale")
-                );
-
-                System.out.println("\nStarting simulation with loaded parameters...");
-                System.out.println(simParams);
-                System.out.println("-----------------------------------------------");
-
-                Simulator simulator = new Simulator(simParams);
-                simulator.run();
-
-                System.out.println("\nSimulation finished successfully!");
-                System.out.println("Results saved in the output/ directory.");
-                return;
-
-            } catch (Exception e) {
-                System.err.println("Error loading configuration file: " + e.getMessage());
-                System.out.println("Falling back to manual input mode...\n");
-            }
-        }
-
-        // Manual input mode
-        double totalTime = readPositiveDouble("Enter total simulation time (seconds): ");
-        int numSources = readPositiveInt("Enter number of traffic sources: ");
-        double onShape = readPositiveDouble("Enter Pareto shape parameter for ON duration (alpha): ");
-        double onScale = readPositiveDouble("Enter Pareto scale (minimum) for ON duration: ");
-        double offShape = readPositiveDouble("Enter Pareto shape parameter for OFF duration (alpha): ");
-        double offScale = readPositiveDouble("Enter Pareto scale (minimum) for OFF duration: ");
-
-        SimulationParameters params = SimulationParameters.fromUserInput(
-                totalTime, numSources, onShape, onScale, offShape, offScale);
-
-        System.out.println();
-        System.out.println("Starting simulation with parameters:");
-        System.out.println(params);
-        System.out.println("-----------------------------------------------");
-
-        try {
-            Simulator simulator = new Simulator(params);
-            simulator.run();
-
-            System.out.println("\nSimulation finished successfully!");
-            System.out.println("Results saved in the output/ directory.");
-        } catch (Exception e) {
-            System.err.println("\nAn error occurred during simulation: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }
