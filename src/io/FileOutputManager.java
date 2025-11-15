@@ -2,6 +2,7 @@ package io;
 
 import core.Event;
 import core.StatisticsCollector;
+import util.HurstEstimator;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,39 +11,37 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Handles all file output operations for the simulator.
- * <p>
- * Responsibilities:
- *  - Manage per-run output directories
- *  - Write detailed event logs
- *  - Save summary statistics
- * <p>
- * Centralizing I/O ensures clean separation between simulation logic
- * and file management, improving maintainability.
+ * Manages all file output operations for the simulator.
+ *
+ * This class is responsible for creating a new output folder for each run,
+ * writing event logs, saving simulation summaries, and handling FGN mode output.
+ * Keeping all file operations here keeps the simulator logic clean and organized.
  */
 public class FileOutputManager {
 
-    /** Root output directory. */
+    /** Base folder where all simulation results will be saved. */
     private static final String OUTPUT_ROOT = "output/";
 
-    /** Directory specific to this simulation run. */
+    /** Directory for this specific simulation run. */
     private final String runDir;
 
-    /** Path to the event log file. */
+    /** Path to the text file where all simulation events are logged. */
     private final String eventLogPath;
 
-    /** Writer for appending event logs efficiently. */
+    /** Writer used to record events as they happen during the simulation. */
     private PrintWriter eventWriter;
 
     /**
-     * Constructs a FileOutputManager for a unique simulation run.
-     * Automatically creates a timestamped folder to contain all
-     * generated files for this run.
+     * Creates a new output folder for the current run.
+     * The folder name includes a timestamp so that multiple runs can be stored
+     * without overwriting previous results.
      */
     public FileOutputManager() {
-        // Create timestamped run folder
         String timestamp = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         this.runDir = OUTPUT_ROOT + "run_" + timestamp + "/";
@@ -53,16 +52,19 @@ public class FileOutputManager {
             eventWriter = new PrintWriter(new FileWriter(eventLogPath, true));
             eventWriter.printf("# Telecom Network Traffic Simulator Event Log%n# Created: %s%n%n", timestamp);
         } catch (IOException e) {
-            System.err.println("Error initializing event log file: " + e.getMessage());
+            System.err.println("Error creating output folder or log file: " + e.getMessage());
         }
     }
 
-    /** Returns this run's directory path. */
+    /** Returns the path of this run's output folder. */
     public String getRunDirectory() {
         return runDir;
     }
 
-    /** Writes a single event record to the event log. */
+    /**
+     * Writes a single simulation event to the log file.
+     * Each line includes the event time, source ID, and event type.
+     */
     public void logEvent(Event event) {
         if (eventWriter == null) return;
         eventWriter.printf("t=%.3f, source=%d, type=%s%n",
@@ -70,9 +72,9 @@ public class FileOutputManager {
     }
 
     /**
-     * Saves a simulation summary file inside the run folder.
-     *
-     * @param stats StatisticsCollector with summary data
+     * Writes a summary file containing key statistics collected during the run.
+     * This includes the number of samples, average and peak rates, standard deviation,
+     * and an estimated Hurst exponent.
      */
     public void saveSummary(StatisticsCollector stats) {
         String summaryPath = runDir + "summary.txt";
@@ -90,7 +92,66 @@ public class FileOutputManager {
         }
     }
 
-    /** Closes the event writer and flushes remaining data to disk. */
+    /**
+     * Saves data generated in FGN mode.
+     * The generated time-series is written to a CSV file, and a short text summary
+     * with the Hurst estimation is saved in the same folder.
+     */
+    public void saveFGNResults(double[] series, double H, double sigma, double mean) {
+        try {
+            String csvPath = runDir + "traffic_data.csv";
+            try (PrintWriter writer = new PrintWriter(new FileWriter(csvPath))) {
+                writer.println("Index,Value");
+                for (int i = 0; i < series.length; i++) {
+                    writer.printf("%d,%.10f%n", i, series[i]);
+                }
+            }
+
+            final int MIN_SAMPLES = 512;
+            final double MIN_VAR = 1e-12;
+
+            double meanVal = Arrays.stream(series).average().orElse(0.0);
+            double variance = Arrays.stream(series)
+                    .map(v -> (v - meanVal) * (v - meanVal))
+                    .average().orElse(0.0);
+
+            Double estH = Double.NaN;
+            if (series.length >= MIN_SAMPLES && variance > MIN_VAR) {
+                List<Double> data = Arrays.stream(series).boxed().collect(Collectors.toList());
+                estH = HurstEstimator.estimateHurst(data);
+            }
+
+            String summaryPath = runDir + "summary.txt";
+            try (PrintWriter sw = new PrintWriter(new FileWriter(summaryPath))) {
+                sw.println("=== FGN Generation Summary ===");
+                sw.printf("Samples Generated: %d%n", series.length);
+                sw.printf("Target Hurst (H): %.4f%n", H);
+                sw.printf("Sigma: %.6f%n", sigma);
+                sw.printf("Mean: %.6f%n", mean);
+                if (estH.isNaN()) {
+                    sw.println("Estimated Hurst: not computed (increase samples or σ)");
+                } else {
+                    sw.printf("Estimated Hurst: %.4f%n", estH);
+                }
+                sw.println("===============================");
+            }
+
+            if (estH.isNaN()) {
+                System.out.println("Estimated Hurst exponent could not be computed (try more samples or higher variance).");
+            } else {
+                System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
+            }
+
+            System.out.printf("FGN data saved: %s%n", csvPath);
+            System.out.printf("FGN summary saved: %s%n", summaryPath);
+            System.out.printf("All results saved in: %s%n", runDir);
+
+        } catch (IOException e) {
+            System.err.println("Error saving FGN results: " + e.getMessage());
+        }
+    }
+
+    /** Flushes and closes the event log safely at the end of the run. */
     public void close() {
         if (eventWriter != null) {
             eventWriter.flush();
