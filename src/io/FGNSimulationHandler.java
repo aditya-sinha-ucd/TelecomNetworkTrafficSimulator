@@ -33,7 +33,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
 
         try {
             FractionalGaussianNoise generator = new FractionalGaussianNoise(
-                    params.getHurst(), params.getSigma(), params.getSeed());
+                    params.getHurst(), params.getSigma(), params.getMean(), params.getSeed());
             double[] series = generator.generate(params.getSampleCount());
 
             FileOutputManager outputManager = new FileOutputManager();
@@ -41,6 +41,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
                     series,
                     params.getHurst(),
                     params.getSigma(),
+                    params.getMean(),
                     params.getSamplingInterval(),
                     params.getThreshold());
             outputManager.close();
@@ -58,6 +59,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         System.out.println("\nGenerating FGN with:");
         System.out.printf("  Hurst exponent (H): %.4f%n", params.getHurst());
         System.out.printf("  Sigma: %.6f%n", params.getSigma());
+        System.out.printf("  Mean: %.6f%n", params.getMean());
         System.out.printf("  Samples: %d%n", params.getSampleCount());
         System.out.printf("  Sampling interval: %.4f seconds%n", params.getSamplingInterval());
         System.out.printf("  Threshold: %.6f%n", params.getThreshold());
@@ -67,12 +69,12 @@ public class FGNSimulationHandler implements SimulationModeHandler {
     private FGNGenerationParameters promptManually() {
         double H = prompter.promptDoubleInRange("Enter Hurst exponent (0.5 < H < 1.0): ", 0.5, 1.0);
         double sigma = prompter.promptPositiveDouble("Enter standard deviation (σ): ");
+        double mean = prompter.promptDouble("Enter mean value: ");
         int samples = prompter.promptPositiveInt("Enter number of samples to generate: ");
         double dt = prompter.promptPositiveDouble("Enter sampling interval between samples (seconds): ");
         double threshold = prompter.promptDouble("Enter ON/OFF threshold for event log (e.g., 0): ");
         long seed = System.currentTimeMillis();
-        warnIfHurstEstimateUnreliable(samples);
-        return new FGNGenerationParameters(H, sigma, samples, dt, threshold, seed);
+        return new FGNGenerationParameters(H, sigma, mean, samples, dt, threshold, seed);
     }
 
     private FGNGenerationParameters loadFromFile() {
@@ -86,6 +88,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
                 double sigma = require(params, "sigma");
                 int samples = (int) Math.round(require(params, "samples"));
 
+                double mean = params.getOrDefault("mean", 0.0);
                 double dt = params.getOrDefault("samplingInterval", 1.0);
                 double threshold = params.getOrDefault("threshold", 0.0);
                 long seed = params.containsKey("seed") ? params.get("seed").longValue() : System.currentTimeMillis();
@@ -103,8 +106,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
                     throw new IllegalArgumentException("samplingInterval must be positive");
                 }
 
-                warnIfHurstEstimateUnreliable(samples);
-                return new FGNGenerationParameters(hurst, sigma, samples, dt, threshold, seed);
+                return new FGNGenerationParameters(hurst, sigma, mean, samples, dt, threshold, seed);
             } catch (IOException e) {
                 System.err.println("Error loading configuration file: " + e.getMessage());
             } catch (IllegalArgumentException e) {
@@ -114,13 +116,6 @@ public class FGNSimulationHandler implements SimulationModeHandler {
             if (!prompter.promptYesNo("Would you like to try another file? (y/n): ")) {
                 return null;
             }
-        }
-    }
-
-    private void warnIfHurstEstimateUnreliable(int samples) {
-        if (samples < FileOutputManager.MIN_FGN_HURST_SAMPLES) {
-            System.out.printf("Warning: Hurst estimation requires at least %d samples; only %d requested.%n",
-                    FileOutputManager.MIN_FGN_HURST_SAMPLES, samples);
         }
     }
 

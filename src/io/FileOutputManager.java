@@ -107,7 +107,7 @@ public class FileOutputManager {
      * The generated time-series is written to a CSV file, and a short text summary
      * with the Hurst estimation is saved in the same folder.
      */
-    public void saveFGNResults(double[] series, double H, double sigma,
+    public void saveFGNResults(double[] series, double H, double sigma, double mean,
                                double samplingInterval, double threshold) {
         try {
             String csvPath = runDir + "traffic_data.csv";
@@ -120,6 +120,7 @@ public class FileOutputManager {
 
             writeFGNEventLog(series, samplingInterval, threshold);
 
+            final int MIN_SAMPLES = 512;
             final double MIN_VAR = 1e-12;
 
             double meanVal = Arrays.stream(series).average().orElse(0.0);

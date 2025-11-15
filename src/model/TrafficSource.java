@@ -30,10 +30,25 @@ public class TrafficSource {
      */
     public TrafficSource(int id, double onShape, double onScale,
                          double offShape, double offScale) {
+        this(id,
+                new ParetoDistribution(onShape, onScale),
+                new ParetoDistribution(offShape, offScale));
+    }
+
+    /**
+     * Package-private constructor that accepts arbitrary distributions.
+     * <p>
+     * Exposed primarily for testing so that deterministic distributions
+     * (or other distribution implementations) can be injected.
+     */
+    TrafficSource(int id, Distribution onDist, Distribution offDist) {
+        if (onDist == null || offDist == null) {
+            throw new IllegalArgumentException("Distributions cannot be null");
+        }
         this.id = id;
         this.state = SourceState.OFF;
-        this.onDist = new ParetoDistribution(onShape, onScale);
-        this.offDist = new ParetoDistribution(offShape, offScale);
+        this.onDist = onDist;
+        this.offDist = offDist;
         this.nextEventTime = 0.0;
     }
 
