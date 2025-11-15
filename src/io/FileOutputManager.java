@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
  */
 public class FileOutputManager {
 
+    /** Minimum samples needed for a reliable Hurst estimate in FGN mode. */
+    public static final int MIN_FGN_HURST_SAMPLES = 512;
+
     /** Base folder where all simulation results will be saved. */
     private static final String OUTPUT_ROOT = "output/";
 
@@ -126,7 +129,13 @@ public class FileOutputManager {
                     .average().orElse(0.0);
 
             Double estH = Double.NaN;
-            if (series.length >= MIN_SAMPLES && variance > MIN_VAR) {
+            String hurstNote = null;
+            if (series.length < MIN_FGN_HURST_SAMPLES) {
+                hurstNote = String.format("requires >= %d samples (generated %d)",
+                        MIN_FGN_HURST_SAMPLES, series.length);
+            } else if (variance <= MIN_VAR) {
+                hurstNote = "variance too low (increase σ or threshold spread)";
+            } else {
                 List<Double> data = Arrays.stream(series).boxed().collect(Collectors.toList());
                 estH = HurstEstimator.estimateHurst(data);
             }
@@ -137,9 +146,12 @@ public class FileOutputManager {
                 sw.printf("Samples Generated: %d%n", series.length);
                 sw.printf("Target Hurst (H): %.4f%n", H);
                 sw.printf("Sigma: %.6f%n", sigma);
-                sw.printf("Mean: %.6f%n", mean);
                 if (estH.isNaN()) {
-                    sw.println("Estimated Hurst: not computed (increase samples or σ)");
+                    if (hurstNote == null) {
+                        sw.println("Estimated Hurst: not computed (estimator returned NaN)");
+                    } else {
+                        sw.printf("Estimated Hurst: not computed (%s)%n", hurstNote);
+                    }
                 } else {
                     sw.printf("Estimated Hurst: %.4f%n", estH);
                 }
@@ -147,7 +159,11 @@ public class FileOutputManager {
             }
 
             if (estH.isNaN()) {
-                System.out.println("Estimated Hurst exponent could not be computed (try more samples or higher variance).");
+                if (hurstNote == null) {
+                    System.out.println("Estimated Hurst exponent could not be computed (estimator returned NaN).");
+                } else {
+                    System.out.printf("Estimated Hurst exponent skipped: %s.%n", hurstNote);
+                }
             } else {
                 System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
             }
