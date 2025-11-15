@@ -7,7 +7,7 @@ public class FractionalGaussianNoiseTest {
 
     @Test
     void testGenerateFGNLengthAndVariance() {
-        FractionalGaussianNoise fgn = new FractionalGaussianNoise(0.8, 1.0, 0.0, 123L);
+        FractionalGaussianNoise fgn = new FractionalGaussianNoise(0.8, 1.0, 123L);
         double[] samples = fgn.generate(128);
 
         assertEquals(128, samples.length, "Output length must match requested sample size");
@@ -23,15 +23,15 @@ public class FractionalGaussianNoiseTest {
     @Test
     void testInvalidParametersThrowException() {
         assertThrows(IllegalArgumentException.class,
-                () -> new FractionalGaussianNoise(0.3, 1.0, 0.0, 1L));
+                () -> new FractionalGaussianNoise(0.3, 1.0, 1L));
         assertThrows(IllegalArgumentException.class,
-                () -> new FractionalGaussianNoise(0.8, -1.0, 0.0, 1L));
+                () -> new FractionalGaussianNoise(0.8, -1.0, 1L));
     }
 
     @Test
     void testReproducibility() {
-        FractionalGaussianNoise f1 = new FractionalGaussianNoise(0.8, 1.0, 0.0, 42L);
-        FractionalGaussianNoise f2 = new FractionalGaussianNoise(0.8, 1.0, 0.0, 42L);
+        FractionalGaussianNoise f1 = new FractionalGaussianNoise(0.8, 1.0, 42L);
+        FractionalGaussianNoise f2 = new FractionalGaussianNoise(0.8, 1.0, 42L);
         assertArrayEquals(f1.generate(100), f2.generate(100), 1e-12, "Same seed must produce identical output");
     }
 }

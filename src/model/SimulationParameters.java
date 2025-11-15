@@ -24,8 +24,7 @@ public class SimulationParameters {
     // NEW: FGN parameters
     public double hurst = 0.80;        // 0.5..1
     public double fgnSigma = 1.0;
-    public double fgnMean = 0.0;
-    public double fgnThreshold = 0.0;  // 0 gives ~50% ON for mean 0
+    public double fgnThreshold = 0.0;  // 0 gives ~50% ON for the zero-mean FGN process
     public long   fgnSeed = 42L;
 
     public SimulationParameters() {}

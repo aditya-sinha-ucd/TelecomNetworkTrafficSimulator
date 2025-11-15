@@ -16,7 +16,6 @@ public final class FractionalGaussianNoise {
 
     private final double hurst;
     private final double sigma;
-    private final double mean;
     private final Random rng;
 
     /**
@@ -24,22 +23,20 @@ public final class FractionalGaussianNoise {
      *
      * @param hurst Hurst exponent (0.5 &lt; H &lt; 1.0)
      * @param sigma Standard deviation (&gt; 0)
-     * @param mean  Mean value
      * @param rng   Random generator
      */
-    public FractionalGaussianNoise(double hurst, double sigma, double mean, Random rng) {
+    public FractionalGaussianNoise(double hurst, double sigma, Random rng) {
         validateParameters(hurst, sigma);
         this.hurst = hurst;
         this.sigma = sigma;
-        this.mean = mean;
         this.rng = rng;
     }
 
     /**
      * Convenience constructor with a seed.
      */
-    public FractionalGaussianNoise(double hurst, double sigma, double mean, long seed) {
-        this(hurst, sigma, mean, new Random(seed));
+    public FractionalGaussianNoise(double hurst, double sigma, long seed) {
+        this(hurst, sigma, new Random(seed));
     }
 
     /**
@@ -174,7 +171,8 @@ public final class FractionalGaussianNoise {
     private double[] scaleAndTrim(double[] data, int n) {
         double[] out = new double[n];
         for (int i = 0; i < n; i++) {
-            out[i] = mean + sigma * data[i];
+            // FGN has zero mean by definition.
+            out[i] = sigma * data[i];
         }
         return out;
     }
@@ -262,5 +260,4 @@ public final class FractionalGaussianNoise {
 
     public double getHurst() { return hurst; }
     public double getSigma() { return sigma; }
-    public double getMean()  { return mean; }
 }
