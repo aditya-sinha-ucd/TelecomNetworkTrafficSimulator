@@ -3,18 +3,9 @@ package io;
 import core.Simulator;
 import model.SimulationParameters;
 import util.FractionalGaussianNoise;
-import util.HurstEstimator;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /**
  * Handles all console interaction with the user.
@@ -115,64 +106,20 @@ public class ConsoleUI {
             int samples = readPositiveInt("Enter number of samples to generate: ");
 
             try {
+                // Generate FGN time-series
                 FractionalGaussianNoise fgn =
                         new FractionalGaussianNoise(H, sigma, mean, System.currentTimeMillis());
                 double[] series = fgn.generate(samples);
 
-                String ts = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
-                String runDir = "output/run_" + ts + "/";
-                new java.io.File(runDir).mkdirs();
+                // Use FileOutputManager to handle all saving (CSV + summary)
+                FileOutputManager output = new FileOutputManager();
+                output.saveFGNResults(series, H, sigma, mean);
+                output.close();
 
-                java.nio.file.Path csvPath = java.nio.file.Path.of(runDir, "traffic_data.csv");
-                try (java.io.PrintWriter writer =
-                             new java.io.PrintWriter(java.nio.file.Files.newBufferedWriter(csvPath))) {
-                    writer.println("Index,Value");
-                    for (int i = 0; i < series.length; i++) {
-                        writer.printf("%d,%.10f%n", i, series[i]);
-                    }
-                }
-
-                // Hurst estimation with safety checks
-                final int MIN_SAMPLES = 512;
-                final double MIN_VAR = 1e-12;
-                double meanVal = java.util.Arrays.stream(series).average().orElse(0.0);
-                double variance = java.util.Arrays.stream(series)
-                        .map(v -> (v - meanVal) * (v - meanVal))
-                        .average().orElse(0.0);
-
-                Double estH = Double.NaN;
-                if (series.length >= MIN_SAMPLES && variance > MIN_VAR) {
-                    estH = util.HurstEstimator.estimateHurst(
-                            java.util.Arrays.stream(series).boxed()
-                                    .collect(java.util.stream.Collectors.toList()));
-                }
-
-                // Write summary file
-                java.nio.file.Path summaryPath = java.nio.file.Path.of(runDir, "summary.txt");
-                try (java.io.PrintWriter sw =
-                             new java.io.PrintWriter(java.nio.file.Files.newBufferedWriter(summaryPath))) {
-                    sw.println("=== FGN Generation Summary ===");
-                    sw.printf("Samples Generated: %d%n", samples);
-                    sw.printf("Target Hurst (H): %.4f%n", H);
-                    sw.printf("Sigma: %.6f%n", sigma);
-                    sw.printf("Mean: %.6f%n", mean);
-                    if (estH.isNaN()) sw.println("Estimated Hurst: not computed (increase samples or σ)");
-                    else               sw.printf("Estimated Hurst: %.4f%n", estH);
-                    sw.println("===============================");
-                }
-
-                // Console output
-                if (estH.isNaN()) {
-                    System.out.println("Estimated Hurst exponent (validation): not computed (increase samples or σ)");
-                } else {
-                    System.out.printf("Estimated Hurst exponent (validation): %.3f%n", estH);
-                }
-                System.out.printf("Time-series data exported to: %s%n", csvPath.toString());
-                System.out.printf("Summary saved to: %s%n", summaryPath.toString());
-                // no event log line for FGN
-                System.out.printf("Results saved to: %s%n", runDir);
-                System.out.println("\nSimulation finished successfully!");
-                System.out.println("Results saved in the output/ directory.");
+                System.out.println("\nFGN sequence generated and saved.");
+                System.out.printf("Results saved in the output directory under: %s%n",
+                        output.getRunDirectory());
+                System.out.println("Simulation finished successfully!");
                 System.out.println("-----------------------------------------------");
 
             } catch (Exception e) {
