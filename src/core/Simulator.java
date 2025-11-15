@@ -2,7 +2,6 @@ package core;
 
 import model.*;
 import util.RandomUtils;
-import util.HurstEstimator;
 import io.FileOutputManager;
 import extensions.MultiSourceManager;
 import extensions.NetworkQueue;
@@ -36,6 +35,17 @@ public class Simulator {
     private final List<TrafficSource> sources = new ArrayList<>();
 
     /**
+     * Next regularly spaced sampling instant for recording the aggregate rate.
+     * Sampling at fixed intervals better matches the assignment requirement of
+     * exporting a uniformly spaced time-series instead of sampling only when
+     * events occur.
+     */
+    private double nextSampleTime = 0.0;
+
+    /** Keeps track of the most recent aggregate rate applied to sampling. */
+    private double lastRecordedRate = 0.0;
+
+    /**
      * Constructs a new Simulator using the provided configuration parameters.
      */
     public Simulator(SimulationParameters params) {
@@ -49,7 +59,6 @@ public class Simulator {
 
         // Initialize output manager (creates its own per-run folder)
         this.outputManager = new FileOutputManager();
-        String runDir = outputManager.getRunDirectory();
 
         // Initialize managers
         this.multiSourceManager = new MultiSourceManager();
@@ -74,6 +83,9 @@ public class Simulator {
             double offset = RandomUtils.uniform(0, 5.0);
             eventQueue.addEvent(new Event(offset, i, EventType.ON));
         }
+
+        // Initial aggregate rate (all sources start OFF).
+        this.lastRecordedRate = computeAggregateRate();
     }
 
     /**
@@ -87,7 +99,10 @@ public class Simulator {
             Event event = eventQueue.nextEvent();
             if (event == null) break;
 
-            clock.advanceTo(event.getTime());
+            double eventTime = event.getTime();
+            recordSamplesBefore(Math.min(eventTime, totalSimulationTime));
+
+            clock.advanceTo(eventTime);
             if (clock.getTime() > totalSimulationTime) break;
 
             try {
@@ -102,27 +117,67 @@ public class Simulator {
                 Event next = src.generateNextEvent(clock.getTime());
                 eventQueue.addEvent(next);
 
-                // Compute aggregate rate
-                long onCount = sources.stream().filter(TrafficSource::isOn).count();
-                double rate = (double) onCount / numSources;
-                stats.recordSample(clock.getTime(), rate);
-
-                // Queue arrivals
-                if (rate > 0) networkQueue.enqueue(clock.getTime());
+                // Update aggregate rate for future sampling
+                lastRecordedRate = computeAggregateRate();
 
             } catch (Exception e) {
                 ErrorHandler.handleError("Error processing event: " + e.getMessage(), false);
             }
         }
 
+        // Capture any remaining samples through the end of the simulation window
+        recordRemainingSamples();
+        networkQueue.processUntil(totalSimulationTime);
+
         System.out.println("Simulation complete!");
         stats.printSummary();
 
         // === Export clean, organized outputs ===
         stats.exportToCSV(runDir + "traffic_data.csv");
-        outputManager.saveSummary(stats);
+        outputManager.saveSummary(stats, networkQueue);
         outputManager.close();
 
         System.out.printf("Results saved to: %s%n", runDir);
+    }
+
+    /** Computes the current aggregate ON rate across all sources. */
+    private double computeAggregateRate() {
+        if (numSources == 0) return 0.0;
+        long onCount = sources.stream().filter(TrafficSource::isOn).count();
+        return (double) onCount / numSources;
+    }
+
+    /**
+     * Records samples at fixed intervals before the provided cutoff time.
+     * The series between events is piecewise-constant, so we simply reuse the
+     * last recorded rate until the next event occurs.
+     */
+    private void recordSamplesBefore(double cutoffTime) {
+        if (params.samplingInterval <= 0) {
+            ErrorHandler.handleError("Sampling interval must be positive", true);
+        }
+        while (nextSampleTime < cutoffTime && nextSampleTime <= totalSimulationTime) {
+            networkQueue.processUntil(nextSampleTime);
+            int arrivals = (int) Math.round(lastRecordedRate * numSources);
+            if (arrivals > 0) {
+                networkQueue.enqueueBulk(nextSampleTime, arrivals);
+            }
+            stats.recordSample(nextSampleTime, lastRecordedRate);
+            nextSampleTime += params.samplingInterval;
+        }
+    }
+
+    /** Records samples until the global simulation time limit is reached. */
+    private void recordRemainingSamples() {
+        if (params.samplingInterval <= 0) return;
+        while (nextSampleTime <= totalSimulationTime) {
+            networkQueue.processUntil(nextSampleTime);
+            int arrivals = (int) Math.round(lastRecordedRate * numSources);
+            if (arrivals > 0) {
+                networkQueue.enqueueBulk(nextSampleTime, arrivals);
+            }
+            stats.recordSample(nextSampleTime, lastRecordedRate);
+            nextSampleTime += params.samplingInterval;
+        }
     }
 }

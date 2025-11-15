@@ -2,6 +2,7 @@ package io;
 
 import core.Event;
 import core.StatisticsCollector;
+import extensions.NetworkQueue;
 import util.HurstEstimator;
 
 import java.io.FileWriter;
@@ -76,7 +77,7 @@ public class FileOutputManager {
      * This includes the number of samples, average and peak rates, standard deviation,
      * and an estimated Hurst exponent.
      */
-    public void saveSummary(StatisticsCollector stats) {
+    public void saveSummary(StatisticsCollector stats, NetworkQueue queue) {
         String summaryPath = runDir + "summary.txt";
         try (FileWriter writer = new FileWriter(summaryPath)) {
             writer.write("=== Telecom Network Traffic Simulator Summary ===\n");
@@ -85,6 +86,12 @@ public class FileOutputManager {
             writer.write(String.format("Peak Rate: %.4f%n", stats.getPeakRate()));
             writer.write(String.format("Std Dev: %.4f%n", stats.getStdDevRate()));
             writer.write(String.format("Estimated Hurst Exponent: %.4f%n", stats.getHurstExponent()));
+            writer.write("--- Network Queue Metrics ---\n");
+            writer.write(String.format("Arrivals: %d%n", queue.getTotalArrived()));
+            writer.write(String.format("Served: %d%n", queue.getTotalServed()));
+            writer.write(String.format("Dropped: %d%n", queue.getTotalDropped()));
+            writer.write(String.format("Average Waiting Time: %.4f%n", queue.getAvgWaitingTime()));
+            writer.write(String.format("Average System Time: %.4f%n", queue.getAvgSystemTime()));
             writer.write("=================================================\n");
             System.out.println("Summary saved to: " + summaryPath);
         } catch (IOException e) {
@@ -97,7 +104,8 @@ public class FileOutputManager {
      * The generated time-series is written to a CSV file, and a short text summary
      * with the Hurst estimation is saved in the same folder.
      */
-    public void saveFGNResults(double[] series, double H, double sigma, double mean) {
+    public void saveFGNResults(double[] series, double H, double sigma, double mean,
+                               double samplingInterval, double threshold) {
         try {
             String csvPath = runDir + "traffic_data.csv";
             try (PrintWriter writer = new PrintWriter(new FileWriter(csvPath))) {
@@ -106,6 +114,8 @@ public class FileOutputManager {
                     writer.printf("%d,%.10f%n", i, series[i]);
                 }
             }
+
+            writeFGNEventLog(series, samplingInterval, threshold);
 
             final int MIN_SAMPLES = 512;
             final double MIN_VAR = 1e-12;
@@ -149,6 +159,22 @@ public class FileOutputManager {
         } catch (IOException e) {
             System.err.println("Error saving FGN results: " + e.getMessage());
         }
+    }
+
+    /** Writes the generated FGN series to the event log for traceability. */
+    private void writeFGNEventLog(double[] series, double samplingInterval, double threshold) {
+        if (eventWriter == null) {
+            return;
+        }
+        eventWriter.println("# Fractional Gaussian Noise samples");
+        double time = 0.0;
+        for (int i = 0; i < series.length; i++) {
+            String state = series[i] >= threshold ? "ON" : "OFF";
+            eventWriter.printf("t=%.6f, sample=%d, value=%.10f, state=%s%n",
+                    time, i, series[i], state);
+            time += samplingInterval;
+        }
+        eventWriter.flush();
     }
 
     /** Flushes and closes the event log safely at the end of the run. */
