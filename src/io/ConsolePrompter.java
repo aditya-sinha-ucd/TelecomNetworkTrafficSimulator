@@ -11,6 +11,9 @@ public class ConsolePrompter {
 
     private final Scanner scanner;
 
+    /**
+     * @param scanner input source shared with the console UI
+     */
     public ConsolePrompter(Scanner scanner) {
         this.scanner = scanner;
     }

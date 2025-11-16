@@ -5,13 +5,14 @@ import java.util.Scanner;
 /**
  * Handles all console interaction with the user.
  * <p>
- * The UI now delegates the actual workflows to dedicated mode handlers so the
- * console loop simply selects a mode, runs it, and optionally repeats.
+ * The UI delegates the heavy lifting to {@link SimulationModeHandler} implementations so
+ * that this class focuses purely on prompting and dispatching simulation modes.
  */
 public class ConsoleUI {
 
     private final ConsolePrompter prompter;
 
+    /** Creates a UI backed by {@link java.util.Scanner}-based prompts. */
     public ConsoleUI() {
         this.prompter = new ConsolePrompter(new Scanner(System.in));
     }
@@ -38,6 +39,11 @@ public class ConsoleUI {
         System.out.println("Thank you for using the Telecom Network Traffic Simulator. Goodbye!");
     }
 
+    /**
+     * Displays the list of available modes and returns the selected handler.
+     *
+     * @return handler representing the requested simulation workflow
+     */
     private SimulationModeHandler selectMode() {
         System.out.println("Select simulation mode:");
         System.out.println("1 - Pareto ON/OFF (event-driven traffic model)");

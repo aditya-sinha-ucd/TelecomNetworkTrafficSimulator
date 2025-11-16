@@ -8,11 +8,17 @@ import java.util.Map;
 
 /**
  * Handles the complete workflow for the Pareto ON/OFF mode.
+ * <p>
+ * Responsibilities include collecting parameters (manually or via file),
+ * instantiating {@link core.Simulator}, and reporting completion.
  */
 public class ParetoSimulationHandler implements SimulationModeHandler {
 
     private final ConsolePrompter prompter;
 
+    /**
+     * @param prompter shared input helper used by the console UI
+     */
     public ParetoSimulationHandler(ConsolePrompter prompter) {
         this.prompter = prompter;
     }
@@ -44,6 +50,9 @@ public class ParetoSimulationHandler implements SimulationModeHandler {
         }
     }
 
+    /**
+     * Interactively asks the user for all parameters needed to run the simulator.
+     */
     private SimulationParameters promptManually() {
         double totalTime = prompter.promptPositiveDouble("Enter total simulation time (seconds): ");
         int numSources = prompter.promptPositiveInt("Enter number of traffic sources: ");
@@ -59,6 +68,9 @@ public class ParetoSimulationHandler implements SimulationModeHandler {
         return params;
     }
 
+    /**
+     * Loads simulation parameters from a configuration file selected by the user.
+     */
     private SimulationParameters loadFromFile() {
         while (true) {
             String path = prompter.promptLine("Enter path to configuration file (e.g., config.txt): ");
@@ -99,6 +111,7 @@ public class ParetoSimulationHandler implements SimulationModeHandler {
         }
     }
 
+    /** Ensures a required field is present in the loaded map. */
     private double require(Map<String, Double> params, String key) {
         if (!params.containsKey(key)) {
             throw new IllegalArgumentException("Missing required parameter: " + key);

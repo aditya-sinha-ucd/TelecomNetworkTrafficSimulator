@@ -6,11 +6,13 @@ import java.util.Random;
  * Fractional Gaussian Noise (fGn) generator using the Davies–Harte method.
  * <p>
  * Produces a Gaussian, long-range dependent sequence with Hurst exponent H in (0.5, 1.0).
- * The implementation follows good SWE/OOP practices:
- *  - clear parameter validation
- *  - dependency injection of Random (reproducible tests)
- *  - private helpers for each mathematical step
- *  - guards to avoid numerical NaNs
+ * Implementation highlights:
+ * <ul>
+ *     <li>Clear parameter validation.</li>
+ *     <li>Dependency injection of {@link java.util.Random} for reproducible tests.</li>
+ *     <li>Private helpers that implement each mathematical step.</li>
+ *     <li>Guards to avoid numerical NaNs in FFT eigenvalues.</li>
+ * </ul>
  */
 public final class FractionalGaussianNoise {
 

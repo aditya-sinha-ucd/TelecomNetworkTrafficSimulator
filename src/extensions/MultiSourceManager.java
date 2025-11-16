@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Manages a list of sources. Can build Pareto or FGN sources.
+ * Utility responsible for constructing collections of {@link model.TrafficSource} objects.
+ * <p>
+ * Depending on the {@link model.SimulationParameters}, it can build either
+ * classic Pareto ON/OFF sources or {@link model.FGNTrafficSource} instances.
  */
 public class MultiSourceManager {
 
@@ -17,7 +20,15 @@ public class MultiSourceManager {
     private final Random random = new Random();
 
     /**
-     * Pareto sources with ±variation.
+     * Builds a list of Pareto-based traffic sources with per-parameter variation.
+     *
+     * @param count         number of sources to create
+     * @param baseOnShape   baseline ON-shape (alpha) parameter
+     * @param baseOnScale   baseline ON-scale parameter
+     * @param baseOffShape  baseline OFF-shape parameter
+     * @param baseOffScale  baseline OFF-scale parameter
+     * @param variation     relative variation applied to each parameter (e.g., 0.15 = ±15%)
+     * @return mutable list of configured traffic sources
      */
     public List<TrafficSource> generateSources(int count,
                                                double baseOnShape, double baseOnScale,
@@ -36,7 +47,10 @@ public class MultiSourceManager {
     }
 
     /**
-     * FGN sources (no Pareto). Parameters come from SimulationParameters.
+     * Builds FGN-thresholded sources using the global simulation parameters.
+     *
+     * @param params simulation configuration containing FGN settings
+     * @return list of {@link FGNTrafficSource} instances
      */
     public List<TrafficSource> generateFGNSources(SimulationParameters params) {
         sources.clear();
@@ -46,11 +60,15 @@ public class MultiSourceManager {
         return sources;
     }
 
+    /** Randomly perturbs a base value by ±variation. */
     private double vary(double base, double variation) {
         double delta = (random.nextDouble() * 2 - 1) * variation; // ±variation
         return Math.max(0.0001, base * (1 + delta));
     }
 
+    /**
+     * @return the last generated list of sources (mutable)
+     */
     public List<TrafficSource> getSources() {
         return sources;
     }

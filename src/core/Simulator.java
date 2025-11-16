@@ -13,11 +13,13 @@ import java.util.List;
 /**
  * Main controller for the event-driven telecom traffic simulation.
  * <p>
- * Responsibilities:
- *  - Initialize traffic sources (Pareto or FGN-based)
- *  - Manage event queue and process ON/OFF transitions
- *  - Record and export statistics
- *  - Integrate optional queue modeling
+ * Responsibilities include:
+ * <ul>
+ *     <li>Initializing either Pareto or FGN-based traffic sources.</li>
+ *     <li>Advancing the {@link EventQueue} and processing ON/OFF transitions.</li>
+ *     <li>Sampling aggregate activity and exporting statistics.</li>
+ *     <li>Coordinating optional queue modeling to approximate downstream congestion.</li>
+ * </ul>
  */
 public class Simulator {
 
@@ -47,6 +49,8 @@ public class Simulator {
 
     /**
      * Constructs a new Simulator using the provided configuration parameters.
+     *
+     * @param params immutable snapshot of user-provided simulation settings
      */
     public Simulator(SimulationParameters params) {
         this.params = params;
@@ -140,7 +144,11 @@ public class Simulator {
         System.out.printf("Results saved to: %s%n", runDir);
     }
 
-    /** Computes the current aggregate ON rate across all sources. */
+    /**
+     * Computes the current aggregate ON rate across all sources.
+     *
+     * @return fraction of sources that are currently ON
+     */
     private double computeAggregateRate() {
         if (numSources == 0) return 0.0;
         long onCount = sources.stream().filter(TrafficSource::isOn).count();
