@@ -1,0 +1,95 @@
+\doxysection{extensions.\+Queue\+Element Class Reference}
+\hypertarget{classextensions_1_1_queue_element}{}\label{classextensions_1_1_queue_element}\index{extensions.QueueElement@{extensions.QueueElement}}
+
+
+Represents a single packet or flow unit in the \doxylink{classextensions_1_1_network_queue}{Network\+Queue}.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classextensions_1_1_queue_element_a599695de4da8ecd295e85eb74cfbfbd3}{Queue\+Element}} (double arrival\+Time)
+\item 
+double \mbox{\hyperlink{classextensions_1_1_queue_element_ae6cc43653c75a36a6f5c2f0180c9df39}{get\+Arrival\+Time}} ()
+\item 
+double \mbox{\hyperlink{classextensions_1_1_queue_element_a5402a2a9f568145802af4cd5aa9db5b0}{get\+Service\+Start\+Time}} ()
+\item 
+void \mbox{\hyperlink{classextensions_1_1_queue_element_ab97db7a275082494be25175199a454fa}{set\+Service\+Start\+Time}} (double t)
+\item 
+double \mbox{\hyperlink{classextensions_1_1_queue_element_a819cb1034a92ab91868731184b774e32}{get\+Departure\+Time}} ()
+\item 
+void \mbox{\hyperlink{classextensions_1_1_queue_element_a62cdb1c746ff0eae6f3808c67640d938}{set\+Departure\+Time}} (double t)
+\item 
+double \mbox{\hyperlink{classextensions_1_1_queue_element_a126c18c3471ed14a408b53d54bbc91ce}{get\+Total\+Delay}} ()
+\item 
+double \mbox{\hyperlink{classextensions_1_1_queue_element_aaa1757100a37b5dc0e91b94d4cacc221}{get\+Waiting\+Time}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single packet or flow unit in the \doxylink{classextensions_1_1_network_queue}{Network\+Queue}. 
+
+Stores arrival, service, and departure times. 
+
+\label{doc-constructors}
+\Hypertarget{classextensions_1_1_queue_element_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classextensions_1_1_queue_element_a599695de4da8ecd295e85eb74cfbfbd3}\index{extensions.QueueElement@{extensions.QueueElement}!QueueElement@{QueueElement}}
+\index{QueueElement@{QueueElement}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{QueueElement()}{QueueElement()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a599695de4da8ecd295e85eb74cfbfbd3} 
+extensions.\+Queue\+Element.\+Queue\+Element (\begin{DoxyParamCaption}\item[{double}]{arrival\+Time}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classextensions_1_1_queue_element_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classextensions_1_1_queue_element_ae6cc43653c75a36a6f5c2f0180c9df39}\index{extensions.QueueElement@{extensions.QueueElement}!getArrivalTime@{getArrivalTime}}
+\index{getArrivalTime@{getArrivalTime}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{getArrivalTime()}{getArrivalTime()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_ae6cc43653c75a36a6f5c2f0180c9df39} 
+double extensions.\+Queue\+Element.\+get\+Arrival\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classextensions_1_1_queue_element_a819cb1034a92ab91868731184b774e32}\index{extensions.QueueElement@{extensions.QueueElement}!getDepartureTime@{getDepartureTime}}
+\index{getDepartureTime@{getDepartureTime}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{getDepartureTime()}{getDepartureTime()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a819cb1034a92ab91868731184b774e32} 
+double extensions.\+Queue\+Element.\+get\+Departure\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classextensions_1_1_queue_element_a5402a2a9f568145802af4cd5aa9db5b0}\index{extensions.QueueElement@{extensions.QueueElement}!getServiceStartTime@{getServiceStartTime}}
+\index{getServiceStartTime@{getServiceStartTime}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{getServiceStartTime()}{getServiceStartTime()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a5402a2a9f568145802af4cd5aa9db5b0} 
+double extensions.\+Queue\+Element.\+get\+Service\+Start\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classextensions_1_1_queue_element_a126c18c3471ed14a408b53d54bbc91ce}\index{extensions.QueueElement@{extensions.QueueElement}!getTotalDelay@{getTotalDelay}}
+\index{getTotalDelay@{getTotalDelay}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{getTotalDelay()}{getTotalDelay()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a126c18c3471ed14a408b53d54bbc91ce} 
+double extensions.\+Queue\+Element.\+get\+Total\+Delay (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+total time spent in the system (service + waiting) 
+\end{DoxyReturn}
+\Hypertarget{classextensions_1_1_queue_element_aaa1757100a37b5dc0e91b94d4cacc221}\index{extensions.QueueElement@{extensions.QueueElement}!getWaitingTime@{getWaitingTime}}
+\index{getWaitingTime@{getWaitingTime}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{getWaitingTime()}{getWaitingTime()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_aaa1757100a37b5dc0e91b94d4cacc221} 
+double extensions.\+Queue\+Element.\+get\+Waiting\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+waiting time before service begins 
+\end{DoxyReturn}
+\Hypertarget{classextensions_1_1_queue_element_a62cdb1c746ff0eae6f3808c67640d938}\index{extensions.QueueElement@{extensions.QueueElement}!setDepartureTime@{setDepartureTime}}
+\index{setDepartureTime@{setDepartureTime}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{setDepartureTime()}{setDepartureTime()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a62cdb1c746ff0eae6f3808c67640d938} 
+void extensions.\+Queue\+Element.\+set\+Departure\+Time (\begin{DoxyParamCaption}\item[{double}]{t}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classextensions_1_1_queue_element_ab97db7a275082494be25175199a454fa}\index{extensions.QueueElement@{extensions.QueueElement}!setServiceStartTime@{setServiceStartTime}}
+\index{setServiceStartTime@{setServiceStartTime}!extensions.QueueElement@{extensions.QueueElement}}
+\doxysubsubsection{\texorpdfstring{setServiceStartTime()}{setServiceStartTime()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_queue_element_ab97db7a275082494be25175199a454fa} 
+void extensions.\+Queue\+Element.\+set\+Service\+Start\+Time (\begin{DoxyParamCaption}\item[{double}]{t}{}\end{DoxyParamCaption})}
+

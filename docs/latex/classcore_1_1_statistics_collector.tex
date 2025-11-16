@@ -1,0 +1,179 @@
+\doxysection{core.\+Statistics\+Collector Class Reference}
+\hypertarget{classcore_1_1_statistics_collector}{}\label{classcore_1_1_statistics_collector}\index{core.StatisticsCollector@{core.StatisticsCollector}}
+
+
+Collects and computes key simulation statistics over time.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1_statistics_collector_a50b9a4a6e7831249feb41fac36e146d4}{Statistics\+Collector}} (double sample\+Interval)
+\item 
+void \mbox{\hyperlink{classcore_1_1_statistics_collector_a437f2ca8e8410fd70820e3ebb19ca20a}{record\+Sample}} (double time, double aggregate\+Rate)
+\begin{DoxyCompactList}\small\item\em Records a new sample of the aggregate traffic rate. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classcore_1_1_statistics_collector_aa3baedbf4963ce2f3aaaa226779451d8}{get\+Average\+Rate}} ()
+\item 
+double \mbox{\hyperlink{classcore_1_1_statistics_collector_a7cab37e3e06ecf53c849d6a8186053f3}{get\+Peak\+Rate}} ()
+\item 
+double \mbox{\hyperlink{classcore_1_1_statistics_collector_a3e65850052d2cc9c841f847d3ea29f66}{get\+Std\+Dev\+Rate}} ()
+\item 
+int \mbox{\hyperlink{classcore_1_1_statistics_collector_a6fea295126171282ea4a75b0ed4aa1f2}{get\+Sample\+Count}} ()
+\item 
+List$<$ Double $>$ \mbox{\hyperlink{classcore_1_1_statistics_collector_a9818b85481c6b29388821839660f3dd0}{get\+Activity\+Rates}} ()
+\item 
+double \mbox{\hyperlink{classcore_1_1_statistics_collector_addc85d704594a6fe41299d4843008121}{get\+Hurst\+Exponent}} ()
+\begin{DoxyCompactList}\small\item\em Estimates Hurst exponent of the activity series. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcore_1_1_statistics_collector_a4fb89ad6c7e23f235c2fd75c728305c3}{print\+Summary}} ()
+\begin{DoxyCompactList}\small\item\em Prints formatted summary to console. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcore_1_1_statistics_collector_a9b32150373a8cf27937e22847089c02c}{export\+To\+CSV}} (String file\+Name)
+\begin{DoxyCompactList}\small\item\em Writes recorded time-\/series data to a CSV file (for plotting). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcore_1_1_statistics_collector_aa66fb08a72c96ca1547a6ca661ceec1c}{export\+Summary}} (String file\+Name)
+\begin{DoxyCompactList}\small\item\em Exports summary statistics to a text file (human-\/readable). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcore_1_1_statistics_collector_a6f3308bd2ed20fe98669eed9e225f272}{append\+Summary\+To\+CSV}} (String file\+Name)
+\begin{DoxyCompactList}\small\item\em Appends summary stats to CSV (for batch experiments). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcore_1_1_statistics_collector_a5497f829c8127f80bd81ada319a8cb66}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Clears all recorded samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Collects and computes key simulation statistics over time. 
+
+The simulator records\+:
+\begin{DoxyItemize}
+\item Aggregate rate (fraction of active ON sources)
+\item Time stamps of samples
+\item Summary stats (mean, peak, std deviation) 
+\end{DoxyItemize}
+
+Provides methods to export time-\/series and summaries for external plotting. 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1_statistics_collector_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1_statistics_collector_a50b9a4a6e7831249feb41fac36e146d4}\index{core.StatisticsCollector@{core.StatisticsCollector}!StatisticsCollector@{StatisticsCollector}}
+\index{StatisticsCollector@{StatisticsCollector}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{StatisticsCollector()}{StatisticsCollector()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a50b9a4a6e7831249feb41fac36e146d4} 
+core.\+Statistics\+Collector.\+Statistics\+Collector (\begin{DoxyParamCaption}\item[{double}]{sample\+Interval}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1_statistics_collector_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1_statistics_collector_a6f3308bd2ed20fe98669eed9e225f272}\index{core.StatisticsCollector@{core.StatisticsCollector}!appendSummaryToCSV@{appendSummaryToCSV}}
+\index{appendSummaryToCSV@{appendSummaryToCSV}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{appendSummaryToCSV()}{appendSummaryToCSV()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a6f3308bd2ed20fe98669eed9e225f272} 
+void core.\+Statistics\+Collector.\+append\+Summary\+To\+CSV (\begin{DoxyParamCaption}\item[{String}]{file\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Appends summary stats to CSV (for batch experiments). 
+
+\Hypertarget{classcore_1_1_statistics_collector_aa66fb08a72c96ca1547a6ca661ceec1c}\index{core.StatisticsCollector@{core.StatisticsCollector}!exportSummary@{exportSummary}}
+\index{exportSummary@{exportSummary}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{exportSummary()}{exportSummary()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_aa66fb08a72c96ca1547a6ca661ceec1c} 
+void core.\+Statistics\+Collector.\+export\+Summary (\begin{DoxyParamCaption}\item[{String}]{file\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Exports summary statistics to a text file (human-\/readable). 
+
+\Hypertarget{classcore_1_1_statistics_collector_a9b32150373a8cf27937e22847089c02c}\index{core.StatisticsCollector@{core.StatisticsCollector}!exportToCSV@{exportToCSV}}
+\index{exportToCSV@{exportToCSV}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{exportToCSV()}{exportToCSV()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a9b32150373a8cf27937e22847089c02c} 
+void core.\+Statistics\+Collector.\+export\+To\+CSV (\begin{DoxyParamCaption}\item[{String}]{file\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Writes recorded time-\/series data to a CSV file (for plotting). 
+
+\Hypertarget{classcore_1_1_statistics_collector_a9818b85481c6b29388821839660f3dd0}\index{core.StatisticsCollector@{core.StatisticsCollector}!getActivityRates@{getActivityRates}}
+\index{getActivityRates@{getActivityRates}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{getActivityRates()}{getActivityRates()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a9818b85481c6b29388821839660f3dd0} 
+List$<$ Double $>$ core.\+Statistics\+Collector.\+get\+Activity\+Rates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+list of recorded activity rates (copy). 
+\end{DoxyReturn}
+\Hypertarget{classcore_1_1_statistics_collector_aa3baedbf4963ce2f3aaaa226779451d8}\index{core.StatisticsCollector@{core.StatisticsCollector}!getAverageRate@{getAverageRate}}
+\index{getAverageRate@{getAverageRate}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{getAverageRate()}{getAverageRate()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_aa3baedbf4963ce2f3aaaa226779451d8} 
+double core.\+Statistics\+Collector.\+get\+Average\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+mean of all recorded activity rates. 
+\end{DoxyReturn}
+\Hypertarget{classcore_1_1_statistics_collector_addc85d704594a6fe41299d4843008121}\index{core.StatisticsCollector@{core.StatisticsCollector}!getHurstExponent@{getHurstExponent}}
+\index{getHurstExponent@{getHurstExponent}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{getHurstExponent()}{getHurstExponent()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_addc85d704594a6fe41299d4843008121} 
+double core.\+Statistics\+Collector.\+get\+Hurst\+Exponent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Estimates Hurst exponent of the activity series. 
+
+\Hypertarget{classcore_1_1_statistics_collector_a7cab37e3e06ecf53c849d6a8186053f3}\index{core.StatisticsCollector@{core.StatisticsCollector}!getPeakRate@{getPeakRate}}
+\index{getPeakRate@{getPeakRate}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{getPeakRate()}{getPeakRate()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a7cab37e3e06ecf53c849d6a8186053f3} 
+double core.\+Statistics\+Collector.\+get\+Peak\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+maximum (peak) activity rate recorded. 
+\end{DoxyReturn}
+\Hypertarget{classcore_1_1_statistics_collector_a6fea295126171282ea4a75b0ed4aa1f2}\index{core.StatisticsCollector@{core.StatisticsCollector}!getSampleCount@{getSampleCount}}
+\index{getSampleCount@{getSampleCount}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{getSampleCount()}{getSampleCount()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a6fea295126171282ea4a75b0ed4aa1f2} 
+int core.\+Statistics\+Collector.\+get\+Sample\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+total number of recorded samples. 
+\end{DoxyReturn}
+\Hypertarget{classcore_1_1_statistics_collector_a3e65850052d2cc9c841f847d3ea29f66}\index{core.StatisticsCollector@{core.StatisticsCollector}!getStdDevRate@{getStdDevRate}}
+\index{getStdDevRate@{getStdDevRate}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{getStdDevRate()}{getStdDevRate()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a3e65850052d2cc9c841f847d3ea29f66} 
+double core.\+Statistics\+Collector.\+get\+Std\+Dev\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+standard deviation of activity rates. 
+\end{DoxyReturn}
+\Hypertarget{classcore_1_1_statistics_collector_a4fb89ad6c7e23f235c2fd75c728305c3}\index{core.StatisticsCollector@{core.StatisticsCollector}!printSummary@{printSummary}}
+\index{printSummary@{printSummary}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{printSummary()}{printSummary()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a4fb89ad6c7e23f235c2fd75c728305c3} 
+void core.\+Statistics\+Collector.\+print\+Summary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Prints formatted summary to console. 
+
+\Hypertarget{classcore_1_1_statistics_collector_a437f2ca8e8410fd70820e3ebb19ca20a}\index{core.StatisticsCollector@{core.StatisticsCollector}!recordSample@{recordSample}}
+\index{recordSample@{recordSample}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{recordSample()}{recordSample()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a437f2ca8e8410fd70820e3ebb19ca20a} 
+void core.\+Statistics\+Collector.\+record\+Sample (\begin{DoxyParamCaption}\item[{double}]{time}{, }\item[{double}]{aggregate\+Rate}{}\end{DoxyParamCaption})}
+
+
+
+Records a new sample of the aggregate traffic rate. 
+
+\Hypertarget{classcore_1_1_statistics_collector_a5497f829c8127f80bd81ada319a8cb66}\index{core.StatisticsCollector@{core.StatisticsCollector}!reset@{reset}}
+\index{reset@{reset}!core.StatisticsCollector@{core.StatisticsCollector}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{classcore_1_1_statistics_collector_a5497f829c8127f80bd81ada319a8cb66} 
+void core.\+Statistics\+Collector.\+reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears all recorded samples. 
+

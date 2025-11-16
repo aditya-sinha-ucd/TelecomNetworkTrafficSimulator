@@ -17,6 +17,9 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -26,9 +29,22 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Telecom Network Traffic Simulator<span id="projectnumber">&#160;early_alpha</span>
+   <div id="projectname">Telecom Network Traffic Simulator
    </div>
+   <div id="projectbrief">1.0</div>
   </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -41,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',true,false,'search.php','Search',true);
-  $(function() { init_search(); });
-});
-</script>
-<div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
@@ -91,6 +98,15 @@ $(function(){initNavTree('dir_5dd65160827af56e6353642206b80129.html','',''); });
   <div class="headertitle"><div class="title">model Directory Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Directory dependency graph for model:</div>
+<div class="dyncontent">
+<div class="center"><img src="dir_5dd65160827af56e6353642206b80129_dep.png" border="0" usemap="#adir__5dd65160827af56e6353642206b80129__dep" loading="lazy" alt="src/model"/></div>
+<map name="adir__5dd65160827af56e6353642206b80129__dep" id="adir__5dd65160827af56e6353642206b80129__dep">
+<area shape="rect" href="dir_5dd65160827af56e6353642206b80129.html" title="model" alt="" coords="26,53,83,80"/>
+<area shape="rect" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" title="src" alt="" coords="16,16,93,91"/>
+</map>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
 Files</h2></td></tr>

@@ -1,0 +1,55 @@
+\doxysection{core.\+Simulator Class Reference}
+\hypertarget{classcore_1_1_simulator}{}\label{classcore_1_1_simulator}\index{core.Simulator@{core.Simulator}}
+
+
+\doxylink{class_main}{Main} controller for the event-\/driven telecom traffic simulation.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc}{Simulator}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provided configuration parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcore_1_1_simulator_a90408d62b198022449753d0f28fc2127}{run}} ()
+\begin{DoxyCompactList}\small\item\em Runs the simulation and exports results to organized output files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_main}{Main} controller for the event-\/driven telecom traffic simulation. 
+
+Responsibilities\+:
+\begin{DoxyItemize}
+\item Initialize traffic sources (Pareto or FGN-\/based)
+\item Manage event queue and process ON/\+OFF transitions
+\item Record and export statistics
+\item Integrate optional queue modeling 
+\end{DoxyItemize}
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1_simulator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc}\index{core.Simulator@{core.Simulator}!Simulator@{Simulator}}
+\index{Simulator@{Simulator}!core.Simulator@{core.Simulator}}
+\doxysubsubsection{\texorpdfstring{Simulator()}{Simulator()}}
+{\footnotesize\ttfamily \label{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc} 
+core.\+Simulator.\+Simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}}}]{params}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provided configuration parameters. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1_simulator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1_simulator_a90408d62b198022449753d0f28fc2127}\index{core.Simulator@{core.Simulator}!run@{run}}
+\index{run@{run}!core.Simulator@{core.Simulator}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classcore_1_1_simulator_a90408d62b198022449753d0f28fc2127} 
+void core.\+Simulator.\+run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Runs the simulation and exports results to organized output files. 
+

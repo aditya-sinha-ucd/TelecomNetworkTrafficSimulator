@@ -1,0 +1,117 @@
+\doxysection{io.\+File\+Output\+Manager Class Reference}
+\hypertarget{classio_1_1_file_output_manager}{}\label{classio_1_1_file_output_manager}\index{io.FileOutputManager@{io.FileOutputManager}}
+
+
+Manages all file output operations for the simulator.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classio_1_1_file_output_manager_a9b94270d895cc800008a66fcd6fce731}{File\+Output\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Creates a new output folder for the current run. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{classio_1_1_file_output_manager_ae796887c8772421829f5de50b1fd50bc}{get\+Run\+Directory}} ()
+\begin{DoxyCompactList}\small\item\em Returns the path of this run\textquotesingle{}s output folder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classio_1_1_file_output_manager_a16b7dd5f27d59c3118326897f8f02f07}{log\+Event}} (\mbox{\hyperlink{classcore_1_1_event}{Event}} event)
+\begin{DoxyCompactList}\small\item\em Writes a single simulation event to the log file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classio_1_1_file_output_manager_a5f4410cf4bd6cea176e312d30de52e95}{save\+Summary}} (\mbox{\hyperlink{classcore_1_1_statistics_collector}{Statistics\+Collector}} stats, \mbox{\hyperlink{classextensions_1_1_network_queue}{Network\+Queue}} queue)
+\begin{DoxyCompactList}\small\item\em Writes a summary file containing key statistics collected during the run. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classio_1_1_file_output_manager_af552798fa19bb2286230ede9a25719d8}{save\+FGNResults}} (double\mbox{[}$\,$\mbox{]} series, double H, double sigma, double sampling\+Interval, double threshold)
+\begin{DoxyCompactList}\small\item\em Saves data generated in FGN mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classio_1_1_file_output_manager_a41772efb869410efcea0a227b684383a}{close}} ()
+\begin{DoxyCompactList}\small\item\em Flushes and closes the event log safely at the end of the run. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final int \mbox{\hyperlink{classio_1_1_file_output_manager_a985b76c25c714460156cad9ae41e160a}{MIN\+\_\+\+FGN\+\_\+\+HURST\+\_\+\+SAMPLES}} = 512
+\begin{DoxyCompactList}\small\item\em Minimum samples needed for a reliable Hurst estimate in FGN mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages all file output operations for the simulator. 
+
+This class is responsible for creating a new output folder for each run, writing event logs, saving simulation summaries, and handling FGN mode output. Keeping all file operations here keeps the simulator logic clean and organized. 
+
+\label{doc-constructors}
+\Hypertarget{classio_1_1_file_output_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classio_1_1_file_output_manager_a9b94270d895cc800008a66fcd6fce731}\index{io.FileOutputManager@{io.FileOutputManager}!FileOutputManager@{FileOutputManager}}
+\index{FileOutputManager@{FileOutputManager}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{FileOutputManager()}{FileOutputManager()}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_a9b94270d895cc800008a66fcd6fce731} 
+io.\+File\+Output\+Manager.\+File\+Output\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates a new output folder for the current run. 
+
+The folder name includes a timestamp so that multiple runs can be stored without overwriting previous results. 
+
+\label{doc-func-members}
+\Hypertarget{classio_1_1_file_output_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classio_1_1_file_output_manager_a41772efb869410efcea0a227b684383a}\index{io.FileOutputManager@{io.FileOutputManager}!close@{close}}
+\index{close@{close}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_a41772efb869410efcea0a227b684383a} 
+void io.\+File\+Output\+Manager.\+close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Flushes and closes the event log safely at the end of the run. 
+
+\Hypertarget{classio_1_1_file_output_manager_ae796887c8772421829f5de50b1fd50bc}\index{io.FileOutputManager@{io.FileOutputManager}!getRunDirectory@{getRunDirectory}}
+\index{getRunDirectory@{getRunDirectory}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{getRunDirectory()}{getRunDirectory()}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_ae796887c8772421829f5de50b1fd50bc} 
+String io.\+File\+Output\+Manager.\+get\+Run\+Directory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the path of this run\textquotesingle{}s output folder. 
+
+\Hypertarget{classio_1_1_file_output_manager_a16b7dd5f27d59c3118326897f8f02f07}\index{io.FileOutputManager@{io.FileOutputManager}!logEvent@{logEvent}}
+\index{logEvent@{logEvent}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{logEvent()}{logEvent()}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_a16b7dd5f27d59c3118326897f8f02f07} 
+void io.\+File\+Output\+Manager.\+log\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcore_1_1_event}{Event}}}]{event}{}\end{DoxyParamCaption})}
+
+
+
+Writes a single simulation event to the log file. 
+
+Each line includes the event time, source ID, and event type. \Hypertarget{classio_1_1_file_output_manager_af552798fa19bb2286230ede9a25719d8}\index{io.FileOutputManager@{io.FileOutputManager}!saveFGNResults@{saveFGNResults}}
+\index{saveFGNResults@{saveFGNResults}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{saveFGNResults()}{saveFGNResults()}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_af552798fa19bb2286230ede9a25719d8} 
+void io.\+File\+Output\+Manager.\+save\+FGNResults (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{series}{, }\item[{double}]{H}{, }\item[{double}]{sigma}{, }\item[{double}]{sampling\+Interval}{, }\item[{double}]{threshold}{}\end{DoxyParamCaption})}
+
+
+
+Saves data generated in FGN mode. 
+
+The generated time-\/series is written to a CSV file, and a short text summary with the Hurst estimation is saved in the same folder. \Hypertarget{classio_1_1_file_output_manager_a5f4410cf4bd6cea176e312d30de52e95}\index{io.FileOutputManager@{io.FileOutputManager}!saveSummary@{saveSummary}}
+\index{saveSummary@{saveSummary}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{saveSummary()}{saveSummary()}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_a5f4410cf4bd6cea176e312d30de52e95} 
+void io.\+File\+Output\+Manager.\+save\+Summary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcore_1_1_statistics_collector}{Statistics\+Collector}}}]{stats}{, }\item[{\mbox{\hyperlink{classextensions_1_1_network_queue}{Network\+Queue}}}]{queue}{}\end{DoxyParamCaption})}
+
+
+
+Writes a summary file containing key statistics collected during the run. 
+
+This includes the number of samples, average and peak rates, standard deviation, and an estimated Hurst exponent. 
+
+\label{doc-variable-members}
+\Hypertarget{classio_1_1_file_output_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classio_1_1_file_output_manager_a985b76c25c714460156cad9ae41e160a}\index{io.FileOutputManager@{io.FileOutputManager}!MIN\_FGN\_HURST\_SAMPLES@{MIN\_FGN\_HURST\_SAMPLES}}
+\index{MIN\_FGN\_HURST\_SAMPLES@{MIN\_FGN\_HURST\_SAMPLES}!io.FileOutputManager@{io.FileOutputManager}}
+\doxysubsubsection{\texorpdfstring{MIN\_FGN\_HURST\_SAMPLES}{MIN\_FGN\_HURST\_SAMPLES}}
+{\footnotesize\ttfamily \label{classio_1_1_file_output_manager_a985b76c25c714460156cad9ae41e160a} 
+final int io.\+File\+Output\+Manager.\+MIN\+\_\+\+FGN\+\_\+\+HURST\+\_\+\+SAMPLES = 512\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Minimum samples needed for a reliable Hurst estimate in FGN mode. 
+

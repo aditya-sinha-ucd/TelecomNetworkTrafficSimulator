@@ -1,0 +1,56 @@
+\doxysection{io.\+Error\+Handler Class Reference}
+\hypertarget{classio_1_1_error_handler}{}\label{classio_1_1_error_handler}\index{io.ErrorHandler@{io.ErrorHandler}}
+
+
+Simple centralized error handler.  
+
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classio_1_1_error_handler_a625c308710b6c7707909869a49a7a8df}{handle\+Error}} (String message, boolean fatal)
+\begin{DoxyCompactList}\small\item\em Prints an error message and optionally exits. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classio_1_1_error_handler_aee8449654c86101e376cb43af852c236}{warn}} (String message)
+\begin{DoxyCompactList}\small\item\em Prints a warning message (non-\/fatal). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple centralized error handler. 
+
+Used for consistent printing of error messages and graceful program termination. 
+
+\label{doc-func-members}
+\Hypertarget{classio_1_1_error_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classio_1_1_error_handler_a625c308710b6c7707909869a49a7a8df}\index{io.ErrorHandler@{io.ErrorHandler}!handleError@{handleError}}
+\index{handleError@{handleError}!io.ErrorHandler@{io.ErrorHandler}}
+\doxysubsubsection{\texorpdfstring{handleError()}{handleError()}}
+{\footnotesize\ttfamily \label{classio_1_1_error_handler_a625c308710b6c7707909869a49a7a8df} 
+void io.\+Error\+Handler.\+handle\+Error (\begin{DoxyParamCaption}\item[{String}]{message}{, }\item[{boolean}]{fatal}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Prints an error message and optionally exits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & message to display \\
+\hline
+{\em fatal} & if true, terminates the program \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classio_1_1_error_handler_aee8449654c86101e376cb43af852c236}\index{io.ErrorHandler@{io.ErrorHandler}!warn@{warn}}
+\index{warn@{warn}!io.ErrorHandler@{io.ErrorHandler}}
+\doxysubsubsection{\texorpdfstring{warn()}{warn()}}
+{\footnotesize\ttfamily \label{classio_1_1_error_handler_aee8449654c86101e376cb43af852c236} 
+void io.\+Error\+Handler.\+warn (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Prints a warning message (non-\/fatal). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & message to display \\
+\hline
+\end{DoxyParams}

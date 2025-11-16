@@ -17,6 +17,9 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -26,9 +29,22 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Telecom Network Traffic Simulator<span id="projectnumber">&#160;early_alpha</span>
+   <div id="projectname">Telecom Network Traffic Simulator
    </div>
+   <div id="projectbrief">1.0</div>
   </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -41,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',true,false,'search.php','Search',true);
-  $(function() { init_search(); });
-});
-</script>
-<div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
@@ -97,13 +104,15 @@ $(function(){initNavTree('interfaceio_1_1_simulation_mode_handler.html','','inte
 <div class="dynheader">
 Inheritance diagram for io.SimulationModeHandler:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="interfaceio_1_1_simulation_mode_handler.png" usemap="#io_2ESimulationModeHandler_map" alt=""/>
-  <map id="io_2ESimulationModeHandler_map" name="io_2ESimulationModeHandler_map">
-<area href="classio_1_1_f_g_n_simulation_handler.html" title="Handles console interaction and execution for the FGN generator mode." alt="io.FGNSimulationHandler" shape="rect" coords="0,56,165,80"/>
-<area href="classio_1_1_pareto_simulation_handler.html" title="Handles the complete workflow for the Pareto ON/OFF mode." alt="io.ParetoSimulationHandler" shape="rect" coords="175,56,340,80"/>
-  </map>
-</div></div>
+<div class="center"><img src="interfaceio_1_1_simulation_mode_handler__inherit__graph.png" border="0" usemap="#aio_8_simulation_mode_handler_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="aio_8_simulation_mode_handler_inherit__map" id="aio_8_simulation_mode_handler_inherit__map">
+<area shape="rect" title="Simple strategy interface so each simulation mode can encapsulate the prompts it needs and the workfl..." alt="" coords="102,5,275,32"/>
+<area shape="rect" href="classio_1_1_f_g_n_simulation_handler.html" title="Handles console interaction and execution for the FGN generator mode." alt="" coords="5,80,175,107"/>
+<area shape="poly" title=" " alt="" coords="162,41,108,82,106,77,157,42"/>
+<area shape="rect" href="classio_1_1_pareto_simulation_handler.html" title="Handles the complete workflow for the Pareto ON/OFF mode." alt="" coords="199,80,378,107"/>
+<area shape="poly" title=" " alt="" coords="219,39,274,79,268,79,217,44"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>

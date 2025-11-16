@@ -1,0 +1,49 @@
+\doxysection{util.\+Hurst\+Estimator Class Reference}
+\hypertarget{classutil_1_1_hurst_estimator}{}\label{classutil_1_1_hurst_estimator}\index{util.HurstEstimator@{util.HurstEstimator}}
+
+
+Estimates the Hurst exponent (H) of a time series.  
+
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classutil_1_1_hurst_estimator_a69505ebc8531e67ec3cb78a7f2feb11c}{estimate\+Hurst}} (List$<$ Double $>$ data)
+\begin{DoxyCompactList}\small\item\em Estimates the Hurst exponent using the R/S analysis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Estimates the Hurst exponent (H) of a time series. 
+
+The Hurst exponent measures the degree of self-\/similarity or long-\/range dependence in the simulated traffic. 
+
+Common interpretation\+:
+\begin{DoxyItemize}
+\item H ≈ 0.\+5 → random (no correlation, Poisson-\/like)
+\item H \texorpdfstring{$>$}{>} 0.\+5 → persistent / self-\/similar (bursty traffic)
+\item H \texorpdfstring{$<$}{<} 0.\+5 → anti-\/persistent (alternating patterns) 
+\end{DoxyItemize}
+
+This implementation uses a simple Rescaled Range (R/S) method. 
+
+\label{doc-func-members}
+\Hypertarget{classutil_1_1_hurst_estimator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutil_1_1_hurst_estimator_a69505ebc8531e67ec3cb78a7f2feb11c}\index{util.HurstEstimator@{util.HurstEstimator}!estimateHurst@{estimateHurst}}
+\index{estimateHurst@{estimateHurst}!util.HurstEstimator@{util.HurstEstimator}}
+\doxysubsubsection{\texorpdfstring{estimateHurst()}{estimateHurst()}}
+{\footnotesize\ttfamily \label{classutil_1_1_hurst_estimator_a69505ebc8531e67ec3cb78a7f2feb11c} 
+double util.\+Hurst\+Estimator.\+estimate\+Hurst (\begin{DoxyParamCaption}\item[{List$<$ Double $>$}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Estimates the Hurst exponent using the R/S analysis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & list of recorded activity rates (0–1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+estimated Hurst exponent in range \mbox{[}0, 1\mbox{]} 
+\end{DoxyReturn}

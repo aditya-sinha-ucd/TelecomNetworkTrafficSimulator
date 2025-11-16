@@ -1,0 +1,81 @@
+\doxysection{util.\+Random\+Utils Class Reference}
+\hypertarget{classutil_1_1_random_utils}{}\label{classutil_1_1_random_utils}\index{util.RandomUtils@{util.RandomUtils}}
+
+
+Utility class providing random number generation functions for the simulator, including support for Pareto-\/distributed samples which produce heavy-\/tailed ON/\+OFF durations.  
+
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classutil_1_1_random_utils_a2ec30e1cdada11bf900ecf59aad56dbe}{sample\+Pareto}} (double shape, double scale)
+\begin{DoxyCompactList}\small\item\em Generates a sample from a Pareto distribution. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classutil_1_1_random_utils_a4f9a1cfd2c2b8c98bc5d1c0a70e35daa}{uniform}} (double min, double max)
+\begin{DoxyCompactList}\small\item\em Generates a uniformly distributed random double in \mbox{[}min, max\mbox{]}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classutil_1_1_random_utils_ae888b0519537d644ec9f9c8c0a498bac}{set\+Seed}} (long seed)
+\begin{DoxyCompactList}\small\item\em Sets a custom random seed for reproducible simulations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class providing random number generation functions for the simulator, including support for Pareto-\/distributed samples which produce heavy-\/tailed ON/\+OFF durations. 
+
+Pareto distribution\+: X = scale / (U\texorpdfstring{$^\wedge$}{\string^}(1/shape)) where U \texorpdfstring{$\sim$}{\string~} Uniform(0, 1) 
+
+\label{doc-func-members}
+\Hypertarget{classutil_1_1_random_utils_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutil_1_1_random_utils_a2ec30e1cdada11bf900ecf59aad56dbe}\index{util.RandomUtils@{util.RandomUtils}!samplePareto@{samplePareto}}
+\index{samplePareto@{samplePareto}!util.RandomUtils@{util.RandomUtils}}
+\doxysubsubsection{\texorpdfstring{samplePareto()}{samplePareto()}}
+{\footnotesize\ttfamily \label{classutil_1_1_random_utils_a2ec30e1cdada11bf900ecf59aad56dbe} 
+double util.\+Random\+Utils.\+sample\+Pareto (\begin{DoxyParamCaption}\item[{double}]{shape}{, }\item[{double}]{scale}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a sample from a Pareto distribution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shape} & the alpha (shape) parameter (\texorpdfstring{$>$}{>} 1 recommended) \\
+\hline
+{\em scale} & the scale (minimum) parameter (\texorpdfstring{$>$}{>} 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a Pareto-\/distributed random sample 
+\end{DoxyReturn}
+\Hypertarget{classutil_1_1_random_utils_ae888b0519537d644ec9f9c8c0a498bac}\index{util.RandomUtils@{util.RandomUtils}!setSeed@{setSeed}}
+\index{setSeed@{setSeed}!util.RandomUtils@{util.RandomUtils}}
+\doxysubsubsection{\texorpdfstring{setSeed()}{setSeed()}}
+{\footnotesize\ttfamily \label{classutil_1_1_random_utils_ae888b0519537d644ec9f9c8c0a498bac} 
+void util.\+Random\+Utils.\+set\+Seed (\begin{DoxyParamCaption}\item[{long}]{seed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sets a custom random seed for reproducible simulations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & the seed value \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classutil_1_1_random_utils_a4f9a1cfd2c2b8c98bc5d1c0a70e35daa}\index{util.RandomUtils@{util.RandomUtils}!uniform@{uniform}}
+\index{uniform@{uniform}!util.RandomUtils@{util.RandomUtils}}
+\doxysubsubsection{\texorpdfstring{uniform()}{uniform()}}
+{\footnotesize\ttfamily \label{classutil_1_1_random_utils_a4f9a1cfd2c2b8c98bc5d1c0a70e35daa} 
+double util.\+Random\+Utils.\+uniform (\begin{DoxyParamCaption}\item[{double}]{min}{, }\item[{double}]{max}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a uniformly distributed random double in \mbox{[}min, max\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min} & lower bound \\
+\hline
+{\em max} & upper bound \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uniformly distributed random value 
+\end{DoxyReturn}

@@ -17,6 +17,9 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -26,9 +29,22 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Telecom Network Traffic Simulator<span id="projectnumber">&#160;early_alpha</span>
+   <div id="projectname">Telecom Network Traffic Simulator
    </div>
+   <div id="projectbrief">1.0</div>
   </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -41,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',true,false,'search.php','Search',true);
-  $(function() { init_search(); });
-});
-</script>
-<div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
@@ -97,12 +104,13 @@ $(function(){initNavTree('classmodel_1_1_distribution.html','','classmodel_1_1_d
 <div class="dynheader">
 Inheritance diagram for model.Distribution:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classmodel_1_1_distribution.png" usemap="#model_2EDistribution_map" alt=""/>
-  <map id="model_2EDistribution_map" name="model_2EDistribution_map">
-<area href="classmodel_1_1_pareto_distribution.html" title="Implements the Pareto (Type I) heavy-tailed distribution." alt="model.ParetoDistribution" shape="rect" coords="0,56,149,80"/>
-  </map>
-</div></div>
+<div class="center"><img src="classmodel_1_1_distribution__inherit__graph.png" border="0" usemap="#amodel_8_distribution_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="amodel_8_distribution_inherit__map" id="amodel_8_distribution_inherit__map">
+<area shape="rect" title="Abstract base class for probability distributions." alt="" coords="24,5,151,32"/>
+<area shape="rect" href="classmodel_1_1_pareto_distribution.html" title="Implements the Pareto (Type I) heavy&#45;tailed distribution." alt="" coords="5,80,170,107"/>
+<area shape="poly" title=" " alt="" coords="89,46,90,81,85,79,86,50"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>

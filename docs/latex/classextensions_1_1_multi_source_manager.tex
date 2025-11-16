@@ -1,0 +1,52 @@
+\doxysection{extensions.\+Multi\+Source\+Manager Class Reference}
+\hypertarget{classextensions_1_1_multi_source_manager}{}\label{classextensions_1_1_multi_source_manager}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}}
+
+
+Manages a list of sources.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ \mbox{\hyperlink{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e}{generate\+Sources}} (int count, double base\+On\+Shape, double base\+On\+Scale, double base\+Off\+Shape, double base\+Off\+Scale, double variation)
+\begin{DoxyCompactList}\small\item\em Pareto sources with ±variation. \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ \mbox{\hyperlink{classextensions_1_1_multi_source_manager_a21ad913dbb4424a363fc7fcc35702cc6}{generate\+FGNSources}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params)
+\begin{DoxyCompactList}\small\item\em FGN sources (no Pareto). \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ \mbox{\hyperlink{classextensions_1_1_multi_source_manager_ab9dc749a7a73d790a36fa46681ad1fb6}{get\+Sources}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages a list of sources. 
+
+Can build Pareto or FGN sources. 
+
+\label{doc-func-members}
+\Hypertarget{classextensions_1_1_multi_source_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classextensions_1_1_multi_source_manager_a21ad913dbb4424a363fc7fcc35702cc6}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}!generateFGNSources@{generateFGNSources}}
+\index{generateFGNSources@{generateFGNSources}!extensions.MultiSourceManager@{extensions.MultiSourceManager}}
+\doxysubsubsection{\texorpdfstring{generateFGNSources()}{generateFGNSources()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_multi_source_manager_a21ad913dbb4424a363fc7fcc35702cc6} 
+List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ extensions.\+Multi\+Source\+Manager.\+generate\+FGNSources (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}}}]{params}{}\end{DoxyParamCaption})}
+
+
+
+FGN sources (no Pareto). 
+
+Parameters come from \doxylink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}. \Hypertarget{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}!generateSources@{generateSources}}
+\index{generateSources@{generateSources}!extensions.MultiSourceManager@{extensions.MultiSourceManager}}
+\doxysubsubsection{\texorpdfstring{generateSources()}{generateSources()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e} 
+List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ extensions.\+Multi\+Source\+Manager.\+generate\+Sources (\begin{DoxyParamCaption}\item[{int}]{count}{, }\item[{double}]{base\+On\+Shape}{, }\item[{double}]{base\+On\+Scale}{, }\item[{double}]{base\+Off\+Shape}{, }\item[{double}]{base\+Off\+Scale}{, }\item[{double}]{variation}{}\end{DoxyParamCaption})}
+
+
+
+Pareto sources with ±variation. 
+
+\Hypertarget{classextensions_1_1_multi_source_manager_ab9dc749a7a73d790a36fa46681ad1fb6}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}!getSources@{getSources}}
+\index{getSources@{getSources}!extensions.MultiSourceManager@{extensions.MultiSourceManager}}
+\doxysubsubsection{\texorpdfstring{getSources()}{getSources()}}
+{\footnotesize\ttfamily \label{classextensions_1_1_multi_source_manager_ab9dc749a7a73d790a36fa46681ad1fb6} 
+List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ extensions.\+Multi\+Source\+Manager.\+get\+Sources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+

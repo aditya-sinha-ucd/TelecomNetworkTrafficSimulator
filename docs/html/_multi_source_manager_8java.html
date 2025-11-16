@@ -17,6 +17,9 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -26,9 +29,22 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Telecom Network Traffic Simulator<span id="projectnumber">&#160;early_alpha</span>
+   <div id="projectname">Telecom Network Traffic Simulator
    </div>
+   <div id="projectbrief">1.0</div>
   </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -41,15 +57,6 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 <script type="text/javascript">
 $(function() { codefold.init(); });
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',true,false,'search.php','Search',true);
-  $(function() { init_search(); });
-});
-</script>
-<div id="main-nav"></div>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
   <div id="nav-tree">
@@ -97,6 +104,26 @@ $(function(){initNavTree('_multi_source_manager_8java.html','',''); });
 <code>import java.util.ArrayList;</code><br />
 <code>import java.util.List;</code><br />
 <code>import java.util.Random;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for MultiSourceManager.java:</div>
+<div class="dyncontent">
+<div class="center"><img src="_multi_source_manager_8java__incl.png" border="0" usemap="#asrc_2extensions_2_multi_source_manager_8java" loading="lazy" alt=""/></div>
+<map name="asrc_2extensions_2_multi_source_manager_8java" id="asrc_2extensions_2_multi_source_manager_8java">
+<area shape="rect" title=" " alt="" coords="462,5,642,48"/>
+<area shape="rect" title=" " alt="" coords="5,96,171,123"/>
+<area shape="poly" title=" " alt="" coords="462,46,177,95,176,90,462,41"/>
+<area shape="rect" title=" " alt="" coords="195,96,384,123"/>
+<area shape="poly" title=" " alt="" coords="487,48,346,94,345,88,482,49"/>
+<area shape="rect" title=" " alt="" coords="407,96,545,123"/>
+<area shape="poly" title=" " alt="" coords="535,48,500,87,497,82,530,50"/>
+<area shape="rect" title=" " alt="" coords="568,96,690,123"/>
+<area shape="poly" title=" " alt="" coords="573,46,609,85,604,84,571,51"/>
+<area shape="rect" title=" " alt="" coords="714,96,806,123"/>
+<area shape="poly" title=" " alt="" coords="606,46,716,90,710,90,605,51"/>
+<area shape="rect" title=" " alt="" coords="830,96,949,123"/>
+<area shape="poly" title=" " alt="" coords="639,46,824,92,818,92,639,51"/>
+</map>
+</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>

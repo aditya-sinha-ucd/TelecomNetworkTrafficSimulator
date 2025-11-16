@@ -1,0 +1,105 @@
+\doxysection{io.\+Console\+Prompter Class Reference}
+\hypertarget{classio_1_1_console_prompter}{}\label{classio_1_1_console_prompter}\index{io.ConsolePrompter@{io.ConsolePrompter}}
+
+
+Utility class responsible for prompting and validating console input.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classio_1_1_console_prompter_a16c45e4fbe57f295375120435620305b}{Console\+Prompter}} (Scanner scanner)
+\item 
+String \mbox{\hyperlink{classio_1_1_console_prompter_a5d313b59e0210a7f5315bd64bc3f34c4}{prompt\+Line}} (String message)
+\begin{DoxyCompactList}\small\item\em Displays a prompt and returns the entered line. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classio_1_1_console_prompter_a01e4d27794962d63f0e4516ad28bb179}{prompt\+Positive\+Double}} (String message)
+\begin{DoxyCompactList}\small\item\em Reads a strictly positive double value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classio_1_1_console_prompter_af534b74f3886ea30ed6cd0bf3485eb73}{prompt\+Double}} (String message)
+\begin{DoxyCompactList}\small\item\em Reads a generic double value. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classio_1_1_console_prompter_a15d6a0d024fae9c3e9ef7be0f56181e2}{prompt\+Double\+In\+Range}} (String message, double min\+Exclusive, double max\+Exclusive)
+\begin{DoxyCompactList}\small\item\em Reads a double within an exclusive range. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classio_1_1_console_prompter_ac88e93614f2e5f96c3fa03f19641d82c}{prompt\+Positive\+Int}} (String message)
+\begin{DoxyCompactList}\small\item\em Reads a strictly positive integer value. \end{DoxyCompactList}\item 
+boolean \mbox{\hyperlink{classio_1_1_console_prompter_acd4910225e8f9e41669a6bd8127629cb}{prompt\+Yes\+No}} (String message)
+\begin{DoxyCompactList}\small\item\em Reads a yes/no response. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class responsible for prompting and validating console input. 
+
+Centralizing all console parsing keeps the UI code small and allows the quit command to be handled consistently anywhere a prompt is shown. 
+
+\label{doc-constructors}
+\Hypertarget{classio_1_1_console_prompter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classio_1_1_console_prompter_a16c45e4fbe57f295375120435620305b}\index{io.ConsolePrompter@{io.ConsolePrompter}!ConsolePrompter@{ConsolePrompter}}
+\index{ConsolePrompter@{ConsolePrompter}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{ConsolePrompter()}{ConsolePrompter()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_a16c45e4fbe57f295375120435620305b} 
+io.\+Console\+Prompter.\+Console\+Prompter (\begin{DoxyParamCaption}\item[{Scanner}]{scanner}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classio_1_1_console_prompter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classio_1_1_console_prompter_af534b74f3886ea30ed6cd0bf3485eb73}\index{io.ConsolePrompter@{io.ConsolePrompter}!promptDouble@{promptDouble}}
+\index{promptDouble@{promptDouble}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{promptDouble()}{promptDouble()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_af534b74f3886ea30ed6cd0bf3485eb73} 
+double io.\+Console\+Prompter.\+prompt\+Double (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Reads a generic double value. 
+
+\Hypertarget{classio_1_1_console_prompter_a15d6a0d024fae9c3e9ef7be0f56181e2}\index{io.ConsolePrompter@{io.ConsolePrompter}!promptDoubleInRange@{promptDoubleInRange}}
+\index{promptDoubleInRange@{promptDoubleInRange}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{promptDoubleInRange()}{promptDoubleInRange()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_a15d6a0d024fae9c3e9ef7be0f56181e2} 
+double io.\+Console\+Prompter.\+prompt\+Double\+In\+Range (\begin{DoxyParamCaption}\item[{String}]{message}{, }\item[{double}]{min\+Exclusive}{, }\item[{double}]{max\+Exclusive}{}\end{DoxyParamCaption})}
+
+
+
+Reads a double within an exclusive range. 
+
+\Hypertarget{classio_1_1_console_prompter_a5d313b59e0210a7f5315bd64bc3f34c4}\index{io.ConsolePrompter@{io.ConsolePrompter}!promptLine@{promptLine}}
+\index{promptLine@{promptLine}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{promptLine()}{promptLine()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_a5d313b59e0210a7f5315bd64bc3f34c4} 
+String io.\+Console\+Prompter.\+prompt\+Line (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Displays a prompt and returns the entered line. 
+
+\Hypertarget{classio_1_1_console_prompter_a01e4d27794962d63f0e4516ad28bb179}\index{io.ConsolePrompter@{io.ConsolePrompter}!promptPositiveDouble@{promptPositiveDouble}}
+\index{promptPositiveDouble@{promptPositiveDouble}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{promptPositiveDouble()}{promptPositiveDouble()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_a01e4d27794962d63f0e4516ad28bb179} 
+double io.\+Console\+Prompter.\+prompt\+Positive\+Double (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Reads a strictly positive double value. 
+
+\Hypertarget{classio_1_1_console_prompter_ac88e93614f2e5f96c3fa03f19641d82c}\index{io.ConsolePrompter@{io.ConsolePrompter}!promptPositiveInt@{promptPositiveInt}}
+\index{promptPositiveInt@{promptPositiveInt}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{promptPositiveInt()}{promptPositiveInt()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_ac88e93614f2e5f96c3fa03f19641d82c} 
+int io.\+Console\+Prompter.\+prompt\+Positive\+Int (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Reads a strictly positive integer value. 
+
+\Hypertarget{classio_1_1_console_prompter_acd4910225e8f9e41669a6bd8127629cb}\index{io.ConsolePrompter@{io.ConsolePrompter}!promptYesNo@{promptYesNo}}
+\index{promptYesNo@{promptYesNo}!io.ConsolePrompter@{io.ConsolePrompter}}
+\doxysubsubsection{\texorpdfstring{promptYesNo()}{promptYesNo()}}
+{\footnotesize\ttfamily \label{classio_1_1_console_prompter_acd4910225e8f9e41669a6bd8127629cb} 
+boolean io.\+Console\+Prompter.\+prompt\+Yes\+No (\begin{DoxyParamCaption}\item[{String}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Reads a yes/no response. 
+

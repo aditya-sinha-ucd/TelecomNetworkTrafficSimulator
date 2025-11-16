@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation." alt="" coords="5,5,143,32"/>
+<area shape="rect" id="Node000001" href="$classmodel_1_1_f_g_n_traffic_source.html" title="TrafficSource that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="191,5,356,32"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="158,16,193,19,188,19,158,21"/>
+</map>

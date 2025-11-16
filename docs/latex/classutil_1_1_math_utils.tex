@@ -1,0 +1,98 @@
+\doxysection{util.\+Math\+Utils Class Reference}
+\hypertarget{classutil_1_1_math_utils}{}\label{classutil_1_1_math_utils}\index{util.MathUtils@{util.MathUtils}}
+
+
+A small collection of numerical helper methods used throughout the simulator for statistical calculations.  
+
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classutil_1_1_math_utils_a58cc66e0ae5abf515431598b35397482}{mean}} (List$<$ Double $>$ values)
+\begin{DoxyCompactList}\small\item\em Computes the arithmetic mean of a list of doubles. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classutil_1_1_math_utils_a4c6c50b0994f7d399ddcbbbaea311ad5}{variance}} (List$<$ Double $>$ values)
+\begin{DoxyCompactList}\small\item\em Computes the sample variance of a list of doubles. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classutil_1_1_math_utils_a5b97e0357a01c72228ab8cd9a3e60c7c}{std\+Dev}} (List$<$ Double $>$ values)
+\begin{DoxyCompactList}\small\item\em Computes the standard deviation from a list of values. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classutil_1_1_math_utils_a5cd43b16ba8cbeaa1f917fe0365280a1}{max}} (List$<$ Double $>$ values)
+\begin{DoxyCompactList}\small\item\em Finds the maximum value in a list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A small collection of numerical helper methods used throughout the simulator for statistical calculations. 
+
+\label{doc-func-members}
+\Hypertarget{classutil_1_1_math_utils_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutil_1_1_math_utils_a5cd43b16ba8cbeaa1f917fe0365280a1}\index{util.MathUtils@{util.MathUtils}!max@{max}}
+\index{max@{max}!util.MathUtils@{util.MathUtils}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily \label{classutil_1_1_math_utils_a5cd43b16ba8cbeaa1f917fe0365280a1} 
+double util.\+Math\+Utils.\+max (\begin{DoxyParamCaption}\item[{List$<$ Double $>$}]{values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Finds the maximum value in a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & list of doubles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+maximum value, or 0 if empty 
+\end{DoxyReturn}
+\Hypertarget{classutil_1_1_math_utils_a58cc66e0ae5abf515431598b35397482}\index{util.MathUtils@{util.MathUtils}!mean@{mean}}
+\index{mean@{mean}!util.MathUtils@{util.MathUtils}}
+\doxysubsubsection{\texorpdfstring{mean()}{mean()}}
+{\footnotesize\ttfamily \label{classutil_1_1_math_utils_a58cc66e0ae5abf515431598b35397482} 
+double util.\+Math\+Utils.\+mean (\begin{DoxyParamCaption}\item[{List$<$ Double $>$}]{values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the arithmetic mean of a list of doubles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & the list of values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the mean, or 0 if the list is empty 
+\end{DoxyReturn}
+\Hypertarget{classutil_1_1_math_utils_a5b97e0357a01c72228ab8cd9a3e60c7c}\index{util.MathUtils@{util.MathUtils}!stdDev@{stdDev}}
+\index{stdDev@{stdDev}!util.MathUtils@{util.MathUtils}}
+\doxysubsubsection{\texorpdfstring{stdDev()}{stdDev()}}
+{\footnotesize\ttfamily \label{classutil_1_1_math_utils_a5b97e0357a01c72228ab8cd9a3e60c7c} 
+double util.\+Math\+Utils.\+std\+Dev (\begin{DoxyParamCaption}\item[{List$<$ Double $>$}]{values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the standard deviation from a list of values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & list of data points \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+standard deviation 
+\end{DoxyReturn}
+\Hypertarget{classutil_1_1_math_utils_a4c6c50b0994f7d399ddcbbbaea311ad5}\index{util.MathUtils@{util.MathUtils}!variance@{variance}}
+\index{variance@{variance}!util.MathUtils@{util.MathUtils}}
+\doxysubsubsection{\texorpdfstring{variance()}{variance()}}
+{\footnotesize\ttfamily \label{classutil_1_1_math_utils_a4c6c50b0994f7d399ddcbbbaea311ad5} 
+double util.\+Math\+Utils.\+variance (\begin{DoxyParamCaption}\item[{List$<$ Double $>$}]{values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the sample variance of a list of doubles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & the list of values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+variance, or 0 if the list is empty or has one element 
+\end{DoxyReturn}
