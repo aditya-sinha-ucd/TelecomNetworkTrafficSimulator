@@ -37,6 +37,21 @@ Holds the configuration required to generate a Fractional Gaussian Noise time-\/
 model.\+FGNGeneration\+Parameters.\+FGNGeneration\+Parameters (\begin{DoxyParamCaption}\item[{double}]{hurst}{, }\item[{double}]{sigma}{, }\item[{int}]{sample\+Count}{, }\item[{double}]{sampling\+Interval}{, }\item[{double}]{threshold}{, }\item[{long}]{seed}{}\end{DoxyParamCaption})}
 
 
+\begin{DoxyParams}{Parameters}
+{\em hurst} & Hurst exponent for the generated process \\
+\hline
+{\em sigma} & standard deviation \\
+\hline
+{\em sample\+Count} & number of samples to generate \\
+\hline
+{\em sampling\+Interval} & spacing between samples (seconds) \\
+\hline
+{\em threshold} & value used to derive ON/\+OFF states \\
+\hline
+{\em seed} & random seed for reproducibility \\
+\hline
+\end{DoxyParams}
+
 
 \label{doc-func-members}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_doc-func-members}
@@ -47,33 +62,51 @@ model.\+FGNGeneration\+Parameters.\+FGNGeneration\+Parameters (\begin{DoxyParamC
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_ade04841519b59a16ee6ff593db7caeed} 
 double model.\+FGNGeneration\+Parameters.\+get\+Hurst (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+desired Hurst exponent 
+\end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_ae857bc96a44cde2570d5cf58d660bc4c}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSampleCount@{getSampleCount}}
 \index{getSampleCount@{getSampleCount}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
 \doxysubsubsection{\texorpdfstring{getSampleCount()}{getSampleCount()}}
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_ae857bc96a44cde2570d5cf58d660bc4c} 
 int model.\+FGNGeneration\+Parameters.\+get\+Sample\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+number of samples to produce 
+\end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_a3b7bff5c074cd1b6ad508007c65e4f57}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSamplingInterval@{getSamplingInterval}}
 \index{getSamplingInterval@{getSamplingInterval}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
 \doxysubsubsection{\texorpdfstring{getSamplingInterval()}{getSamplingInterval()}}
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_a3b7bff5c074cd1b6ad508007c65e4f57} 
 double model.\+FGNGeneration\+Parameters.\+get\+Sampling\+Interval (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+spacing between samples 
+\end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_a4a80bb1bd3ef1833b3a424a10aedbea4}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSeed@{getSeed}}
 \index{getSeed@{getSeed}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
 \doxysubsubsection{\texorpdfstring{getSeed()}{getSeed()}}
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_a4a80bb1bd3ef1833b3a424a10aedbea4} 
 long model.\+FGNGeneration\+Parameters.\+get\+Seed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+random seed 
+\end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_acdf1e274f67f86dc23e3629272cfafa3}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSigma@{getSigma}}
 \index{getSigma@{getSigma}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
 \doxysubsubsection{\texorpdfstring{getSigma()}{getSigma()}}
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_acdf1e274f67f86dc23e3629272cfafa3} 
 double model.\+FGNGeneration\+Parameters.\+get\+Sigma (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+standard deviation 
+\end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_aec8238b406cf939453ba880aa83d5afd}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getThreshold@{getThreshold}}
 \index{getThreshold@{getThreshold}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
 \doxysubsubsection{\texorpdfstring{getThreshold()}{getThreshold()}}
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_aec8238b406cf939453ba880aa83d5afd} 
 double model.\+FGNGeneration\+Parameters.\+get\+Threshold (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+threshold applied when deriving ON/\+OFF states 
+\end{DoxyReturn}

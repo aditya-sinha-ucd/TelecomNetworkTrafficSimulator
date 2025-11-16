@@ -23,12 +23,12 @@ double \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise_a372edef708ae9ee
 \doxysubsection{Detailed Description}
 Fractional Gaussian Noise (f\+Gn) generator using the Davies–\+Harte method. 
 
-Produces a Gaussian, long-\/range dependent sequence with Hurst exponent H in (0.\+5, 1.\+0). The implementation follows good SWE/\+OOP practices\+:
+Produces a Gaussian, long-\/range dependent sequence with Hurst exponent H in (0.\+5, 1.\+0). Implementation highlights\+: 
 \begin{DoxyItemize}
-\item clear parameter validation
-\item dependency injection of Random (reproducible tests)
-\item private helpers for each mathematical step
-\item guards to avoid numerical Na\+Ns 
+\item Clear parameter validation. 
+\item Dependency injection of {\ttfamily \doxylink{}{java.\+util.\+Random}} for reproducible tests. 
+\item Private helpers that implement each mathematical step. 
+\item Guards to avoid numerical Na\+Ns in FFT eigenvalues. 
 \end{DoxyItemize}
 
 \label{doc-constructors}

@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -153,6 +154,17 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hurst</td><td>Hurst exponent for the generated process </td></tr>
+    <tr><td class="paramname">sigma</td><td>standard deviation </td></tr>
+    <tr><td class="paramname">sampleCount</td><td>number of samples to generate </td></tr>
+    <tr><td class="paramname">samplingInterval</td><td>spacing between samples (seconds) </td></tr>
+    <tr><td class="paramname">threshold</td><td>value used to derive ON/OFF states </td></tr>
+    <tr><td class="paramname">seed</td><td>random seed for reproducibility </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -171,6 +183,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>desired Hurst exponent </dd></dl>
 
 </div>
 </div>
@@ -188,6 +201,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>number of samples to produce </dd></dl>
 
 </div>
 </div>
@@ -205,6 +219,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>spacing between samples </dd></dl>
 
 </div>
 </div>
@@ -222,6 +237,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>random seed </dd></dl>
 
 </div>
 </div>
@@ -239,6 +255,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>standard deviation </dd></dl>
 
 </div>
 </div>
@@ -256,6 +273,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>threshold applied when deriving ON/OFF states </dd></dl>
 
 </div>
 </div>

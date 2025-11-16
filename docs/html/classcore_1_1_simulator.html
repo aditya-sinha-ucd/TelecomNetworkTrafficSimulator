@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,7 +100,7 @@ $(function(){initNavTree('classcore_1_1_simulator.html','','classcore_1_1_simula
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_main.html" title="This is breif description.">Main</a> controller for the event-driven telecom traffic simulation.  
+<p><a class="el" href="class_main.html" title="Application entry point for the Telecom Network Traffic Simulator.">Main</a> controller for the event-driven telecom traffic simulation.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -110,12 +111,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a90408d62b198022449753d0f28fc2127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the simulation and exports results to organized output files.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_main.html" title="This is breif description.">Main</a> controller for the event-driven telecom traffic simulation. </p>
-<p>Responsibilities:</p><ul>
-<li>Initialize traffic sources (Pareto or FGN-based)</li>
-<li>Manage event queue and process ON/OFF transitions</li>
-<li>Record and export statistics</li>
-<li>Integrate optional queue modeling </li>
+<div class="textblock"><p><a class="el" href="class_main.html" title="Application entry point for the Telecom Network Traffic Simulator.">Main</a> controller for the event-driven telecom traffic simulation. </p>
+<p>Responsibilities include: </p><ul>
+<li>
+Initializing either Pareto or FGN-based traffic sources. </li>
+<li>
+Advancing the <code><a class="el" href="classcore_1_1_event_queue.html">EventQueue</a></code> and processing ON/OFF transitions. </li>
+<li>
+Sampling aggregate activity and exporting statistics. </li>
+<li>
+Coordinating optional queue modeling to approximate downstream congestion. </li>
 </ul>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae2ffd756ab11668916a9a321935083fc" name="ae2ffd756ab11668916a9a321935083fc"></a>
@@ -134,6 +139,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructs a new <a class="el" href="classcore_1_1_simulator.html" title="Main controller for the event-driven telecom traffic simulation.">Simulator</a> using the provided configuration parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">params</td><td>immutable snapshot of user-provided simulation settings </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

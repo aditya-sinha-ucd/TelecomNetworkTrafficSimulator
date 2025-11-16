@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -139,8 +140,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> that follows an FGN-driven ON/OFF pattern. </p>
-<p>We convert an FGN series to a binary sequence using a threshold, run-length encode it into durations, then serve durations one-by-one.</p>
-<p>This class extends <a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> only to keep the same type the Simulator already uses. We override the behavior we need. </p>
+<p>The constructor converts an FGN series to a binary sequence using a threshold, run-length encodes the sequence into durations, and then replays those durations so the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> can continue operating without code changes. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a94eee91b60846d52d199a8e17d5198a5" name="a94eee91b60846d52d199a8e17d5198a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a94eee91b60846d52d199a8e17d5198a5">&#9670;&#160;</a></span>FGNTrafficSource()</h2>
@@ -160,6 +160,13 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>source identifier reused by the simulator </td></tr>
+    <tr><td class="paramname">params</td><td>simulation parameters containing all FGN settings </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -199,7 +206,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the time of the next scheduled event. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>timestamp of the next scheduled state change event </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_traffic_source.html#addec51a76b1461dc78eb0c6713764bbf">model.TrafficSource</a>.</p>
 
@@ -219,7 +226,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>true if the source is currently ON. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> when the FGN schedule is currently ON </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_traffic_source.html#a40e607dd4f4f1a04d39e41c89ac37f90">model.TrafficSource</a>.</p>
 

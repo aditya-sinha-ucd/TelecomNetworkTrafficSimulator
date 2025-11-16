@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -98,12 +99,18 @@ $(function(){initNavTree('classextensions_1_1_network_queue.html','','classexten
   <div class="headertitle"><div class="title">extensions.NetworkQueue Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple single-server queue approximation used to capture downstream latency.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab02d76244c36826c5cc21d600d14bafb" id="r_ab02d76244c36826c5cc21d600d14bafb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab02d76244c36826c5cc21d600d14bafb">NetworkQueue</a> (double serviceRate)</td></tr>
+<tr class="memdesc:ab02d76244c36826c5cc21d600d14bafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a queue with a given service rate.  <br /></td></tr>
 <tr class="memitem:ae7d5e433fb3b1c50848ff9dffec7feee" id="r_ae7d5e433fb3b1c50848ff9dffec7feee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7d5e433fb3b1c50848ff9dffec7feee">processUntil</a> (double t)</td></tr>
+<tr class="memdesc:ae7d5e433fb3b1c50848ff9dffec7feee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes departures and service progress until the specified time.  <br /></td></tr>
 <tr class="memitem:ac2def965576502968c8093d7e37a4687" id="r_ac2def965576502968c8093d7e37a4687"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2def965576502968c8093d7e37a4687">enqueueBulk</a> (double t, int count)</td></tr>
+<tr class="memdesc:ac2def965576502968c8093d7e37a4687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple arrivals at the same time instant.  <br /></td></tr>
 <tr class="memitem:ad93aafed5ef022486e5b998c0c656af2" id="r_ad93aafed5ef022486e5b998c0c656af2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad93aafed5ef022486e5b998c0c656af2">enqueue</a> (double t)</td></tr>
 <tr class="memdesc:ad93aafed5ef022486e5b998c0c656af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for single-packet enqueue to match <a class="el" href="_simulator_8java.html">Simulator.java</a>.  <br /></td></tr>
 <tr class="memitem:a5e5de730f486483e01f35ddd5b0dc66c" id="r_a5e5de730f486483e01f35ddd5b0dc66c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e5de730f486483e01f35ddd5b0dc66c">getAvgWaitingTime</a> ()</td></tr>
@@ -114,7 +121,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace9f836bda56ed1143a21053713e8144" id="r_ace9f836bda56ed1143a21053713e8144"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace9f836bda56ed1143a21053713e8144">getTotalArrived</a> ()</td></tr>
 <tr class="memitem:adba9e711cfa1e6f5e5a06c5d6ede9ac7" id="r_adba9e711cfa1e6f5e5a06c5d6ede9ac7"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adba9e711cfa1e6f5e5a06c5d6ede9ac7">toString</a> ()</td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple single-server queue approximation used to capture downstream latency. </p>
+<p>The queue assumes deterministic service with rate <code class="JavaDocCode">µ</code> and keeps track of cumulative waiting/system times as well as arrival/serviced counters so that the simulator can report queueing metrics alongside traffic stats. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab02d76244c36826c5cc21d600d14bafb" name="ab02d76244c36826c5cc21d600d14bafb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab02d76244c36826c5cc21d600d14bafb">&#9670;&#160;</a></span>NetworkQueue()</h2>
 
@@ -129,6 +139,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a queue with a given service rate. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">serviceRate</td><td>packets served per second (must be &gt; 0) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -171,6 +189,15 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Enqueues multiple arrivals at the same time instant. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>arrival time </td></tr>
+    <tr><td class="paramname">count</td><td>number of packets to enqueue </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a0ac144070ce40b5c3427d0c330debbfb" name="a0ac144070ce40b5c3427d0c330debbfb"></a>
@@ -187,6 +214,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>average total time spent in the system </dd></dl>
 
 </div>
 </div>
@@ -204,6 +232,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>average waiting time experienced by served packets </dd></dl>
 
 </div>
 </div>
@@ -221,6 +250,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>instantaneous number of packets waiting </dd></dl>
 
 </div>
 </div>
@@ -238,6 +268,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>cumulative arrivals injected into the queue </dd></dl>
 
 </div>
 </div>
@@ -255,6 +286,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>packets dropped due to capacity (always zero currently) </dd></dl>
 
 </div>
 </div>
@@ -272,6 +304,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>total packets completed </dd></dl>
 
 </div>
 </div>
@@ -289,6 +322,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Processes departures and service progress until the specified time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>simulation time horizon to advance to </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

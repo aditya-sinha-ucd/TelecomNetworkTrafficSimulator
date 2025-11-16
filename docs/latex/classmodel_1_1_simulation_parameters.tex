@@ -2,12 +2,13 @@
 \hypertarget{classmodel_1_1_simulation_parameters}{}\label{classmodel_1_1_simulation_parameters}\index{model.SimulationParameters@{model.SimulationParameters}}
 
 
-Simulation parameters.  
+Holds all configuration options required by the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}.  
 
 
 
 
-Collaboration diagram for model.\+Simulation\+Parameters\+:\nopagebreak
+Collaboration diagram for model.\+Simulation\+Parameters\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -18,7 +19,7 @@ Collaboration diagram for model.\+Simulation\+Parameters\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{Traffic\+Model}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Chooses the underlying traffic model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,42 +33,42 @@ String \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a45ed8617f642ce6c2b
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{classmodel_1_1_simulation_parameters_ae86d5088333168c53e180b8003c9d253}{Simulation\+Parameters}} \mbox{\hyperlink{classmodel_1_1_simulation_parameters_ad7ce80850badcc3580b50694cf333f26}{from\+User\+Input}} (double total\+Time, int num\+Sources, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_afdf4f5d783f5c1b497872edd9cda10ab}{on\+Shape}}, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aad1f68603f865c07fc69f71f0cbb69cf}{on\+Scale}}, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a477b320a7bf5bfe48670648e3def6c3e}{off\+Shape}}, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aad85e229495951434a819c9831938cc5}{off\+Scale}})
-\begin{DoxyCompactList}\small\item\em Convenience. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Convenience factory mirroring the UI prompts. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a7c823b35838a3f5e831ff0b6832a9b7d}{total\+Simulation\+Time}}
-\item 
+\begin{DoxyCompactList}\small\item\em Total simulated time horizon in seconds. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classmodel_1_1_simulation_parameters_adc411491132527d2eb20d46715443606}{number\+Of\+Sources}}
-\item 
+\begin{DoxyCompactList}\small\item\em Number of traffic sources in the experiment. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_afdf4f5d783f5c1b497872edd9cda10ab}{on\+Shape}}
-\item 
+\begin{DoxyCompactList}\small\item\em Pareto parameters for ON durations. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aad1f68603f865c07fc69f71f0cbb69cf}{on\+Scale}}
 \item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a477b320a7bf5bfe48670648e3def6c3e}{off\+Shape}}
-\item 
+\begin{DoxyCompactList}\small\item\em Pareto parameters for OFF durations. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aad85e229495951434a819c9831938cc5}{off\+Scale}}
 \item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a8ca3cdbe4fefeae08fa89dba12259384}{sampling\+Interval}} = 1.\+0
-\item 
+\begin{DoxyCompactList}\small\item\em Interval (seconds) between samples recorded by {\ttfamily \doxylink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}}. \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a2c930f0f9c34f9a10cefcd5ce921dfbf}{random\+Seed}} = System.\+current\+Time\+Millis()
-\item 
+\begin{DoxyCompactList}\small\item\em Optional seed for reproducible randomness. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{Traffic\+Model}} \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a052b973c3a977d1a27b2f171f77090f5}{traffic\+Model}} = \mbox{\hyperlink{enummodel_1_1_simulation_parameters_1_1_traffic_model_ac6d2e374a66c9e150db4e5d84e2a6d06}{Traffic\+Model.\+PARETO\+\_\+\+ON\+\_\+\+OFF}}
 \item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a8da4d1d4f84bf0d5a21fe0f52ef4883e}{hurst}} = 0.\+80
-\item 
+\begin{DoxyCompactList}\small\item\em Hurst exponent used when {\ttfamily \doxylink{enummodel_1_1_simulation_parameters_1_1_traffic_model_a912c36231cdf60846ea6eb24963b2e59}{Traffic\+Model\#\+FGN\+\_\+\+THRESHOLD}} is active. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_ad61fd8a6d2c615686c2be9a1d24ecbba}{fgn\+Sigma}} = 1.\+0
-\item 
+\begin{DoxyCompactList}\small\item\em Standard deviation for the generated FGN process. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aa46225795ca5ac200ed5d4dfb6d631b4}{fgn\+Threshold}} = 0.\+0
-\item 
+\begin{DoxyCompactList}\small\item\em Threshold applied to the FGN sequence to derive ON/\+OFF states. \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a3957d82cdf98c07a5f37c781706c3eb6}{fgn\+Seed}} = 42L
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Per-\/source seed base for the FGN generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Simulation parameters. 
+Holds all configuration options required by the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. 
 
-Keep the existing fields and add a simple switch for the FGN option. 
+The structure covers both the classic Pareto ON/\+OFF model and the optional FGN-\/thresholded model, allowing callers to switch behavior with {\ttfamily \doxylink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{Traffic\+Model}}. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_simulation_parameters_doc-constructors}
@@ -97,7 +98,7 @@ model.\+Simulation\+Parameters.\+Simulation\+Parameters (\begin{DoxyParamCaption
 
 
 
-Convenience. 
+Convenience factory mirroring the UI prompts. 
 
 \Hypertarget{classmodel_1_1_simulation_parameters_a45ed8617f642ce6c2b430102d0930249}\index{model.SimulationParameters@{model.SimulationParameters}!toString@{toString}}
 \index{toString@{toString}!model.SimulationParameters@{model.SimulationParameters}}
@@ -116,11 +117,19 @@ String model.\+Simulation\+Parameters.\+to\+String (\begin{DoxyParamCaption}{}{}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a3957d82cdf98c07a5f37c781706c3eb6} 
 long model.\+Simulation\+Parameters.\+fgn\+Seed = 42L}
 
+
+
+Per-\/source seed base for the FGN generator. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_ad61fd8a6d2c615686c2be9a1d24ecbba}\index{model.SimulationParameters@{model.SimulationParameters}!fgnSigma@{fgnSigma}}
 \index{fgnSigma@{fgnSigma}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{fgnSigma}{fgnSigma}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_ad61fd8a6d2c615686c2be9a1d24ecbba} 
 double model.\+Simulation\+Parameters.\+fgn\+Sigma = 1.\+0}
+
+
+
+Standard deviation for the generated FGN process. 
 
 \Hypertarget{classmodel_1_1_simulation_parameters_aa46225795ca5ac200ed5d4dfb6d631b4}\index{model.SimulationParameters@{model.SimulationParameters}!fgnThreshold@{fgnThreshold}}
 \index{fgnThreshold@{fgnThreshold}!model.SimulationParameters@{model.SimulationParameters}}
@@ -128,17 +137,29 @@ double model.\+Simulation\+Parameters.\+fgn\+Sigma = 1.\+0}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_aa46225795ca5ac200ed5d4dfb6d631b4} 
 double model.\+Simulation\+Parameters.\+fgn\+Threshold = 0.\+0}
 
+
+
+Threshold applied to the FGN sequence to derive ON/\+OFF states. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_a8da4d1d4f84bf0d5a21fe0f52ef4883e}\index{model.SimulationParameters@{model.SimulationParameters}!hurst@{hurst}}
 \index{hurst@{hurst}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{hurst}{hurst}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a8da4d1d4f84bf0d5a21fe0f52ef4883e} 
 double model.\+Simulation\+Parameters.\+hurst = 0.\+80}
 
+
+
+Hurst exponent used when {\ttfamily \doxylink{enummodel_1_1_simulation_parameters_1_1_traffic_model_a912c36231cdf60846ea6eb24963b2e59}{Traffic\+Model\#\+FGN\+\_\+\+THRESHOLD}} is active. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_adc411491132527d2eb20d46715443606}\index{model.SimulationParameters@{model.SimulationParameters}!numberOfSources@{numberOfSources}}
 \index{numberOfSources@{numberOfSources}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{numberOfSources}{numberOfSources}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_adc411491132527d2eb20d46715443606} 
 int model.\+Simulation\+Parameters.\+number\+Of\+Sources}
+
+
+
+Number of traffic sources in the experiment. 
 
 \Hypertarget{classmodel_1_1_simulation_parameters_aad85e229495951434a819c9831938cc5}\index{model.SimulationParameters@{model.SimulationParameters}!offScale@{offScale}}
 \index{offScale@{offScale}!model.SimulationParameters@{model.SimulationParameters}}
@@ -152,6 +173,10 @@ double model.\+Simulation\+Parameters.\+off\+Scale}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a477b320a7bf5bfe48670648e3def6c3e} 
 double model.\+Simulation\+Parameters.\+off\+Shape}
 
+
+
+Pareto parameters for OFF durations. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_aad1f68603f865c07fc69f71f0cbb69cf}\index{model.SimulationParameters@{model.SimulationParameters}!onScale@{onScale}}
 \index{onScale@{onScale}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{onScale}{onScale}}
@@ -164,11 +189,19 @@ double model.\+Simulation\+Parameters.\+on\+Scale}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_afdf4f5d783f5c1b497872edd9cda10ab} 
 double model.\+Simulation\+Parameters.\+on\+Shape}
 
+
+
+Pareto parameters for ON durations. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_a2c930f0f9c34f9a10cefcd5ce921dfbf}\index{model.SimulationParameters@{model.SimulationParameters}!randomSeed@{randomSeed}}
 \index{randomSeed@{randomSeed}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{randomSeed}{randomSeed}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a2c930f0f9c34f9a10cefcd5ce921dfbf} 
 long model.\+Simulation\+Parameters.\+random\+Seed = System.\+current\+Time\+Millis()}
+
+
+
+Optional seed for reproducible randomness. 
 
 \Hypertarget{classmodel_1_1_simulation_parameters_a8ca3cdbe4fefeae08fa89dba12259384}\index{model.SimulationParameters@{model.SimulationParameters}!samplingInterval@{samplingInterval}}
 \index{samplingInterval@{samplingInterval}!model.SimulationParameters@{model.SimulationParameters}}
@@ -176,11 +209,19 @@ long model.\+Simulation\+Parameters.\+random\+Seed = System.\+current\+Time\+Mil
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a8ca3cdbe4fefeae08fa89dba12259384} 
 double model.\+Simulation\+Parameters.\+sampling\+Interval = 1.\+0}
 
+
+
+Interval (seconds) between samples recorded by {\ttfamily \doxylink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}}. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_a7c823b35838a3f5e831ff0b6832a9b7d}\index{model.SimulationParameters@{model.SimulationParameters}!totalSimulationTime@{totalSimulationTime}}
 \index{totalSimulationTime@{totalSimulationTime}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{totalSimulationTime}{totalSimulationTime}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a7c823b35838a3f5e831ff0b6832a9b7d} 
 double model.\+Simulation\+Parameters.\+total\+Simulation\+Time}
+
+
+
+Total simulated time horizon in seconds. 
 
 \Hypertarget{classmodel_1_1_simulation_parameters_a052b973c3a977d1a27b2f171f77090f5}\index{model.SimulationParameters@{model.SimulationParameters}!trafficModel@{trafficModel}}
 \index{trafficModel@{trafficModel}!model.SimulationParameters@{model.SimulationParameters}}

@@ -17,12 +17,12 @@ void \mbox{\hyperlink{classcore_1_1_simulator_a90408d62b198022449753d0f28fc2127}
 \doxysubsection{Detailed Description}
 \doxylink{class_main}{Main} controller for the event-\/driven telecom traffic simulation. 
 
-Responsibilities\+:
+Responsibilities include\+: 
 \begin{DoxyItemize}
-\item Initialize traffic sources (Pareto or FGN-\/based)
-\item Manage event queue and process ON/\+OFF transitions
-\item Record and export statistics
-\item Integrate optional queue modeling 
+\item Initializing either Pareto or FGN-\/based traffic sources. 
+\item Advancing the {\ttfamily \doxylink{classcore_1_1_event_queue}{Event\+Queue}} and processing ON/\+OFF transitions. 
+\item Sampling aggregate activity and exporting statistics. 
+\item Coordinating optional queue modeling to approximate downstream congestion. 
 \end{DoxyItemize}
 
 \label{doc-constructors}
@@ -38,6 +38,11 @@ core.\+Simulator.\+Simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{cl
 
 Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provided configuration parameters. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em params} & immutable snapshot of user-\/provided simulation settings \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}

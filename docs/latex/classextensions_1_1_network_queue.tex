@@ -1,14 +1,19 @@
 \doxysection{extensions.\+Network\+Queue Class Reference}
 \hypertarget{classextensions_1_1_network_queue}{}\label{classextensions_1_1_network_queue}\index{extensions.NetworkQueue@{extensions.NetworkQueue}}
+
+
+Simple single-\/server queue approximation used to capture downstream latency.  
+
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classextensions_1_1_network_queue_ab02d76244c36826c5cc21d600d14bafb}{Network\+Queue}} (double service\+Rate)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a queue with a given service rate. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classextensions_1_1_network_queue_ae7d5e433fb3b1c50848ff9dffec7feee}{process\+Until}} (double t)
-\item 
+\begin{DoxyCompactList}\small\item\em Processes departures and service progress until the specified time. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classextensions_1_1_network_queue_ac2def965576502968c8093d7e37a4687}{enqueue\+Bulk}} (double t, int count)
-\item 
+\begin{DoxyCompactList}\small\item\em Enqueues multiple arrivals at the same time instant. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classextensions_1_1_network_queue_ad93aafed5ef022486e5b998c0c656af2}{enqueue}} (double t)
 \begin{DoxyCompactList}\small\item\em Wrapper for single-\/packet enqueue to match \doxylink{_simulator_8java}{Simulator.\+java}. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classextensions_1_1_network_queue_a5e5de730f486483e01f35ddd5b0dc66c}{get\+Avg\+Waiting\+Time}} ()
@@ -27,6 +32,11 @@ String \mbox{\hyperlink{classextensions_1_1_network_queue_adba9e711cfa1e6f5e5a06
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Simple single-\/server queue approximation used to capture downstream latency. 
+
+The queue assumes deterministic service with rate {\ttfamily µ} and keeps track of cumulative waiting/system times as well as arrival/serviced counters so that the simulator can report queueing metrics alongside traffic stats. 
+
 \label{doc-constructors}
 \Hypertarget{classextensions_1_1_network_queue_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -36,6 +46,15 @@ String \mbox{\hyperlink{classextensions_1_1_network_queue_adba9e711cfa1e6f5e5a06
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_ab02d76244c36826c5cc21d600d14bafb} 
 extensions.\+Network\+Queue.\+Network\+Queue (\begin{DoxyParamCaption}\item[{double}]{service\+Rate}{}\end{DoxyParamCaption})}
 
+
+
+Creates a queue with a given service rate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service\+Rate} & packets served per second (must be \texorpdfstring{$>$}{>} 0) \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}
@@ -57,48 +76,86 @@ Wrapper for single-\/packet enqueue to match \doxylink{_simulator_8java}{Simulat
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_ac2def965576502968c8093d7e37a4687} 
 void extensions.\+Network\+Queue.\+enqueue\+Bulk (\begin{DoxyParamCaption}\item[{double}]{t}{, }\item[{int}]{count}{}\end{DoxyParamCaption})}
 
+
+
+Enqueues multiple arrivals at the same time instant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & arrival time \\
+\hline
+{\em count} & number of packets to enqueue \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classextensions_1_1_network_queue_a0ac144070ce40b5c3427d0c330debbfb}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getAvgSystemTime@{getAvgSystemTime}}
 \index{getAvgSystemTime@{getAvgSystemTime}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{getAvgSystemTime()}{getAvgSystemTime()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a0ac144070ce40b5c3427d0c330debbfb} 
 double extensions.\+Network\+Queue.\+get\+Avg\+System\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+average total time spent in the system 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a5e5de730f486483e01f35ddd5b0dc66c}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getAvgWaitingTime@{getAvgWaitingTime}}
 \index{getAvgWaitingTime@{getAvgWaitingTime}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{getAvgWaitingTime()}{getAvgWaitingTime()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a5e5de730f486483e01f35ddd5b0dc66c} 
 double extensions.\+Network\+Queue.\+get\+Avg\+Waiting\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+average waiting time experienced by served packets 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a49aa7b620e47da24731e00e00a2a1425}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getQueueLength@{getQueueLength}}
 \index{getQueueLength@{getQueueLength}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{getQueueLength()}{getQueueLength()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a49aa7b620e47da24731e00e00a2a1425} 
 int extensions.\+Network\+Queue.\+get\+Queue\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+instantaneous number of packets waiting 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_ace9f836bda56ed1143a21053713e8144}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getTotalArrived@{getTotalArrived}}
 \index{getTotalArrived@{getTotalArrived}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{getTotalArrived()}{getTotalArrived()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_ace9f836bda56ed1143a21053713e8144} 
 long extensions.\+Network\+Queue.\+get\+Total\+Arrived (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+cumulative arrivals injected into the queue 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a6f3dbf3d4daea8a8ae001e3dd986f9e6}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getTotalDropped@{getTotalDropped}}
 \index{getTotalDropped@{getTotalDropped}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{getTotalDropped()}{getTotalDropped()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a6f3dbf3d4daea8a8ae001e3dd986f9e6} 
 long extensions.\+Network\+Queue.\+get\+Total\+Dropped (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+packets dropped due to capacity (always zero currently) 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a1ddab09c5581125e16a08eca608eacd4}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getTotalServed@{getTotalServed}}
 \index{getTotalServed@{getTotalServed}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{getTotalServed()}{getTotalServed()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a1ddab09c5581125e16a08eca608eacd4} 
 long extensions.\+Network\+Queue.\+get\+Total\+Served (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+total packets completed 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_ae7d5e433fb3b1c50848ff9dffec7feee}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!processUntil@{processUntil}}
 \index{processUntil@{processUntil}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{processUntil()}{processUntil()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_ae7d5e433fb3b1c50848ff9dffec7feee} 
 void extensions.\+Network\+Queue.\+process\+Until (\begin{DoxyParamCaption}\item[{double}]{t}{}\end{DoxyParamCaption})}
 
+
+
+Processes departures and service progress until the specified time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & simulation time horizon to advance to \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classextensions_1_1_network_queue_adba9e711cfa1e6f5e5a06c5d6ede9ac7}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!toString@{toString}}
 \index{toString@{toString}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}

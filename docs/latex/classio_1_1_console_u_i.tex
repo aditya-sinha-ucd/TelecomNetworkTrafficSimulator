@@ -9,7 +9,7 @@ Handles all console interaction with the user.
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classio_1_1_console_u_i_ad32220db3f2449c9244f436d06f4ce7a}{Console\+UI}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a UI backed by {\ttfamily \doxylink{}{java.\+util.\+Scanner}}-\/based prompts. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_console_u_i_a55923120b39f925736bf1d2a8bba41fd}{start}} ()
 \begin{DoxyCompactList}\small\item\em Starts the console-\/driven interaction and launches the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -17,7 +17,7 @@ void \mbox{\hyperlink{classio_1_1_console_u_i_a55923120b39f925736bf1d2a8bba41fd}
 \doxysubsection{Detailed Description}
 Handles all console interaction with the user. 
 
-The UI now delegates the actual workflows to dedicated mode handlers so the console loop simply selects a mode, runs it, and optionally repeats. 
+The UI delegates the heavy lifting to {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} implementations so that this class focuses purely on prompting and dispatching simulation modes. 
 
 \label{doc-constructors}
 \Hypertarget{classio_1_1_console_u_i_doc-constructors}
@@ -27,6 +27,10 @@ The UI now delegates the actual workflows to dedicated mode handlers so the cons
 \doxysubsubsection{\texorpdfstring{ConsoleUI()}{ConsoleUI()}}
 {\footnotesize\ttfamily \label{classio_1_1_console_u_i_ad32220db3f2449c9244f436d06f4ce7a} 
 io.\+Console\+UI.\+Console\+UI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates a UI backed by {\ttfamily \doxylink{}{java.\+util.\+Scanner}}-\/based prompts. 
 
 
 

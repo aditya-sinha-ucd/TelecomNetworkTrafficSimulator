@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,14 +100,14 @@ $(function(){initNavTree('interfaceio_1_1_simulation_mode_handler.html','','inte
 </div><!--header-->
 <div class="contents">
 
-<p>Simple strategy interface so each simulation mode can encapsulate the prompts it needs and the workflow for executing the mode.  
+<p>Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for io.SimulationModeHandler:</div>
 <div class="dyncontent">
 <div class="center"><img src="interfaceio_1_1_simulation_mode_handler__inherit__graph.png" border="0" usemap="#aio_8_simulation_mode_handler_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="aio_8_simulation_mode_handler_inherit__map" id="aio_8_simulation_mode_handler_inherit__map">
-<area shape="rect" title="Simple strategy interface so each simulation mode can encapsulate the prompts it needs and the workfl..." alt="" coords="102,5,275,32"/>
+<area shape="rect" title="Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode." alt="" coords="102,5,275,32"/>
 <area shape="rect" href="classio_1_1_f_g_n_simulation_handler.html" title="Handles console interaction and execution for the FGN generator mode." alt="" coords="5,80,175,107"/>
 <area shape="poly" title=" " alt="" coords="162,41,108,82,106,77,157,42"/>
 <area shape="rect" href="classio_1_1_pareto_simulation_handler.html" title="Handles the complete workflow for the Pareto ON/OFF mode." alt="" coords="199,80,378,107"/>
@@ -117,9 +118,10 @@ Inheritance diagram for io.SimulationModeHandler:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9d6a128f79038b59c1bfa212d11911ef" id="r_a9d6a128f79038b59c1bfa212d11911ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d6a128f79038b59c1bfa212d11911ef">run</a> ()</td></tr>
+<tr class="memdesc:a9d6a128f79038b59c1bfa212d11911ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the configured simulation or generation workflow.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple strategy interface so each simulation mode can encapsulate the prompts it needs and the workflow for executing the mode. </p>
+<div class="textblock"><p>Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a9d6a128f79038b59c1bfa212d11911ef" name="a9d6a128f79038b59c1bfa212d11911ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9d6a128f79038b59c1bfa212d11911ef">&#9670;&#160;</a></span>run()</h2>
@@ -135,6 +137,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Executes the configured simulation or generation workflow. </p>
 
 <p>Implemented in <a class="el" href="classio_1_1_f_g_n_simulation_handler.html#ad8a7f9c99e70076e78a79b76e2666c7c">io.FGNSimulationHandler</a>, and <a class="el" href="classio_1_1_pareto_simulation_handler.html#ab597c9e77f1988ac767abb7b5b85773a">io.ParetoSimulationHandler</a>.</p>
 

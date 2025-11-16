@@ -2,24 +2,24 @@
 \hypertarget{classextensions_1_1_multi_source_manager}{}\label{classextensions_1_1_multi_source_manager}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}}
 
 
-Manages a list of sources.  
+Utility responsible for constructing collections of {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} objects.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ \mbox{\hyperlink{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e}{generate\+Sources}} (int count, double base\+On\+Shape, double base\+On\+Scale, double base\+Off\+Shape, double base\+Off\+Scale, double variation)
-\begin{DoxyCompactList}\small\item\em Pareto sources with ±variation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Builds a list of Pareto-\/based traffic sources with per-\/parameter variation. \end{DoxyCompactList}\item 
 List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ \mbox{\hyperlink{classextensions_1_1_multi_source_manager_a21ad913dbb4424a363fc7fcc35702cc6}{generate\+FGNSources}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params)
-\begin{DoxyCompactList}\small\item\em FGN sources (no Pareto). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Builds FGN-\/thresholded sources using the global simulation parameters. \end{DoxyCompactList}\item 
 List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ \mbox{\hyperlink{classextensions_1_1_multi_source_manager_ab9dc749a7a73d790a36fa46681ad1fb6}{get\+Sources}} ()
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Manages a list of sources. 
+Utility responsible for constructing collections of {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} objects. 
 
-Can build Pareto or FGN sources. 
+Depending on the {\ttfamily \doxylink{classmodel_1_1_simulation_parameters}{model.\+Simulation\+Parameters}}, it can build either classic Pareto ON/\+OFF sources or {\ttfamily \doxylink{classmodel_1_1_f_g_n_traffic_source}{model.\+FGNTraffic\+Source}} instances. 
 
 \label{doc-func-members}
 \Hypertarget{classextensions_1_1_multi_source_manager_doc-func-members}
@@ -32,9 +32,17 @@ List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ ex
 
 
 
-FGN sources (no Pareto). 
+Builds FGN-\/thresholded sources using the global simulation parameters. 
 
-Parameters come from \doxylink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}. \Hypertarget{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}!generateSources@{generateSources}}
+
+\begin{DoxyParams}{Parameters}
+{\em params} & simulation configuration containing FGN settings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+list of {\ttfamily \doxylink{classmodel_1_1_f_g_n_traffic_source}{FGNTraffic\+Source}} instances 
+\end{DoxyReturn}
+\Hypertarget{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}!generateSources@{generateSources}}
 \index{generateSources@{generateSources}!extensions.MultiSourceManager@{extensions.MultiSourceManager}}
 \doxysubsubsection{\texorpdfstring{generateSources()}{generateSources()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_multi_source_manager_a5f8c717a47fb470a13b084e3fb36f11e} 
@@ -42,11 +50,32 @@ List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ ex
 
 
 
-Pareto sources with ±variation. 
+Builds a list of Pareto-\/based traffic sources with per-\/parameter variation. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em count} & number of sources to create \\
+\hline
+{\em base\+On\+Shape} & baseline ON-\/shape (alpha) parameter \\
+\hline
+{\em base\+On\+Scale} & baseline ON-\/scale parameter \\
+\hline
+{\em base\+Off\+Shape} & baseline OFF-\/shape parameter \\
+\hline
+{\em base\+Off\+Scale} & baseline OFF-\/scale parameter \\
+\hline
+{\em variation} & relative variation applied to each parameter (e.\+g., 0.\+15 = ±15\%) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mutable list of configured traffic sources 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_multi_source_manager_ab9dc749a7a73d790a36fa46681ad1fb6}\index{extensions.MultiSourceManager@{extensions.MultiSourceManager}!getSources@{getSources}}
 \index{getSources@{getSources}!extensions.MultiSourceManager@{extensions.MultiSourceManager}}
 \doxysubsubsection{\texorpdfstring{getSources()}{getSources()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_multi_source_manager_ab9dc749a7a73d790a36fa46681ad1fb6} 
 List$<$ \mbox{\hyperlink{classmodel_1_1_traffic_source}{Traffic\+Source}} $>$ extensions.\+Multi\+Source\+Manager.\+get\+Sources (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+the last generated list of sources (mutable) 
+\end{DoxyReturn}

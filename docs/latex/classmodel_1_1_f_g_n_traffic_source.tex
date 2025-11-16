@@ -50,9 +50,7 @@ String \mbox{\hyperlink{classmodel_1_1_traffic_source_a6ae2fe5ae6db9946581323984
 \doxysubsection{Detailed Description}
 \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} that follows an FGN-\/driven ON/\+OFF pattern. 
 
-We convert an FGN series to a binary sequence using a threshold, run-\/length encode it into durations, then serve durations one-\/by-\/one.
-
-This class extends \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} only to keep the same type the Simulator already uses. We override the behavior we need. 
+The constructor converts an FGN series to a binary sequence using a threshold, run-\/length encodes the sequence into durations, and then replays those durations so the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} can continue operating without code changes. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_f_g_n_traffic_source_doc-constructors}
@@ -63,6 +61,13 @@ This class extends \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} onl
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_traffic_source_a94eee91b60846d52d199a8e17d5198a5} 
 model.\+FGNTraffic\+Source.\+FGNTraffic\+Source (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}}}]{params}{}\end{DoxyParamCaption})}
 
+
+\begin{DoxyParams}{Parameters}
+{\em id} & source identifier reused by the simulator \\
+\hline
+{\em params} & simulation parameters containing all FGN settings \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}
@@ -89,7 +94,7 @@ Reimplemented from \mbox{\hyperlink{classmodel_1_1_traffic_source_aa4e3b925bf2bf
 double model.\+FGNTraffic\+Source.\+get\+Next\+Event\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyReturn}{Returns}
-the time of the next scheduled event. 
+timestamp of the next scheduled state change event 
 \end{DoxyReturn}
 
 
@@ -102,7 +107,7 @@ Reimplemented from \mbox{\hyperlink{classmodel_1_1_traffic_source_addec51a76b146
 boolean model.\+FGNTraffic\+Source.\+is\+On (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyReturn}{Returns}
-true if the source is currently ON. 
+{\ttfamily true} when the FGN schedule is currently ON 
 \end{DoxyReturn}
 
 

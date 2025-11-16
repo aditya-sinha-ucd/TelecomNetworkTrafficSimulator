@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,15 +100,15 @@ $(function(){initNavTree('classmodel_1_1_simulation_parameters.html','','classmo
 </div><!--header-->
 <div class="contents">
 
-<p>Simulation parameters.  
+<p>Holds all configuration options required by the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for model.SimulationParameters:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodel_1_1_simulation_parameters__coll__graph.png" border="0" usemap="#amodel_8_simulation_parameters_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amodel_8_simulation_parameters_coll__map" id="amodel_8_simulation_parameters_coll__map">
-<area shape="rect" title="Simulation parameters." alt="" coords="7,120,196,147"/>
-<area shape="rect" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html" title=" " alt="" coords="5,5,198,48"/>
+<area shape="rect" title="Holds all configuration options required by the core.Simulator." alt="" coords="7,120,196,147"/>
+<area shape="rect" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html" title="Chooses the underlying traffic model." alt="" coords="5,5,198,48"/>
 <area shape="poly" title=" " alt="" coords="104,62,104,120,99,119,99,65"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -115,6 +116,7 @@ Collaboration diagram for model.SimulationParameters:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:TrafficModel" id="r_TrafficModel"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html">TrafficModel</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chooses the underlying traffic model.  <a href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -125,27 +127,37 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad7ce80850badcc3580b50694cf333f26" id="r_ad7ce80850badcc3580b50694cf333f26"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#ae86d5088333168c53e180b8003c9d253">SimulationParameters</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7ce80850badcc3580b50694cf333f26">fromUserInput</a> (double totalTime, int numSources, double <a class="el" href="#afdf4f5d783f5c1b497872edd9cda10ab">onShape</a>, double <a class="el" href="#aad1f68603f865c07fc69f71f0cbb69cf">onScale</a>, double <a class="el" href="#a477b320a7bf5bfe48670648e3def6c3e">offShape</a>, double <a class="el" href="#aad85e229495951434a819c9831938cc5">offScale</a>)</td></tr>
-<tr class="memdesc:ad7ce80850badcc3580b50694cf333f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience.  <br /></td></tr>
+<tr class="memdesc:ad7ce80850badcc3580b50694cf333f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience factory mirroring the UI prompts.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7c823b35838a3f5e831ff0b6832a9b7d" id="r_a7c823b35838a3f5e831ff0b6832a9b7d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c823b35838a3f5e831ff0b6832a9b7d">totalSimulationTime</a></td></tr>
+<tr class="memdesc:a7c823b35838a3f5e831ff0b6832a9b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total simulated time horizon in seconds.  <br /></td></tr>
 <tr class="memitem:adc411491132527d2eb20d46715443606" id="r_adc411491132527d2eb20d46715443606"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc411491132527d2eb20d46715443606">numberOfSources</a></td></tr>
+<tr class="memdesc:adc411491132527d2eb20d46715443606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of traffic sources in the experiment.  <br /></td></tr>
 <tr class="memitem:afdf4f5d783f5c1b497872edd9cda10ab" id="r_afdf4f5d783f5c1b497872edd9cda10ab"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdf4f5d783f5c1b497872edd9cda10ab">onShape</a></td></tr>
+<tr class="memdesc:afdf4f5d783f5c1b497872edd9cda10ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pareto parameters for ON durations.  <br /></td></tr>
 <tr class="memitem:aad1f68603f865c07fc69f71f0cbb69cf" id="r_aad1f68603f865c07fc69f71f0cbb69cf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad1f68603f865c07fc69f71f0cbb69cf">onScale</a></td></tr>
 <tr class="memitem:a477b320a7bf5bfe48670648e3def6c3e" id="r_a477b320a7bf5bfe48670648e3def6c3e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a477b320a7bf5bfe48670648e3def6c3e">offShape</a></td></tr>
+<tr class="memdesc:a477b320a7bf5bfe48670648e3def6c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pareto parameters for OFF durations.  <br /></td></tr>
 <tr class="memitem:aad85e229495951434a819c9831938cc5" id="r_aad85e229495951434a819c9831938cc5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad85e229495951434a819c9831938cc5">offScale</a></td></tr>
 <tr class="memitem:a8ca3cdbe4fefeae08fa89dba12259384" id="r_a8ca3cdbe4fefeae08fa89dba12259384"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ca3cdbe4fefeae08fa89dba12259384">samplingInterval</a> = 1.0</td></tr>
+<tr class="memdesc:a8ca3cdbe4fefeae08fa89dba12259384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interval (seconds) between samples recorded by <code><a class="el" href="classcore_1_1_statistics_collector.html">core.StatisticsCollector</a></code>.  <br /></td></tr>
 <tr class="memitem:a2c930f0f9c34f9a10cefcd5ce921dfbf" id="r_a2c930f0f9c34f9a10cefcd5ce921dfbf"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c930f0f9c34f9a10cefcd5ce921dfbf">randomSeed</a> = System.currentTimeMillis()</td></tr>
+<tr class="memdesc:a2c930f0f9c34f9a10cefcd5ce921dfbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional seed for reproducible randomness.  <br /></td></tr>
 <tr class="memitem:a052b973c3a977d1a27b2f171f77090f5" id="r_a052b973c3a977d1a27b2f171f77090f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html">TrafficModel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a052b973c3a977d1a27b2f171f77090f5">trafficModel</a> = <a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html#ac6d2e374a66c9e150db4e5d84e2a6d06">TrafficModel.PARETO_ON_OFF</a></td></tr>
 <tr class="memitem:a8da4d1d4f84bf0d5a21fe0f52ef4883e" id="r_a8da4d1d4f84bf0d5a21fe0f52ef4883e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8da4d1d4f84bf0d5a21fe0f52ef4883e">hurst</a> = 0.80</td></tr>
+<tr class="memdesc:a8da4d1d4f84bf0d5a21fe0f52ef4883e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hurst exponent used when <code><a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html#a912c36231cdf60846ea6eb24963b2e59">TrafficModel#FGN_THRESHOLD</a></code> is active.  <br /></td></tr>
 <tr class="memitem:ad61fd8a6d2c615686c2be9a1d24ecbba" id="r_ad61fd8a6d2c615686c2be9a1d24ecbba"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad61fd8a6d2c615686c2be9a1d24ecbba">fgnSigma</a> = 1.0</td></tr>
+<tr class="memdesc:ad61fd8a6d2c615686c2be9a1d24ecbba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard deviation for the generated FGN process.  <br /></td></tr>
 <tr class="memitem:aa46225795ca5ac200ed5d4dfb6d631b4" id="r_aa46225795ca5ac200ed5d4dfb6d631b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa46225795ca5ac200ed5d4dfb6d631b4">fgnThreshold</a> = 0.0</td></tr>
+<tr class="memdesc:aa46225795ca5ac200ed5d4dfb6d631b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Threshold applied to the FGN sequence to derive ON/OFF states.  <br /></td></tr>
 <tr class="memitem:a3957d82cdf98c07a5f37c781706c3eb6" id="r_a3957d82cdf98c07a5f37c781706c3eb6"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3957d82cdf98c07a5f37c781706c3eb6">fgnSeed</a> = 42L</td></tr>
+<tr class="memdesc:a3957d82cdf98c07a5f37c781706c3eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-source seed base for the FGN generator.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simulation parameters. </p>
-<p>Keep the existing fields and add a simple switch for the FGN option. </p>
+<div class="textblock"><p>Holds all configuration options required by the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>. </p>
+<p>The structure covers both the classic Pareto ON/OFF model and the optional FGN-thresholded model, allowing callers to switch behavior with <code><a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html">TrafficModel</a></code>. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae86d5088333168c53e180b8003c9d253" name="ae86d5088333168c53e180b8003c9d253"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae86d5088333168c53e180b8003c9d253">&#9670;&#160;</a></span>SimulationParameters() <span class="overload">[1/2]</span></h2>
@@ -253,7 +265,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Convenience. </p>
+<p>Convenience factory mirroring the UI prompts. </p>
 
 </div>
 </div>
@@ -287,6 +299,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Per-source seed base for the FGN generator. </p>
+
 </div>
 </div>
 <a id="ad61fd8a6d2c615686c2be9a1d24ecbba" name="ad61fd8a6d2c615686c2be9a1d24ecbba"></a>
@@ -300,6 +314,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Standard deviation for the generated FGN process. </p>
 
 </div>
 </div>
@@ -315,6 +331,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Threshold applied to the FGN sequence to derive ON/OFF states. </p>
+
 </div>
 </div>
 <a id="a8da4d1d4f84bf0d5a21fe0f52ef4883e" name="a8da4d1d4f84bf0d5a21fe0f52ef4883e"></a>
@@ -329,6 +347,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Hurst exponent used when <code><a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html#a912c36231cdf60846ea6eb24963b2e59">TrafficModel#FGN_THRESHOLD</a></code> is active. </p>
+
 </div>
 </div>
 <a id="adc411491132527d2eb20d46715443606" name="adc411491132527d2eb20d46715443606"></a>
@@ -342,6 +362,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Number of traffic sources in the experiment. </p>
 
 </div>
 </div>
@@ -371,6 +393,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Pareto parameters for OFF durations. </p>
+
 </div>
 </div>
 <a id="aad1f68603f865c07fc69f71f0cbb69cf" name="aad1f68603f865c07fc69f71f0cbb69cf"></a>
@@ -399,6 +423,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Pareto parameters for ON durations. </p>
+
 </div>
 </div>
 <a id="a2c930f0f9c34f9a10cefcd5ce921dfbf" name="a2c930f0f9c34f9a10cefcd5ce921dfbf"></a>
@@ -412,6 +438,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Optional seed for reproducible randomness. </p>
 
 </div>
 </div>
@@ -427,6 +455,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Interval (seconds) between samples recorded by <code><a class="el" href="classcore_1_1_statistics_collector.html">core.StatisticsCollector</a></code>. </p>
+
 </div>
 </div>
 <a id="a7c823b35838a3f5e831ff0b6832a9b7d" name="a7c823b35838a3f5e831ff0b6832a9b7d"></a>
@@ -440,6 +470,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Total simulated time horizon in seconds. </p>
 
 </div>
 </div>

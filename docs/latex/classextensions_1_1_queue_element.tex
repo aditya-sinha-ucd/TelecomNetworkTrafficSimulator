@@ -9,17 +9,17 @@ Represents a single packet or flow unit in the \doxylink{classextensions_1_1_net
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classextensions_1_1_queue_element_a599695de4da8ecd295e85eb74cfbfbd3}{Queue\+Element}} (double arrival\+Time)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a queue element that arrives at the specified time. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classextensions_1_1_queue_element_ae6cc43653c75a36a6f5c2f0180c9df39}{get\+Arrival\+Time}} ()
 \item 
 double \mbox{\hyperlink{classextensions_1_1_queue_element_a5402a2a9f568145802af4cd5aa9db5b0}{get\+Service\+Start\+Time}} ()
 \item 
 void \mbox{\hyperlink{classextensions_1_1_queue_element_ab97db7a275082494be25175199a454fa}{set\+Service\+Start\+Time}} (double t)
-\item 
+\begin{DoxyCompactList}\small\item\em Records the moment service begins. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classextensions_1_1_queue_element_a819cb1034a92ab91868731184b774e32}{get\+Departure\+Time}} ()
 \item 
 void \mbox{\hyperlink{classextensions_1_1_queue_element_a62cdb1c746ff0eae6f3808c67640d938}{set\+Departure\+Time}} (double t)
-\item 
+\begin{DoxyCompactList}\small\item\em Records when the packet leaves the queueing system. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classextensions_1_1_queue_element_a126c18c3471ed14a408b53d54bbc91ce}{get\+Total\+Delay}} ()
 \item 
 double \mbox{\hyperlink{classextensions_1_1_queue_element_aaa1757100a37b5dc0e91b94d4cacc221}{get\+Waiting\+Time}} ()
@@ -42,6 +42,15 @@ extensions.\+Queue\+Element.\+Queue\+Element (\begin{DoxyParamCaption}\item[{dou
 
 
 
+Creates a queue element that arrives at the specified time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arrival\+Time} & timestamp when the packet reaches the queue \\
+\hline
+\end{DoxyParams}
+
+
 \label{doc-func-members}
 \Hypertarget{classextensions_1_1_queue_element_doc-func-members}
 \doxysubsection{Member Function Documentation}
@@ -51,18 +60,27 @@ extensions.\+Queue\+Element.\+Queue\+Element (\begin{DoxyParamCaption}\item[{dou
 {\footnotesize\ttfamily \label{classextensions_1_1_queue_element_ae6cc43653c75a36a6f5c2f0180c9df39} 
 double extensions.\+Queue\+Element.\+get\+Arrival\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+arrival time of the packet 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_queue_element_a819cb1034a92ab91868731184b774e32}\index{extensions.QueueElement@{extensions.QueueElement}!getDepartureTime@{getDepartureTime}}
 \index{getDepartureTime@{getDepartureTime}!extensions.QueueElement@{extensions.QueueElement}}
 \doxysubsubsection{\texorpdfstring{getDepartureTime()}{getDepartureTime()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a819cb1034a92ab91868731184b774e32} 
 double extensions.\+Queue\+Element.\+get\+Departure\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+departure time, or -\/1 if still in the system 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_queue_element_a5402a2a9f568145802af4cd5aa9db5b0}\index{extensions.QueueElement@{extensions.QueueElement}!getServiceStartTime@{getServiceStartTime}}
 \index{getServiceStartTime@{getServiceStartTime}!extensions.QueueElement@{extensions.QueueElement}}
 \doxysubsubsection{\texorpdfstring{getServiceStartTime()}{getServiceStartTime()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a5402a2a9f568145802af4cd5aa9db5b0} 
 double extensions.\+Queue\+Element.\+get\+Service\+Start\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+\begin{DoxyReturn}{Returns}
+moment when service begins, or -\/1 if not yet started 
+\end{DoxyReturn}
 \Hypertarget{classextensions_1_1_queue_element_a126c18c3471ed14a408b53d54bbc91ce}\index{extensions.QueueElement@{extensions.QueueElement}!getTotalDelay@{getTotalDelay}}
 \index{getTotalDelay@{getTotalDelay}!extensions.QueueElement@{extensions.QueueElement}}
 \doxysubsubsection{\texorpdfstring{getTotalDelay()}{getTotalDelay()}}
@@ -87,9 +105,17 @@ waiting time before service begins
 {\footnotesize\ttfamily \label{classextensions_1_1_queue_element_a62cdb1c746ff0eae6f3808c67640d938} 
 void extensions.\+Queue\+Element.\+set\+Departure\+Time (\begin{DoxyParamCaption}\item[{double}]{t}{}\end{DoxyParamCaption})}
 
+
+
+Records when the packet leaves the queueing system. 
+
 \Hypertarget{classextensions_1_1_queue_element_ab97db7a275082494be25175199a454fa}\index{extensions.QueueElement@{extensions.QueueElement}!setServiceStartTime@{setServiceStartTime}}
 \index{setServiceStartTime@{setServiceStartTime}!extensions.QueueElement@{extensions.QueueElement}}
 \doxysubsubsection{\texorpdfstring{setServiceStartTime()}{setServiceStartTime()}}
 {\footnotesize\ttfamily \label{classextensions_1_1_queue_element_ab97db7a275082494be25175199a454fa} 
 void extensions.\+Queue\+Element.\+set\+Service\+Start\+Time (\begin{DoxyParamCaption}\item[{double}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Records the moment service begins. 
 

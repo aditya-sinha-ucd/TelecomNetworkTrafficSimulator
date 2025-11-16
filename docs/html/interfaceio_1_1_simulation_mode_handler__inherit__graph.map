@@ -1,5 +1,5 @@
 <map id="io.SimulationModeHandler" name="io.SimulationModeHandler">
-<area shape="rect" id="Node000001" title="Simple strategy interface so each simulation mode can encapsulate the prompts it needs and the workfl..." alt="" coords="102,5,275,32"/>
+<area shape="rect" id="Node000001" title="Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode." alt="" coords="102,5,275,32"/>
 <area shape="rect" id="Node000002" href="$classio_1_1_f_g_n_simulation_handler.html" title="Handles console interaction and execution for the FGN generator mode." alt="" coords="5,80,175,107"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,41,108,82,106,77,157,42"/>
 <area shape="rect" id="Node000003" href="$classio_1_1_pareto_simulation_handler.html" title="Handles the complete workflow for the Pareto ON/OFF mode." alt="" coords="199,80,378,107"/>
