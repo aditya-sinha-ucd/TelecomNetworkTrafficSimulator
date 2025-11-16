@@ -9,23 +9,26 @@ import java.util.List;
 
 /**
  * TrafficSource that follows an FGN-driven ON/OFF pattern.
- * We convert an FGN series to a binary sequence using a threshold,
- * run-length encode it into durations, then serve durations one-by-one.
- *
- * This class extends TrafficSource only to keep the same type the
- * Simulator already uses. We override the behavior we need.
+ * <p>
+ * The constructor converts an FGN series to a binary sequence using a threshold,
+ * run-length encodes the sequence into durations, and then replays those durations
+ * so the {@link core.Simulator} can continue operating without code changes.
  */
 public final class FGNTrafficSource extends TrafficSource {
 
     private final SimulationParameters params;
 
-    // Precomputed durations between flips (seconds).
+    /** Precomputed durations between ON/OFF flips (seconds). */
     private final List<Double> durations = new ArrayList<>();
     private int durIndex = 0;
 
     private SourceState state = SourceState.OFF;
     private double nextTime = 0.0;
 
+    /**
+     * @param id     source identifier reused by the simulator
+     * @param params simulation parameters containing all FGN settings
+     */
     public FGNTrafficSource(int id, SimulationParameters params) {
         // Call parent with dummy Pareto values; we override all behavior.
         super(id, 1.0, 1.0, 1.0, 1.0);
@@ -88,11 +91,15 @@ public final class FGNTrafficSource extends TrafficSource {
         }
     }
 
+    /** @return {@code true} when the FGN schedule is currently ON */
     @Override
     public boolean isOn() {
         return state == SourceState.ON;
     }
 
+    /**
+     * @return timestamp of the next scheduled state change event
+     */
     @Override
     public double getNextEventTime() {
         return nextTime;

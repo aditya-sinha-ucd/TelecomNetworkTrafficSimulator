@@ -1,30 +1,49 @@
 package model;
 
 /**
- * Simulation parameters.
- * Keep the existing fields and add a simple switch for the FGN option.
+ * Holds all configuration options required by the {@link core.Simulator}.
+ * <p>
+ * The structure covers both the classic Pareto ON/OFF model and the optional
+ * FGN-thresholded model, allowing callers to switch behavior with
+ * {@link TrafficModel}.
  */
 public class SimulationParameters {
 
-    // existing
+    /** Total simulated time horizon in seconds. */
     public double totalSimulationTime;
+
+    /** Number of traffic sources in the experiment. */
     public int numberOfSources;
+
+    /** Pareto parameters for ON durations. */
     public double onShape, onScale;
+
+    /** Pareto parameters for OFF durations. */
     public double offShape, offScale;
+
+    /** Interval (seconds) between samples recorded by {@link core.StatisticsCollector}. */
     public double samplingInterval = 1.0;
+
+    /** Optional seed for reproducible randomness. */
     public long randomSeed = System.currentTimeMillis();
 
-    // NEW: choose traffic model
+    /** Chooses the underlying traffic model. */
     public enum TrafficModel {
         PARETO_ON_OFF,
         FGN_THRESHOLD
     }
     public TrafficModel trafficModel = TrafficModel.PARETO_ON_OFF;
 
-    // NEW: FGN parameters
+    /** Hurst exponent used when {@link TrafficModel#FGN_THRESHOLD} is active. */
     public double hurst = 0.80;        // 0.5..1
+
+    /** Standard deviation for the generated FGN process. */
     public double fgnSigma = 1.0;
+
+    /** Threshold applied to the FGN sequence to derive ON/OFF states. */
     public double fgnThreshold = 0.0;  // 0 gives ~50% ON for the zero-mean FGN process
+
+    /** Per-source seed base for the FGN generator. */
     public long   fgnSeed = 42L;
 
     public SimulationParameters() {}
@@ -40,7 +59,7 @@ public class SimulationParameters {
         this.offScale = offScale;
     }
 
-    /** Convenience */
+    /** Convenience factory mirroring the UI prompts. */
     public static SimulationParameters fromUserInput(double totalTime, int numSources,
                                                      double onShape, double onScale,
                                                      double offShape, double offScale) {

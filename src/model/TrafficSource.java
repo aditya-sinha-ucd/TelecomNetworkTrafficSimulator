@@ -73,6 +73,8 @@ public class TrafficSource {
 
     /**
      * Processes a state change event (ON or OFF).
+     *
+     * @param event event delivered by the simulator that flips the source state
      */
     public void processEvent(Event event) {
         if (event.getType() == EventType.ON) {

@@ -1,9 +1,10 @@
 package io;
 
 /**
- * Simple strategy interface so each simulation mode can encapsulate the
- * prompts it needs and the workflow for executing the mode.
+ * Strategy interface that encapsulates the prompts and workflow for a specific
+ * console simulation mode.
  */
 public interface SimulationModeHandler {
+    /** Executes the configured simulation or generation workflow. */
     void run();
 }

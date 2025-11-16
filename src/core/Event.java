@@ -9,7 +9,7 @@ package core;
  */
 public class Event implements Comparable<Event> {
 
-    // The simulation time (in seconds) when this event occurs.
+    /** The simulation time (in seconds) when this event occurs. */
     private final double time;
 
     /** Unique identifier of the source generating this event. */
@@ -31,17 +31,23 @@ public class Event implements Comparable<Event> {
         this.type = type;
     }
 
-    // @return the simulation time of the event
+    /**
+     * @return the simulation time of the event
+     */
     public double getTime() {
         return time;
     }
 
-    /* @return the ID of the traffic source associated with this event */
+    /**
+     * @return the ID of the traffic source associated with this event
+     */
     public int getSourceId() {
         return sourceId;
     }
 
-    /** @return the type of event (ON/OFF) */
+    /**
+     * @return the type of event (ON/OFF)
+     */
     public EventType getType() {
         return type;
     }

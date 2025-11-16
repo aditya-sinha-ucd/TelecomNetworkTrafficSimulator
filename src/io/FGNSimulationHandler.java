@@ -8,11 +8,17 @@ import java.util.Map;
 
 /**
  * Handles console interaction and execution for the FGN generator mode.
+ * <p>
+ * Responsible for parameter gathering, invoking {@link util.FractionalGaussianNoise},
+ * and exporting all generated series/summary artifacts.
  */
 public class FGNSimulationHandler implements SimulationModeHandler {
 
     private final ConsolePrompter prompter;
 
+    /**
+     * @param prompter shared console input helper
+     */
     public FGNSimulationHandler(ConsolePrompter prompter) {
         this.prompter = prompter;
     }
@@ -54,6 +60,9 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         }
     }
 
+    /**
+     * Echoes the chosen configuration back to the console before generation begins.
+     */
     private void printConfiguration(FGNGenerationParameters params) {
         System.out.println("\nGenerating FGN with:");
         System.out.printf("  Hurst exponent (H): %.4f%n", params.getHurst());
@@ -64,6 +73,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         System.out.println("-----------------------------------------------");
     }
 
+    /** Collects generator parameters through interactive prompts. */
     private FGNGenerationParameters promptManually() {
         double H = prompter.promptDoubleInRange("Enter Hurst exponent (0.5 < H < 1.0): ", 0.5, 1.0);
         double sigma = prompter.promptPositiveDouble("Enter standard deviation (σ): ");
@@ -75,6 +85,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         return new FGNGenerationParameters(H, sigma, samples, dt, threshold, seed);
     }
 
+    /** Loads generator parameters from a configuration file. */
     private FGNGenerationParameters loadFromFile() {
         while (true) {
             String path = prompter.promptLine("Enter path to FGN configuration file: ");
@@ -117,6 +128,9 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         }
     }
 
+    /**
+     * Emits a warning if the requested series is too short for meaningful Hurst estimation.
+     */
     private void warnIfHurstEstimateUnreliable(int samples) {
         if (samples < FileOutputManager.MIN_FGN_HURST_SAMPLES) {
             System.out.printf("Warning: Hurst estimation requires at least %d samples; only %d requested.%n",
@@ -124,6 +138,7 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         }
     }
 
+    /** Validates that a configuration map contains a numeric value for the key. */
     private double require(Map<String, Double> params, String key) {
         if (!params.containsKey(key)) {
             throw new IllegalArgumentException("Missing required parameter: " + key);
