@@ -1,0 +1,49 @@
+@startuml
+' UML sequence diagram describing the console-driven Pareto traffic simulation flow
+' Compatible with IntelliJ IDEA's built-in PlantUML diagram renderer
+
+actor User
+participant "ConsoleUI" as UI
+participant "ConsolePrompter" as Prompter
+participant "ParetoSimulationHandler" as Handler
+participant "ConfigFileLoader" as Loader
+participant "Simulator" as Simulator
+
+== Application startup ==
+User -> UI : launch application
+UI -> UI : printBanner()
+
+loop until user exits
+    UI -> UI : selectMode()
+    UI -> Prompter : promptLine("Enter choice (1 or 2)")
+    Prompter --> UI : user selection
+    UI -> Handler : new ParetoSimulationHandler(prompter)
+    UI -> Handler : run()
+
+    Handler -> Prompter : promptYesNo("Load parameters from a file?")
+    alt load from file
+        loop until valid file
+            Handler -> Prompter : promptLine("Enter path to configuration file")
+            Prompter --> Handler : file path
+            Handler -> Loader : loadConfig(path)
+            Loader --> Handler : Map<String, Double>
+            Handler -> Handler : validate + build SimulationParameters
+        end
+    else enter manually
+        Handler -> Prompter : promptPositiveDouble("totalTime")
+        Handler -> Prompter : promptPositiveInt("numSources")
+        Handler -> Prompter : promptPositiveDouble("on/off parameters")
+        Handler -> Handler : SimulationParameters.fromUserInput(...)
+    end
+
+    Handler -> Simulator : new Simulator(params)
+    Handler -> Simulator : run()
+    Simulator --> Handler : traffic samples + completion signal
+
+    Handler -> UI : print success summary
+    UI -> Prompter : promptYesNo("Run another simulation? (y/n)")
+    Prompter --> UI : continue?
+end
+
+UI -> User : "Thank you for using the simulator. Goodbye!"
+@enduml
