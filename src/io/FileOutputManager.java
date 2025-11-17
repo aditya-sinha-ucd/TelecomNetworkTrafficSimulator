@@ -5,6 +5,7 @@ import core.StatisticsCollector;
 import extensions.NetworkQueue;
 import util.HurstEstimator;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,17 +14,22 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * Manages all file output operations for the simulator.
  *
- * This class is responsible for creating a new output folder for each run,
- * writing event logs, saving simulation summaries, and handling FGN mode output.
- * Keeping all file operations here keeps the simulator logic clean and organized.
+ * <p>The manager owns the lifecycle of a per-run directory, including the
+ * timestamped folder structure, {@code event_log.txt}, {@code summary.txt}, the
+ * sampled traffic CSV, and a {@code metadata.json} file that captures
+ * descriptive run annotations. Keeping all file operations centralized ensures
+ * the simulator core and handlers stay focused on orchestration logic.</p>
  */
-public class FileOutputManager {
+public class FileOutputManager implements OutputSink {
 
     /** Minimum samples needed for a reliable Hurst estimate in FGN mode. */
     public static final int MIN_FGN_HURST_SAMPLES = 512;
@@ -37,6 +43,9 @@ public class FileOutputManager {
     /** Path to the text file where all simulation events are logged. */
     private final String eventLogPath;
 
+    /** Optional descriptive metadata about the run. */
+    private final Map<String, String> metadata;
+
     /** Writer used to record events as they happen during the simulation. */
     private PrintWriter eventWriter;
 
@@ -46,6 +55,20 @@ public class FileOutputManager {
      * without overwriting previous results.
      */
     public FileOutputManager() {
+        this(Collections.emptyMap());
+    }
+
+    /**
+     * Creates a new output manager that also stores run metadata alongside
+     * regular artifacts.
+     *
+     * @param metadata descriptive context (mode, parameters, etc.) supplied by
+     *                 simulation handlers; may be {@code null} to skip metadata.
+     */
+    public FileOutputManager(Map<String, String> metadata) {
+        this.metadata = metadata == null
+                ? Collections.emptyMap()
+                : Collections.unmodifiableMap(new LinkedHashMap<>(metadata));
         String timestamp = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         this.runDir = OUTPUT_ROOT + "run_" + timestamp + "/";
@@ -54,13 +77,21 @@ public class FileOutputManager {
         try {
             Files.createDirectories(Path.of(runDir));
             eventWriter = new PrintWriter(new FileWriter(eventLogPath, true));
-            eventWriter.printf("# Telecom Network Traffic Simulator Event Log%n# Created: %s%n%n", timestamp);
+            eventWriter.printf("# Telecom Network Traffic Simulator Event Log%n# Created: %s%n", timestamp);
+            if (!this.metadata.isEmpty()) {
+                eventWriter.println("# --- Run Metadata ---");
+                this.metadata.forEach((key, value) ->
+                        eventWriter.printf("# %s: %s%n", key, value));
+            }
+            eventWriter.println();
+            writeMetadataFile();
         } catch (IOException e) {
             System.err.println("Error creating output folder or log file: " + e.getMessage());
         }
     }
 
     /** Returns the path of this run's output folder. */
+    @Override
     public String getRunDirectory() {
         return runDir;
     }
@@ -69,6 +100,7 @@ public class FileOutputManager {
      * Writes a single simulation event to the log file.
      * Each line includes the event time, source ID, and event type.
      */
+    @Override
     public void logEvent(Event event) {
         if (eventWriter == null) return;
         eventWriter.printf("t=%.3f, source=%d, type=%s%n",
@@ -76,25 +108,38 @@ public class FileOutputManager {
     }
 
     /**
-     * Writes a summary file containing key statistics collected during the run.
-     * This includes the number of samples, average and peak rates, standard deviation,
-     * and an estimated Hurst exponent.
+     * Writes a friendly, sectioned summary that pairs simulation metrics with
+     * the metadata supplied by the handler.
+     *
+     * <p>The summary mirrors what is printed to the console but also includes
+     * queue statistics and the {@code metadata} block so that each run folder
+     * becomes self-describing for downstream analysis or debugging.</p>
      */
+    @Override
     public void saveSummary(StatisticsCollector stats, NetworkQueue queue) {
         String summaryPath = runDir + "summary.txt";
         try (FileWriter writer = new FileWriter(summaryPath)) {
-            writer.write("=== Telecom Network Traffic Simulator Summary ===\n");
-            writer.write(String.format("Samples Recorded: %d%n", stats.getSampleCount()));
-            writer.write(String.format("Average Rate: %.4f%n", stats.getAverageRate()));
-            writer.write(String.format("Peak Rate: %.4f%n", stats.getPeakRate()));
-            writer.write(String.format("Std Dev: %.4f%n", stats.getStdDevRate()));
-            writer.write(String.format("Estimated Hurst Exponent: %.4f%n", stats.getHurstExponent()));
-            writer.write("--- Network Queue Metrics ---\n");
-            writer.write(String.format("Arrivals: %d%n", queue.getTotalArrived()));
-            writer.write(String.format("Served: %d%n", queue.getTotalServed()));
-            writer.write(String.format("Dropped: %d%n", queue.getTotalDropped()));
-            writer.write(String.format("Average Waiting Time: %.4f%n", queue.getAvgWaitingTime()));
-            writer.write(String.format("Average System Time: %.4f%n", queue.getAvgSystemTime()));
+            writer.write("=== Telecom Network Traffic Simulator Report ===\n");
+            writer.write(String.format("Run Directory: %s%n%n", runDir));
+
+            appendMetadataSection(writer);
+            writer.write('\n');
+
+            writer.write("Traffic Statistics\n");
+            writer.write("------------------\n");
+            writer.write(String.format("Samples Recorded : %d%n", stats.getSampleCount()));
+            writer.write(String.format("Average Rate     : %.4f%n", stats.getAverageRate()));
+            writer.write(String.format("Peak Rate        : %.4f%n", stats.getPeakRate()));
+            writer.write(String.format("Std Dev          : %.4f%n", stats.getStdDevRate()));
+            writer.write(String.format("Hurst Exponent   : %.4f%n", stats.getHurstExponent()));
+
+            writer.write("\nQueue Metrics\n");
+            writer.write("-------------\n");
+            writer.write(String.format("Arrivals           : %d%n", queue.getTotalArrived()));
+            writer.write(String.format("Served             : %d%n", queue.getTotalServed()));
+            writer.write(String.format("Dropped            : %d%n", queue.getTotalDropped()));
+            writer.write(String.format("Average Waiting (s): %.4f%n", queue.getAvgWaitingTime()));
+            writer.write(String.format("Average System (s) : %.4f%n", queue.getAvgSystemTime()));
             writer.write("=================================================\n");
             System.out.println("Summary saved to: " + summaryPath);
         } catch (IOException e) {
@@ -107,6 +152,7 @@ public class FileOutputManager {
      * The generated time-series is written to a CSV file, and a short text summary
      * with the Hurst estimation is saved in the same folder.
      */
+    @Override
     public void saveFGNResults(double[] series, double H, double sigma,
                                double samplingInterval, double threshold) {
         try {
@@ -141,19 +187,33 @@ public class FileOutputManager {
 
             String summaryPath = runDir + "summary.txt";
             try (PrintWriter sw = new PrintWriter(new FileWriter(summaryPath))) {
-                sw.println("=== FGN Generation Summary ===");
-                sw.printf("Samples Generated: %d%n", series.length);
-                sw.printf("Target Hurst (H): %.4f%n", H);
-                sw.printf("Sigma: %.6f%n", sigma);
+                sw.println("=== FGN Generation Report ===");
+                sw.printf("Run Directory: %s%n%n", runDir);
+                appendMetadataSection(sw);
+
+                sw.println();
+                sw.println("Series Statistics");
+                sw.println("-----------------");
+                sw.printf("Samples Generated : %d%n", series.length);
+                sw.printf("Target Hurst (H) : %.4f%n", H);
+                sw.printf("Sigma            : %.6f%n", sigma);
+                sw.printf("Mean Value       : %.6f%n", meanVal);
+                sw.printf("Std Dev          : %.6f%n", Math.sqrt(Math.max(variance, 0)));
                 if (estH.isNaN()) {
                     if (hurstNote == null) {
-                        sw.println("Estimated Hurst: not computed (estimator returned NaN)");
+                        sw.println("Estimated Hurst  : not computed (estimator returned NaN)");
                     } else {
-                        sw.printf("Estimated Hurst: not computed (%s)%n", hurstNote);
+                        sw.printf("Estimated Hurst  : not computed (%s)%n", hurstNote);
                     }
                 } else {
-                    sw.printf("Estimated Hurst: %.4f%n", estH);
+                    sw.printf("Estimated Hurst  : %.4f%n", estH);
                 }
+
+                sw.println();
+                sw.println("Interpretation Notes");
+                sw.println("--------------------");
+                sw.printf("Sampling Interval : %.6f seconds%n", samplingInterval);
+                sw.printf("ON/OFF Threshold  : %.6f (>= threshold logs as ON)%n", threshold);
                 sw.println("===============================");
             }
 
@@ -193,11 +253,61 @@ public class FileOutputManager {
     }
 
     /** Flushes and closes the event log safely at the end of the run. */
+    @Override
     public void close() {
         if (eventWriter != null) {
             eventWriter.flush();
             eventWriter.close();
             System.out.println("Event log saved to: " + eventLogPath);
         }
+    }
+
+    /** Writes run metadata to a JSON file to aid later comparisons. */
+    private void writeMetadataFile() {
+        if (metadata.isEmpty()) {
+            return;
+        }
+        Path metadataPath = Path.of(runDir, "metadata.json");
+        try (BufferedWriter writer = Files.newBufferedWriter(metadataPath)) {
+            writer.write("{\n");
+            int index = 0;
+            int size = metadata.size();
+            for (Map.Entry<String, String> entry : metadata.entrySet()) {
+                String key = escapeJson(entry.getKey());
+                String value = escapeJson(entry.getValue());
+                writer.write(String.format("  \"%s\": \"%s\"%s%n",
+                        key, value, (++index < size) ? "," : ""));
+            }
+            writer.write("}\n");
+        } catch (IOException e) {
+            System.err.println("Error writing metadata file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Appends a human-readable metadata section that clearly lists key/value
+     * annotations supplied by the handler.
+     */
+    private void appendMetadataSection(Appendable writer) throws IOException {
+        writer.append("Run Metadata\n");
+        writer.append("------------\n");
+        if (metadata.isEmpty()) {
+            writer.append("  (no metadata provided)\n");
+            return;
+        }
+        for (Map.Entry<String, String> entry : metadata.entrySet()) {
+            writer.append("  ")
+                    .append(entry.getKey())
+                    .append(": ")
+                    .append(entry.getValue() == null ? "" : entry.getValue())
+                    .append('\n');
+        }
+    }
+
+    private String escapeJson(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 }

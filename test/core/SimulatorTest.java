@@ -1,7 +1,17 @@
 package core;
 
+import extensions.NetworkQueue;
+import io.OutputSink;
 import model.SimulationParameters;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -47,7 +57,6 @@ public class SimulatorTest {
         params.trafficModel = SimulationParameters.TrafficModel.FGN_THRESHOLD;
         params.hurst = 0.8;
         params.fgnSigma = 1.0;
-        params.fgnMean = 0.0;
         params.fgnThreshold = 0.0;
 
         // Second Step: Run FGN simulation
@@ -55,5 +64,95 @@ public class SimulatorTest {
 
         assertDoesNotThrow(sim::run,
                 "FGN-based Simulator should run without throwing exceptions");
+    }
+
+    @Test
+    void testSimulatorUsesInjectedOutputSink() throws Exception {
+        SimulationParameters params = new SimulationParameters(
+                15.0,
+                4,
+                1.4, 1.0, 1.2, 2.0
+        );
+        params.samplingInterval = 0.5;
+
+        Path tempRoot = Files.createTempDirectory("simulator-output-test");
+        Path runDir = tempRoot.resolve("injected-run");
+        AtomicReference<RecordingSink> sinkRef = new AtomicReference<>();
+
+        Simulator simulator = new Simulator(params, () -> {
+            try {
+                RecordingSink sink = new RecordingSink(runDir);
+                sinkRef.set(sink);
+                return sink;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        assertDoesNotThrow(simulator::run,
+                "Simulator should be able to run with a custom sink");
+
+        RecordingSink sink = sinkRef.get();
+        assertNotNull(sink, "Supplier should expose the created sink");
+        assertTrue(sink.summarySaved, "Summary should be written through the sink");
+        assertTrue(sink.closed, "Sink close() should be invoked via try-with-resources");
+        assertFalse(sink.events.isEmpty(), "Simulation should emit events to the sink");
+        assertTrue(Files.exists(runDir.resolve("traffic_data.csv")),
+                "CSV export should target the injected run directory");
+
+        deleteRecursively(tempRoot);
+    }
+
+    private void deleteRecursively(Path root) throws IOException {
+        if (!Files.exists(root)) {
+            return;
+        }
+        try (java.util.stream.Stream<Path> stream = Files.walk(root)) {
+            stream.sorted((a, b) -> b.compareTo(a)).forEach(path -> {
+                try {
+                    Files.deleteIfExists(path);
+                } catch (IOException e) {
+                    throw new RuntimeException("Unable to delete test directory: " + path, e);
+                }
+            });
+        }
+    }
+
+    private static final class RecordingSink implements OutputSink {
+        private final Path runDir;
+        private final List<Event> events = new ArrayList<>();
+        private boolean summarySaved;
+        private boolean closed;
+
+        RecordingSink(Path runDir) throws IOException {
+            this.runDir = runDir;
+            Files.createDirectories(runDir);
+        }
+
+        @Override
+        public String getRunDirectory() {
+            return runDir.toString() + "/";
+        }
+
+        @Override
+        public void logEvent(Event event) {
+            events.add(event);
+        }
+
+        @Override
+        public void saveSummary(StatisticsCollector stats, NetworkQueue queue) {
+            summarySaved = true;
+        }
+
+        @Override
+        public void saveFGNResults(double[] series, double H, double sigma,
+                                   double samplingInterval, double threshold) {
+            throw new UnsupportedOperationException("Not used in this test");
+        }
+
+        @Override
+        public void close() {
+            closed = true;
+        }
     }
 }

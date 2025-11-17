@@ -4,6 +4,7 @@ import model.FGNGenerationParameters;
 import util.FractionalGaussianNoise;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -42,14 +43,14 @@ public class FGNSimulationHandler implements SimulationModeHandler {
                     params.getHurst(), params.getSigma(), params.getSeed());
             double[] series = generator.generate(params.getSampleCount());
 
-            FileOutputManager outputManager = new FileOutputManager();
-            outputManager.saveFGNResults(
-                    series,
-                    params.getHurst(),
-                    params.getSigma(),
-                    params.getSamplingInterval(),
-                    params.getThreshold());
-            outputManager.close();
+            try (OutputSink outputManager = new FileOutputManager(buildMetadata(params))) {
+                outputManager.saveFGNResults(
+                        series,
+                        params.getHurst(),
+                        params.getSigma(),
+                        params.getSamplingInterval(),
+                        params.getThreshold());
+            }
 
             System.out.println("\nFGN sequence generated successfully!");
             System.out.printf("Samples written: %d%n", params.getSampleCount());
@@ -136,6 +137,24 @@ public class FGNSimulationHandler implements SimulationModeHandler {
             System.out.printf("Warning: Hurst estimation requires at least %d samples; only %d requested.%n",
                     FileOutputManager.MIN_FGN_HURST_SAMPLES, samples);
         }
+    }
+
+    /**
+     * Builds a descriptive metadata map for the current generator run so the
+     * {@link FileOutputManager} can persist it alongside the event log.
+     *
+     * @param params immutable snapshot of the requested generator settings
+     * @return ordered map describing key run attributes for later reference
+     */
+    private Map<String, String> buildMetadata(FGNGenerationParameters params) {
+        Map<String, String> metadata = new LinkedHashMap<>();
+        metadata.put("mode", "FGN");
+        metadata.put("samples", Integer.toString(params.getSampleCount()));
+        metadata.put("hurst", Double.toString(params.getHurst()));
+        metadata.put("sigma", Double.toString(params.getSigma()));
+        metadata.put("samplingInterval", Double.toString(params.getSamplingInterval()));
+        metadata.put("threshold", Double.toString(params.getThreshold()));
+        return metadata;
     }
 
     /** Validates that a configuration map contains a numeric value for the key. */

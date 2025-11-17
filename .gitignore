@@ -31,3 +31,5 @@ bin/
 
 # Simulator run artifacts
 output/
+build/
+target/
