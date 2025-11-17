@@ -217,7 +217,7 @@ public final class FractionalGaussianNoise {
             }
         }
 
-        // Cooley–Tukey
+        // Cooley–Tukey FFT
         for (int len = 2; len <= n; len <<= 1) {
             double ang = 2.0 * Math.PI / len * (inverse ? -1.0 : 1.0);
             double wlenRe = Math.cos(ang);
@@ -258,8 +258,6 @@ public final class FractionalGaussianNoise {
 
 
     // Getters
-
-
     public double getHurst() { return hurst; }
     public double getSigma() { return sigma; }
 }
