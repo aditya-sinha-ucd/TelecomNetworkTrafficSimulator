@@ -1,14 +1,21 @@
+/**
+ * @file test/util/RandomUtilsTest.java
+ * @brief Validates the Pareto and uniform number generation helpers.
+ */
 package util;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests for the RandomUtils class.
- * Validates Pareto and uniform random number generation.
+ * @class RandomUtilsTest
+ * @brief Unit tests for {@link util.RandomUtils}.
  */
 public class RandomUtilsTest {
 
+    /**
+     * @brief Ensures Pareto sampling always returns values above the scale parameter.
+     */
     @Test
     void testParetoGeneratesPositiveValues() {
         for (int i = 0; i < 100; i++) {
@@ -17,6 +24,9 @@ public class RandomUtilsTest {
         }
     }
 
+    /**
+     * @brief Verifies uniform sampling remains within the provided bounds.
+     */
     @Test
     void testUniformGeneratesInRange() {
         for (int i = 0; i < 100; i++) {
@@ -25,6 +35,9 @@ public class RandomUtilsTest {
         }
     }
 
+    /**
+     * @brief Confirms invalid Pareto parameters raise {@link IllegalArgumentException}.
+     */
     @Test
     void testInvalidParetoParametersThrowException() {
         assertThrows(IllegalArgumentException.class, () -> RandomUtils.samplePareto(0.0, 1.0));

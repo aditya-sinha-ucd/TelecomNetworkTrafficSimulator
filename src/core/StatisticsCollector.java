@@ -1,3 +1,14 @@
+/**
+ * @file src/core/StatisticsCollector.java
+ * @brief Captures time-series samples and derives summary metrics.
+ * @details The collector is fed by {@link core.Simulator} at a fixed sampling
+ *          cadence. It stores timestamps and aggregate activity rates, then
+ *          exposes descriptive statistics (mean, max, deviation) and advanced
+ *          measures such as the Hurst exponent via {@link util.HurstEstimator}.
+ *          Outputs are written to CSV or text summaries through export helpers.
+ *          Collaborates with {@link util.MathUtils} for numerical routines.
+ * @date 2024-05-30
+ */
 package core;
 
 import util.MathUtils;
@@ -9,65 +20,95 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Collects and computes key simulation statistics over time.
- * <p>
- * The simulator records:
- *  - Aggregate rate (fraction of active ON sources)
- *  - Time stamps of samples
- *  - Summary stats (mean, peak, std deviation)
- * <p>
- * Provides methods to export time-series and summaries for external plotting.
+ * @class StatisticsCollector
+ * @brief Immutable-interval statistics sink for the simulator.
+ * @details Receives (time, rate) tuples, keeps them in-memory, and offers
+ *          reporting utilities suited for visualization or downstream analysis.
+ *          Inputs: timestamps and aggregate rates from {@link core.Simulator}.
+ *          Outputs: summary metrics, Hurst estimates, CSV/text exports.
  */
 public class StatisticsCollector {
 
+    /** Recorded timestamps for each sample. */
     private final List<Double> timeStamps;
+    /** Recorded aggregate rate per timestamp. */
     private final List<Double> activityRates;
+    /** Sampling interval provided via configuration. */
     private final double sampleInterval;
 
+    /**
+     * @brief Constructs a collector bound to a fixed sampling interval.
+     * @param sampleInterval Interval between consecutive samples produced by
+     *                       {@link core.Simulator}.
+     */
     public StatisticsCollector(double sampleInterval) {
         this.sampleInterval = sampleInterval;
         this.timeStamps = new ArrayList<>();
         this.activityRates = new ArrayList<>();
     }
 
-    /** Records a new sample of the aggregate traffic rate. */
+    /**
+     * @brief Records a new aggregate traffic-rate sample.
+     * @param time Simulation timestamp of the observation.
+     * @param aggregateRate Fraction of ON sources at {@code time}.
+     */
     public void recordSample(double time, double aggregateRate) {
         timeStamps.add(time);
         activityRates.add(aggregateRate);
     }
 
-    /** @return mean of all recorded activity rates. */
+    /**
+     * @brief Computes the mean of all recorded activity rates.
+     * @return Average fraction of ON sources over the captured window.
+     */
     public double getAverageRate() {
         return MathUtils.mean(activityRates);
     }
 
-    /** @return maximum (peak) activity rate recorded. */
+    /**
+     * @brief Retrieves the maximum (peak) activity rate recorded.
+     * @return Highest observed aggregate rate.
+     */
     public double getPeakRate() {
         return MathUtils.max(activityRates);
     }
 
-    /** @return standard deviation of activity rates. */
+    /**
+     * @brief Calculates the standard deviation of activity rates.
+     * @return Sample standard deviation of the aggregate rate series.
+     */
     public double getStdDevRate() {
         return MathUtils.stdDev(activityRates);
     }
 
-    /** @return total number of recorded samples. */
+    /**
+     * @brief Reports the total number of recorded samples.
+     * @return Count of stored observations.
+     */
     public int getSampleCount() {
         return activityRates.size();
     }
 
-    /** @return list of recorded activity rates (copy). */
+    /**
+     * @brief Provides a defensive copy of the activity-rate series.
+     * @return Mutable list containing the recorded aggregate rates.
+     */
     public List<Double> getActivityRates() {
         return new ArrayList<>(activityRates);
     }
 
-    /** Estimates Hurst exponent of the activity series. */
+    /**
+     * @brief Estimates the Hurst exponent of the recorded activity series.
+     * @return Hurst exponent or {@code 0.0} if insufficient data points exist.
+     */
     public double getHurstExponent() {
         if (activityRates.size() < 10) return 0.0;
         return HurstEstimator.estimateHurst(activityRates);
     }
 
-    /** Prints formatted summary to console. */
+    /**
+     * @brief Prints a formatted summary table to the console.
+     */
     public void printSummary() {
         System.out.println("\n=== Simulation Summary ===");
         System.out.printf("Samples recorded: %d%n", getSampleCount());
@@ -78,7 +119,10 @@ public class StatisticsCollector {
         System.out.println("===========================\n");
     }
 
-    /** Writes recorded time-series data to a CSV file (for plotting). */
+    /**
+     * @brief Writes recorded time-series data to a CSV file.
+     * @param fileName Destination path relative to the simulation run directory.
+     */
     public void exportToCSV(String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("Time,AggregateRate\n");
@@ -92,7 +136,10 @@ public class StatisticsCollector {
         }
     }
 
-    /** Exports summary statistics to a text file (human-readable). */
+    /**
+     * @brief Exports summary statistics to a human-readable text file.
+     * @param fileName Destination file for the summary block.
+     */
     public void exportSummary(String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("=== Simulation Summary ===\n");
@@ -108,7 +155,10 @@ public class StatisticsCollector {
         }
     }
 
-    /** Appends summary stats to CSV (for batch experiments). */
+    /**
+     * @brief Appends summary stats to an experiment-level CSV.
+     * @param fileName Aggregated CSV capturing multiple runs.
+     */
     public void appendSummaryToCSV(String fileName) {
         try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.write(String.format("%.4f,%.4f,%.4f,%.4f,%d%n",
@@ -119,7 +169,9 @@ public class StatisticsCollector {
         }
     }
 
-    /** Clears all recorded samples. */
+    /**
+     * @brief Clears all recorded samples, resetting the collector.
+     */
     public void reset() {
         timeStamps.clear();
         activityRates.clear();

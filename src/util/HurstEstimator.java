@@ -1,27 +1,25 @@
+/**
+ * @file src/util/HurstEstimator.java
+ * @brief Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent.
+ * @details Used to characterize the self-similarity of recorded aggregate rates
+ *          within {@link core.StatisticsCollector} and FGN workflows. Outputs a
+ *          value in [0,1] indicating persistence or anti-persistence.
+ * @date 2024-05-30
+ */
 package util;
 
 import java.util.List;
 
 /**
- * Estimates the Hurst exponent (H) of a time series.
- * <p>
- * The Hurst exponent measures the degree of self-similarity or
- * long-range dependence in the simulated traffic.
- * <p>
- * Common interpretation:
- *  - H ≈ 0.5 → random (no correlation, Poisson-like)
- *  - H > 0.5 → persistent / self-similar (bursty traffic)
- *  - H < 0.5 → anti-persistent (alternating patterns)
- * <p>
- * This implementation uses a simple Rescaled Range (R/S) method.
+ * @class HurstEstimator
+ * @brief Estimates the Hurst exponent (H) of a time series via R/S analysis.
  */
 public class HurstEstimator {
 
     /**
-     * Estimates the Hurst exponent using the R/S analysis.
-     *
-     * @param data list of recorded activity rates (0–1)
-     * @return estimated Hurst exponent in range [0, 1]
+     * @brief Estimates the Hurst exponent using the R/S analysis.
+     * @param data List of recorded activity rates (0–1).
+     * @return Estimated Hurst exponent in range [0, 1].
      */
     public static double estimateHurst(List<Double> data) {
         if (data == null || data.size() < 10) return 0.5; // fallback

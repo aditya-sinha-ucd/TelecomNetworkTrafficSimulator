@@ -1,3 +1,13 @@
+/**
+ * @file src/io/ConfigFileLoader.java
+ * @brief Utility for reading simulation parameters from simple config files.
+ * @details Supports `key=value` and JSON-like syntaxes, ignoring comments and
+ *          formatting characters. Converts numeric values into a
+ *          {@link java.util.Map} so higher layers (e.g., {@link io.ConsoleUI})
+ *          can hydrate {@link model.SimulationParameters}. Inputs are file paths
+ *          and outputs are string-to-double mappings.
+ * @date 2024-05-30
+ */
 package io;
 
 import java.io.BufferedReader;
@@ -7,38 +17,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Loads simulation parameters from a simple text or JSON-like configuration file.
- * <p>
- * Supported formats (key=value per line or JSON-style):
- * <pre>
- * totalTime=1000
- * numSources=50
- * onShape=1.5
- * onScale=1.0
- * offShape=1.2
- * offScale=2.0
- * </pre>
- * or
- * <pre>
- * {
- *   "totalTime": 1000,
- *   "numSources": 50,
- *   "onShape": 1.5,
- *   "onScale": 1.0,
- *   "offShape": 1.2,
- *   "offScale": 2.0
- * }
- * </pre>
- * Lines starting with '#' are treated as comments.
+ * @class ConfigFileLoader
+ * @brief Parses textual configuration files into parameter maps.
+ * @details Consumed by the console UI when users opt to load settings from
+ *          disk. The loader sanitizes input lines, splits on `=` or `:`, and
+ *          handles both plain text and JSON-like structures.
  */
 public class ConfigFileLoader {
 
     /**
-     * Reads simulation parameters from a configuration file.
-     *
-     * @param path path to the configuration file
-     * @return a Map<String, Double> containing numeric parameters
-     * @throws IOException if the file cannot be read
+     * @brief Reads simulation parameters from a configuration file.
+     * @param path Path to the configuration file.
+     * @return Map containing numeric parameters keyed by name.
+     * @throws IOException If the file cannot be read.
      */
     public static Map<String, Double> loadConfig(String path) throws IOException {
         Map<String, Double> params = new HashMap<>();
@@ -72,9 +63,8 @@ public class ConfigFileLoader {
     }
 
     /**
-     * Prints loaded parameters to the console for confirmation.
-     *
-     * @param params the map of loaded parameters
+     * @brief Prints loaded parameters to the console for confirmation.
+     * @param params Map of loaded parameters.
      */
     public static void printLoadedParameters(Map<String, Double> params) {
         System.out.println("Loaded configuration parameters:");

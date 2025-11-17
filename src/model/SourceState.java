@@ -1,11 +1,20 @@
+/**
+ * @file src/model/SourceState.java
+ * @brief Enumerates the ON/OFF states of a {@link model.TrafficSource}.
+ * @details Used by {@link core.Simulator}, {@link core.Event}, and source
+ *          implementations to track transitions during the discrete-event
+ *          simulation.
+ * @date 2024-05-30
+ */
 package model;
 
 /**
- * Represents the state of a TrafficSource.
- * A source can either be actively generating traffic (ON)
- * or idle (OFF).
+ * @enum SourceState
+ * @brief Identifies whether a source is actively generating traffic.
  */
 public enum SourceState {
+    /** Source is emitting traffic. */
     ON,
+    /** Source is idle. */
     OFF
 }

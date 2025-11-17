@@ -1,8 +1,20 @@
+/**
+ * @file src/extensions/QueueElement.java
+ * @brief Data container for individual packets in {@link extensions.NetworkQueue}.
+ * @details Stores arrival, service start, and departure timestamps so that the
+ *          queue can compute waiting and system times. Collaborates exclusively
+ *          with {@link NetworkQueue}, which mutates the service/departure times
+ *          as service progresses.
+ * @date 2024-05-30
+ */
 package extensions;
 
 /**
- * Represents a single packet or flow unit in the NetworkQueue.
- * Stores arrival, service, and departure times.
+ * @class QueueElement
+ * @brief Represents a single packet or flow unit in the queue.
+ * @details Acts as a mutable record used during deterministic service
+ *          calculations. Inputs: arrival time via constructor; outputs: derived
+ *          delays queried by {@link NetworkQueue}.
  */
 public class QueueElement {
 
@@ -11,36 +23,56 @@ public class QueueElement {
     private double departureTime = -1;
 
     /**
-     * Creates a queue element that arrives at the specified time.
-     *
-     * @param arrivalTime timestamp when the packet reaches the queue
+     * @brief Creates a queue element that arrives at the specified time.
+     * @param arrivalTime Timestamp when the packet reaches the queue.
      */
     public QueueElement(double arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    /** @return arrival time of the packet */
+    /**
+     * @brief Arrival time of the packet.
+     * @return Timestamp provided at construction.
+     */
     public double getArrivalTime() { return arrivalTime; }
 
-    /** @return moment when service begins, or -1 if not yet started */
+    /**
+     * @brief Moment when service begins, or -1 if not yet started.
+     * @return Service start timestamp.
+     */
     public double getServiceStartTime() { return serviceStartTime; }
 
-    /** Records the moment service begins. */
+    /**
+     * @brief Records the moment service begins.
+     * @param t Service start timestamp.
+     */
     public void setServiceStartTime(double t) { this.serviceStartTime = t; }
 
-    /** @return departure time, or -1 if still in the system */
+    /**
+     * @brief Departure time, or -1 if still in the system.
+     * @return Service completion timestamp.
+     */
     public double getDepartureTime() { return departureTime; }
 
-    /** Records when the packet leaves the queueing system. */
+    /**
+     * @brief Records when the packet leaves the queueing system.
+     * @param t Departure timestamp.
+     */
     public void setDepartureTime(double t) { this.departureTime = t; }
 
-    /** @return total time spent in the system (service + waiting) */
+    /**
+     * @brief Total time spent in the system (waiting + service).
+     * @return Sojourn time in seconds; zero if departure not set.
+     */
     public double getTotalDelay() {
         if (departureTime < 0) return 0;
         return departureTime - arrivalTime;
     }
 
-    /** @return waiting time before service begins */
+    /**
+     * @brief Waiting time before service begins.
+     * @return Waiting duration; zero if service not started.
+     */
     public double getWaitingTime() {
         if (serviceStartTime < 0) return 0;
         return serviceStartTime - arrivalTime;

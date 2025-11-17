@@ -1,3 +1,7 @@
+/**
+ * @file test/util/HurstEstimatorTest.java
+ * @brief Tests for the {@link util.HurstEstimator} to ensure bounded outputs.
+ */
 package util;
 
 import org.junit.jupiter.api.Test;
@@ -6,11 +10,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests for the HurstEstimator class.
- * Validates that computed Hurst values are within [0,1].
+ * @class HurstEstimatorTest
+ * @brief Validates the Hurst estimator for typical and edge-case inputs.
  */
 public class HurstEstimatorTest {
 
+    /**
+     * @brief Ensures estimated values always fall within the [0,1] interval.
+     */
     @Test
     void testHurstValueWithinValidRange() {
         List<Double> data = new ArrayList<>();
@@ -20,6 +27,9 @@ public class HurstEstimatorTest {
         assertTrue(hurst >= 0.0 && hurst <= 1.0, "Hurst exponent must be within [0,1]");
     }
 
+    /**
+     * @brief Verifies small datasets default to 0.5 as a fallback.
+     */
     @Test
     void testHurstReturnsDefaultForSmallDataset() {
         List<Double> data = new ArrayList<>();

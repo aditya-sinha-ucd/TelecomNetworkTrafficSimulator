@@ -1,8 +1,17 @@
+/**
+ * @file src/model/FGNGenerationParameters.java
+ * @brief Immutable value object representing FGN generator settings.
+ * @details Consumed by {@link io.FGNSimulationHandler} and
+ *          {@link util.FractionalGaussianNoise} to derive sample sequences.
+ *          Encapsulates Hurst exponent, variance, sampling cadence, ON/OFF
+ *          threshold, and RNG seed.
+ * @date 2024-05-30
+ */
 package model;
 
 /**
- * Holds the configuration required to generate a Fractional Gaussian Noise
- * time-series from the console or a configuration file.
+ * @class FGNGenerationParameters
+ * @brief Stores the configuration required to generate a Fractional Gaussian Noise time-series.
  */
 public class FGNGenerationParameters {
 
@@ -14,12 +23,13 @@ public class FGNGenerationParameters {
     private final long seed;
 
     /**
-     * @param hurst             Hurst exponent for the generated process
-     * @param sigma             standard deviation
-     * @param sampleCount       number of samples to generate
-     * @param samplingInterval  spacing between samples (seconds)
-     * @param threshold         value used to derive ON/OFF states
-     * @param seed              random seed for reproducibility
+     * @brief Builds a parameter bundle populated with generator settings.
+     * @param hurst Hurst exponent for the generated process.
+     * @param sigma Standard deviation.
+     * @param sampleCount Number of samples to generate.
+     * @param samplingInterval Spacing between samples (seconds).
+     * @param threshold Value used to derive ON/OFF states.
+     * @param seed Random seed for reproducibility.
      */
     public FGNGenerationParameters(double hurst, double sigma,
                                    int sampleCount, double samplingInterval,
@@ -32,32 +42,50 @@ public class FGNGenerationParameters {
         this.seed = seed;
     }
 
-    /** @return desired Hurst exponent */
+    /**
+     * @brief Desired Hurst exponent.
+     * @return Target H value.
+     */
     public double getHurst() {
         return hurst;
     }
 
-    /** @return standard deviation */
+    /**
+     * @brief Standard deviation of the generated series.
+     * @return Sigma value.
+     */
     public double getSigma() {
         return sigma;
     }
 
-    /** @return number of samples to produce */
+    /**
+     * @brief Number of samples to produce.
+     * @return Positive sample count.
+     */
     public int getSampleCount() {
         return sampleCount;
     }
 
-    /** @return spacing between samples */
+    /**
+     * @brief Spacing between samples.
+     * @return Sampling interval in seconds.
+     */
     public double getSamplingInterval() {
         return samplingInterval;
     }
 
-    /** @return threshold applied when deriving ON/OFF states */
+    /**
+     * @brief Threshold applied when deriving ON/OFF states.
+     * @return Numeric threshold.
+     */
     public double getThreshold() {
         return threshold;
     }
 
-    /** @return random seed */
+    /**
+     * @brief Random seed for reproducibility.
+     * @return Seed value.
+     */
     public long getSeed() {
         return seed;
     }

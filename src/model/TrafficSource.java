@@ -1,14 +1,23 @@
+/**
+ * @file src/model/TrafficSource.java
+ * @brief Models an ON/OFF traffic source backed by configurable distributions.
+ * @details Collaborates with {@link core.Simulator} to emit {@link core.Event}
+ *          objects and responds to processed events to update internal state.
+ *          Default behavior uses {@link model.ParetoDistribution} to generate
+ *          heavy-tailed durations, but tests can inject custom distributions.
+ * @date 2024-05-30
+ */
 package model;
 
 import core.Event;
 import core.EventType;
 
 /**
- * Represents a single ON/OFF traffic source in the simulation.
- * <p>
- * Each TrafficSource alternates between active (ON) and idle (OFF) states.
- * The ON and OFF durations are sampled from Pareto distributions to model
- * self-similar network traffic.
+ * @class TrafficSource
+ * @brief Represents a single ON/OFF traffic source in the simulation.
+ * @details Alternates between active (ON) and idle (OFF) states with durations
+ *          drawn from configured distributions. Generates events consumed by
+ *          the simulator event queue.
  */
 public class TrafficSource {
 
@@ -26,7 +35,12 @@ public class TrafficSource {
     private double nextEventTime;
 
     /**
-     * Constructs a new TrafficSource with given Pareto parameters.
+     * @brief Constructs a new TrafficSource with given Pareto parameters.
+     * @param id Unique identifier for the source.
+     * @param onShape Shape parameter for ON durations.
+     * @param onScale Scale parameter for ON durations.
+     * @param offShape Shape parameter for OFF durations.
+     * @param offScale Scale parameter for OFF durations.
      */
     public TrafficSource(int id, double onShape, double onScale,
                          double offShape, double offScale) {
@@ -53,10 +67,9 @@ public class TrafficSource {
     }
 
     /**
-     * Generates the next event for this source based on its current state.
-     *
-     * @param currentTime the current simulation time
-     * @return the next event (ON or OFF)
+     * @brief Generates the next event based on the current state.
+     * @param currentTime Current simulation time.
+     * @return Next {@link Event} describing a state change.
      */
     public Event generateNextEvent(double currentTime) {
         double duration;
@@ -72,9 +85,8 @@ public class TrafficSource {
     }
 
     /**
-     * Processes a state change event (ON or OFF).
-     *
-     * @param event event delivered by the simulator that flips the source state
+     * @brief Processes a state change event (ON or OFF).
+     * @param event Event delivered by the simulator that flips the source state.
      */
     public void processEvent(Event event) {
         if (event.getType() == EventType.ON) {
@@ -84,17 +96,26 @@ public class TrafficSource {
         }
     }
 
-    /** @return true if the source is currently ON. */
+    /**
+     * @brief Indicates whether the source is currently ON.
+     * @return {@code true} when in the ON state.
+     */
     public boolean isOn() {
         return state == SourceState.ON;
     }
 
-    /** @return the ID of this source. */
+    /**
+     * @brief Identifier of this source.
+     * @return Unique source ID.
+     */
     public int getId() {
         return id;
     }
 
-    /** @return the time of the next scheduled event. */
+    /**
+     * @brief Time of the next scheduled event.
+     * @return Absolute timestamp of the upcoming event.
+     */
     public double getNextEventTime() {
         return nextEventTime;
     }

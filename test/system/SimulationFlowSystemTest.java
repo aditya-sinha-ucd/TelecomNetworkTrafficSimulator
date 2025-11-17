@@ -1,3 +1,7 @@
+/**
+ * @file test/system/SimulationFlowSystemTest.java
+ * @brief System-level tests that exercise the primary simulation workflow end-to-end.
+ */
 package system;
 
 import core.Simulator;
@@ -21,10 +25,14 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * System-level tests that exercise the primary simulation workflow.
+ * @class SimulationFlowSystemTest
+ * @brief Ensures configuration loading, simulation, and output generation interoperate correctly.
  */
 public class SimulationFlowSystemTest {
 
+    /**
+     * @brief Validates that a simulation can run from config through output artifact creation.
+     */
     @Test
     void testSimulationFlowFromConfigToOutput() throws Exception {
         Path config = Files.createTempFile("sim", ".cfg");
@@ -81,6 +89,9 @@ public class SimulationFlowSystemTest {
         Files.deleteIfExists(config);
     }
 
+    /**
+     * @brief Ensures the error handler logs non-fatal errors without exiting.
+     */
     @Test
     void testErrorHandlerNonFatalLogsMessage() {
         ByteArrayOutputStream err = new ByteArrayOutputStream();
@@ -97,6 +108,9 @@ public class SimulationFlowSystemTest {
         assertFalse(output.contains("Program terminated."));
     }
 
+    /**
+     * @brief Lists existing run directories created by the simulator outputs.
+     */
     private List<String> listRunDirectories() throws IOException {
         Path outputRoot = Path.of("output");
         if (!Files.exists(outputRoot)) {
@@ -110,6 +124,9 @@ public class SimulationFlowSystemTest {
         }
     }
 
+    /**
+     * @brief Deletes a run directory hierarchy produced during tests.
+     */
     private void deleteRecursively(Path dir) throws IOException {
         if (!Files.exists(dir)) return;
         try (java.util.stream.Stream<Path> stream = Files.walk(dir)) {

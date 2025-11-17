@@ -1,3 +1,7 @@
+/**
+ * @file test/core/EventQueueTest.java
+ * @brief Verifies chronological ordering and invariants of {@link core.EventQueue}.
+ */
 package core;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -5,13 +9,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the EventQueue class.
- * These tests verify the correct behavior of the event queue used for
- * time-ordered simulation scheduling. The queue should:
- * - Maintain strict chronological ordering of events.
- * - Support safe peeking without removing elements.
- * - Handle empty and duplicate-time cases gracefully.
- * - Correctly clear and reset its internal state.
+ * @class EventQueueTest
+ * @brief Unit tests that ensure {@link EventQueue} maintains ordering semantics.
  */
 public class EventQueueTest {
 
@@ -19,7 +18,7 @@ public class EventQueueTest {
     private static final double EPSILON = 1e-9;
 
     /**
-     * Creates a new, empty queue before each test to ensure independence.
+     * @brief Creates a new, empty queue before each test to ensure independence.
      */
     @BeforeEach
     void setUp() {
@@ -27,11 +26,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Ensures that events added in random order are retrieved
-     * in ascending order of their scheduled time.
-     * The test adds three events at times 5.0, 2.0, and 7.5, and
-     * verifies that nextEvent() returns them in the correct order.
-     * It also checks that the queue becomes empty afterward.
+     * @brief Ensures events added in random order are retrieved chronologically.
      */
     @Test
     void testEventOrderingByTime() {
@@ -53,12 +48,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Confirms that peeking at the next event does not remove it
-     * from the queue.
-     * The test adds a single event, calls peekNextEvent(),
-     * and verifies that:
-     * - The returned event matches the expected time and type.
-     * - The queue still contains the event afterward.
+     * @brief Confirms that peeking at the next event does not remove it.
      */
     @Test
     void testPeekNextEventDoesNotRemoveIt() {
@@ -75,8 +65,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Verifies that the clear() method completely removes
-     * all events from the queue and resets its size to zero.
+     * @brief Verifies that {@link EventQueue#clear()} removes all events.
      */
     @Test
     void testClearRemovesAllEvents() {
@@ -90,8 +79,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Ensures that calling clear() multiple times is safe
-     * and does not throw exceptions.
+     * @brief Ensures repeated calls to {@link EventQueue#clear()} are idempotent.
      */
     @Test
     void testClearIsIdempotent() {
@@ -102,9 +90,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Tests behavior when multiple events have identical timestamps.
-     * The queue should preserve insertion order (FIFO) among events
-     * with the same time value.
+     * @brief Tests behavior when multiple events share identical timestamps.
      */
     @Test
     void testEventsWithSameTimestampKeepInsertionOrder() {
@@ -120,8 +106,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Ensures that requesting the next event from an empty queue
-     * returns null instead of throwing an exception.
+     * @brief Ensures requesting nextEvent from an empty queue returns {@code null}.
      */
     @Test
     void testNextEventOnEmptyQueueReturnsNull() {
@@ -129,8 +114,7 @@ public class EventQueueTest {
     }
 
     /**
-     * Ensures that peeking into an empty queue returns null
-     * instead of throwing an exception.
+     * @brief Ensures peeking into an empty queue returns {@code null}.
      */
     @Test
     void testPeekNextEventOnEmptyQueueReturnsNull() {
@@ -138,9 +122,7 @@ public class EventQueueTest {
     }
 
     /**
-     *
-     * Verifies that attempting to add a null event throws an exception,
-     * ensuring the queue cannot contain invalid entries.
+     * @brief Verifies that attempting to add a null event throws an exception.
      */
     @Test
     void testAddNullEventThrowsException() {

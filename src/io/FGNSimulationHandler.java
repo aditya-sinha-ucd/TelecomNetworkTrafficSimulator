@@ -1,3 +1,13 @@
+/**
+ * @file src/io/FGNSimulationHandler.java
+ * @brief Console workflow that generates Fractional Gaussian Noise time series.
+ * @details Guides the user through configuration, invokes
+ *          {@link util.FractionalGaussianNoise}, and exports the resulting
+ *          samples via {@link io.FileOutputManager}. Collaborates with
+ *          {@link ConsolePrompter} for input collection and
+ *          {@link ConfigFileLoader} for optional file-based parameters.
+ * @date 2024-05-30
+ */
 package io;
 
 import model.FGNGenerationParameters;
@@ -8,22 +18,26 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Handles console interaction and execution for the FGN generator mode.
- * <p>
- * Responsible for parameter gathering, invoking {@link util.FractionalGaussianNoise},
- * and exporting all generated series/summary artifacts.
+ * @class FGNSimulationHandler
+ * @brief Implements {@link SimulationModeHandler} for the FGN generator mode.
+ * @details Responsibilities include parameter gathering (interactive or file
+ *          based), generator invocation, metadata logging, and artifact export.
  */
 public class FGNSimulationHandler implements SimulationModeHandler {
 
     private final ConsolePrompter prompter;
 
     /**
-     * @param prompter shared console input helper
+     * @brief Creates a handler bound to the shared {@link ConsolePrompter}.
+     * @param prompter Shared console input helper.
      */
     public FGNSimulationHandler(ConsolePrompter prompter) {
         this.prompter = prompter;
     }
 
+    /**
+     * @brief Executes the FGN generation workflow from prompt to export.
+     */
     @Override
     public void run() {
         System.out.println("\n=== Fractional Gaussian Noise Mode ===");
@@ -62,7 +76,8 @@ public class FGNSimulationHandler implements SimulationModeHandler {
     }
 
     /**
-     * Echoes the chosen configuration back to the console before generation begins.
+     * @brief Echoes the chosen configuration to the console before generation.
+     * @param params Fully specified generator settings.
      */
     private void printConfiguration(FGNGenerationParameters params) {
         System.out.println("\nGenerating FGN with:");
@@ -74,7 +89,10 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         System.out.println("-----------------------------------------------");
     }
 
-    /** Collects generator parameters through interactive prompts. */
+    /**
+     * @brief Collects generator parameters through interactive prompts.
+     * @return Immutable parameter bundle for FGN generation.
+     */
     private FGNGenerationParameters promptManually() {
         double H = prompter.promptDoubleInRange("Enter Hurst exponent (0.5 < H < 1.0): ", 0.5, 1.0);
         double sigma = prompter.promptPositiveDouble("Enter standard deviation (σ): ");
@@ -86,7 +104,10 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         return new FGNGenerationParameters(H, sigma, samples, dt, threshold, seed);
     }
 
-    /** Loads generator parameters from a configuration file. */
+    /**
+     * @brief Loads generator parameters from a configuration file.
+     * @return Parsed {@link FGNGenerationParameters} or {@code null} if the user aborts.
+     */
     private FGNGenerationParameters loadFromFile() {
         while (true) {
             String path = prompter.promptLine("Enter path to FGN configuration file: ");
@@ -130,7 +151,8 @@ public class FGNSimulationHandler implements SimulationModeHandler {
     }
 
     /**
-     * Emits a warning if the requested series is too short for meaningful Hurst estimation.
+     * @brief Emits a warning if the requested series is too short for meaningful Hurst estimation.
+     * @param samples Requested number of samples.
      */
     private void warnIfHurstEstimateUnreliable(int samples) {
         if (samples < FileOutputManager.MIN_FGN_HURST_SAMPLES) {
@@ -140,11 +162,9 @@ public class FGNSimulationHandler implements SimulationModeHandler {
     }
 
     /**
-     * Builds a descriptive metadata map for the current generator run so the
-     * {@link FileOutputManager} can persist it alongside the event log.
-     *
-     * @param params immutable snapshot of the requested generator settings
-     * @return ordered map describing key run attributes for later reference
+     * @brief Builds a descriptive metadata map for the current generator run.
+     * @param params Immutable snapshot of the requested generator settings.
+     * @return Ordered map describing key run attributes for later reference.
      */
     private Map<String, String> buildMetadata(FGNGenerationParameters params) {
         Map<String, String> metadata = new LinkedHashMap<>();
@@ -157,7 +177,13 @@ public class FGNSimulationHandler implements SimulationModeHandler {
         return metadata;
     }
 
-    /** Validates that a configuration map contains a numeric value for the key. */
+    /**
+     * @brief Validates that a configuration map contains a numeric value for the key.
+     * @param params Parameter map loaded from disk.
+     * @param key Required key.
+     * @return Numeric value associated with {@code key}.
+     * @throws IllegalArgumentException if the key is absent.
+     */
     private double require(Map<String, Double> params, String key) {
         if (!params.containsKey(key)) {
             throw new IllegalArgumentException("Missing required parameter: " + key);

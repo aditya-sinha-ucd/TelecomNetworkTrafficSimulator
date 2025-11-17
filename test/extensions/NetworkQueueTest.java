@@ -1,19 +1,23 @@
+/**
+ * @file test/extensions/NetworkQueueTest.java
+ * @brief Verifies the behavior of the {@link extensions.NetworkQueue} helper.
+ * @details Covers queue length, service progression, drop counts, and metric
+ *          consistency for the unlimited-capacity queue used within the
+ *          simulator.
+ */
 package extensions;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests for the NetworkQueue class (unlimited capacity version).
- * This version matches the provided NetworkQueue implementation, which:
- *  - only has a single constructor (serviceRate)
- *  - does not drop packets (unlimited capacity)
- *  - tracks served packets and queue length
+ * @class NetworkQueueTest
+ * @brief Unit tests targeting {@link extensions.NetworkQueue} invariants.
  */
 public class NetworkQueueTest {
 
     /**
-     * Test that packets added to the queue increase its length.
+     * @brief Ensures packets added to the queue increase its length.
      */
     @Test
     void testEnqueueIncreasesQueueLength() {
@@ -25,7 +29,7 @@ public class NetworkQueueTest {
     }
 
     /**
-     * Test that processing time causes packets to be served.
+     * @brief Verifies that processing time causes packets to be served.
      */
     @Test
     void testPacketsAreServedOverTime() {
@@ -40,7 +44,7 @@ public class NetworkQueueTest {
     }
 
     /**
-     * Test that totalDropped remains zero (unlimited capacity, no drops).
+     * @brief Confirms that totalDropped remains zero for unlimited capacity.
      */
     @Test
     void testNoPacketsDroppedInUnlimitedQueue() {
@@ -52,7 +56,7 @@ public class NetworkQueueTest {
     }
 
     /**
-     * Test that queue statistics remain consistent after several updates.
+     * @brief Ensures queue statistics remain consistent after multiple updates.
      */
     @Test
     void testQueueStatsConsistency() {

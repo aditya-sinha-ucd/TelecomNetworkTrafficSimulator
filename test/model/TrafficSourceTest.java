@@ -1,3 +1,7 @@
+/**
+ * @file test/model/TrafficSourceTest.java
+ * @brief Validates the ON/OFF state machine and scheduling logic of {@link model.TrafficSource}.
+ */
 package model;
 
 import core.Event;
@@ -8,14 +12,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link TrafficSource} verifying the ON/OFF state machine
- * and event scheduling logic.
+ * @class TrafficSourceTest
+ * @brief Unit tests ensuring {@link TrafficSource} emits correct events and state transitions.
  */
 public class TrafficSourceTest {
 
     private TrafficSource source;
     private static final double EPSILON = 1e-9;
 
+    /**
+     * @brief Sets up deterministic distributions for repeatable tests.
+     */
     @BeforeEach
     void setUp() {
         Distribution onDist = new FixedDistribution(2.0, 3.0);
@@ -23,6 +30,9 @@ public class TrafficSourceTest {
         source = new TrafficSource(7, onDist, offDist);
     }
 
+    /**
+     * @brief Confirms that alternating ON/OFF events are scheduled with correct durations.
+     */
     @Test
     void testGenerateNextEventSchedulesOnThenOff() {
         Event first = source.generateNextEvent(10.0);
@@ -39,6 +49,9 @@ public class TrafficSourceTest {
         assertEquals(17.0, source.getNextEventTime(), EPSILON);
     }
 
+    /**
+     * @brief Ensures {@link TrafficSource#processEvent(Event)} flips the internal state.
+     */
     @Test
     void testProcessEventSwitchesStates() {
         Event onEvent = new Event(1.0, source.getId(), EventType.ON);
@@ -50,6 +63,9 @@ public class TrafficSourceTest {
         assertFalse(source.isOn(), "Source should be OFF after OFF event");
     }
 
+    /**
+     * @brief Verifies subsequent samples always advance time monotonically.
+     */
     @Test
     void testAlternatingSamplesAdvanceTimeMonotonically() {
         Event on = source.generateNextEvent(0.0);

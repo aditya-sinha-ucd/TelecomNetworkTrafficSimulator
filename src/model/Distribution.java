@@ -1,17 +1,23 @@
+/**
+ * @file src/model/Distribution.java
+ * @brief Abstract base class for probability distributions used by sources.
+ * @details Establishes the contract satisfied by concrete distributions such as
+ *          {@link model.ParetoDistribution}. Collaborators include
+ *          {@link model.TrafficSource}, which relies on {@link #sample()} to
+ *          determine ON/OFF durations.
+ * @date 2024-05-30
+ */
 package model;
 
 /**
- * Abstract base class for probability distributions.
- * <p>
- * Defines the interface for all distribution types used
- * in the simulator (e.g., Pareto, Exponential, etc.).
+ * @class Distribution
+ * @brief Defines the sampling interface for all supported distributions.
  */
 public abstract class Distribution {
 
     /**
-     * Generates a random sample from this distribution.
-     *
-     * @return a randomly sampled value (must be positive)
+     * @brief Generates a random sample from this distribution.
+     * @return Randomly sampled positive value.
      */
     public abstract double sample();
 }

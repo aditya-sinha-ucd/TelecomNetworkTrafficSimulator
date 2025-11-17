@@ -1,18 +1,19 @@
+/**
+ * @file src/util/FractionalGaussianNoise.java
+ * @brief Fractional Gaussian Noise (fGn) generator using the Davies–Harte method.
+ * @details Produces Gaussian, long-range dependent sequences with configurable
+ *          Hurst exponent and standard deviation. Emphasizes reproducibility via
+ *          dependency injection of {@link java.util.Random} and guards against
+ *          numerical instabilities in FFT computations.
+ * @date 2024-05-30
+ */
 package util;
 
 import java.util.Random;
 
 /**
- * Fractional Gaussian Noise (fGn) generator using the Davies–Harte method.
- * <p>
- * Produces a Gaussian, long-range dependent sequence with Hurst exponent H in (0.5, 1.0).
- * Implementation highlights:
- * <ul>
- *     <li>Clear parameter validation.</li>
- *     <li>Dependency injection of {@link java.util.Random} for reproducible tests.</li>
- *     <li>Private helpers that implement each mathematical step.</li>
- *     <li>Guards to avoid numerical NaNs in FFT eigenvalues.</li>
- * </ul>
+ * @class FractionalGaussianNoise
+ * @brief Generates Fractional Gaussian Noise sequences for the simulator.
  */
 public final class FractionalGaussianNoise {
 
@@ -21,11 +22,10 @@ public final class FractionalGaussianNoise {
     private final Random rng;
 
     /**
-     * Preferred constructor: inject a Random for reproducibility and tests.
-     *
-     * @param hurst Hurst exponent (0.5 &lt; H &lt; 1.0)
-     * @param sigma Standard deviation (&gt; 0)
-     * @param rng   Random generator
+     * @brief Preferred constructor that injects a {@link Random} for reproducibility.
+     * @param hurst Hurst exponent (0.5 &lt; H &lt; 1.0).
+     * @param sigma Standard deviation (&gt; 0).
+     * @param rng Random generator used internally.
      */
     public FractionalGaussianNoise(double hurst, double sigma, Random rng) {
         validateParameters(hurst, sigma);
@@ -35,17 +35,16 @@ public final class FractionalGaussianNoise {
     }
 
     /**
-     * Convenience constructor with a seed.
+     * @brief Convenience constructor that seeds an internal {@link Random}.
      */
     public FractionalGaussianNoise(double hurst, double sigma, long seed) {
         this(hurst, sigma, new Random(seed));
     }
 
     /**
-     * Generate an fGn sequence of length n.
-     *
-     * @param n number of samples (n &ge; 2)
-     * @return array of length n containing the generated samples
+     * @brief Generates an fGn sequence of length {@code n}.
+     * @param n Number of samples (n &ge; 2).
+     * @return Array containing the generated samples.
      */
     public double[] generate(int n) {
         if (n < 2) throw new IllegalArgumentException("n must be >= 2");
@@ -80,6 +79,9 @@ public final class FractionalGaussianNoise {
     // Validation and parameter helpers
 
 
+    /**
+     * @brief Validates Hurst and sigma parameters.
+     */
     private static void validateParameters(double hurst, double sigma) {
         if (hurst <= 0.5 || hurst >= 1.0) {
             throw new IllegalArgumentException("Hurst exponent must be in (0.5, 1.0)");
@@ -93,11 +95,7 @@ public final class FractionalGaussianNoise {
     // Davies–Harte components
 
     /**
-     * Build the circulant covariance vector c[0..m-1] used by the Davies–Harte method.
-     * We ensure:
-     *  - c[k] = gamma(k) for 0 <= k < n
-     *  - c[k] = gamma(2n - k) for n <= k <= 2n
-     *  - c[k] = 0 for k > 2n (safe zero-padding, prevents NaNs)
+     * @brief Builds the circulant covariance vector used by the Davies–Harte method.
      */
     private double[] buildCovarianceVector(int n, int m) {
         double[] c = new double[m];
@@ -120,8 +118,7 @@ public final class FractionalGaussianNoise {
     }
 
     /**
-     * fGn autocovariance for non-negative lag k:
-     * gamma(k) = 0.5 * (|k-1|^{2H} - 2|k|^{2H} + |k+1|^{2H}).
+     * @brief fGn autocovariance for non-negative lag k.
      */
     private double gamma(int k) {
         if (k < 0) throw new IllegalArgumentException("gamma(k) requires k >= 0");
@@ -132,6 +129,9 @@ public final class FractionalGaussianNoise {
         return 0.5 * (km1 - 2.0 * k0 + kp1);
     }
 
+    /**
+     * @brief Clamps tiny negative eigenvalues introduced by numerical noise.
+     */
     private static void clipNegatives(double[] eigenvalues) {
         for (int i = 0; i < eigenvalues.length; i++) {
             if (eigenvalues[i] < 0.0) eigenvalues[i] = 0.0;
@@ -139,8 +139,7 @@ public final class FractionalGaussianNoise {
     }
 
     /**
-     * Fill (Ur, Ui) with a conjugate-symmetric complex Gaussian vector whose
-     * per-frequency variance equals the eigenvalue at that bin.
+     * @brief Fills (Ur, Ui) with a conjugate-symmetric complex Gaussian vector.
      */
     private void buildComplexGaussian(double[] eigenvalues, double[] Ur, double[] Ui) {
         int m = eigenvalues.length;
@@ -170,6 +169,9 @@ public final class FractionalGaussianNoise {
         }
     }
 
+    /**
+     * @brief Scales the inverse FFT result to σ and trims to length n.
+     */
     private double[] scaleAndTrim(double[] data, int n) {
         double[] out = new double[n];
         for (int i = 0; i < n; i++) {
@@ -179,6 +181,9 @@ public final class FractionalGaussianNoise {
         return out;
     }
 
+    /**
+     * @brief Samples a standard normal variate via Box–Muller.
+     */
     private double nextGaussian() {
         // Box–Muller with guard to avoid log(0)
         double u1 = Math.max(1e-12, rng.nextDouble());
@@ -186,6 +191,9 @@ public final class FractionalGaussianNoise {
         return Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
     }
 
+    /**
+     * @brief Computes the next power of two greater than or equal to {@code value}.
+     */
     private static int nextPowerOfTwo(int value) {
         int m = 1;
         while (m < value) m <<= 1;
@@ -196,11 +204,10 @@ public final class FractionalGaussianNoise {
 
 
     /**
-     * In-place complex FFT.
-     *
-     * @param re real part (modified in place)
-     * @param im imag part (modified in place)
-     * @param inverse true for inverse FFT (also normalizes by N)
+     * @brief In-place complex FFT (Cooley–Tukey radix-2).
+     * @param re Real part (modified in place).
+     * @param im Imag part (modified in place).
+     * @param inverse {@code true} for inverse FFT (also normalizes by N).
      */
     private static void fft(double[] re, double[] im, boolean inverse) {
         int n = re.length;
@@ -257,7 +264,15 @@ public final class FractionalGaussianNoise {
     }
 
 
-    // Getters
+    /**
+     * @brief Hurst exponent configured for this generator.
+     * @return H parameter.
+     */
     public double getHurst() { return hurst; }
+
+    /**
+     * @brief Standard deviation configured for this generator.
+     * @return σ parameter.
+     */
     public double getSigma() { return sigma; }
 }

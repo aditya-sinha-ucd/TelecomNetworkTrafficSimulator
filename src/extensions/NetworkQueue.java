@@ -1,20 +1,33 @@
+/**
+ * @file src/extensions/NetworkQueue.java
+ * @brief Lightweight single-server queue approximation for downstream effects.
+ * @details Used by {@link core.Simulator} to translate aggregate ON rates into
+ *          latency/throughput metrics. The queue models deterministic service
+ *          with configurable rate μ, tracks arrivals, departures, waiting time,
+ *          and drop statistics, and exposes averages for reporting. Collaborates
+ *          closely with {@link extensions.QueueElement} objects which capture
+ *          per-packet timing.
+ * @date 2024-05-30
+ */
 package extensions;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Simple single-server queue approximation used to capture downstream latency.
- * <p>
- * The queue assumes deterministic service with rate {@code µ} and keeps track
- * of cumulative waiting/system times as well as arrival/serviced counters so
- * that the simulator can report queueing metrics alongside traffic stats.
+ * @class NetworkQueue
+ * @brief Deterministic single-server queue used for coarse congestion modeling.
+ * @details Accepts bulk arrivals from {@link core.Simulator}, advances service
+ *          progress over time, and aggregates waiting/system time metrics for
+ *          diagnostic reporting.
  */
 public class NetworkQueue {
 
+    /** Service rate μ expressed in packets per second. */
     private final double serviceRate;
     /** Queue capacity (Integer.MAX_VALUE to emulate no limit). */
     private final int capacity = Integer.MAX_VALUE;
+    /** FIFO structure holding pending packets. */
     private final Deque<QueueElement> queue = new ArrayDeque<>();
 
     private double lastProcessedTime = 0.0;
@@ -26,9 +39,9 @@ public class NetworkQueue {
     private double sumSystemTime = 0.0;
 
     /**
-     * Creates a queue with a given service rate.
-     *
-     * @param serviceRate packets served per second (must be &gt; 0)
+     * @brief Creates a queue with the provided service rate.
+     * @param serviceRate Packets served per second (must be &gt; 0).
+     * @throws IllegalArgumentException if the service rate is not positive.
      */
     public NetworkQueue(double serviceRate) {
         if (serviceRate <= 0)
@@ -37,9 +50,8 @@ public class NetworkQueue {
     }
 
     /**
-     * Processes departures and service progress until the specified time.
-     *
-     * @param t simulation time horizon to advance to
+     * @brief Processes departures and service progress until the specified time.
+     * @param t Simulation time horizon to advance to.
      */
     public void processUntil(double t) {
         if (t <= lastProcessedTime) return;
@@ -63,10 +75,9 @@ public class NetworkQueue {
     }
 
     /**
-     * Enqueues multiple arrivals at the same time instant.
-     *
-     * @param t     arrival time
-     * @param count number of packets to enqueue
+     * @brief Enqueues multiple arrivals at the same time instant.
+     * @param t Arrival time shared by the bulk arrivals.
+     * @param count Number of packets to enqueue.
      */
     public void enqueueBulk(double t, int count) {
         if (count <= 0) return;
@@ -76,29 +87,66 @@ public class NetworkQueue {
         }
     }
 
-    /** Wrapper for single-packet enqueue to match Simulator.java */
+    /**
+     * @brief Wrapper for single-packet enqueues to match {@link core.Simulator} usage.
+     * @param t Arrival timestamp of the packet.
+     */
     public void enqueue(double t) {
         enqueueBulk(t, 1);
     }
 
-    /** @return average waiting time experienced by served packets */
-    public double getAvgWaitingTime() { return (totalServed == 0) ? 0 : sumWaitingTime / totalServed; }
+    /**
+     * @brief Average waiting time experienced by served packets.
+     * @return Mean queue-only delay (seconds).
+     */
+    public double getAvgWaitingTime() {
+        return (totalServed == 0) ? 0 : sumWaitingTime / totalServed;
+    }
 
-    /** @return average total time spent in the system */
-    public double getAvgSystemTime() { return (totalServed == 0) ? 0 : sumSystemTime / totalServed; }
+    /**
+     * @brief Average total time spent in the system (waiting + service).
+     * @return Mean sojourn time for served packets.
+     */
+    public double getAvgSystemTime() {
+        return (totalServed == 0) ? 0 : sumSystemTime / totalServed;
+    }
 
-    /** @return instantaneous number of packets waiting */
-    public int getQueueLength() { return queue.size(); }
+    /**
+     * @brief Instantaneous number of packets waiting.
+     * @return Queue length including the job in service if any.
+     */
+    public int getQueueLength() {
+        return queue.size();
+    }
 
-    /** @return total packets completed */
-    public long getTotalServed() { return totalServed; }
+    /**
+     * @brief Total packets completed by the server.
+     * @return Cumulative departures count.
+     */
+    public long getTotalServed() {
+        return totalServed;
+    }
 
-    /** @return packets dropped due to capacity (always zero currently) */
-    public long getTotalDropped() { return totalDropped; }
+    /**
+     * @brief Packets dropped due to capacity (always zero currently).
+     * @return Number of arrivals rejected.
+     */
+    public long getTotalDropped() {
+        return totalDropped;
+    }
 
-    /** @return cumulative arrivals injected into the queue */
-    public long getTotalArrived() { return totalArrived; }
+    /**
+     * @brief Cumulative arrivals injected into the queue.
+     * @return Total enqueued packet count.
+     */
+    public long getTotalArrived() {
+        return totalArrived;
+    }
 
+    /**
+     * @brief Provides a human-readable snapshot of queue metrics.
+     * @return String summarizing arrivals, departures, drops, and averages.
+     */
     @Override
     public String toString() {
         return String.format(
