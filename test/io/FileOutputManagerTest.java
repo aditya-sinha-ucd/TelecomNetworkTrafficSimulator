@@ -1,3 +1,7 @@
+/**
+ * @file test/io/FileOutputManagerTest.java
+ * @brief Validates metadata persistence and reporting for {@link io.FileOutputManager}.
+ */
 package io;
 
 import core.StatisticsCollector;
@@ -13,11 +17,14 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests focused on the {@link FileOutputManager}'s metadata persistence
- * features.
+ * @class FileOutputManagerTest
+ * @brief Ensures {@link FileOutputManager} writes metadata and summaries correctly.
  */
 public class FileOutputManagerTest {
 
+    /**
+     * @brief Ensures metadata is persisted to both event log and metadata.json.
+     */
     @Test
     void metadataIsPersistedToBothEventLogAndJson() throws IOException {
         Map<String, String> metadata = new LinkedHashMap<>();
@@ -48,6 +55,9 @@ public class FileOutputManagerTest {
         deleteRecursively(runPath);
     }
 
+    /**
+     * @brief Verifies that summary files include metadata and clear sections.
+     */
     @Test
     void summaryIncludesMetadataAndClearSections() throws IOException {
         Map<String, String> metadata = new LinkedHashMap<>();
@@ -79,6 +89,11 @@ public class FileOutputManagerTest {
         deleteRecursively(runPath);
     }
 
+    /**
+     * @brief Helper to remove temporary run directories produced during tests.
+     * @param dir Directory to delete recursively.
+     * @throws IOException if cleanup fails.
+     */
     private void deleteRecursively(Path dir) throws IOException {
         if (!Files.exists(dir)) {
             return;

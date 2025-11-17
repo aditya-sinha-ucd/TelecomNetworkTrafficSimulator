@@ -1,3 +1,13 @@
+/**
+ * @file src/io/FileOutputManager.java
+ * @brief Concrete {@link OutputSink} that persists artifacts to disk.
+ * @details Owns per-run directories, handles event logs, summaries, CSVs, and
+ *          metadata files for both simulator and FGN workflows. Centralizing
+ *          IO keeps {@link core.Simulator} and console handlers focused on
+ *          orchestration while this class manages formatting, file creation,
+ *          and metadata serialization.
+ * @date 2024-05-30
+ */
 package io;
 
 import core.Event;
@@ -21,13 +31,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Manages all file output operations for the simulator.
- *
- * <p>The manager owns the lifecycle of a per-run directory, including the
- * timestamped folder structure, {@code event_log.txt}, {@code summary.txt}, the
- * sampled traffic CSV, and a {@code metadata.json} file that captures
- * descriptive run annotations. Keeping all file operations centralized ensures
- * the simulator core and handlers stay focused on orchestration logic.</p>
+ * @class FileOutputManager
+ * @brief Implements {@link OutputSink} using timestamped run directories.
+ * @details Responsible for file lifecycle management, metadata capture, and
+ *          statistical summaries. Collaborates with {@link util.HurstEstimator}
+ *          to validate generated sequences and with {@link extensions.NetworkQueue}
+ *          to report congestion metrics.
  */
 public class FileOutputManager implements OutputSink {
 
@@ -50,19 +59,17 @@ public class FileOutputManager implements OutputSink {
     private PrintWriter eventWriter;
 
     /**
-     * Creates a new output folder for the current run.
-     * The folder name includes a timestamp so that multiple runs can be stored
-     * without overwriting previous results.
+     * @brief Creates a new output folder for the current run.
+     * @details The folder name includes a timestamp so that multiple runs can
+     *          be stored without overwriting previous results.
      */
     public FileOutputManager() {
         this(Collections.emptyMap());
     }
 
     /**
-     * Creates a new output manager that also stores run metadata alongside
-     * regular artifacts.
-     *
-     * @param metadata descriptive context (mode, parameters, etc.) supplied by
+     * @brief Creates a new output manager that also stores run metadata.
+     * @param metadata Descriptive context (mode, parameters, etc.) supplied by
      *                 simulation handlers; may be {@code null} to skip metadata.
      */
     public FileOutputManager(Map<String, String> metadata) {
@@ -90,15 +97,18 @@ public class FileOutputManager implements OutputSink {
         }
     }
 
-    /** Returns the path of this run's output folder. */
+    /**
+     * @brief Returns the path of this run's output folder.
+     * @return Path string pointing to the run directory.
+     */
     @Override
     public String getRunDirectory() {
         return runDir;
     }
 
     /**
-     * Writes a single simulation event to the log file.
-     * Each line includes the event time, source ID, and event type.
+     * @brief Writes a single simulation event to the log file.
+     * @param event Event emitted by {@link core.Simulator}.
      */
     @Override
     public void logEvent(Event event) {
@@ -108,12 +118,9 @@ public class FileOutputManager implements OutputSink {
     }
 
     /**
-     * Writes a friendly, sectioned summary that pairs simulation metrics with
-     * the metadata supplied by the handler.
-     *
-     * <p>The summary mirrors what is printed to the console but also includes
-     * queue statistics and the {@code metadata} block so that each run folder
-     * becomes self-describing for downstream analysis or debugging.</p>
+     * @brief Writes a friendly, sectioned summary pairing metrics with metadata.
+     * @param stats Traffic statistics gathered during the run.
+     * @param queue Queue metrics collected alongside traffic stats.
      */
     @Override
     public void saveSummary(StatisticsCollector stats, NetworkQueue queue) {
@@ -148,9 +155,12 @@ public class FileOutputManager implements OutputSink {
     }
 
     /**
-     * Saves data generated in FGN mode.
-     * The generated time-series is written to a CSV file, and a short text summary
-     * with the Hurst estimation is saved in the same folder.
+     * @brief Saves data generated in FGN mode, including CSV and summary.
+     * @param series Generated time-series samples.
+     * @param H Target Hurst exponent.
+     * @param sigma Standard deviation used for generation.
+     * @param samplingInterval Time spacing between samples.
+     * @param threshold Threshold for ON/OFF labeling in the event log.
      */
     @Override
     public void saveFGNResults(double[] series, double H, double sigma,
@@ -236,7 +246,12 @@ public class FileOutputManager implements OutputSink {
         }
     }
 
-    /** Writes the generated FGN series to the event log for traceability. */
+    /**
+     * @brief Writes the generated FGN series to the event log for traceability.
+     * @param series Generated time-series.
+     * @param samplingInterval Sampling interval used when generating data.
+     * @param threshold Threshold for ON/OFF labeling.
+     */
     private void writeFGNEventLog(double[] series, double samplingInterval, double threshold) {
         if (eventWriter == null) {
             return;
@@ -252,7 +267,9 @@ public class FileOutputManager implements OutputSink {
         eventWriter.flush();
     }
 
-    /** Flushes and closes the event log safely at the end of the run. */
+    /**
+     * @brief Flushes and closes the event log safely at the end of the run.
+     */
     @Override
     public void close() {
         if (eventWriter != null) {
@@ -262,7 +279,9 @@ public class FileOutputManager implements OutputSink {
         }
     }
 
-    /** Writes run metadata to a JSON file to aid later comparisons. */
+    /**
+     * @brief Writes run metadata to a JSON file to aid later comparisons.
+     */
     private void writeMetadataFile() {
         if (metadata.isEmpty()) {
             return;
@@ -285,8 +304,9 @@ public class FileOutputManager implements OutputSink {
     }
 
     /**
-     * Appends a human-readable metadata section that clearly lists key/value
-     * annotations supplied by the handler.
+     * @brief Appends a human-readable metadata section to a text-based report.
+     * @param writer Appendable receiving the metadata section.
+     * @throws IOException if writing to {@code writer} fails.
      */
     private void appendMetadataSection(Appendable writer) throws IOException {
         writer.append("Run Metadata\n");
@@ -304,6 +324,11 @@ public class FileOutputManager implements OutputSink {
         }
     }
 
+    /**
+     * @brief Escapes JSON special characters for metadata serialization.
+     * @param value Raw metadata value.
+     * @return Escaped representation safe for JSON output.
+     */
     private String escapeJson(String value) {
         if (value == null) {
             return "";

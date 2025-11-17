@@ -1,78 +1,88 @@
+/**
+ * @file src/core/EventQueue.java
+ * @brief Priority-queue backed scheduler used by the simulator core.
+ * @details Encapsulates a {@link java.util.PriorityQueue} of {@link core.Event}
+ *          instances ordered by time. The queue is the primary collaborator of
+ *          {@link core.Simulator}, supplying it with the next chronological
+ *          event to execute. Inputs are {@link Event} objects produced by
+ *          traffic sources, and outputs are the same events delivered in sorted
+ *          order for processing.
+ * @date 2024-05-30
+ */
 package core;
 
 import java.util.PriorityQueue;
 
 /**
- * Manages the event scheduling and ordering for the simulation.
- * <p>
- * This class acts as the central mechanism that determines
- * which event occurs next. It uses a {@link PriorityQueue}
- * to ensure events are always processed in chronological order.
+ * @class EventQueue
+ * @brief Thin wrapper around {@link PriorityQueue} tailored for simulation.
+ * @details Responsible for lifecycle management of scheduled events, providing
+ *          operations to enqueue, poll, peek, and clear events. The class also
+ *          exposes diagnostic information such as size for telemetry.
  */
 public class EventQueue {
 
-    /** Internal priority queue that stores events sorted by time. */
+    /** Internal priority queue storing events sorted by timestamp. */
     private final PriorityQueue<Event> queue;
 
-    /** Constructs an empty event queue. */
+    /**
+     * @brief Constructs an empty event queue ready for scheduling.
+     */
     public EventQueue() {
         this.queue = new PriorityQueue<>();
     }
 
     /**
-     * Adds a new event to the queue.
-     *
-     * @param event the event to schedule
+     * @brief Adds a new event to the scheduler.
+     * @param event {@link Event} to be ordered chronologically.
      */
     public void addEvent(Event event) {
         queue.add(event);
     }
 
     /**
-     * Retrieves and removes the next (earliest) event from the queue.
-     *
-     * @return the next scheduled event, or {@code null} if the queue is empty
+     * @brief Retrieves and removes the earliest event.
+     * @return Next {@link Event} to execute, or {@code null} if no events
+     *         remain in the queue.
      */
     public Event nextEvent() {
         return queue.poll();
     }
 
     /**
-     * Peeks at the next event without removing it.
-     *
-     * @return the next event in line, or {@code null} if the queue is empty
+     * @brief Peeks at the next event without dequeuing it.
+     * @return Upcoming {@link Event} or {@code null} when empty.
      */
     public Event peekNextEvent() {
         return queue.peek();
     }
 
     /**
-     * Checks if there are any remaining events to process.
-     *
-     * @return {@code true} if no events remain, {@code false} otherwise
+     * @brief Indicates whether there are events left to process.
+     * @return {@code true} if the queue currently holds no events.
      */
     public boolean isEmpty() {
         return queue.isEmpty();
     }
 
     /**
-     * @return the current number of events in the queue
+     * @brief Reports the number of events waiting to be processed.
+     * @return Count of scheduled events.
      */
     public int size() {
         return queue.size();
     }
 
     /**
-     * Removes all events from the queue.
-     * Useful when resetting or restarting the simulation.
+     * @brief Removes all pending events, effectively resetting scheduling.
      */
     public void clear() {
         queue.clear();
     }
 
     /**
-     * Provides a string summary of the current queue state,
-     * for debugging or status messages during the simulation.
+     * @brief Describes the current queue state for logging.
+     * @return String containing the queue size summary.
      */
     @Override
     public String toString() {

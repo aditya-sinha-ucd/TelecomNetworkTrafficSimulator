@@ -1,11 +1,20 @@
+/**
+ * @file src/model/SimulationParameters.java
+ * @brief Mutable configuration DTO consumed by {@link core.Simulator}.
+ * @details Captures both Pareto and FGN-specific options, enabling the console
+ *          UI to toggle between models via {@link TrafficModel}. Inputs come
+ *          from {@link io.ConsolePrompter} or configuration files; outputs are
+ *          read-only views accessed by simulation components.
+ * @date 2024-05-30
+ */
 package model;
 
 /**
- * Holds all configuration options required by the {@link core.Simulator}.
- * <p>
- * The structure covers both the classic Pareto ON/OFF model and the optional
- * FGN-thresholded model, allowing callers to switch behavior with
- * {@link TrafficModel}.
+ * @class SimulationParameters
+ * @brief Encapsulates all configuration options required by the simulator.
+ * @details Provides convenience constructors and sensible defaults so UI code
+ *          can populate it incrementally. Serves as the primary input to the
+ *          {@link core.Simulator} constructor.
  */
 public class SimulationParameters {
 
@@ -46,8 +55,20 @@ public class SimulationParameters {
     /** Per-source seed base for the FGN generator. */
     public long   fgnSeed = 42L;
 
+    /**
+     * @brief Creates an empty parameter bag to be populated manually.
+     */
     public SimulationParameters() {}
 
+    /**
+     * @brief Populates key Pareto settings via constructor arguments.
+     * @param totalTime Total simulated time horizon in seconds.
+     * @param numSources Number of traffic sources in the experiment.
+     * @param onShape Pareto shape for ON durations.
+     * @param onScale Pareto scale for ON durations.
+     * @param offShape Pareto shape for OFF durations.
+     * @param offScale Pareto scale for OFF durations.
+     */
     public SimulationParameters(double totalTime, int numSources,
                                 double onShape, double onScale,
                                 double offShape, double offScale) {
@@ -59,13 +80,20 @@ public class SimulationParameters {
         this.offScale = offScale;
     }
 
-    /** Convenience factory mirroring the UI prompts. */
+    /**
+     * @brief Convenience factory mirroring the UI prompts.
+     * @return Populated {@link SimulationParameters} with Pareto inputs set.
+     */
     public static SimulationParameters fromUserInput(double totalTime, int numSources,
                                                      double onShape, double onScale,
                                                      double offShape, double offScale) {
         return new SimulationParameters(totalTime, numSources, onShape, onScale, offShape, offScale);
     }
 
+    /**
+     * @brief Produces a descriptive string containing key parameter values.
+     * @return Readable representation of the configuration.
+     */
     @Override
     public String toString() {
         String base = String.format(

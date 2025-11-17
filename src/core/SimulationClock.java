@@ -1,44 +1,63 @@
+/**
+ * @file src/core/SimulationClock.java
+ * @brief Shared notion of simulation time across the core subsystems.
+ * @details The clock is advanced monotonically by {@link core.Simulator} as it
+ *          processes {@link core.Event} objects from the {@link core.EventQueue}.
+ *          Other collaborators such as {@link core.StatisticsCollector} consult
+ *          the clock to compute durations, rates, and time-weighted averages.
+ *          Inputs consist of the next event time, while outputs are time reads
+ *          through {@link #getTime()}.
+ * @date 2024-05-30
+ */
 package core;
 
 /**
- * Manages the current simulation time and provides
- * a consistent time reference for all components.
- * <p>
- * This class allows multiple modules (e.g., queues,
- * statistics, estimators) to stay synchronized.
+ * @class SimulationClock
+ * @brief Maintains and exposes the current simulation timestamp.
+ * @details Provides deterministic timekeeping for queues, collectors, and
+ *          estimators. It enforces monotonic advancement, ensuring causality in
+ *          the discrete-event simulation.
  */
 public class SimulationClock {
 
-    /** The current simulation time in seconds. */
+    /** Current simulation time in seconds. */
     private double currentTime;
 
-    /** Creates a new simulation clock starting at time 0. */
+    /**
+     * @brief Creates a clock initialized to time zero.
+     */
     public SimulationClock() {
         this.currentTime = 0.0;
     }
 
-    /** @return the current simulation time */
+    /**
+     * @brief Reads the present simulation time.
+     * @return Current simulation timestamp in seconds.
+     */
     public double getTime() {
         return currentTime;
     }
 
     /**
-     * Advances the simulation clock to a new time.
-     * Only moves forward, never backward.
-     *
-     * @param newTime the next event time
+     * @brief Advances the clock to the specified time if it is not in the past.
+     * @param newTime Next event time supplied by {@link core.EventQueue}.
      */
     public void advanceTo(double newTime) {
         if (newTime >= currentTime)
             currentTime = newTime;
     }
 
-    /** Resets the simulation clock to zero. */
+    /**
+     * @brief Resets the clock to its initial state.
+     */
     public void reset() {
         currentTime = 0.0;
     }
 
-    /** Returns a formatted string for logging. */
+    /**
+     * @brief Produces a formatted representation for logging contexts.
+     * @return String with millisecond precision of {@link #currentTime}.
+     */
     @Override
     public String toString() {
         return String.format("%.3f", currentTime);

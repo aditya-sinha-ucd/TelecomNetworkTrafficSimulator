@@ -1,3 +1,11 @@
+/**
+ * @file src/io/ParetoSimulationHandler.java
+ * @brief Console workflow for the classic Pareto ON/OFF simulation mode.
+ * @details Collects configuration data, constructs {@link core.Simulator}, and
+ *          reports completion to the user. Supports both manual and file-based
+ *          parameter entry.
+ * @date 2024-05-30
+ */
 package io;
 
 import core.Simulator;
@@ -7,22 +15,26 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Handles the complete workflow for the Pareto ON/OFF mode.
- * <p>
- * Responsibilities include collecting parameters (manually or via file),
- * instantiating {@link core.Simulator}, and reporting completion.
+ * @class ParetoSimulationHandler
+ * @brief Implements {@link SimulationModeHandler} for Pareto-driven sources.
+ * @details Responsibilities include collecting parameters, instantiating the
+ *          simulator, and handling error conditions gracefully.
  */
 public class ParetoSimulationHandler implements SimulationModeHandler {
 
     private final ConsolePrompter prompter;
 
     /**
-     * @param prompter shared input helper used by the console UI
+     * @brief Creates a handler bound to the shared input helper.
+     * @param prompter Shared input helper used by the console UI.
      */
     public ParetoSimulationHandler(ConsolePrompter prompter) {
         this.prompter = prompter;
     }
 
+    /**
+     * @brief Drives the Pareto simulation from prompts to execution.
+     */
     @Override
     public void run() {
         System.out.println("\n=== Pareto ON/OFF Traffic Simulation ===");
@@ -51,7 +63,8 @@ public class ParetoSimulationHandler implements SimulationModeHandler {
     }
 
     /**
-     * Interactively asks the user for all parameters needed to run the simulator.
+     * @brief Interactively asks the user for all parameters needed to run the simulator.
+     * @return Populated {@link SimulationParameters} instance.
      */
     private SimulationParameters promptManually() {
         double totalTime = prompter.promptPositiveDouble("Enter total simulation time (seconds): ");
@@ -69,7 +82,8 @@ public class ParetoSimulationHandler implements SimulationModeHandler {
     }
 
     /**
-     * Loads simulation parameters from a configuration file selected by the user.
+     * @brief Loads simulation parameters from a configuration file selected by the user.
+     * @return {@link SimulationParameters} parsed from disk, or {@code null} if aborted.
      */
     private SimulationParameters loadFromFile() {
         while (true) {
@@ -111,7 +125,13 @@ public class ParetoSimulationHandler implements SimulationModeHandler {
         }
     }
 
-    /** Ensures a required field is present in the loaded map. */
+    /**
+     * @brief Ensures a required field is present in the loaded map.
+     * @param params Map from configuration file.
+     * @param key Required key.
+     * @return Value associated with {@code key}.
+     * @throws IllegalArgumentException if the key is missing.
+     */
     private double require(Map<String, Double> params, String key) {
         if (!params.containsKey(key)) {
             throw new IllegalArgumentException("Missing required parameter: " + key);

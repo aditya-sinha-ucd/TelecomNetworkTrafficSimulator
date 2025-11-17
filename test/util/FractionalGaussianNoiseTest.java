@@ -1,10 +1,21 @@
+/**
+ * @file test/util/FractionalGaussianNoiseTest.java
+ * @brief Exercises the Davies–Harte implementation for correctness and reproducibility.
+ */
 package util;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @class FractionalGaussianNoiseTest
+ * @brief Unit tests for {@link util.FractionalGaussianNoise}.
+ */
 public class FractionalGaussianNoiseTest {
 
+    /**
+     * @brief Ensures generated series have correct length and non-zero variance.
+     */
     @Test
     void testGenerateFGNLengthAndVariance() {
         FractionalGaussianNoise fgn = new FractionalGaussianNoise(0.8, 1.0, 123L);
@@ -20,6 +31,9 @@ public class FractionalGaussianNoiseTest {
         assertFalse(allZero, "Generated samples should not be all zeros");
     }
 
+    /**
+     * @brief Verifies invalid constructor parameters throw {@link IllegalArgumentException}.
+     */
     @Test
     void testInvalidParametersThrowException() {
         assertThrows(IllegalArgumentException.class,
@@ -28,6 +42,9 @@ public class FractionalGaussianNoiseTest {
                 () -> new FractionalGaussianNoise(0.8, -1.0, 1L));
     }
 
+    /**
+     * @brief Confirms seeding yields reproducible sample sequences.
+     */
     @Test
     void testReproducibility() {
         FractionalGaussianNoise f1 = new FractionalGaussianNoise(0.8, 1.0, 42L);

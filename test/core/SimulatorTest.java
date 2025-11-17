@@ -1,3 +1,7 @@
+/**
+ * @file test/core/SimulatorTest.java
+ * @brief Integration-style tests for {@link core.Simulator} and its collaborators.
+ */
 package core;
 
 import extensions.NetworkQueue;
@@ -15,12 +19,14 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Integration test for the Simulator class.
- * Verifies that the simulation can run end-to-end without throwing exceptions.
- * This test uses a small, deterministic configuration so it executes quickly.
+ * @class SimulatorTest
+ * @brief Ensures the simulator runs across Pareto and FGN modes and supports injected sinks.
  */
 public class SimulatorTest {
 
+    /**
+     * @brief Verifies the simulator can execute a Pareto configuration without exceptions.
+     */
     @Test
     void testSimulatorRunsSuccessfully() {
         // Step 1: Create simulation parameters
@@ -46,6 +52,9 @@ public class SimulatorTest {
                 "Simulator should complete a full run without exceptions");
     }
 
+    /**
+     * @brief Ensures the simulator handles FGN-driven runs without errors.
+     */
     @Test
     void testSimulatorHandlesFGNModel() {
         // First Step: Configure FGN-based model
@@ -66,6 +75,9 @@ public class SimulatorTest {
                 "FGN-based Simulator should run without throwing exceptions");
     }
 
+    /**
+     * @brief Confirms a custom {@link OutputSink} can be injected and observed.
+     */
     @Test
     void testSimulatorUsesInjectedOutputSink() throws Exception {
         SimulationParameters params = new SimulationParameters(
@@ -103,6 +115,9 @@ public class SimulatorTest {
         deleteRecursively(tempRoot);
     }
 
+    /**
+     * @brief Removes temporary directories created during the test.
+     */
     private void deleteRecursively(Path root) throws IOException {
         if (!Files.exists(root)) {
             return;
@@ -118,6 +133,10 @@ public class SimulatorTest {
         }
     }
 
+    /**
+     * @class RecordingSink
+     * @brief Minimal {@link OutputSink} that records interactions for assertions.
+     */
     private static final class RecordingSink implements OutputSink {
         private final Path runDir;
         private final List<Event> events = new ArrayList<>();

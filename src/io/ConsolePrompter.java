@@ -1,24 +1,39 @@
+/**
+ * @file src/io/ConsolePrompter.java
+ * @brief Centralizes console prompting logic and validation rules.
+ * @details Works alongside {@link io.ConsoleUI} to request numeric/text input
+ *          while providing consistent handling of quit commands. Encapsulating
+ *          user input parsing keeps UI flow logic tidy and testable.
+ * @date 2024-05-30
+ */
 package io;
 
 import java.util.Scanner;
 
 /**
- * Utility class responsible for prompting and validating console input.
- * Centralizing all console parsing keeps the UI code small and allows the
- * quit command to be handled consistently anywhere a prompt is shown.
+ * @class ConsolePrompter
+ * @brief Wraps {@link Scanner} to collect validated user responses.
+ * @details Supports prompting for positive numbers, bounded doubles, integers,
+ *          and yes/no answers. Collaborates exclusively with the console UI and
+ *          signals exit when the user types `quit` or `q`.
  */
 public class ConsolePrompter {
 
     private final Scanner scanner;
 
     /**
-     * @param scanner input source shared with the console UI
+     * @brief Creates a prompter bound to a shared {@link Scanner} instance.
+     * @param scanner Input source shared with the console UI.
      */
     public ConsolePrompter(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    /** Displays a prompt and returns the entered line. */
+    /**
+     * @brief Displays a prompt and returns the entered line.
+     * @param message Prompt shown to the user.
+     * @return User-entered string (trimmed) unless a quit command terminates the app.
+     */
     public String promptLine(String message) {
         System.out.print(message);
         String input = scanner.nextLine().trim();
@@ -29,7 +44,11 @@ public class ConsolePrompter {
         return input;
     }
 
-    /** Reads a strictly positive double value. */
+    /**
+     * @brief Reads a strictly positive double value.
+     * @param message Prompt shown to the user.
+     * @return Positive double supplied via the console.
+     */
     public double promptPositiveDouble(String message) {
         while (true) {
             String input = promptLine(message);
@@ -45,7 +64,11 @@ public class ConsolePrompter {
         }
     }
 
-    /** Reads a generic double value. */
+    /**
+     * @brief Reads an arbitrary double value.
+     * @param message Prompt displayed to the user.
+     * @return Parsed double result.
+     */
     public double promptDouble(String message) {
         while (true) {
             String input = promptLine(message);
@@ -57,7 +80,13 @@ public class ConsolePrompter {
         }
     }
 
-    /** Reads a double within an exclusive range. */
+    /**
+     * @brief Reads a double within an exclusive range.
+     * @param message Prompt displayed to the user.
+     * @param minExclusive Lower bound (exclusive).
+     * @param maxExclusive Upper bound (exclusive).
+     * @return Double value strictly within the bounds.
+     */
     public double promptDoubleInRange(String message, double minExclusive, double maxExclusive) {
         while (true) {
             String input = promptLine(message);
@@ -73,7 +102,11 @@ public class ConsolePrompter {
         }
     }
 
-    /** Reads a strictly positive integer value. */
+    /**
+     * @brief Reads a strictly positive integer value.
+     * @param message Prompt displayed to the user.
+     * @return Positive integer provided via the console.
+     */
     public int promptPositiveInt(String message) {
         while (true) {
             String input = promptLine(message);
@@ -89,7 +122,11 @@ public class ConsolePrompter {
         }
     }
 
-    /** Reads a yes/no response. */
+    /**
+     * @brief Reads a yes/no response.
+     * @param message Prompt displayed to the user.
+     * @return {@code true} for yes, {@code false} for no.
+     */
     public boolean promptYesNo(String message) {
         while (true) {
             String input = promptLine(message).toLowerCase();
@@ -103,7 +140,11 @@ public class ConsolePrompter {
         }
     }
 
-    /** Checks if the provided input matches the quit command. */
+    /**
+     * @brief Checks if the provided input matches the quit command.
+     * @param value Raw user input.
+     * @return {@code true} when the user requested to exit.
+     */
     private boolean isQuitCommand(String value) {
         return value.equalsIgnoreCase("quit") || value.equalsIgnoreCase("q");
     }

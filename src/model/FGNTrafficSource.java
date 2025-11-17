@@ -1,3 +1,12 @@
+/**
+ * @file src/model/FGNTrafficSource.java
+ * @brief {@link TrafficSource} implementation driven by Fractional Gaussian Noise.
+ * @details Converts an FGN time series into ON/OFF durations, enabling the
+ *          {@link core.Simulator} to reuse existing scheduling logic without
+ *          modification. Collaborates with {@link util.FractionalGaussianNoise}
+ *          and {@link model.SimulationParameters} for generation parameters.
+ * @date 2024-05-30
+ */
 package model;
 
 import core.Event;
@@ -8,11 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TrafficSource that follows an FGN-driven ON/OFF pattern.
- * <p>
- * The constructor converts an FGN series to a binary sequence using a threshold,
- * run-length encodes the sequence into durations, and then replays those durations
- * so the {@link core.Simulator} can continue operating without code changes.
+ * @class FGNTrafficSource
+ * @brief TrafficSource variant that follows an FGN-driven ON/OFF pattern.
  */
 public final class FGNTrafficSource extends TrafficSource {
 
@@ -26,8 +32,9 @@ public final class FGNTrafficSource extends TrafficSource {
     private double nextTime = 0.0;
 
     /**
-     * @param id     source identifier reused by the simulator
-     * @param params simulation parameters containing all FGN settings
+     * @brief Constructs an FGN-backed source that replays a deterministic schedule.
+     * @param id Source identifier reused by the simulator.
+     * @param params Simulation parameters containing all FGN settings.
      */
     public FGNTrafficSource(int id, SimulationParameters params) {
         // Call parent with dummy Pareto values; we override all behavior.
@@ -36,7 +43,9 @@ public final class FGNTrafficSource extends TrafficSource {
         buildSchedule();
     }
 
-    /** Build the flip schedule by thresholding an FGN series. */
+    /**
+     * @brief Builds the flip schedule by thresholding an FGN series.
+     */
     private void buildSchedule() {
         int n = (int) Math.ceil(params.totalSimulationTime / params.samplingInterval);
         if (n < 2) n = 2;
@@ -67,7 +76,11 @@ public final class FGNTrafficSource extends TrafficSource {
         // If durations list ends early, Simulator will stop at totalSimulationTime anyway.
     }
 
-    /** Return the next event time based on the next FGN duration. */
+    /**
+     * @brief Returns the next event time based on the next FGN duration.
+     * @param currentTime Current simulation time.
+     * @return {@link Event} that flips the source state.
+     */
     @Override
     public Event generateNextEvent(double currentTime) {
         if (durIndex >= durations.size()) {
@@ -81,7 +94,10 @@ public final class FGNTrafficSource extends TrafficSource {
         return new Event(nextTime, getId(), state == SourceState.ON ? EventType.OFF : EventType.ON);
     }
 
-    /** Update current state when the simulator delivers the flip. */
+    /**
+     * @brief Updates current state when the simulator delivers the flip.
+     * @param event Event representing the new state.
+     */
     @Override
     public void processEvent(Event event) {
         if (event.getType() == EventType.ON) {
@@ -91,14 +107,18 @@ public final class FGNTrafficSource extends TrafficSource {
         }
     }
 
-    /** @return {@code true} when the FGN schedule is currently ON */
+    /**
+     * @brief Indicates whether the FGN schedule is currently ON.
+     * @return {@code true} if the state is ON.
+     */
     @Override
     public boolean isOn() {
         return state == SourceState.ON;
     }
 
     /**
-     * @return timestamp of the next scheduled state change event
+     * @brief Timestamp of the next scheduled state change event.
+     * @return Absolute time of the next flip.
      */
     @Override
     public double getNextEventTime() {

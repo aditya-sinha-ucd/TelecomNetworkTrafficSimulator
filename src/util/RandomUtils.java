@@ -1,15 +1,18 @@
+/**
+ * @file src/util/RandomUtils.java
+ * @brief Shared random helper functions used by the simulator.
+ * @details Provides Pareto sampling and uniform draws needed by
+ *          {@link model.TrafficSource} initialization and other modules.
+ *          Centralizing randomness simplifies seeding for reproducibility.
+ * @date 2024-05-30
+ */
 package util;
 
 import java.util.Random;
 
 /**
- * Utility class providing random number generation functions
- * for the simulator, including support for Pareto-distributed
- * samples which produce heavy-tailed ON/OFF durations.
- * <p>
- * Pareto distribution:
- * X = scale / (U^(1/shape))
- * where U ~ Uniform(0, 1)
+ * @class RandomUtils
+ * @brief Utility class providing random number generation functions for the simulator.
  */
 public final class RandomUtils {
 
@@ -20,11 +23,10 @@ public final class RandomUtils {
     private RandomUtils() {}
 
     /**
-     * Generates a sample from a Pareto distribution.
-     *
-     * @param shape the alpha (shape) parameter (> 1 recommended)
-     * @param scale the scale (minimum) parameter (> 0)
-     * @return a Pareto-distributed random sample
+     * @brief Generates a sample from a Pareto distribution.
+     * @param shape Alpha (shape) parameter (> 0).
+     * @param scale Scale (minimum) parameter (> 0).
+     * @return Pareto-distributed random sample.
      */
     public static double samplePareto(double shape, double scale) {
         if (shape <= 0 || scale <= 0)
@@ -37,11 +39,10 @@ public final class RandomUtils {
     }
 
     /**
-     * Generates a uniformly distributed random double in [min, max].
-     *
-     * @param min lower bound
-     * @param max upper bound
-     * @return uniformly distributed random value
+     * @brief Generates a uniformly distributed random double in [min, max].
+     * @param min Lower bound.
+     * @param max Upper bound.
+     * @return Uniformly distributed random value.
      */
     public static double uniform(double min, double max) {
         if (max <= min)
@@ -51,9 +52,8 @@ public final class RandomUtils {
     }
 
     /**
-     * Sets a custom random seed for reproducible simulations.
-     *
-     * @param seed the seed value
+     * @brief Sets a custom random seed for reproducible simulations.
+     * @param seed Seed value applied to the shared RNG.
      */
     public static void setSeed(long seed) {
         RANDOM.setSeed(seed);
