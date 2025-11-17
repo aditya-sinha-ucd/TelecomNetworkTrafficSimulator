@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['randomutils_0',['RandomUtils',['../classutil_1_1_random_utils.html',1,'util']]]
+  ['queueelement_0',['QueueElement',['../classextensions_1_1_queue_element.html',1,'extensions']]]
 ];

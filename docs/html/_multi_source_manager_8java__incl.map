@@ -1,15 +1,15 @@
-<map id="src/extensions/MultiSourceManager.java" name="src/extensions/MultiSourceManager.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="462,5,642,48"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,171,123"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,46,177,95,176,90,462,41"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="195,96,384,123"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="487,48,346,94,345,88,482,49"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="407,96,545,123"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="535,48,500,87,497,82,530,50"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="568,96,690,123"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="573,46,609,85,604,84,571,51"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="714,96,806,123"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="606,46,716,90,710,90,605,51"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="830,96,949,123"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="639,46,824,92,818,92,639,51"/>
+<map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/MultiSourceManager.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/MultiSourceManager.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="462,5,642,80"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,128,171,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,65,164,127,163,122,461,60"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="195,128,384,155"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="464,77,339,125,337,120,459,78"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="407,128,545,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="526,79,497,118,494,113,521,81"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="568,128,690,155"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="582,78,612,116,607,115,580,83"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="714,128,806,155"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="632,78,722,121,716,121,631,83"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="830,128,949,155"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="643,67,833,123,828,123,642,72"/>
 </map>

@@ -16,7 +16,7 @@ var searchData=
   ['getnexteventtime_13',['getNextEventTime',['../classmodel_1_1_f_g_n_traffic_source.html#a3544936198cc3463029165522d49011a',1,'model.FGNTrafficSource.getNextEventTime()'],['../classmodel_1_1_traffic_source.html#addec51a76b1461dc78eb0c6713764bbf',1,'model.TrafficSource.getNextEventTime()']]],
   ['getpeakrate_14',['getPeakRate',['../classcore_1_1_statistics_collector.html#a7cab37e3e06ecf53c849d6a8186053f3',1,'core::StatisticsCollector']]],
   ['getqueuelength_15',['getQueueLength',['../classextensions_1_1_network_queue.html#a49aa7b620e47da24731e00e00a2a1425',1,'extensions::NetworkQueue']]],
-  ['getrundirectory_16',['getRunDirectory',['../classio_1_1_file_output_manager.html#ae796887c8772421829f5de50b1fd50bc',1,'io::FileOutputManager']]],
+  ['getrundirectory_16',['getRunDirectory',['../classio_1_1_file_output_manager.html#ae796887c8772421829f5de50b1fd50bc',1,'io.FileOutputManager.getRunDirectory()'],['../interfaceio_1_1_output_sink.html#a04b309b5e0f81f20c915b1cf9eb04d9e',1,'io.OutputSink.getRunDirectory()']]],
   ['getsamplecount_17',['getSampleCount',['../classcore_1_1_statistics_collector.html#a6fea295126171282ea4a75b0ed4aa1f2',1,'core.StatisticsCollector.getSampleCount()'],['../classmodel_1_1_f_g_n_generation_parameters.html#ae857bc96a44cde2570d5cf58d660bc4c',1,'model.FGNGenerationParameters.getSampleCount()']]],
   ['getsamplinginterval_18',['getSamplingInterval',['../classmodel_1_1_f_g_n_generation_parameters.html#a3b7bff5c074cd1b6ad508007c65e4f57',1,'model::FGNGenerationParameters']]],
   ['getscale_19',['getScale',['../classmodel_1_1_pareto_distribution.html#aa632f65f25165daf89d41dc34ca72f46',1,'model::ParetoDistribution']]],

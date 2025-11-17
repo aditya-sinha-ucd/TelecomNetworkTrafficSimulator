@@ -20,7 +20,6 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
-<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -102,17 +101,43 @@ $(function(){initNavTree('classio_1_1_file_output_manager.html','','classio_1_1_
 
 <p>Manages all file output operations for the simulator.  
  <a href="#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for io.FileOutputManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classio_1_1_file_output_manager__inherit__graph.png" border="0" usemap="#aio_8_file_output_manager_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="aio_8_file_output_manager_inherit__map" id="aio_8_file_output_manager_inherit__map">
+<area shape="rect" title="Manages all file output operations for the simulator." alt="" coords="5,155,151,181"/>
+<area shape="rect" href="interfaceio_1_1_output_sink.html" title="Small abstraction around simulation output destinations." alt="" coords="28,80,128,107"/>
+<area shape="poly" title=" " alt="" coords="80,121,81,155,75,153,76,124"/>
+<area shape="rect" title=" " alt="" coords="25,5,131,32"/>
+<area shape="poly" title=" " alt="" coords="79,45,81,80,75,79,77,50"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for io.FileOutputManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="classio_1_1_file_output_manager__coll__graph.png" border="0" usemap="#aio_8_file_output_manager_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="aio_8_file_output_manager_coll__map" id="aio_8_file_output_manager_coll__map">
+<area shape="rect" title="Manages all file output operations for the simulator." alt="" coords="5,155,151,181"/>
+<area shape="rect" href="interfaceio_1_1_output_sink.html" title="Small abstraction around simulation output destinations." alt="" coords="28,80,128,107"/>
+<area shape="poly" title=" " alt="" coords="80,121,81,155,75,153,76,124"/>
+<area shape="rect" title=" " alt="" coords="25,5,131,32"/>
+<area shape="poly" title=" " alt="" coords="79,45,81,80,75,79,77,50"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b94270d895cc800008a66fcd6fce731" id="r_a9b94270d895cc800008a66fcd6fce731"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b94270d895cc800008a66fcd6fce731">FileOutputManager</a> ()</td></tr>
 <tr class="memdesc:a9b94270d895cc800008a66fcd6fce731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new output folder for the current run.  <br /></td></tr>
+<tr class="memitem:a8402997e967c75c2eafdbb4bef8fbec4" id="r_a8402997e967c75c2eafdbb4bef8fbec4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8402997e967c75c2eafdbb4bef8fbec4">FileOutputManager</a> (Map&lt; String, String &gt; metadata)</td></tr>
+<tr class="memdesc:a8402997e967c75c2eafdbb4bef8fbec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new output manager that also stores run metadata alongside regular artifacts.  <br /></td></tr>
 <tr class="memitem:ae796887c8772421829f5de50b1fd50bc" id="r_ae796887c8772421829f5de50b1fd50bc"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae796887c8772421829f5de50b1fd50bc">getRunDirectory</a> ()</td></tr>
 <tr class="memdesc:ae796887c8772421829f5de50b1fd50bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the path of this run's output folder.  <br /></td></tr>
 <tr class="memitem:a16b7dd5f27d59c3118326897f8f02f07" id="r_a16b7dd5f27d59c3118326897f8f02f07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16b7dd5f27d59c3118326897f8f02f07">logEvent</a> (<a class="el" href="classcore_1_1_event.html">Event</a> event)</td></tr>
 <tr class="memdesc:a16b7dd5f27d59c3118326897f8f02f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single simulation event to the log file.  <br /></td></tr>
 <tr class="memitem:a5f4410cf4bd6cea176e312d30de52e95" id="r_a5f4410cf4bd6cea176e312d30de52e95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f4410cf4bd6cea176e312d30de52e95">saveSummary</a> (<a class="el" href="classcore_1_1_statistics_collector.html">StatisticsCollector</a> stats, <a class="el" href="classextensions_1_1_network_queue.html">NetworkQueue</a> queue)</td></tr>
-<tr class="memdesc:a5f4410cf4bd6cea176e312d30de52e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a summary file containing key statistics collected during the run.  <br /></td></tr>
+<tr class="memdesc:a5f4410cf4bd6cea176e312d30de52e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a friendly, sectioned summary that pairs simulation metrics with the metadata supplied by the handler.  <br /></td></tr>
 <tr class="memitem:af552798fa19bb2286230ede9a25719d8" id="r_af552798fa19bb2286230ede9a25719d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af552798fa19bb2286230ede9a25719d8">saveFGNResults</a> (double[] series, double H, double sigma, double samplingInterval, double threshold)</td></tr>
 <tr class="memdesc:af552798fa19bb2286230ede9a25719d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves data generated in FGN mode.  <br /></td></tr>
 <tr class="memitem:a41772efb869410efcea0a227b684383a" id="r_a41772efb869410efcea0a227b684383a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41772efb869410efcea0a227b684383a">close</a> ()</td></tr>
@@ -125,10 +150,10 @@ Static Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages all file output operations for the simulator. </p>
-<p>This class is responsible for creating a new output folder for each run, writing event logs, saving simulation summaries, and handling FGN mode output. Keeping all file operations here keeps the simulator logic clean and organized. </p>
+<p>The manager owns the lifecycle of a per-run directory, including the timestamped folder structure, <code class="JavaDocCode">event_log.txt</code>, <code class="JavaDocCode">summary.txt</code>, the sampled traffic CSV, and a <code class="JavaDocCode">metadata.json</code> file that captures descriptive run annotations. Keeping all file operations centralized ensures the simulator core and handlers stay focused on orchestration logic.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9b94270d895cc800008a66fcd6fce731" name="a9b94270d895cc800008a66fcd6fce731"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b94270d895cc800008a66fcd6fce731">&#9670;&#160;</a></span>FileOutputManager()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b94270d895cc800008a66fcd6fce731">&#9670;&#160;</a></span>FileOutputManager() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +169,31 @@ Static Public Attributes</h2></td></tr>
 
 <p>Creates a new output folder for the current run. </p>
 <p>The folder name includes a timestamp so that multiple runs can be stored without overwriting previous results. </p>
+
+</div>
+</div>
+<a id="a8402997e967c75c2eafdbb4bef8fbec4" name="a8402997e967c75c2eafdbb4bef8fbec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8402997e967c75c2eafdbb4bef8fbec4">&#9670;&#160;</a></span>FileOutputManager() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">io.FileOutputManager.FileOutputManager </td>
+          <td>(</td>
+          <td class="paramtype">Map&lt; String, String &gt;</td>          <td class="paramname"><span class="paramname"><em>metadata</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a new output manager that also stores run metadata alongside regular artifacts. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metadata</td><td>descriptive context (mode, parameters, etc.) supplied by simulation handlers; may be <code class="JavaDocCode">null</code> to skip metadata. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -165,6 +215,8 @@ Static Public Attributes</h2></td></tr>
 
 <p>Flushes and closes the event log safely at the end of the run. </p>
 
+<p>Implements <a class="el" href="interfaceio_1_1_output_sink.html#aed4ca742b1f8b5bffa2504a0a5239a0c">io.OutputSink</a>.</p>
+
 </div>
 </div>
 <a id="ae796887c8772421829f5de50b1fd50bc" name="ae796887c8772421829f5de50b1fd50bc"></a>
@@ -183,6 +235,8 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the path of this run's output folder. </p>
+
+<p>Implements <a class="el" href="interfaceio_1_1_output_sink.html#a04b309b5e0f81f20c915b1cf9eb04d9e">io.OutputSink</a>.</p>
 
 </div>
 </div>
@@ -203,6 +257,8 @@ Static Public Attributes</h2></td></tr>
 
 <p>Writes a single simulation event to the log file. </p>
 <p>Each line includes the event time, source ID, and event type. </p>
+
+<p>Implements <a class="el" href="interfaceio_1_1_output_sink.html#aadf75eca6b2ec14bcdf42c3ee99b8907">io.OutputSink</a>.</p>
 
 </div>
 </div>
@@ -243,6 +299,8 @@ Static Public Attributes</h2></td></tr>
 <p>Saves data generated in FGN mode. </p>
 <p>The generated time-series is written to a CSV file, and a short text summary with the Hurst estimation is saved in the same folder. </p>
 
+<p>Implements <a class="el" href="interfaceio_1_1_output_sink.html#aafc8d45d0791924f35b970af3c15022c">io.OutputSink</a>.</p>
+
 </div>
 </div>
 <a id="a5f4410cf4bd6cea176e312d30de52e95" name="a5f4410cf4bd6cea176e312d30de52e95"></a>
@@ -264,8 +322,10 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Writes a summary file containing key statistics collected during the run. </p>
-<p>This includes the number of samples, average and peak rates, standard deviation, and an estimated Hurst exponent. </p>
+<p>Writes a friendly, sectioned summary that pairs simulation metrics with the metadata supplied by the handler. </p>
+<p>The summary mirrors what is printed to the console but also includes queue statistics and the <code class="JavaDocCode">metadata</code> block so that each run folder becomes self-describing for downstream analysis or debugging.</p>
+
+<p>Implements <a class="el" href="interfaceio_1_1_output_sink.html#a15170bb5ff306424c0534e678f1dcd23">io.OutputSink</a>.</p>
 
 </div>
 </div>

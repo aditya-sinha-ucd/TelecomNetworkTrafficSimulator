@@ -1,5 +1,10 @@
 var hierarchy =
 [
+    [ "AutoCloseable", null, [
+      [ "io.OutputSink", "interfaceio_1_1_output_sink.html", [
+        [ "io.FileOutputManager", "classio_1_1_file_output_manager.html", null ]
+      ] ]
+    ] ],
     [ "Comparable", null, [
       [ "core.Event", "classcore_1_1_event.html", null ]
     ] ],
@@ -13,7 +18,6 @@ var hierarchy =
     [ "core.EventQueue", "classcore_1_1_event_queue.html", null ],
     [ "core.EventType", "enumcore_1_1_event_type.html", null ],
     [ "model.FGNGenerationParameters", "classmodel_1_1_f_g_n_generation_parameters.html", null ],
-    [ "io.FileOutputManager", "classio_1_1_file_output_manager.html", null ],
     [ "util.FractionalGaussianNoise", "classutil_1_1_fractional_gaussian_noise.html", null ],
     [ "util.HurstEstimator", "classutil_1_1_hurst_estimator.html", null ],
     [ "Main", "class_main.html", null ],

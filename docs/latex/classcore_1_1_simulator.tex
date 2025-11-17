@@ -10,6 +10,8 @@
 \item 
 \mbox{\hyperlink{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc}{Simulator}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params)
 \begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provided configuration parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcore_1_1_simulator_a9896d1cae8f415e9345b0ce300ec4dfe}{Simulator}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params, Supplier$<$ \mbox{\hyperlink{interfaceio_1_1_output_sink}{Output\+Sink}} $>$ output\+Sink\+Supplier)
+\begin{DoxyCompactList}\small\item\em Allows callers (and tests) to inject a custom output sink. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcore_1_1_simulator_a90408d62b198022449753d0f28fc2127}{run}} ()
 \begin{DoxyCompactList}\small\item\em Runs the simulation and exports results to organized output files. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -30,7 +32,7 @@ Responsibilities include\+:
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc}\index{core.Simulator@{core.Simulator}!Simulator@{Simulator}}
 \index{Simulator@{Simulator}!core.Simulator@{core.Simulator}}
-\doxysubsubsection{\texorpdfstring{Simulator()}{Simulator()}}
+\doxysubsubsection{\texorpdfstring{Simulator()}{Simulator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc} 
 core.\+Simulator.\+Simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}}}]{params}{}\end{DoxyParamCaption})}
 
@@ -43,6 +45,16 @@ Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provide
 {\em params} & immutable snapshot of user-\/provided simulation settings \\
 \hline
 \end{DoxyParams}
+\Hypertarget{classcore_1_1_simulator_a9896d1cae8f415e9345b0ce300ec4dfe}\index{core.Simulator@{core.Simulator}!Simulator@{Simulator}}
+\index{Simulator@{Simulator}!core.Simulator@{core.Simulator}}
+\doxysubsubsection{\texorpdfstring{Simulator()}{Simulator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classcore_1_1_simulator_a9896d1cae8f415e9345b0ce300ec4dfe} 
+core.\+Simulator.\+Simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}}}]{params}{, }\item[{Supplier$<$ \mbox{\hyperlink{interfaceio_1_1_output_sink}{Output\+Sink}} $>$}]{output\+Sink\+Supplier}{}\end{DoxyParamCaption})}
+
+
+
+Allows callers (and tests) to inject a custom output sink. 
+
 
 
 \label{doc-func-members}

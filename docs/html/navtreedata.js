@@ -47,7 +47,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_config_file_loader_8java.html",
-"classmodel_1_1_pareto_distribution.html#aa632f65f25165daf89d41dc34ca72f46"
+"classmodel_1_1_pareto_distribution.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

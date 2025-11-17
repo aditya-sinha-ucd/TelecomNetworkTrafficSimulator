@@ -20,7 +20,6 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
-<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -107,6 +106,8 @@ $(function(){initNavTree('classcore_1_1_simulator.html','','classcore_1_1_simula
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae2ffd756ab11668916a9a321935083fc" id="r_ae2ffd756ab11668916a9a321935083fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2ffd756ab11668916a9a321935083fc">Simulator</a> (<a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a> params)</td></tr>
 <tr class="memdesc:ae2ffd756ab11668916a9a321935083fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classcore_1_1_simulator.html" title="Main controller for the event-driven telecom traffic simulation.">Simulator</a> using the provided configuration parameters.  <br /></td></tr>
+<tr class="memitem:a9896d1cae8f415e9345b0ce300ec4dfe" id="r_a9896d1cae8f415e9345b0ce300ec4dfe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9896d1cae8f415e9345b0ce300ec4dfe">Simulator</a> (<a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a> params, Supplier&lt; <a class="el" href="interfaceio_1_1_output_sink.html">OutputSink</a> &gt; outputSinkSupplier)</td></tr>
+<tr class="memdesc:a9896d1cae8f415e9345b0ce300ec4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows callers (and tests) to inject a custom output sink.  <br /></td></tr>
 <tr class="memitem:a90408d62b198022449753d0f28fc2127" id="r_a90408d62b198022449753d0f28fc2127"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90408d62b198022449753d0f28fc2127">run</a> ()</td></tr>
 <tr class="memdesc:a90408d62b198022449753d0f28fc2127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the simulation and exports results to organized output files.  <br /></td></tr>
 </table>
@@ -124,7 +125,7 @@ Coordinating optional queue modeling to approximate downstream congestion. </li>
 </ul>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae2ffd756ab11668916a9a321935083fc" name="ae2ffd756ab11668916a9a321935083fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2ffd756ab11668916a9a321935083fc">&#9670;&#160;</a></span>Simulator()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2ffd756ab11668916a9a321935083fc">&#9670;&#160;</a></span>Simulator() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,6 +146,29 @@ Coordinating optional queue modeling to approximate downstream congestion. </li>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a9896d1cae8f415e9345b0ce300ec4dfe" name="a9896d1cae8f415e9345b0ce300ec4dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9896d1cae8f415e9345b0ce300ec4dfe">&#9670;&#160;</a></span>Simulator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">core.Simulator.Simulator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a></td>          <td class="paramname"><span class="paramname"><em>params</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Supplier&lt; <a class="el" href="interfaceio_1_1_output_sink.html">OutputSink</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>outputSinkSupplier</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allows callers (and tests) to inject a custom output sink. </p>
 
 </div>
 </div>

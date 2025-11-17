@@ -1,13 +1,13 @@
-<map id="src/model/FGNTrafficSource.java" name="src/model/FGNTrafficSource.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="237,5,452,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,90,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,35,105,81,104,76,292,30"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="114,80,226,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="317,32,216,76,214,71,312,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="251,80,439,107"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="347,31,347,66,343,63,343,34"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="464,80,586,107"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="377,30,482,74,477,74,376,35"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="610,80,701,107"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="400,30,597,77,592,78,399,35"/>
+<map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/FGNTrafficSource.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/FGNTrafficSource.java">
+<area shape="rect" id="Node000001" title=" " alt="" coords="206,5,484,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,90,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,67,105,110,104,105,248,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="114,112,226,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="291,64,209,107,207,102,286,65"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="251,112,439,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="347,62,347,98,343,95,343,66"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="464,112,586,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="404,62,488,105,483,105,403,67"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="610,112,701,139"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="446,62,599,107,594,107,445,67"/>
 </map>

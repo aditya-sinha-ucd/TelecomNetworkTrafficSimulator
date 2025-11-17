@@ -1,7 +1,7 @@
 var searchData=
 [
   ['clear_0',['clear',['../classcore_1_1_event_queue.html#aaf1b4ff3e2636269d1ff7f0532e15693',1,'core::EventQueue']]],
-  ['close_1',['close',['../classio_1_1_file_output_manager.html#a41772efb869410efcea0a227b684383a',1,'io::FileOutputManager']]],
+  ['close_1',['close',['../classio_1_1_file_output_manager.html#a41772efb869410efcea0a227b684383a',1,'io.FileOutputManager.close()'],['../interfaceio_1_1_output_sink.html#aed4ca742b1f8b5bffa2504a0a5239a0c',1,'io.OutputSink.close()']]],
   ['compareto_2',['compareTo',['../classcore_1_1_event.html#ac707fff7e79d7aaf9098f2b9130ff318',1,'core::Event']]],
   ['configfileloader_3',['ConfigFileLoader',['../classio_1_1_config_file_loader.html',1,'io']]],
   ['configfileloader_2ejava_4',['ConfigFileLoader.java',['../_config_file_loader_8java.html',1,'']]],
