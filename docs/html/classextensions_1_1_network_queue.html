@@ -99,30 +99,37 @@ $(function(){initNavTree('classextensions_1_1_network_queue.html','','classexten
 </div><!--header-->
 <div class="contents">
 
-<p>Simple single-server queue approximation used to capture downstream latency.  
+<p>Deterministic single-server queue used for coarse congestion modeling.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab02d76244c36826c5cc21d600d14bafb" id="r_ab02d76244c36826c5cc21d600d14bafb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab02d76244c36826c5cc21d600d14bafb">NetworkQueue</a> (double serviceRate)</td></tr>
-<tr class="memdesc:ab02d76244c36826c5cc21d600d14bafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a queue with a given service rate.  <br /></td></tr>
+<tr class="memdesc:ab02d76244c36826c5cc21d600d14bafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a queue with the provided service rate.  <br /></td></tr>
 <tr class="memitem:ae7d5e433fb3b1c50848ff9dffec7feee" id="r_ae7d5e433fb3b1c50848ff9dffec7feee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7d5e433fb3b1c50848ff9dffec7feee">processUntil</a> (double t)</td></tr>
 <tr class="memdesc:ae7d5e433fb3b1c50848ff9dffec7feee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes departures and service progress until the specified time.  <br /></td></tr>
 <tr class="memitem:ac2def965576502968c8093d7e37a4687" id="r_ac2def965576502968c8093d7e37a4687"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2def965576502968c8093d7e37a4687">enqueueBulk</a> (double t, int count)</td></tr>
 <tr class="memdesc:ac2def965576502968c8093d7e37a4687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueues multiple arrivals at the same time instant.  <br /></td></tr>
 <tr class="memitem:ad93aafed5ef022486e5b998c0c656af2" id="r_ad93aafed5ef022486e5b998c0c656af2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad93aafed5ef022486e5b998c0c656af2">enqueue</a> (double t)</td></tr>
-<tr class="memdesc:ad93aafed5ef022486e5b998c0c656af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for single-packet enqueue to match <a class="el" href="_simulator_8java.html">Simulator.java</a>.  <br /></td></tr>
+<tr class="memdesc:ad93aafed5ef022486e5b998c0c656af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for single-packet enqueues to match <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> usage.  <br /></td></tr>
 <tr class="memitem:a5e5de730f486483e01f35ddd5b0dc66c" id="r_a5e5de730f486483e01f35ddd5b0dc66c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e5de730f486483e01f35ddd5b0dc66c">getAvgWaitingTime</a> ()</td></tr>
+<tr class="memdesc:a5e5de730f486483e01f35ddd5b0dc66c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Average waiting time experienced by served packets.  <br /></td></tr>
 <tr class="memitem:a0ac144070ce40b5c3427d0c330debbfb" id="r_a0ac144070ce40b5c3427d0c330debbfb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ac144070ce40b5c3427d0c330debbfb">getAvgSystemTime</a> ()</td></tr>
+<tr class="memdesc:a0ac144070ce40b5c3427d0c330debbfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Average total time spent in the system (waiting + service).  <br /></td></tr>
 <tr class="memitem:a49aa7b620e47da24731e00e00a2a1425" id="r_a49aa7b620e47da24731e00e00a2a1425"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49aa7b620e47da24731e00e00a2a1425">getQueueLength</a> ()</td></tr>
+<tr class="memdesc:a49aa7b620e47da24731e00e00a2a1425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantaneous number of packets waiting.  <br /></td></tr>
 <tr class="memitem:a1ddab09c5581125e16a08eca608eacd4" id="r_a1ddab09c5581125e16a08eca608eacd4"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ddab09c5581125e16a08eca608eacd4">getTotalServed</a> ()</td></tr>
+<tr class="memdesc:a1ddab09c5581125e16a08eca608eacd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total packets completed by the server.  <br /></td></tr>
 <tr class="memitem:a6f3dbf3d4daea8a8ae001e3dd986f9e6" id="r_a6f3dbf3d4daea8a8ae001e3dd986f9e6"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f3dbf3d4daea8a8ae001e3dd986f9e6">getTotalDropped</a> ()</td></tr>
+<tr class="memdesc:a6f3dbf3d4daea8a8ae001e3dd986f9e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Packets dropped due to capacity (always zero currently).  <br /></td></tr>
 <tr class="memitem:ace9f836bda56ed1143a21053713e8144" id="r_ace9f836bda56ed1143a21053713e8144"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace9f836bda56ed1143a21053713e8144">getTotalArrived</a> ()</td></tr>
+<tr class="memdesc:ace9f836bda56ed1143a21053713e8144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cumulative arrivals injected into the queue.  <br /></td></tr>
 <tr class="memitem:adba9e711cfa1e6f5e5a06c5d6ede9ac7" id="r_adba9e711cfa1e6f5e5a06c5d6ede9ac7"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adba9e711cfa1e6f5e5a06c5d6ede9ac7">toString</a> ()</td></tr>
+<tr class="memdesc:adba9e711cfa1e6f5e5a06c5d6ede9ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a human-readable snapshot of queue metrics.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple single-server queue approximation used to capture downstream latency. </p>
-<p>The queue assumes deterministic service with rate <code class="JavaDocCode">µ</code> and keeps track of cumulative waiting/system times as well as arrival/serviced counters so that the simulator can report queueing metrics alongside traffic stats. </p>
+<div class="textblock"><p>Deterministic single-server queue used for coarse congestion modeling. </p>
+<p>Accepts bulk arrivals from <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>, advances service progress over time, and aggregates waiting/system time metrics for diagnostic reporting. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab02d76244c36826c5cc21d600d14bafb" name="ab02d76244c36826c5cc21d600d14bafb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab02d76244c36826c5cc21d600d14bafb">&#9670;&#160;</a></span>NetworkQueue()</h2>
@@ -139,10 +146,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a queue with a given service rate. </p>
+<p>Creates a queue with the provided service rate. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">serviceRate</td><td>packets served per second (must be &gt; 0) </td></tr>
+    <tr><td class="paramname">serviceRate</td><td>Packets served per second (must be &gt; 0). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IllegalArgumentException</td><td>if the service rate is not positive. </td></tr>
   </table>
   </dd>
 </dl>
@@ -165,7 +178,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wrapper for single-packet enqueue to match <a class="el" href="_simulator_8java.html">Simulator.java</a>. </p>
+<p>Wrapper for single-packet enqueues to match <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> usage. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Arrival timestamp of the packet. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -191,8 +210,8 @@ Public Member Functions</h2></td></tr>
 <p>Enqueues multiple arrivals at the same time instant. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>arrival time </td></tr>
-    <tr><td class="paramname">count</td><td>number of packets to enqueue </td></tr>
+    <tr><td class="paramname">t</td><td>Arrival time shared by the bulk arrivals. </td></tr>
+    <tr><td class="paramname">count</td><td>Number of packets to enqueue. </td></tr>
   </table>
   </dd>
 </dl>
@@ -213,7 +232,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>average total time spent in the system </dd></dl>
+
+<p>Average total time spent in the system (waiting + service). </p>
+<dl class="section return"><dt>Returns</dt><dd>Mean sojourn time for served packets. </dd></dl>
 
 </div>
 </div>
@@ -231,7 +252,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>average waiting time experienced by served packets </dd></dl>
+
+<p>Average waiting time experienced by served packets. </p>
+<dl class="section return"><dt>Returns</dt><dd>Mean queue-only delay (seconds). </dd></dl>
 
 </div>
 </div>
@@ -249,7 +272,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>instantaneous number of packets waiting </dd></dl>
+
+<p>Instantaneous number of packets waiting. </p>
+<dl class="section return"><dt>Returns</dt><dd>Queue length including the job in service if any. </dd></dl>
 
 </div>
 </div>
@@ -267,7 +292,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>cumulative arrivals injected into the queue </dd></dl>
+
+<p>Cumulative arrivals injected into the queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total enqueued packet count. </dd></dl>
 
 </div>
 </div>
@@ -285,7 +312,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>packets dropped due to capacity (always zero currently) </dd></dl>
+
+<p>Packets dropped due to capacity (always zero currently). </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of arrivals rejected. </dd></dl>
 
 </div>
 </div>
@@ -303,7 +332,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>total packets completed </dd></dl>
+
+<p>Total packets completed by the server. </p>
+<dl class="section return"><dt>Returns</dt><dd>Cumulative departures count. </dd></dl>
 
 </div>
 </div>
@@ -325,7 +356,7 @@ Public Member Functions</h2></td></tr>
 <p>Processes departures and service progress until the specified time. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>simulation time horizon to advance to </td></tr>
+    <tr><td class="paramname">t</td><td>Simulation time horizon to advance to. </td></tr>
   </table>
   </dd>
 </dl>
@@ -346,6 +377,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Provides a human-readable snapshot of queue metrics. </p>
+<dl class="section return"><dt>Returns</dt><dd>String summarizing arrivals, departures, drops, and averages. </dd></dl>
 
 </div>
 </div>

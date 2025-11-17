@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/MultiSourceManager.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/MultiSourceManager.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="462,5,642,80"/>
+<area shape="rect" id="Node000001" title="Factory&#45;like helper that constructs homogeneous or heterogeneous source pools." alt="" coords="462,5,642,80"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,128,171,155"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,65,164,127,163,122,461,60"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="195,128,384,155"/>

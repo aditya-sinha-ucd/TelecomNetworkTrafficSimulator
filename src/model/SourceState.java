@@ -4,7 +4,6 @@
  * @details Used by {@link core.Simulator}, {@link core.Event}, and source
  *          implementations to track transitions during the discrete-event
  *          simulation.
- * @date 2024-05-30
  */
 package model;
 

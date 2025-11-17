@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/NetworkQueue.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/NetworkQueue.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="58,5,238,80"/>
+<area shape="rect" id="Node000001" title="Lightweight single&#45;server queue approximation for downstream effects." alt="" coords="58,5,238,80"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,128,145,155"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,79,96,117,92,113,118,82"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="169,128,277,155"/>

@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/util/\+Math\+Utils.java File Reference}
 \hypertarget{_math_utils_8java}{}\label{_math_utils_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/MathUtils.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/MathUtils.java}}
+
+
+Collection of numerical helper methods used by the simulator.  
+
+
 {\ttfamily import java.\+util.\+List;}\newline
 Include dependency graph for Math\+Utils.\+java\+:
 \nopagebreak
@@ -13,9 +18,15 @@ Include dependency graph for Math\+Utils.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classutil_1_1_math_utils}{util.\+Math\+Utils}}
-\begin{DoxyCompactList}\small\item\em A small collection of numerical helper methods used throughout the simulator for statistical calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Static utilities for common statistical calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceutil}{util}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Collection of numerical helper methods used by the simulator. 
+
+Offers mean, variance, standard deviation, and max calculations for {\ttfamily \doxylink{}{java.\+util.\+List}} collections of doubles. Primarily consumed by {\ttfamily \doxylink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}} and {\ttfamily \doxylink{classutil_1_1_hurst_estimator}{util.\+Hurst\+Estimator}}. 

@@ -99,7 +99,7 @@ $(function(){initNavTree('classutil_1_1_random_utils.html','','classutil_1_1_ran
 </div><!--header-->
 <div class="contents">
 
-<p>Utility class providing random number generation functions for the simulator, including support for Pareto-distributed samples which produce heavy-tailed ON/OFF durations.  
+<p>Utility class providing random number generation functions for the simulator.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -112,8 +112,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae888b0519537d644ec9f9c8c0a498bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a custom random seed for reproducible simulations.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utility class providing random number generation functions for the simulator, including support for Pareto-distributed samples which produce heavy-tailed ON/OFF durations. </p>
-<p>Pareto distribution: X = scale / (U^(1/shape)) where U ~ Uniform(0, 1) </p>
+<div class="textblock"><p>Utility class providing random number generation functions for the simulator. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a2ec30e1cdada11bf900ecf59aad56dbe" name="a2ec30e1cdada11bf900ecf59aad56dbe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ec30e1cdada11bf900ecf59aad56dbe">&#9670;&#160;</a></span>samplePareto()</h2>
@@ -145,12 +144,12 @@ Static Public Member Functions</h2></td></tr>
 <p>Generates a sample from a Pareto distribution. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shape</td><td>the alpha (shape) parameter (&gt; 1 recommended) </td></tr>
-    <tr><td class="paramname">scale</td><td>the scale (minimum) parameter (&gt; 0) </td></tr>
+    <tr><td class="paramname">shape</td><td>Alpha (shape) parameter (&gt; 0). </td></tr>
+    <tr><td class="paramname">scale</td><td>Scale (minimum) parameter (&gt; 0). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a Pareto-distributed random sample </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Pareto-distributed random sample. </dd></dl>
 
 </div>
 </div>
@@ -180,7 +179,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Sets a custom random seed for reproducible simulations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">seed</td><td>the seed value </td></tr>
+    <tr><td class="paramname">seed</td><td>Seed value applied to the shared RNG. </td></tr>
   </table>
   </dd>
 </dl>
@@ -217,12 +216,12 @@ Static Public Member Functions</h2></td></tr>
 <p>Generates a uniformly distributed random double in [min, max]. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">min</td><td>lower bound </td></tr>
-    <tr><td class="paramname">max</td><td>upper bound </td></tr>
+    <tr><td class="paramname">min</td><td>Lower bound. </td></tr>
+    <tr><td class="paramname">max</td><td>Upper bound. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>uniformly distributed random value </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Uniformly distributed random value. </dd></dl>
 
 </div>
 </div>

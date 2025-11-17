@@ -99,30 +99,31 @@ $(function(){initNavTree('classcore_1_1_event_queue.html','','classcore_1_1_even
 </div><!--header-->
 <div class="contents">
 
-<p>Manages the event scheduling and ordering for the simulation.  
+<p>Thin wrapper around <code><a class="el" href="">PriorityQueue</a></code> tailored for simulation.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac3476ba9da16b788937354247096ecf9" id="r_ac3476ba9da16b788937354247096ecf9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3476ba9da16b788937354247096ecf9">EventQueue</a> ()</td></tr>
-<tr class="memdesc:ac3476ba9da16b788937354247096ecf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty event queue.  <br /></td></tr>
+<tr class="memdesc:ac3476ba9da16b788937354247096ecf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty event queue ready for scheduling.  <br /></td></tr>
 <tr class="memitem:a88f4a243b7f5dc0b82ad43f8f94a9ab6" id="r_a88f4a243b7f5dc0b82ad43f8f94a9ab6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88f4a243b7f5dc0b82ad43f8f94a9ab6">addEvent</a> (<a class="el" href="classcore_1_1_event.html">Event</a> event)</td></tr>
-<tr class="memdesc:a88f4a243b7f5dc0b82ad43f8f94a9ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new event to the queue.  <br /></td></tr>
+<tr class="memdesc:a88f4a243b7f5dc0b82ad43f8f94a9ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new event to the scheduler.  <br /></td></tr>
 <tr class="memitem:ace733a8cca4d3e56e9b918bda65af619" id="r_ace733a8cca4d3e56e9b918bda65af619"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcore_1_1_event.html">Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace733a8cca4d3e56e9b918bda65af619">nextEvent</a> ()</td></tr>
-<tr class="memdesc:ace733a8cca4d3e56e9b918bda65af619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves and removes the next (earliest) event from the queue.  <br /></td></tr>
+<tr class="memdesc:ace733a8cca4d3e56e9b918bda65af619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves and removes the earliest event.  <br /></td></tr>
 <tr class="memitem:aa8a0c14628d09f49b62d3c266d4aafa5" id="r_aa8a0c14628d09f49b62d3c266d4aafa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcore_1_1_event.html">Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8a0c14628d09f49b62d3c266d4aafa5">peekNextEvent</a> ()</td></tr>
-<tr class="memdesc:aa8a0c14628d09f49b62d3c266d4aafa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peeks at the next event without removing it.  <br /></td></tr>
+<tr class="memdesc:aa8a0c14628d09f49b62d3c266d4aafa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peeks at the next event without dequeuing it.  <br /></td></tr>
 <tr class="memitem:af7d180e559f6ac2aca3458bebacd8607" id="r_af7d180e559f6ac2aca3458bebacd8607"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7d180e559f6ac2aca3458bebacd8607">isEmpty</a> ()</td></tr>
-<tr class="memdesc:af7d180e559f6ac2aca3458bebacd8607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if there are any remaining events to process.  <br /></td></tr>
+<tr class="memdesc:af7d180e559f6ac2aca3458bebacd8607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether there are events left to process.  <br /></td></tr>
 <tr class="memitem:af4334e15449c906de4fe483e09b4396a" id="r_af4334e15449c906de4fe483e09b4396a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4334e15449c906de4fe483e09b4396a">size</a> ()</td></tr>
+<tr class="memdesc:af4334e15449c906de4fe483e09b4396a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports the number of events waiting to be processed.  <br /></td></tr>
 <tr class="memitem:aaf1b4ff3e2636269d1ff7f0532e15693" id="r_aaf1b4ff3e2636269d1ff7f0532e15693"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf1b4ff3e2636269d1ff7f0532e15693">clear</a> ()</td></tr>
-<tr class="memdesc:aaf1b4ff3e2636269d1ff7f0532e15693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all events from the queue.  <br /></td></tr>
+<tr class="memdesc:aaf1b4ff3e2636269d1ff7f0532e15693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all pending events, effectively resetting scheduling.  <br /></td></tr>
 <tr class="memitem:a6ad158284ecc7d46f07297fd73a5d95e" id="r_a6ad158284ecc7d46f07297fd73a5d95e"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ad158284ecc7d46f07297fd73a5d95e">toString</a> ()</td></tr>
-<tr class="memdesc:a6ad158284ecc7d46f07297fd73a5d95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a string summary of the current queue state, for debugging or status messages during the simulation.  <br /></td></tr>
+<tr class="memdesc:a6ad158284ecc7d46f07297fd73a5d95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the current queue state for logging.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages the event scheduling and ordering for the simulation. </p>
-<p>This class acts as the central mechanism that determines which event occurs next. It uses a <code><a class="el" href="">PriorityQueue</a></code> to ensure events are always processed in chronological order. </p>
+<div class="textblock"><p>Thin wrapper around <code><a class="el" href="">PriorityQueue</a></code> tailored for simulation. </p>
+<p>Responsible for lifecycle management of scheduled events, providing operations to enqueue, poll, peek, and clear events. The class also exposes diagnostic information such as size for telemetry. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac3476ba9da16b788937354247096ecf9" name="ac3476ba9da16b788937354247096ecf9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac3476ba9da16b788937354247096ecf9">&#9670;&#160;</a></span>EventQueue()</h2>
@@ -139,7 +140,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs an empty event queue. </p>
+<p>Constructs an empty event queue ready for scheduling. </p>
 
 </div>
 </div>
@@ -159,10 +160,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Adds a new event to the queue. </p>
+<p>Adds a new event to the scheduler. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>the event to schedule </td></tr>
+    <tr><td class="paramname">event</td><td><code><a class="el" href="classcore_1_1_event.html">Event</a></code> to be ordered chronologically. </td></tr>
   </table>
   </dd>
 </dl>
@@ -184,8 +185,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Removes all events from the queue. </p>
-<p>Useful when resetting or restarting the simulation. </p>
+<p>Removes all pending events, effectively resetting scheduling. </p>
 
 </div>
 </div>
@@ -204,8 +204,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Checks if there are any remaining events to process. </p>
-<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> if no events remain, <code class="JavaDocCode">false</code> otherwise </dd></dl>
+<p>Indicates whether there are events left to process. </p>
+<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> if the queue currently holds no events. </dd></dl>
 
 </div>
 </div>
@@ -224,8 +224,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Retrieves and removes the next (earliest) event from the queue. </p>
-<dl class="section return"><dt>Returns</dt><dd>the next scheduled event, or <code class="JavaDocCode">null</code> if the queue is empty </dd></dl>
+<p>Retrieves and removes the earliest event. </p>
+<dl class="section return"><dt>Returns</dt><dd>Next <code><a class="el" href="classcore_1_1_event.html">Event</a></code> to execute, or <code class="JavaDocCode">null</code> if no events remain in the queue. </dd></dl>
 
 </div>
 </div>
@@ -244,8 +244,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Peeks at the next event without removing it. </p>
-<dl class="section return"><dt>Returns</dt><dd>the next event in line, or <code class="JavaDocCode">null</code> if the queue is empty </dd></dl>
+<p>Peeks at the next event without dequeuing it. </p>
+<dl class="section return"><dt>Returns</dt><dd>Upcoming <code><a class="el" href="classcore_1_1_event.html">Event</a></code> or <code class="JavaDocCode">null</code> when empty. </dd></dl>
 
 </div>
 </div>
@@ -263,7 +263,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the current number of events in the queue </dd></dl>
+
+<p>Reports the number of events waiting to be processed. </p>
+<dl class="section return"><dt>Returns</dt><dd>Count of scheduled events. </dd></dl>
 
 </div>
 </div>
@@ -282,7 +284,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Provides a string summary of the current queue state, for debugging or status messages during the simulation. </p>
+<p>Describes the current queue state for logging. </p>
+<dl class="section return"><dt>Returns</dt><dd>String containing the queue size summary. </dd></dl>
 
 </div>
 </div>

@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/util/\+Fractional\+Gaussian\+Noise.java File Reference}
 \hypertarget{_fractional_gaussian_noise_8java}{}\label{_fractional_gaussian_noise_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/FractionalGaussianNoise.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/FractionalGaussianNoise.java}}
+
+
+Fractional Gaussian Noise (f\+Gn) generator using the Davies–\+Harte method.  
+
+
 {\ttfamily import java.\+util.\+Random;}\newline
 Include dependency graph for Fractional\+Gaussian\+Noise.\+java\+:
 \nopagebreak
@@ -13,9 +18,15 @@ Include dependency graph for Fractional\+Gaussian\+Noise.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise}{util.\+Fractional\+Gaussian\+Noise}}
-\begin{DoxyCompactList}\small\item\em Fractional Gaussian Noise (f\+Gn) generator using the Davies–\+Harte method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Generates Fractional Gaussian Noise sequences for the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceutil}{util}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fractional Gaussian Noise (f\+Gn) generator using the Davies–\+Harte method. 
+
+Produces Gaussian, long-\/range dependent sequences with configurable Hurst exponent and standard deviation. Emphasizes reproducibility via dependency injection of {\ttfamily \doxylink{}{java.\+util.\+Random}} and guards against numerical instabilities in FFT computations. 

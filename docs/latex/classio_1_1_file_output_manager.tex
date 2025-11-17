@@ -2,7 +2,7 @@
 \hypertarget{classio_1_1_file_output_manager}{}\label{classio_1_1_file_output_manager}\index{io.FileOutputManager@{io.FileOutputManager}}
 
 
-Manages all file output operations for the simulator.  
+Implements {\ttfamily \doxylink{interfaceio_1_1_output_sink}{Output\+Sink}} using timestamped run directories.  
 
 
 
@@ -31,15 +31,15 @@ Collaboration diagram for io.\+File\+Output\+Manager\+:
 \mbox{\hyperlink{classio_1_1_file_output_manager_a9b94270d895cc800008a66fcd6fce731}{File\+Output\+Manager}} ()
 \begin{DoxyCompactList}\small\item\em Creates a new output folder for the current run. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classio_1_1_file_output_manager_a8402997e967c75c2eafdbb4bef8fbec4}{File\+Output\+Manager}} (Map$<$ String, String $>$ metadata)
-\begin{DoxyCompactList}\small\item\em Creates a new output manager that also stores run metadata alongside regular artifacts. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Creates a new output manager that also stores run metadata. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classio_1_1_file_output_manager_ae796887c8772421829f5de50b1fd50bc}{get\+Run\+Directory}} ()
 \begin{DoxyCompactList}\small\item\em Returns the path of this run\textquotesingle{}s output folder. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_file_output_manager_a16b7dd5f27d59c3118326897f8f02f07}{log\+Event}} (\mbox{\hyperlink{classcore_1_1_event}{Event}} event)
 \begin{DoxyCompactList}\small\item\em Writes a single simulation event to the log file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_file_output_manager_a5f4410cf4bd6cea176e312d30de52e95}{save\+Summary}} (\mbox{\hyperlink{classcore_1_1_statistics_collector}{Statistics\+Collector}} stats, \mbox{\hyperlink{classextensions_1_1_network_queue}{Network\+Queue}} queue)
-\begin{DoxyCompactList}\small\item\em Writes a friendly, sectioned summary that pairs simulation metrics with the metadata supplied by the handler. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Writes a friendly, sectioned summary pairing metrics with metadata. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_file_output_manager_af552798fa19bb2286230ede9a25719d8}{save\+FGNResults}} (double\mbox{[}$\,$\mbox{]} series, double H, double sigma, double sampling\+Interval, double threshold)
-\begin{DoxyCompactList}\small\item\em Saves data generated in FGN mode. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Saves data generated in FGN mode, including CSV and summary. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_file_output_manager_a41772efb869410efcea0a227b684383a}{close}} ()
 \begin{DoxyCompactList}\small\item\em Flushes and closes the event log safely at the end of the run. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Attributes}
@@ -50,9 +50,9 @@ static final int \mbox{\hyperlink{classio_1_1_file_output_manager_a985b76c25c714
 
 
 \doxysubsection{Detailed Description}
-Manages all file output operations for the simulator. 
+Implements {\ttfamily \doxylink{interfaceio_1_1_output_sink}{Output\+Sink}} using timestamped run directories. 
 
-The manager owns the lifecycle of a per-\/run directory, including the timestamped folder structure, {\ttfamily event\+\_\+log.\+txt}, {\ttfamily summary.\+txt}, the sampled traffic CSV, and a {\ttfamily metadata.\+json} file that captures descriptive run annotations. Keeping all file operations centralized ensures the simulator core and handlers stay focused on orchestration logic.
+Responsible for file lifecycle management, metadata capture, and statistical summaries. Collaborates with {\ttfamily \doxylink{classutil_1_1_hurst_estimator}{util.\+Hurst\+Estimator}} to validate generated sequences and with {\ttfamily \doxylink{classextensions_1_1_network_queue}{extensions.\+Network\+Queue}} to report congestion metrics. 
 
 \label{doc-constructors}
 \Hypertarget{classio_1_1_file_output_manager_doc-constructors}
@@ -75,11 +75,11 @@ io.\+File\+Output\+Manager.\+File\+Output\+Manager (\begin{DoxyParamCaption}\ite
 
 
 
-Creates a new output manager that also stores run metadata alongside regular artifacts. 
+Creates a new output manager that also stores run metadata. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em metadata} & descriptive context (mode, parameters, etc.) supplied by simulation handlers; may be {\ttfamily null} to skip metadata. \\
+{\em metadata} & Descriptive context (mode, parameters, etc.) supplied by simulation handlers; may be {\ttfamily null} to skip metadata. \\
 \hline
 \end{DoxyParams}
 
@@ -111,6 +111,9 @@ String io.\+File\+Output\+Manager.\+get\+Run\+Directory (\begin{DoxyParamCaption
 
 Returns the path of this run\textquotesingle{}s output folder. 
 
+\begin{DoxyReturn}{Returns}
+Path string pointing to the run directory. 
+\end{DoxyReturn}
 
 
 Implements \mbox{\hyperlink{interfaceio_1_1_output_sink_a04b309b5e0f81f20c915b1cf9eb04d9e}{io.\+Output\+Sink}}.
@@ -125,7 +128,12 @@ void io.\+File\+Output\+Manager.\+log\+Event (\begin{DoxyParamCaption}\item[{\mb
 
 Writes a single simulation event to the log file. 
 
-Each line includes the event time, source ID, and event type. 
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \doxylink{classcore_1_1_event}{Event} emitted by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. \\
+\hline
+\end{DoxyParams}
+
 
 Implements \mbox{\hyperlink{interfaceio_1_1_output_sink_aadf75eca6b2ec14bcdf42c3ee99b8907}{io.\+Output\+Sink}}.
 
@@ -137,9 +145,22 @@ void io.\+File\+Output\+Manager.\+save\+FGNResults (\begin{DoxyParamCaption}\ite
 
 
 
-Saves data generated in FGN mode. 
+Saves data generated in FGN mode, including CSV and summary. 
 
-The generated time-\/series is written to a CSV file, and a short text summary with the Hurst estimation is saved in the same folder. 
+
+\begin{DoxyParams}{Parameters}
+{\em series} & Generated time-\/series samples. \\
+\hline
+{\em H} & Target Hurst exponent. \\
+\hline
+{\em sigma} & Standard deviation used for generation. \\
+\hline
+{\em sampling\+Interval} & Time spacing between samples. \\
+\hline
+{\em threshold} & Threshold for ON/\+OFF labeling in the event log. \\
+\hline
+\end{DoxyParams}
+
 
 Implements \mbox{\hyperlink{interfaceio_1_1_output_sink_aafc8d45d0791924f35b970af3c15022c}{io.\+Output\+Sink}}.
 
@@ -151,9 +172,16 @@ void io.\+File\+Output\+Manager.\+save\+Summary (\begin{DoxyParamCaption}\item[{
 
 
 
-Writes a friendly, sectioned summary that pairs simulation metrics with the metadata supplied by the handler. 
+Writes a friendly, sectioned summary pairing metrics with metadata. 
 
-The summary mirrors what is printed to the console but also includes queue statistics and the {\ttfamily metadata} block so that each run folder becomes self-\/describing for downstream analysis or debugging.
+
+\begin{DoxyParams}{Parameters}
+{\em stats} & Traffic statistics gathered during the run. \\
+\hline
+{\em queue} & Queue metrics collected alongside traffic stats. \\
+\hline
+\end{DoxyParams}
+
 
 Implements \mbox{\hyperlink{interfaceio_1_1_output_sink_a15170bb5ff306424c0534e678f1dcd23}{io.\+Output\+Sink}}.
 

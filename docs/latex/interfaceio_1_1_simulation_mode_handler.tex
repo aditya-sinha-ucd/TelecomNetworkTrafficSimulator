@@ -2,12 +2,13 @@
 \hypertarget{interfaceio_1_1_simulation_mode_handler}{}\label{interfaceio_1_1_simulation_mode_handler}\index{io.SimulationModeHandler@{io.SimulationModeHandler}}
 
 
-Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode.  
+Contract for launching a particular simulation or data-\/generation mode.  
 
 
 
 
-Inheritance diagram for io.\+Simulation\+Mode\+Handler\+:\nopagebreak
+Inheritance diagram for io.\+Simulation\+Mode\+Handler\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,7 +23,9 @@ void \mbox{\hyperlink{interfaceio_1_1_simulation_mode_handler_a9d6a128f79038b59c
 
 
 \doxysubsection{Detailed Description}
-Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode. 
+Contract for launching a particular simulation or data-\/generation mode. 
+
+Implementations such as {\ttfamily \doxylink{classio_1_1_pareto_simulation_handler}{io.\+Pareto\+Simulation\+Handler}} and {\ttfamily \doxylink{classio_1_1_f_g_n_simulation_handler}{io.\+FGNSimulation\+Handler}} collect inputs and run the core simulation pipeline. 
 
 \label{doc-func-members}
 \Hypertarget{interfaceio_1_1_simulation_mode_handler_doc-func-members}

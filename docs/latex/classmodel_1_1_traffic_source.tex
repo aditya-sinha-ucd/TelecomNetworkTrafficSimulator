@@ -7,7 +7,8 @@ Represents a single ON/\+OFF traffic source in the simulation.
 
 
 
-Inheritance diagram for model.\+Traffic\+Source\+:\nopagebreak
+Inheritance diagram for model.\+Traffic\+Source\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,15 +21,15 @@ Inheritance diagram for model.\+Traffic\+Source\+:\nopagebreak
 \mbox{\hyperlink{classmodel_1_1_traffic_source_a7fa07bfb5b338b43cc6cb5d3a3bbb04a}{Traffic\+Source}} (int id, double on\+Shape, double on\+Scale, double off\+Shape, double off\+Scale)
 \begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} with given Pareto parameters. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcore_1_1_event}{Event}} \mbox{\hyperlink{classmodel_1_1_traffic_source_aa4e3b925bf2bffc159bedcb17510d843}{generate\+Next\+Event}} (double current\+Time)
-\begin{DoxyCompactList}\small\item\em Generates the next event for this source based on its current state. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generates the next event based on the current state. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmodel_1_1_traffic_source_aaf7909151e413ed8e83b1c6e0feeddd5}{process\+Event}} (\mbox{\hyperlink{classcore_1_1_event}{Event}} event)
 \begin{DoxyCompactList}\small\item\em Processes a state change event (ON or OFF). \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classmodel_1_1_traffic_source_a40e607dd4f4f1a04d39e41c89ac37f90}{is\+On}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Indicates whether the source is currently ON. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classmodel_1_1_traffic_source_aac5b13f053ea34b108cf1b189232c030}{get\+Id}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Identifier of this source. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_traffic_source_addec51a76b1461dc78eb0c6713764bbf}{get\+Next\+Event\+Time}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Time of the next scheduled event. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classmodel_1_1_traffic_source_a6ae2fe5ae6db9946581323984c937998}{to\+String}} ()
 \end{DoxyCompactItemize}
 
@@ -36,7 +37,7 @@ String \mbox{\hyperlink{classmodel_1_1_traffic_source_a6ae2fe5ae6db9946581323984
 \doxysubsection{Detailed Description}
 Represents a single ON/\+OFF traffic source in the simulation. 
 
-Each \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} alternates between active (ON) and idle (OFF) states. The ON and OFF durations are sampled from Pareto distributions to model self-\/similar network traffic. 
+Alternates between active (ON) and idle (OFF) states with durations drawn from configured distributions. Generates events consumed by the simulator event queue. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_traffic_source_doc-constructors}
@@ -52,6 +53,19 @@ model.\+Traffic\+Source.\+Traffic\+Source (\begin{DoxyParamCaption}\item[{int}]{
 Constructs a new \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} with given Pareto parameters. 
 
 
+\begin{DoxyParams}{Parameters}
+{\em id} & Unique identifier for the source. \\
+\hline
+{\em on\+Shape} & Shape parameter for ON durations. \\
+\hline
+{\em on\+Scale} & Scale parameter for ON durations. \\
+\hline
+{\em off\+Shape} & Shape parameter for OFF durations. \\
+\hline
+{\em off\+Scale} & Scale parameter for OFF durations. \\
+\hline
+\end{DoxyParams}
+
 
 \label{doc-func-members}
 \Hypertarget{classmodel_1_1_traffic_source_doc-func-members}
@@ -64,15 +78,15 @@ Constructs a new \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} with 
 
 
 
-Generates the next event for this source based on its current state. 
+Generates the next event based on the current state. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em current\+Time} & the current simulation time \\
+{\em current\+Time} & Current simulation time. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-the next event (ON or OFF) 
+Next {\ttfamily \doxylink{classcore_1_1_event}{Event}} describing a state change. 
 \end{DoxyReturn}
 
 
@@ -84,8 +98,12 @@ Reimplemented in \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a961d5a9e7
 {\footnotesize\ttfamily \label{classmodel_1_1_traffic_source_aac5b13f053ea34b108cf1b189232c030} 
 int model.\+Traffic\+Source.\+get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Identifier of this source. 
+
 \begin{DoxyReturn}{Returns}
-the ID of this source. 
+Unique source ID. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_traffic_source_addec51a76b1461dc78eb0c6713764bbf}\index{model.TrafficSource@{model.TrafficSource}!getNextEventTime@{getNextEventTime}}
 \index{getNextEventTime@{getNextEventTime}!model.TrafficSource@{model.TrafficSource}}
@@ -93,8 +111,12 @@ the ID of this source.
 {\footnotesize\ttfamily \label{classmodel_1_1_traffic_source_addec51a76b1461dc78eb0c6713764bbf} 
 double model.\+Traffic\+Source.\+get\+Next\+Event\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Time of the next scheduled event. 
+
 \begin{DoxyReturn}{Returns}
-the time of the next scheduled event. 
+Absolute timestamp of the upcoming event. 
 \end{DoxyReturn}
 
 
@@ -106,8 +128,12 @@ Reimplemented in \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a354493619
 {\footnotesize\ttfamily \label{classmodel_1_1_traffic_source_a40e607dd4f4f1a04d39e41c89ac37f90} 
 boolean model.\+Traffic\+Source.\+is\+On (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Indicates whether the source is currently ON. 
+
 \begin{DoxyReturn}{Returns}
-true if the source is currently ON. 
+{\ttfamily true} when in the ON state. 
 \end{DoxyReturn}
 
 
@@ -125,7 +151,7 @@ Processes a state change event (ON or OFF).
 
 
 \begin{DoxyParams}{Parameters}
-{\em event} & event delivered by the simulator that flips the source state \\
+{\em event} & \doxylink{classcore_1_1_event}{Event} delivered by the simulator that flips the source state. \\
 \hline
 \end{DoxyParams}
 

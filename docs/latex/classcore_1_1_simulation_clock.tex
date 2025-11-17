@@ -2,28 +2,28 @@
 \hypertarget{classcore_1_1_simulation_clock}{}\label{classcore_1_1_simulation_clock}\index{core.SimulationClock@{core.SimulationClock}}
 
 
-Manages the current simulation time and provides a consistent time reference for all components.  
+Maintains and exposes the current simulation timestamp.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcore_1_1_simulation_clock_afd2e2f05d8998e16614b364840427c6b}{Simulation\+Clock}} ()
-\begin{DoxyCompactList}\small\item\em Creates a new simulation clock starting at time 0. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Creates a clock initialized to time zero. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classcore_1_1_simulation_clock_ac3fcd9acb4e25e432294f6cf49c4b250}{get\+Time}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Reads the present simulation time. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcore_1_1_simulation_clock_a275160d685e24e4c5ccf7809fbd7ea8f}{advance\+To}} (double new\+Time)
-\begin{DoxyCompactList}\small\item\em Advances the simulation clock to a new time. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Advances the clock to the specified time if it is not in the past. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcore_1_1_simulation_clock_a7d519a3c907ff4f8b5d565a73bb90218}{reset}} ()
-\begin{DoxyCompactList}\small\item\em Resets the simulation clock to zero. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Resets the clock to its initial state. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classcore_1_1_simulation_clock_a7f4e4a4934dea5e56b0d9e711e9e9ead}{to\+String}} ()
-\begin{DoxyCompactList}\small\item\em Returns a formatted string for logging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Produces a formatted representation for logging contexts. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Manages the current simulation time and provides a consistent time reference for all components. 
+Maintains and exposes the current simulation timestamp. 
 
-This class allows multiple modules (e.\+g., queues, statistics, estimators) to stay synchronized. 
+Provides deterministic timekeeping for queues, collectors, and estimators. It enforces monotonic advancement, ensuring causality in the discrete-\/event simulation. 
 
 \label{doc-constructors}
 \Hypertarget{classcore_1_1_simulation_clock_doc-constructors}
@@ -36,7 +36,7 @@ core.\+Simulation\+Clock.\+Simulation\+Clock (\begin{DoxyParamCaption}{}{}\end{D
 
 
 
-Creates a new simulation clock starting at time 0. 
+Creates a clock initialized to time zero. 
 
 
 
@@ -51,13 +51,11 @@ void core.\+Simulation\+Clock.\+advance\+To (\begin{DoxyParamCaption}\item[{doub
 
 
 
-Advances the simulation clock to a new time. 
-
-Only moves forward, never backward.
+Advances the clock to the specified time if it is not in the past. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em new\+Time} & the next event time \\
+{\em new\+Time} & Next event time supplied by {\ttfamily \doxylink{classcore_1_1_event_queue}{core.\+Event\+Queue}}. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classcore_1_1_simulation_clock_ac3fcd9acb4e25e432294f6cf49c4b250}\index{core.SimulationClock@{core.SimulationClock}!getTime@{getTime}}
@@ -66,8 +64,12 @@ Only moves forward, never backward.
 {\footnotesize\ttfamily \label{classcore_1_1_simulation_clock_ac3fcd9acb4e25e432294f6cf49c4b250} 
 double core.\+Simulation\+Clock.\+get\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Reads the present simulation time. 
+
 \begin{DoxyReturn}{Returns}
-the current simulation time 
+Current simulation timestamp in seconds. 
 \end{DoxyReturn}
 \Hypertarget{classcore_1_1_simulation_clock_a7d519a3c907ff4f8b5d565a73bb90218}\index{core.SimulationClock@{core.SimulationClock}!reset@{reset}}
 \index{reset@{reset}!core.SimulationClock@{core.SimulationClock}}
@@ -77,7 +79,7 @@ void core.\+Simulation\+Clock.\+reset (\begin{DoxyParamCaption}{}{}\end{DoxyPara
 
 
 
-Resets the simulation clock to zero. 
+Resets the clock to its initial state. 
 
 \Hypertarget{classcore_1_1_simulation_clock_a7f4e4a4934dea5e56b0d9e711e9e9ead}\index{core.SimulationClock@{core.SimulationClock}!toString@{toString}}
 \index{toString@{toString}!core.SimulationClock@{core.SimulationClock}}
@@ -87,5 +89,8 @@ String core.\+Simulation\+Clock.\+to\+String (\begin{DoxyParamCaption}{}{}\end{D
 
 
 
-Returns a formatted string for logging. 
+Produces a formatted representation for logging contexts. 
 
+\begin{DoxyReturn}{Returns}
+String with millisecond precision of {\ttfamily \doxylink{}{current\+Time}}. 
+\end{DoxyReturn}

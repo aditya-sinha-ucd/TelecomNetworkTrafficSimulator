@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/TrafficSource.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/TrafficSource.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,256,64"/>
+<area shape="rect" id="Node000001" title="Models an ON/OFF traffic source backed by configurable distributions." alt="" coords="5,5,256,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="27,112,111,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,63,89,101,85,97,108,66"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="136,112,248,139"/>

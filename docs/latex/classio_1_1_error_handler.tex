@@ -2,7 +2,7 @@
 \hypertarget{classio_1_1_error_handler}{}\label{classio_1_1_error_handler}\index{io.ErrorHandler@{io.ErrorHandler}}
 
 
-Simple centralized error handler.  
+Provides helpers for printing warnings and terminating failures.  
 
 
 \doxysubsubsection*{Static Public Member Functions}
@@ -15,9 +15,9 @@ static void \mbox{\hyperlink{classio_1_1_error_handler_aee8449654c86101e376cb43a
 
 
 \doxysubsection{Detailed Description}
-Simple centralized error handler. 
+Provides helpers for printing warnings and terminating failures. 
 
-Used for consistent printing of error messages and graceful program termination. 
+Offers two static methods\+: {\ttfamily \doxylink{classio_1_1_error_handler_a625c308710b6c7707909869a49a7a8df}{handle\+Error(\+String, boolean)}} for fatal/non-\/fatal errors and {\ttfamily \doxylink{classio_1_1_error_handler_aee8449654c86101e376cb43af852c236}{warn(\+String)}} for advisory messages. Inputs are user-\/facing strings; outputs are console messages and optional JVM termination. 
 
 \label{doc-func-members}
 \Hypertarget{classio_1_1_error_handler_doc-func-members}
@@ -34,9 +34,9 @@ Prints an error message and optionally exits.
 
 
 \begin{DoxyParams}{Parameters}
-{\em message} & message to display \\
+{\em message} & Message to display. \\
 \hline
-{\em fatal} & if true, terminates the program \\
+{\em fatal} & If {\ttfamily true}, terminates the program with exit code 1. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classio_1_1_error_handler_aee8449654c86101e376cb43af852c236}\index{io.ErrorHandler@{io.ErrorHandler}!warn@{warn}}
@@ -51,6 +51,6 @@ Prints a warning message (non-\/fatal).
 
 
 \begin{DoxyParams}{Parameters}
-{\em message} & message to display \\
+{\em message} & Message to display. \\
 \hline
 \end{DoxyParams}

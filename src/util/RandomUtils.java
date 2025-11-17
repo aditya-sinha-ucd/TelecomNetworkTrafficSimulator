@@ -4,7 +4,6 @@
  * @details Provides Pareto sampling and uniform draws needed by
  *          {@link model.TrafficSource} initialization and other modules.
  *          Centralizing randomness simplifies seeding for reproducibility.
- * @date 2024-05-30
  */
 package util;
 

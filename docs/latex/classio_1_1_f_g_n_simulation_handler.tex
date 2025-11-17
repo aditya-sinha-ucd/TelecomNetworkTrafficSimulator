@@ -2,12 +2,13 @@
 \hypertarget{classio_1_1_f_g_n_simulation_handler}{}\label{classio_1_1_f_g_n_simulation_handler}\index{io.FGNSimulationHandler@{io.FGNSimulationHandler}}
 
 
-Handles console interaction and execution for the FGN generator mode.  
+Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for the FGN generator mode.  
 
 
 
 
-Inheritance diagram for io.\+FGNSimulation\+Handler\+:\nopagebreak
+Inheritance diagram for io.\+FGNSimulation\+Handler\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,7 +17,8 @@ Inheritance diagram for io.\+FGNSimulation\+Handler\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for io.\+FGNSimulation\+Handler\+:\nopagebreak
+Collaboration diagram for io.\+FGNSimulation\+Handler\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,15 +29,15 @@ Collaboration diagram for io.\+FGNSimulation\+Handler\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classio_1_1_f_g_n_simulation_handler_ad68bf9ed457ff2313bd91bc41f00aecb}{FGNSimulation\+Handler}} (\mbox{\hyperlink{classio_1_1_console_prompter}{Console\+Prompter}} prompter)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a handler bound to the shared {\ttfamily \doxylink{classio_1_1_console_prompter}{Console\+Prompter}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_f_g_n_simulation_handler_ad8a7f9c99e70076e78a79b76e2666c7c}{run}} ()
-\begin{DoxyCompactList}\small\item\em Executes the configured simulation or generation workflow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes the FGN generation workflow from prompt to export. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Handles console interaction and execution for the FGN generator mode. 
+Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for the FGN generator mode. 
 
-Responsible for parameter gathering, invoking {\ttfamily \doxylink{classutil_1_1_fractional_gaussian_noise}{util.\+Fractional\+Gaussian\+Noise}}, and exporting all generated series/summary artifacts. 
+Responsibilities include parameter gathering (interactive or file based), generator invocation, metadata logging, and artifact export. 
 
 \label{doc-constructors}
 \Hypertarget{classio_1_1_f_g_n_simulation_handler_doc-constructors}
@@ -47,8 +49,12 @@ Responsible for parameter gathering, invoking {\ttfamily \doxylink{classutil_1_1
 io.\+FGNSimulation\+Handler.\+FGNSimulation\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classio_1_1_console_prompter}{Console\+Prompter}}}]{prompter}{}\end{DoxyParamCaption})}
 
 
+
+Creates a handler bound to the shared {\ttfamily \doxylink{classio_1_1_console_prompter}{Console\+Prompter}}. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em prompter} & shared console input helper \\
+{\em prompter} & Shared console input helper. \\
 \hline
 \end{DoxyParams}
 
@@ -64,7 +70,7 @@ void io.\+FGNSimulation\+Handler.\+run (\begin{DoxyParamCaption}{}{}\end{DoxyPar
 
 
 
-Executes the configured simulation or generation workflow. 
+Executes the FGN generation workflow from prompt to export. 
 
 
 

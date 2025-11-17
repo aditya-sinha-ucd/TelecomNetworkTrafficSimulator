@@ -2,12 +2,13 @@
 \hypertarget{classmodel_1_1_f_g_n_traffic_source}{}\label{classmodel_1_1_f_g_n_traffic_source}\index{model.FGNTrafficSource@{model.FGNTrafficSource}}
 
 
-\doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} that follows an FGN-\/driven ON/\+OFF pattern.  
+\doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} variant that follows an FGN-\/driven ON/\+OFF pattern.  
 
 
 
 
-Inheritance diagram for model.\+FGNTraffic\+Source\+:\nopagebreak
+Inheritance diagram for model.\+FGNTraffic\+Source\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,7 +17,8 @@ Inheritance diagram for model.\+FGNTraffic\+Source\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for model.\+FGNTraffic\+Source\+:\nopagebreak
+Collaboration diagram for model.\+FGNTraffic\+Source\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,30 +29,28 @@ Collaboration diagram for model.\+FGNTraffic\+Source\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a94eee91b60846d52d199a8e17d5198a5}{FGNTraffic\+Source}} (int id, \mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructs an FGN-\/backed source that replays a deterministic schedule. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcore_1_1_event}{Event}} \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a961d5a9e771148c260193bca7c749941}{generate\+Next\+Event}} (double current\+Time)
-\begin{DoxyCompactList}\small\item\em Return the next event time based on the next FGN duration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the next event time based on the next FGN duration. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a2b7236b8275eb4fa5dd75acf609e79cf}{process\+Event}} (\mbox{\hyperlink{classcore_1_1_event}{Event}} event)
-\begin{DoxyCompactList}\small\item\em Update current state when the simulator delivers the flip. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Updates current state when the simulator delivers the flip. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a594ec49b495721960bfef9a3583aa4a8}{is\+On}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Indicates whether the FGN schedule is currently ON. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source_a3544936198cc3463029165522d49011a}{get\+Next\+Event\+Time}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Timestamp of the next scheduled state change event. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classmodel_1_1_traffic_source_a7fa07bfb5b338b43cc6cb5d3a3bbb04a}{Traffic\+Source}} (int id, double on\+Shape, double on\+Scale, double off\+Shape, double off\+Scale)
 \begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} with given Pareto parameters. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classmodel_1_1_traffic_source_aac5b13f053ea34b108cf1b189232c030}{get\+Id}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Identifier of this source. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classmodel_1_1_traffic_source_a6ae2fe5ae6db9946581323984c937998}{to\+String}} ()
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} that follows an FGN-\/driven ON/\+OFF pattern. 
-
-The constructor converts an FGN series to a binary sequence using a threshold, run-\/length encodes the sequence into durations, and then replays those durations so the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} can continue operating without code changes. 
+\doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} variant that follows an FGN-\/driven ON/\+OFF pattern. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_f_g_n_traffic_source_doc-constructors}
@@ -62,10 +62,14 @@ The constructor converts an FGN series to a binary sequence using a threshold, r
 model.\+FGNTraffic\+Source.\+FGNTraffic\+Source (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}}}]{params}{}\end{DoxyParamCaption})}
 
 
+
+Constructs an FGN-\/backed source that replays a deterministic schedule. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em id} & source identifier reused by the simulator \\
+{\em id} & Source identifier reused by the simulator. \\
 \hline
-{\em params} & simulation parameters containing all FGN settings \\
+{\em params} & Simulation parameters containing all FGN settings. \\
 \hline
 \end{DoxyParams}
 
@@ -81,8 +85,16 @@ model.\+FGNTraffic\+Source.\+FGNTraffic\+Source (\begin{DoxyParamCaption}\item[{
 
 
 
-Return the next event time based on the next FGN duration. 
+Returns the next event time based on the next FGN duration. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Time} & Current simulation time. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily \doxylink{classcore_1_1_event}{Event}} that flips the source state. 
+\end{DoxyReturn}
 
 
 Reimplemented from \mbox{\hyperlink{classmodel_1_1_traffic_source_aa4e3b925bf2bffc159bedcb17510d843}{model.\+Traffic\+Source}}.
@@ -93,8 +105,12 @@ Reimplemented from \mbox{\hyperlink{classmodel_1_1_traffic_source_aa4e3b925bf2bf
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_traffic_source_a3544936198cc3463029165522d49011a} 
 double model.\+FGNTraffic\+Source.\+get\+Next\+Event\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Timestamp of the next scheduled state change event. 
+
 \begin{DoxyReturn}{Returns}
-timestamp of the next scheduled state change event 
+Absolute time of the next flip. 
 \end{DoxyReturn}
 
 
@@ -106,8 +122,12 @@ Reimplemented from \mbox{\hyperlink{classmodel_1_1_traffic_source_addec51a76b146
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_traffic_source_a594ec49b495721960bfef9a3583aa4a8} 
 boolean model.\+FGNTraffic\+Source.\+is\+On (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Indicates whether the FGN schedule is currently ON. 
+
 \begin{DoxyReturn}{Returns}
-{\ttfamily true} when the FGN schedule is currently ON 
+{\ttfamily true} if the state is ON. 
 \end{DoxyReturn}
 
 
@@ -121,8 +141,13 @@ void model.\+FGNTraffic\+Source.\+process\+Event (\begin{DoxyParamCaption}\item[
 
 
 
-Update current state when the simulator delivers the flip. 
+Updates current state when the simulator delivers the flip. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \doxylink{classcore_1_1_event}{Event} representing the new state. \\
+\hline
+\end{DoxyParams}
 
 
 Reimplemented from \mbox{\hyperlink{classmodel_1_1_traffic_source_aaf7909151e413ed8e83b1c6e0feeddd5}{model.\+Traffic\+Source}}.

@@ -11,13 +11,13 @@ Handles all console interaction with the user.
 \mbox{\hyperlink{classio_1_1_console_u_i_ad32220db3f2449c9244f436d06f4ce7a}{Console\+UI}} ()
 \begin{DoxyCompactList}\small\item\em Creates a UI backed by {\ttfamily \doxylink{}{java.\+util.\+Scanner}}-\/based prompts. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_console_u_i_a55923120b39f925736bf1d2a8bba41fd}{start}} ()
-\begin{DoxyCompactList}\small\item\em Starts the console-\/driven interaction and launches the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Starts the console-\/driven interaction and launches simulations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Handles all console interaction with the user. 
 
-The UI delegates the heavy lifting to {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} implementations so that this class focuses purely on prompting and dispatching simulation modes. 
+Focuses on prompting and dispatching simulation modes while delegating heavy lifting to {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} implementations. Input\+: user menu selections and parameters via the {\ttfamily \doxylink{classio_1_1_console_prompter}{Console\+Prompter}}. Output\+: triggered simulation runs and user feedback. 
 
 \label{doc-constructors}
 \Hypertarget{classio_1_1_console_u_i_doc-constructors}
@@ -45,5 +45,6 @@ void io.\+Console\+UI.\+start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption
 
 
 
-Starts the console-\/driven interaction and launches the simulator. 
+Starts the console-\/driven interaction and launches simulations. 
 
+Loops until the user declines another run. For each cycle the UI asks for a mode, invokes the corresponding handler, then prompts whether to continue. 

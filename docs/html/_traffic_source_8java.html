@@ -98,6 +98,9 @@ $(function(){initNavTree('_traffic_source_8java.html','',''); });
   <div class="headertitle"><div class="title">TrafficSource.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Models an ON/OFF traffic source backed by configurable distributions.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>import core.Event;</code><br />
 <code>import core.EventType;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -105,7 +108,7 @@ Include dependency graph for TrafficSource.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_traffic_source_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2model_2_traffic_source_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2model_2_traffic_source_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2model_2_traffic_source_8java">
-<area shape="rect" title=" " alt="" coords="5,5,256,64"/>
+<area shape="rect" title="Models an ON/OFF traffic source backed by configurable distributions." alt="" coords="5,5,256,64"/>
 <area shape="rect" title=" " alt="" coords="27,112,111,139"/>
 <area shape="poly" title=" " alt="" coords="113,63,89,101,85,97,108,66"/>
 <area shape="rect" title=" " alt="" coords="136,112,248,139"/>
@@ -122,7 +125,10 @@ Classes</h2></td></tr>
 Packages</h2></td></tr>
 <tr class="memitem:model" id="r_model"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html">model</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Models an ON/OFF traffic source backed by configurable distributions. </p>
+<p>Collaborates with <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> to emit <code><a class="el" href="classcore_1_1_event.html">core.Event</a></code> objects and responds to processed events to update internal state. Default behavior uses <code><a class="el" href="classmodel_1_1_pareto_distribution.html">model.ParetoDistribution</a></code> to generate heavy-tailed durations, but tests can inject custom distributions. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

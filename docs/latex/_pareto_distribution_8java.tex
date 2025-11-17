@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/model/\+Pareto\+Distribution.java File Reference}
 \hypertarget{_pareto_distribution_8java}{}\label{_pareto_distribution_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/ParetoDistribution.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/ParetoDistribution.java}}
+
+
+Pareto (Type I) heavy-\/tailed distribution used for ON/\+OFF durations.  
+
+
 {\ttfamily import java.\+util.\+Random;}\newline
 Include dependency graph for Pareto\+Distribution.\+java\+:
 \nopagebreak
@@ -19,3 +24,9 @@ class \mbox{\hyperlink{classmodel_1_1_pareto_distribution}{model.\+Pareto\+Distr
 \item 
 package \mbox{\hyperlink{namespacemodel}{model}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Pareto (Type I) heavy-\/tailed distribution used for ON/\+OFF durations. 
+
+Provides inverse-\/transform sampling for generating ON/\+OFF durations consumed by {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} instances. The distribution is parameterized by shape α and scale β, matching textbook Pareto. 

@@ -5,7 +5,6 @@
  *          {@link core.Simulator} to reuse existing scheduling logic without
  *          modification. Collaborates with {@link util.FractionalGaussianNoise}
  *          and {@link model.SimulationParameters} for generation parameters.
- * @date 2024-05-30
  */
 package model;
 

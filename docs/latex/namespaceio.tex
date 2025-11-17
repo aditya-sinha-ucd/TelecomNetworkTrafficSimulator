@@ -4,20 +4,20 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_config_file_loader}{Config\+File\+Loader}}
-\begin{DoxyCompactList}\small\item\em Loads simulation parameters from a simple text or JSON-\/like configuration file. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Parses textual configuration files into parameter maps. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classio_1_1_console_prompter}{Console\+Prompter}}
-\begin{DoxyCompactList}\small\item\em Utility class responsible for prompting and validating console input. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Wraps {\ttfamily \doxylink{}{Scanner}} to collect validated user responses. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classio_1_1_console_u_i}{Console\+UI}}
 \begin{DoxyCompactList}\small\item\em Handles all console interaction with the user. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classio_1_1_error_handler}{Error\+Handler}}
-\begin{DoxyCompactList}\small\item\em Simple centralized error handler. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Provides helpers for printing warnings and terminating failures. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classio_1_1_f_g_n_simulation_handler}{FGNSimulation\+Handler}}
-\begin{DoxyCompactList}\small\item\em Handles console interaction and execution for the FGN generator mode. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for the FGN generator mode. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classio_1_1_file_output_manager}{File\+Output\+Manager}}
-\begin{DoxyCompactList}\small\item\em Manages all file output operations for the simulator. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implements {\ttfamily \doxylink{interfaceio_1_1_output_sink}{Output\+Sink}} using timestamped run directories. \end{DoxyCompactList}\item 
 interface \mbox{\hyperlink{interfaceio_1_1_output_sink}{Output\+Sink}}
-\begin{DoxyCompactList}\small\item\em Small abstraction around simulation output destinations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Contract for saving events, summaries, and FGN outputs. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classio_1_1_pareto_simulation_handler}{Pareto\+Simulation\+Handler}}
-\begin{DoxyCompactList}\small\item\em Handles the complete workflow for the Pareto ON/\+OFF mode. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for Pareto-\/driven sources. \end{DoxyCompactList}\item 
 interface \mbox{\hyperlink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}}
-\begin{DoxyCompactList}\small\item\em Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Contract for launching a particular simulation or data-\/generation mode. \end{DoxyCompactList}\end{DoxyCompactItemize}

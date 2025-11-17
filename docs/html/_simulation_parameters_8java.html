@@ -98,11 +98,14 @@ $(function(){initNavTree('_simulation_parameters_8java.html','',''); });
   <div class="headertitle"><div class="title">SimulationParameters.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Mutable configuration DTO consumed by <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:model_2ESimulationParameters" id="r_model_2ESimulationParameters"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_simulation_parameters.html">model.SimulationParameters</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds all configuration options required by the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>.  <a href="classmodel_1_1_simulation_parameters.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encapsulates all configuration options required by the simulator.  <a href="classmodel_1_1_simulation_parameters.html#details">More...</a><br /></td></tr>
 <tr class="memitem:model_2ESimulationParameters_2ETrafficModel" id="r_model_2ESimulationParameters_2ETrafficModel"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html">model.SimulationParameters.TrafficModel</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chooses the underlying traffic model.  <a href="enummodel_1_1_simulation_parameters_1_1_traffic_model.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -110,7 +113,10 @@ Classes</h2></td></tr>
 Packages</h2></td></tr>
 <tr class="memitem:model" id="r_model"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html">model</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Mutable configuration DTO consumed by <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>. </p>
+<p>Captures both Pareto and FGN-specific options, enabling the console UI to toggle between models via <code><a class="el" href="">TrafficModel</a></code>. Inputs come from <code><a class="el" href="classio_1_1_console_prompter.html">io.ConsolePrompter</a></code> or configuration files; outputs are read-only views accessed by simulation components. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

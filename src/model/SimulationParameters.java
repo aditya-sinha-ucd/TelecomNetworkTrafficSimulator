@@ -5,7 +5,6 @@
  *          UI to toggle between models via {@link TrafficModel}. Inputs come
  *          from {@link io.ConsolePrompter} or configuration files; outputs are
  *          read-only views accessed by simulation components.
- * @date 2024-05-30
  */
 package model;
 

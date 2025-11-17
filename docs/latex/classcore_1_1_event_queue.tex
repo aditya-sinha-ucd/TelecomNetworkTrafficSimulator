@@ -2,34 +2,34 @@
 \hypertarget{classcore_1_1_event_queue}{}\label{classcore_1_1_event_queue}\index{core.EventQueue@{core.EventQueue}}
 
 
-Manages the event scheduling and ordering for the simulation.  
+Thin wrapper around {\ttfamily \doxylink{}{Priority\+Queue}} tailored for simulation.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcore_1_1_event_queue_ac3476ba9da16b788937354247096ecf9}{Event\+Queue}} ()
-\begin{DoxyCompactList}\small\item\em Constructs an empty event queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructs an empty event queue ready for scheduling. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcore_1_1_event_queue_a88f4a243b7f5dc0b82ad43f8f94a9ab6}{add\+Event}} (\mbox{\hyperlink{classcore_1_1_event}{Event}} event)
-\begin{DoxyCompactList}\small\item\em Adds a new event to the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Adds a new event to the scheduler. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcore_1_1_event}{Event}} \mbox{\hyperlink{classcore_1_1_event_queue_ace733a8cca4d3e56e9b918bda65af619}{next\+Event}} ()
-\begin{DoxyCompactList}\small\item\em Retrieves and removes the next (earliest) event from the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Retrieves and removes the earliest event. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcore_1_1_event}{Event}} \mbox{\hyperlink{classcore_1_1_event_queue_aa8a0c14628d09f49b62d3c266d4aafa5}{peek\+Next\+Event}} ()
-\begin{DoxyCompactList}\small\item\em Peeks at the next event without removing it. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Peeks at the next event without dequeuing it. \end{DoxyCompactList}\item 
 boolean \mbox{\hyperlink{classcore_1_1_event_queue_af7d180e559f6ac2aca3458bebacd8607}{is\+Empty}} ()
-\begin{DoxyCompactList}\small\item\em Checks if there are any remaining events to process. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Indicates whether there are events left to process. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classcore_1_1_event_queue_af4334e15449c906de4fe483e09b4396a}{size}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Reports the number of events waiting to be processed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcore_1_1_event_queue_aaf1b4ff3e2636269d1ff7f0532e15693}{clear}} ()
-\begin{DoxyCompactList}\small\item\em Removes all events from the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Removes all pending events, effectively resetting scheduling. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classcore_1_1_event_queue_a6ad158284ecc7d46f07297fd73a5d95e}{to\+String}} ()
-\begin{DoxyCompactList}\small\item\em Provides a string summary of the current queue state, for debugging or status messages during the simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Describes the current queue state for logging. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Manages the event scheduling and ordering for the simulation. 
+Thin wrapper around {\ttfamily \doxylink{}{Priority\+Queue}} tailored for simulation. 
 
-This class acts as the central mechanism that determines which event occurs next. It uses a {\ttfamily \doxylink{}{Priority\+Queue}} to ensure events are always processed in chronological order. 
+Responsible for lifecycle management of scheduled events, providing operations to enqueue, poll, peek, and clear events. The class also exposes diagnostic information such as size for telemetry. 
 
 \label{doc-constructors}
 \Hypertarget{classcore_1_1_event_queue_doc-constructors}
@@ -42,7 +42,7 @@ core.\+Event\+Queue.\+Event\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCa
 
 
 
-Constructs an empty event queue. 
+Constructs an empty event queue ready for scheduling. 
 
 
 
@@ -57,11 +57,11 @@ void core.\+Event\+Queue.\+add\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyp
 
 
 
-Adds a new event to the queue. 
+Adds a new event to the scheduler. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em event} & the event to schedule \\
+{\em event} & {\ttfamily \doxylink{classcore_1_1_event}{Event}} to be ordered chronologically. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classcore_1_1_event_queue_aaf1b4ff3e2636269d1ff7f0532e15693}\index{core.EventQueue@{core.EventQueue}!clear@{clear}}
@@ -72,9 +72,9 @@ void core.\+Event\+Queue.\+clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCapt
 
 
 
-Removes all events from the queue. 
+Removes all pending events, effectively resetting scheduling. 
 
-Useful when resetting or restarting the simulation. \Hypertarget{classcore_1_1_event_queue_af7d180e559f6ac2aca3458bebacd8607}\index{core.EventQueue@{core.EventQueue}!isEmpty@{isEmpty}}
+\Hypertarget{classcore_1_1_event_queue_af7d180e559f6ac2aca3458bebacd8607}\index{core.EventQueue@{core.EventQueue}!isEmpty@{isEmpty}}
 \index{isEmpty@{isEmpty}!core.EventQueue@{core.EventQueue}}
 \doxysubsubsection{\texorpdfstring{isEmpty()}{isEmpty()}}
 {\footnotesize\ttfamily \label{classcore_1_1_event_queue_af7d180e559f6ac2aca3458bebacd8607} 
@@ -82,10 +82,10 @@ boolean core.\+Event\+Queue.\+is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyPa
 
 
 
-Checks if there are any remaining events to process. 
+Indicates whether there are events left to process. 
 
 \begin{DoxyReturn}{Returns}
-{\ttfamily true} if no events remain, {\ttfamily false} otherwise 
+{\ttfamily true} if the queue currently holds no events. 
 \end{DoxyReturn}
 \Hypertarget{classcore_1_1_event_queue_ace733a8cca4d3e56e9b918bda65af619}\index{core.EventQueue@{core.EventQueue}!nextEvent@{nextEvent}}
 \index{nextEvent@{nextEvent}!core.EventQueue@{core.EventQueue}}
@@ -95,10 +95,10 @@ Checks if there are any remaining events to process.
 
 
 
-Retrieves and removes the next (earliest) event from the queue. 
+Retrieves and removes the earliest event. 
 
 \begin{DoxyReturn}{Returns}
-the next scheduled event, or {\ttfamily null} if the queue is empty 
+Next {\ttfamily \doxylink{classcore_1_1_event}{Event}} to execute, or {\ttfamily null} if no events remain in the queue. 
 \end{DoxyReturn}
 \Hypertarget{classcore_1_1_event_queue_aa8a0c14628d09f49b62d3c266d4aafa5}\index{core.EventQueue@{core.EventQueue}!peekNextEvent@{peekNextEvent}}
 \index{peekNextEvent@{peekNextEvent}!core.EventQueue@{core.EventQueue}}
@@ -108,10 +108,10 @@ the next scheduled event, or {\ttfamily null} if the queue is empty
 
 
 
-Peeks at the next event without removing it. 
+Peeks at the next event without dequeuing it. 
 
 \begin{DoxyReturn}{Returns}
-the next event in line, or {\ttfamily null} if the queue is empty 
+Upcoming {\ttfamily \doxylink{classcore_1_1_event}{Event}} or {\ttfamily null} when empty. 
 \end{DoxyReturn}
 \Hypertarget{classcore_1_1_event_queue_af4334e15449c906de4fe483e09b4396a}\index{core.EventQueue@{core.EventQueue}!size@{size}}
 \index{size@{size}!core.EventQueue@{core.EventQueue}}
@@ -119,8 +119,12 @@ the next event in line, or {\ttfamily null} if the queue is empty
 {\footnotesize\ttfamily \label{classcore_1_1_event_queue_af4334e15449c906de4fe483e09b4396a} 
 int core.\+Event\+Queue.\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Reports the number of events waiting to be processed. 
+
 \begin{DoxyReturn}{Returns}
-the current number of events in the queue 
+Count of scheduled events. 
 \end{DoxyReturn}
 \Hypertarget{classcore_1_1_event_queue_a6ad158284ecc7d46f07297fd73a5d95e}\index{core.EventQueue@{core.EventQueue}!toString@{toString}}
 \index{toString@{toString}!core.EventQueue@{core.EventQueue}}
@@ -130,5 +134,8 @@ String core.\+Event\+Queue.\+to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyPa
 
 
 
-Provides a string summary of the current queue state, for debugging or status messages during the simulation. 
+Describes the current queue state for logging. 
 
+\begin{DoxyReturn}{Returns}
+String containing the queue size summary. 
+\end{DoxyReturn}

@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+FGNSimulation\+Handler.java File Reference}
 \hypertarget{_f_g_n_simulation_handler_8java}{}\label{_f_g_n_simulation_handler_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FGNSimulationHandler.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FGNSimulationHandler.java}}
+
+
+Console workflow that generates Fractional Gaussian Noise time series.  
+
+
 {\ttfamily import model.\+FGNGeneration\+Parameters;}\newline
 {\ttfamily import util.\+Fractional\+Gaussian\+Noise;}\newline
 {\ttfamily import java.\+io.\+IOException;}\newline
@@ -17,9 +22,17 @@ Include dependency graph for FGNSimulation\+Handler.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_f_g_n_simulation_handler}{io.\+FGNSimulation\+Handler}}
-\begin{DoxyCompactList}\small\item\em Handles console interaction and execution for the FGN generator mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for the FGN generator mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Console workflow that generates Fractional Gaussian Noise time series. 
+
+Guides the user through configuration, invokes {\ttfamily \doxylink{classutil_1_1_fractional_gaussian_noise}{util.\+Fractional\+Gaussian\+Noise}}, and exports the resulting samples via {\ttfamily \doxylink{classio_1_1_file_output_manager}{io.\+File\+Output\+Manager}}. Collaborates with {\ttfamily \doxylink{}{Console\+Prompter}} for input collection and {\ttfamily \doxylink{}{Config\+File\+Loader}} for optional file-\/based parameters. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

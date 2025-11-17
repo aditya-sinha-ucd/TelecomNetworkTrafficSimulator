@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/Simulator.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/Simulator.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="906,5,1124,64"/>
+<area shape="rect" id="Node000001" title="Orchestrates the end&#45;to&#45;end telecom traffic simulation workflow." alt="" coords="906,5,1124,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,71,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="903,39,748,48,545,61,318,82,86,115,85,109,317,77,545,56,748,43,909,38"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="95,112,213,139"/>

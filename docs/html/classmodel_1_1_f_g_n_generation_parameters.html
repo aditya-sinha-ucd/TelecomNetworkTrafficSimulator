@@ -99,21 +99,28 @@ $(function(){initNavTree('classmodel_1_1_f_g_n_generation_parameters.html','','c
 </div><!--header-->
 <div class="contents">
 
-<p>Holds the configuration required to generate a Fractional Gaussian Noise time-series from the console or a configuration file.  
+<p>Stores the configuration required to generate a Fractional Gaussian Noise time-series.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a07d69b3088f106dd44e51480bf507050" id="r_a07d69b3088f106dd44e51480bf507050"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07d69b3088f106dd44e51480bf507050">FGNGenerationParameters</a> (double hurst, double sigma, int sampleCount, double samplingInterval, double threshold, long seed)</td></tr>
+<tr class="memdesc:a07d69b3088f106dd44e51480bf507050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a parameter bundle populated with generator settings.  <br /></td></tr>
 <tr class="memitem:ade04841519b59a16ee6ff593db7caeed" id="r_ade04841519b59a16ee6ff593db7caeed"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade04841519b59a16ee6ff593db7caeed">getHurst</a> ()</td></tr>
+<tr class="memdesc:ade04841519b59a16ee6ff593db7caeed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desired Hurst exponent.  <br /></td></tr>
 <tr class="memitem:acdf1e274f67f86dc23e3629272cfafa3" id="r_acdf1e274f67f86dc23e3629272cfafa3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdf1e274f67f86dc23e3629272cfafa3">getSigma</a> ()</td></tr>
+<tr class="memdesc:acdf1e274f67f86dc23e3629272cfafa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard deviation of the generated series.  <br /></td></tr>
 <tr class="memitem:ae857bc96a44cde2570d5cf58d660bc4c" id="r_ae857bc96a44cde2570d5cf58d660bc4c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae857bc96a44cde2570d5cf58d660bc4c">getSampleCount</a> ()</td></tr>
+<tr class="memdesc:ae857bc96a44cde2570d5cf58d660bc4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of samples to produce.  <br /></td></tr>
 <tr class="memitem:a3b7bff5c074cd1b6ad508007c65e4f57" id="r_a3b7bff5c074cd1b6ad508007c65e4f57"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b7bff5c074cd1b6ad508007c65e4f57">getSamplingInterval</a> ()</td></tr>
+<tr class="memdesc:a3b7bff5c074cd1b6ad508007c65e4f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spacing between samples.  <br /></td></tr>
 <tr class="memitem:aec8238b406cf939453ba880aa83d5afd" id="r_aec8238b406cf939453ba880aa83d5afd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec8238b406cf939453ba880aa83d5afd">getThreshold</a> ()</td></tr>
+<tr class="memdesc:aec8238b406cf939453ba880aa83d5afd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Threshold applied when deriving ON/OFF states.  <br /></td></tr>
 <tr class="memitem:a4a80bb1bd3ef1833b3a424a10aedbea4" id="r_a4a80bb1bd3ef1833b3a424a10aedbea4"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a80bb1bd3ef1833b3a424a10aedbea4">getSeed</a> ()</td></tr>
+<tr class="memdesc:a4a80bb1bd3ef1833b3a424a10aedbea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random seed for reproducibility.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Holds the configuration required to generate a Fractional Gaussian Noise time-series from the console or a configuration file. </p>
+<div class="textblock"><p>Stores the configuration required to generate a Fractional Gaussian Noise time-series. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a07d69b3088f106dd44e51480bf507050" name="a07d69b3088f106dd44e51480bf507050"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07d69b3088f106dd44e51480bf507050">&#9670;&#160;</a></span>FGNGenerationParameters()</h2>
@@ -153,14 +160,16 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Builds a parameter bundle populated with generator settings. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">hurst</td><td>Hurst exponent for the generated process </td></tr>
-    <tr><td class="paramname">sigma</td><td>standard deviation </td></tr>
-    <tr><td class="paramname">sampleCount</td><td>number of samples to generate </td></tr>
-    <tr><td class="paramname">samplingInterval</td><td>spacing between samples (seconds) </td></tr>
-    <tr><td class="paramname">threshold</td><td>value used to derive ON/OFF states </td></tr>
-    <tr><td class="paramname">seed</td><td>random seed for reproducibility </td></tr>
+    <tr><td class="paramname">hurst</td><td>Hurst exponent for the generated process. </td></tr>
+    <tr><td class="paramname">sigma</td><td>Standard deviation. </td></tr>
+    <tr><td class="paramname">sampleCount</td><td>Number of samples to generate. </td></tr>
+    <tr><td class="paramname">samplingInterval</td><td>Spacing between samples (seconds). </td></tr>
+    <tr><td class="paramname">threshold</td><td>Value used to derive ON/OFF states. </td></tr>
+    <tr><td class="paramname">seed</td><td>Random seed for reproducibility. </td></tr>
   </table>
   </dd>
 </dl>
@@ -182,7 +191,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>desired Hurst exponent </dd></dl>
+
+<p>Desired Hurst exponent. </p>
+<dl class="section return"><dt>Returns</dt><dd>Target H value. </dd></dl>
 
 </div>
 </div>
@@ -200,7 +211,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>number of samples to produce </dd></dl>
+
+<p>Number of samples to produce. </p>
+<dl class="section return"><dt>Returns</dt><dd>Positive sample count. </dd></dl>
 
 </div>
 </div>
@@ -218,7 +231,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>spacing between samples </dd></dl>
+
+<p>Spacing between samples. </p>
+<dl class="section return"><dt>Returns</dt><dd>Sampling interval in seconds. </dd></dl>
 
 </div>
 </div>
@@ -236,7 +251,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>random seed </dd></dl>
+
+<p>Random seed for reproducibility. </p>
+<dl class="section return"><dt>Returns</dt><dd>Seed value. </dd></dl>
 
 </div>
 </div>
@@ -254,7 +271,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>standard deviation </dd></dl>
+
+<p>Standard deviation of the generated series. </p>
+<dl class="section return"><dt>Returns</dt><dd>Sigma value. </dd></dl>
 
 </div>
 </div>
@@ -272,7 +291,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>threshold applied when deriving ON/OFF states </dd></dl>
+
+<p>Threshold applied when deriving ON/OFF states. </p>
+<dl class="section return"><dt>Returns</dt><dd>Numeric threshold. </dd></dl>
 
 </div>
 </div>

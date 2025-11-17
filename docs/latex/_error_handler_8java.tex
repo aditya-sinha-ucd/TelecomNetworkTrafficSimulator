@@ -1,12 +1,25 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+Error\+Handler.java File Reference}
 \hypertarget{_error_handler_8java}{}\label{_error_handler_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ErrorHandler.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ErrorHandler.java}}
+
+
+Centralized facility for reporting recoverable and fatal errors.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_error_handler}{io.\+Error\+Handler}}
-\begin{DoxyCompactList}\small\item\em Simple centralized error handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Provides helpers for printing warnings and terminating failures. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Centralized facility for reporting recoverable and fatal errors. 
+
+Ensures consistent messaging throughout the console UI and simulator core. Collaborates with classes such as {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} and {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}} that need to abort execution on unrecoverable input or runtime issues. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

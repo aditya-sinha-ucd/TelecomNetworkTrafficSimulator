@@ -2,34 +2,26 @@
 \hypertarget{classutil_1_1_fractional_gaussian_noise}{}\label{classutil_1_1_fractional_gaussian_noise}\index{util.FractionalGaussianNoise@{util.FractionalGaussianNoise}}
 
 
-Fractional Gaussian Noise (f\+Gn) generator using the Davies–\+Harte method.  
+Generates Fractional Gaussian Noise sequences for the simulator.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise_a8b802ad974e9482ecbe8cae6f7a440b8}{Fractional\+Gaussian\+Noise}} (double hurst, double sigma, Random rng)
-\begin{DoxyCompactList}\small\item\em Preferred constructor\+: inject a Random for reproducibility and tests. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Preferred constructor that injects a {\ttfamily \doxylink{}{Random}} for reproducibility. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise_a1bb338ea7930b8132a9f6aafaf6f7b97}{Fractional\+Gaussian\+Noise}} (double hurst, double sigma, long seed)
-\begin{DoxyCompactList}\small\item\em Convenience constructor with a seed. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Convenience constructor that seeds an internal {\ttfamily \doxylink{}{Random}}. \end{DoxyCompactList}\item 
 double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise_a2247c86384b49eb63c4c1c155ddc2ba0}{generate}} (int n)
-\begin{DoxyCompactList}\small\item\em Generate an f\+Gn sequence of length n. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generates an f\+Gn sequence of length {\ttfamily n}. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise_a647e47d996a85c17d4ffeca97cc1dd2f}{get\+Hurst}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Hurst exponent configured for this generator. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classutil_1_1_fractional_gaussian_noise_a372edef708ae9ee12c12a9932d66b037}{get\+Sigma}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Standard deviation configured for this generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Fractional Gaussian Noise (f\+Gn) generator using the Davies–\+Harte method. 
-
-Produces a Gaussian, long-\/range dependent sequence with Hurst exponent H in (0.\+5, 1.\+0). Implementation highlights\+: 
-\begin{DoxyItemize}
-\item Clear parameter validation. 
-\item Dependency injection of {\ttfamily \doxylink{}{java.\+util.\+Random}} for reproducible tests. 
-\item Private helpers that implement each mathematical step. 
-\item Guards to avoid numerical Na\+Ns in FFT eigenvalues. 
-\end{DoxyItemize}
+Generates Fractional Gaussian Noise sequences for the simulator. 
 
 \label{doc-constructors}
 \Hypertarget{classutil_1_1_fractional_gaussian_noise_doc-constructors}
@@ -42,15 +34,15 @@ util.\+Fractional\+Gaussian\+Noise.\+Fractional\+Gaussian\+Noise (\begin{DoxyPar
 
 
 
-Preferred constructor\+: inject a Random for reproducibility and tests. 
+Preferred constructor that injects a {\ttfamily \doxylink{}{Random}} for reproducibility. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em hurst} & Hurst exponent (0.\+5 \texorpdfstring{$<$}{<} H \texorpdfstring{$<$}{<} 1.\+0) \\
+{\em hurst} & Hurst exponent (0.\+5 \texorpdfstring{$<$}{<} H \texorpdfstring{$<$}{<} 1.\+0). \\
 \hline
-{\em sigma} & Standard deviation (\texorpdfstring{$>$}{>} 0) \\
+{\em sigma} & Standard deviation (\texorpdfstring{$>$}{>} 0). \\
 \hline
-{\em rng} & Random generator \\
+{\em rng} & Random generator used internally. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classutil_1_1_fractional_gaussian_noise_a1bb338ea7930b8132a9f6aafaf6f7b97}\index{util.FractionalGaussianNoise@{util.FractionalGaussianNoise}!FractionalGaussianNoise@{FractionalGaussianNoise}}
@@ -61,7 +53,7 @@ util.\+Fractional\+Gaussian\+Noise.\+Fractional\+Gaussian\+Noise (\begin{DoxyPar
 
 
 
-Convenience constructor with a seed. 
+Convenience constructor that seeds an internal {\ttfamily \doxylink{}{Random}}. 
 
 
 
@@ -76,15 +68,15 @@ double\mbox{[}$\,$\mbox{]} util.\+Fractional\+Gaussian\+Noise.\+generate (\begin
 
 
 
-Generate an f\+Gn sequence of length n. 
+Generates an f\+Gn sequence of length {\ttfamily n}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em n} & number of samples (n {$\ge$} 2) \\
+{\em n} & Number of samples (n {$\ge$} 2). \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-array of length n containing the generated samples 
+Array containing the generated samples. 
 \end{DoxyReturn}
 \Hypertarget{classutil_1_1_fractional_gaussian_noise_a647e47d996a85c17d4ffeca97cc1dd2f}\index{util.FractionalGaussianNoise@{util.FractionalGaussianNoise}!getHurst@{getHurst}}
 \index{getHurst@{getHurst}!util.FractionalGaussianNoise@{util.FractionalGaussianNoise}}
@@ -92,9 +84,23 @@ array of length n containing the generated samples
 {\footnotesize\ttfamily \label{classutil_1_1_fractional_gaussian_noise_a647e47d996a85c17d4ffeca97cc1dd2f} 
 double util.\+Fractional\+Gaussian\+Noise.\+get\+Hurst (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Hurst exponent configured for this generator. 
+
+\begin{DoxyReturn}{Returns}
+H parameter. 
+\end{DoxyReturn}
 \Hypertarget{classutil_1_1_fractional_gaussian_noise_a372edef708ae9ee12c12a9932d66b037}\index{util.FractionalGaussianNoise@{util.FractionalGaussianNoise}!getSigma@{getSigma}}
 \index{getSigma@{getSigma}!util.FractionalGaussianNoise@{util.FractionalGaussianNoise}}
 \doxysubsubsection{\texorpdfstring{getSigma()}{getSigma()}}
 {\footnotesize\ttfamily \label{classutil_1_1_fractional_gaussian_noise_a372edef708ae9ee12c12a9932d66b037} 
 double util.\+Fractional\+Gaussian\+Noise.\+get\+Sigma (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Standard deviation configured for this generator. 
+
+\begin{DoxyReturn}{Returns}
+σ parameter. 
+\end{DoxyReturn}

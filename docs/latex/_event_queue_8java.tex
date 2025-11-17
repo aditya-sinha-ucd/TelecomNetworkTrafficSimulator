@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/core/\+Event\+Queue.java File Reference}
 \hypertarget{_event_queue_8java}{}\label{_event_queue_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/EventQueue.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/EventQueue.java}}
+
+
+Priority-\/queue backed scheduler used by the simulator core.  
+
+
 {\ttfamily import java.\+util.\+Priority\+Queue;}\newline
 Include dependency graph for Event\+Queue.\+java\+:
 \nopagebreak
@@ -13,9 +18,17 @@ Include dependency graph for Event\+Queue.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classcore_1_1_event_queue}{core.\+Event\+Queue}}
-\begin{DoxyCompactList}\small\item\em Manages the event scheduling and ordering for the simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Thin wrapper around {\ttfamily \doxylink{}{Priority\+Queue}} tailored for simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespacecore}{core}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Priority-\/queue backed scheduler used by the simulator core. 
+
+Encapsulates a {\ttfamily \doxylink{}{java.\+util.\+Priority\+Queue}} of {\ttfamily \doxylink{classcore_1_1_event}{core.\+Event}} instances ordered by time. The queue is the primary collaborator of {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}, supplying it with the next chronological event to execute. Inputs are {\ttfamily \doxylink{}{Event}} objects produced by traffic sources, and outputs are the same events delivered in sorted order for processing. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

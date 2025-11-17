@@ -107,7 +107,7 @@ Inheritance diagram for model.ParetoDistribution:</div>
 <div class="center"><img src="classmodel_1_1_pareto_distribution__inherit__graph.png" border="0" usemap="#amodel_8_pareto_distribution_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="amodel_8_pareto_distribution_inherit__map" id="amodel_8_pareto_distribution_inherit__map">
 <area shape="rect" title="Implements the Pareto (Type I) heavy&#45;tailed distribution." alt="" coords="5,80,170,107"/>
-<area shape="rect" href="classmodel_1_1_distribution.html" title="Abstract base class for probability distributions." alt="" coords="24,5,151,32"/>
+<area shape="rect" href="classmodel_1_1_distribution.html" title="Defines the sampling interface for all supported distributions." alt="" coords="24,5,151,32"/>
 <area shape="poly" title=" " alt="" coords="89,46,90,81,85,79,86,50"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -117,7 +117,7 @@ Collaboration diagram for model.ParetoDistribution:</div>
 <div class="center"><img src="classmodel_1_1_pareto_distribution__coll__graph.png" border="0" usemap="#amodel_8_pareto_distribution_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amodel_8_pareto_distribution_coll__map" id="amodel_8_pareto_distribution_coll__map">
 <area shape="rect" title="Implements the Pareto (Type I) heavy&#45;tailed distribution." alt="" coords="5,80,170,107"/>
-<area shape="rect" href="classmodel_1_1_distribution.html" title="Abstract base class for probability distributions." alt="" coords="24,5,151,32"/>
+<area shape="rect" href="classmodel_1_1_distribution.html" title="Defines the sampling interface for all supported distributions." alt="" coords="24,5,151,32"/>
 <area shape="poly" title=" " alt="" coords="89,46,90,81,85,79,86,50"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -129,12 +129,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad0e08d76f088a94df73355f7e086da98" id="r_ad0e08d76f088a94df73355f7e086da98"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0e08d76f088a94df73355f7e086da98">sample</a> ()</td></tr>
 <tr class="memdesc:ad0e08d76f088a94df73355f7e086da98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random sample using inverse transform sampling.  <br /></td></tr>
 <tr class="memitem:a2cff948f47deee0048dd0cf38e04834d" id="r_a2cff948f47deee0048dd0cf38e04834d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cff948f47deee0048dd0cf38e04834d">getShape</a> ()</td></tr>
+<tr class="memdesc:a2cff948f47deee0048dd0cf38e04834d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shape parameter α.  <br /></td></tr>
 <tr class="memitem:aa632f65f25165daf89d41dc34ca72f46" id="r_aa632f65f25165daf89d41dc34ca72f46"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa632f65f25165daf89d41dc34ca72f46">getScale</a> ()</td></tr>
+<tr class="memdesc:aa632f65f25165daf89d41dc34ca72f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale parameter β.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implements the Pareto (Type I) heavy-tailed distribution. </p>
-<p>Probability Density Function: f(x) = (alpha * scale^alpha) / x^(alpha + 1), for x &gt;= scale </p>
-<p>Used for modeling ON and OFF durations of traffic sources. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1a52757cd271a9106c94b645dedd8103" name="a1a52757cd271a9106c94b645dedd8103"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a52757cd271a9106c94b645dedd8103">&#9670;&#160;</a></span>ParetoDistribution()</h2>
@@ -158,8 +158,8 @@ Public Member Functions</h2></td></tr>
 <p>Constructs a Pareto distribution with given parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shape</td><td>shape parameter α (must be &gt; 0) </td></tr>
-    <tr><td class="paramname">scale</td><td>scale parameter β (must be &gt; 0) </td></tr>
+    <tr><td class="paramname">shape</td><td>Shape parameter α (must be &gt; 0). </td></tr>
+    <tr><td class="paramname">scale</td><td>Scale parameter β (must be &gt; 0). </td></tr>
   </table>
   </dd>
 </dl>
@@ -181,7 +181,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>scale parameter β </dd></dl>
+
+<p>Scale parameter β. </p>
+<dl class="section return"><dt>Returns</dt><dd>Minimum value parameter. </dd></dl>
 
 </div>
 </div>
@@ -199,7 +201,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>shape parameter α </dd></dl>
+
+<p>Shape parameter α. </p>
+<dl class="section return"><dt>Returns</dt><dd>Alpha value used during construction. </dd></dl>
 
 </div>
 </div>
@@ -219,7 +223,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Generates a random sample using inverse transform sampling. </p>
-<p>Formula: X = β / (U)^(1/α), where U ~ Uniform(0,1) </p>
+<dl class="section return"><dt>Returns</dt><dd>Random sample drawn from the Pareto distribution. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_distribution.html#ae58ad69acb139857940a5ff5a152355b">model.Distribution</a>.</p>
 

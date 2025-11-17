@@ -98,6 +98,9 @@ $(function(){initNavTree('_multi_source_manager_8java.html','',''); });
   <div class="headertitle"><div class="title">MultiSourceManager.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Factory-like helper that constructs homogeneous or heterogeneous source pools.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>import model.FGNTrafficSource;</code><br />
 <code>import model.SimulationParameters;</code><br />
 <code>import model.TrafficSource;</code><br />
@@ -109,7 +112,7 @@ Include dependency graph for MultiSourceManager.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_multi_source_manager_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2extensions_2_multi_source_manager_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2extensions_2_multi_source_manager_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2extensions_2_multi_source_manager_8java">
-<area shape="rect" title=" " alt="" coords="462,5,642,80"/>
+<area shape="rect" title="Factory&#45;like helper that constructs homogeneous or heterogeneous source pools." alt="" coords="462,5,642,80"/>
 <area shape="rect" title=" " alt="" coords="5,128,171,155"/>
 <area shape="poly" title=" " alt="" coords="462,65,164,127,163,122,461,60"/>
 <area shape="rect" title=" " alt="" coords="195,128,384,155"/>
@@ -128,13 +131,16 @@ Include dependency graph for MultiSourceManager.java:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:extensions_2EMultiSourceManager" id="r_extensions_2EMultiSourceManager"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classextensions_1_1_multi_source_manager.html">extensions.MultiSourceManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility responsible for constructing collections of <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> objects.  <a href="classextensions_1_1_multi_source_manager.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encapsulates construction strategies for multiple traffic sources.  <a href="classextensions_1_1_multi_source_manager.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:extensions" id="r_extensions"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceextensions.html">extensions</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Factory-like helper that constructs homogeneous or heterogeneous source pools. </p>
+<p>The class centralizes creation of <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> instances, supporting both Pareto ON/OFF sources with random parameter variation and <code><a class="el" href="classmodel_1_1_f_g_n_traffic_source.html">model.FGNTrafficSource</a></code> objects that leverage Fractional Gaussian Noise thresholds. Collaborates tightly with <code><a class="el" href="classmodel_1_1_simulation_parameters.html">model.SimulationParameters</a></code> to interpret requested traffic models. Outputs are mutable lists reused by <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

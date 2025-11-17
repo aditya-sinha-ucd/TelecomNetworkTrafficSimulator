@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+Config\+File\+Loader.java File Reference}
 \hypertarget{_config_file_loader_8java}{}\label{_config_file_loader_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConfigFileLoader.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConfigFileLoader.java}}
+
+
+Utility for reading simulation parameters from simple config files.  
+
+
 {\ttfamily import java.\+io.\+Buffered\+Reader;}\newline
 {\ttfamily import java.\+io.\+File\+Reader;}\newline
 {\ttfamily import java.\+io.\+IOException;}\newline
@@ -17,9 +22,17 @@ Include dependency graph for Config\+File\+Loader.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_config_file_loader}{io.\+Config\+File\+Loader}}
-\begin{DoxyCompactList}\small\item\em Loads simulation parameters from a simple text or JSON-\/like configuration file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Parses textual configuration files into parameter maps. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility for reading simulation parameters from simple config files. 
+
+Supports {\ttfamily key=value} and JSON-\/like syntaxes, ignoring comments and formatting characters. Converts numeric values into a {\ttfamily \doxylink{}{java.\+util.\+Map}} so higher layers (e.\+g., {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}}) can hydrate {\ttfamily \doxylink{classmodel_1_1_simulation_parameters}{model.\+Simulation\+Parameters}}. Inputs are file paths and outputs are string-\/to-\/double mappings. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

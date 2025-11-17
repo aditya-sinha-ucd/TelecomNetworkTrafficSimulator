@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/StatisticsCollector.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/StatisticsCollector.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="281,5,551,64"/>
+<area shape="rect" id="Node000001" title="Captures time&#45;series samples and derives summary metrics." alt="" coords="281,5,551,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,104,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="299,67,119,111,118,106,298,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="128,112,258,139"/>

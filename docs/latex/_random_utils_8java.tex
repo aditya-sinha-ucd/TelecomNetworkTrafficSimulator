@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/util/\+Random\+Utils.java File Reference}
 \hypertarget{_random_utils_8java}{}\label{_random_utils_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/RandomUtils.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/RandomUtils.java}}
+
+
+Shared random helper functions used by the simulator.  
+
+
 {\ttfamily import java.\+util.\+Random;}\newline
 Include dependency graph for Random\+Utils.\+java\+:
 \nopagebreak
@@ -13,9 +18,15 @@ Include dependency graph for Random\+Utils.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classutil_1_1_random_utils}{util.\+Random\+Utils}}
-\begin{DoxyCompactList}\small\item\em Utility class providing random number generation functions for the simulator, including support for Pareto-\/distributed samples which produce heavy-\/tailed ON/\+OFF durations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Utility class providing random number generation functions for the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceutil}{util}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Shared random helper functions used by the simulator. 
+
+Provides Pareto sampling and uniform draws needed by {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} initialization and other modules. Centralizing randomness simplifies seeding for reproducibility. 

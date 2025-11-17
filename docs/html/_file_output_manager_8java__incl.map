@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FileOutputManager.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FileOutputManager.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="1269,5,1527,64"/>
+<area shape="rect" id="Node000001" title="Concrete OutputSink that persists artifacts to disk." alt="" coords="1269,5,1527,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,120,90,147"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1266,39,998,49,662,64,338,85,204,99,103,115,92,117,91,112,102,109,204,93,337,80,662,58,998,44,1271,39"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="114,120,272,147"/>

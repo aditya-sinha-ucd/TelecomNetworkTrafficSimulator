@@ -98,6 +98,9 @@ $(function(){initNavTree('_f_g_n_traffic_source_8java.html','',''); });
   <div class="headertitle"><div class="title">FGNTrafficSource.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code><a class="el" href="">TrafficSource</a></code> implementation driven by Fractional Gaussian Noise.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>import core.Event;</code><br />
 <code>import core.EventType;</code><br />
 <code>import util.FractionalGaussianNoise;</code><br />
@@ -108,7 +111,7 @@ Include dependency graph for FGNTrafficSource.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_f_g_n_traffic_source_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2model_2_f_g_n_traffic_source_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2model_2_f_g_n_traffic_source_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2model_2_f_g_n_traffic_source_8java">
-<area shape="rect" title=" " alt="" coords="206,5,484,64"/>
+<area shape="rect" title="TrafficSource implementation driven by Fractional Gaussian Noise." alt="" coords="206,5,484,64"/>
 <area shape="rect" title=" " alt="" coords="5,112,90,139"/>
 <area shape="poly" title=" " alt="" coords="249,67,105,110,104,105,248,62"/>
 <area shape="rect" title=" " alt="" coords="114,112,226,139"/>
@@ -125,13 +128,16 @@ Include dependency graph for FGNTrafficSource.java:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:model_2EFGNTrafficSource" id="r_model_2EFGNTrafficSource"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_f_g_n_traffic_source.html">model.FGNTrafficSource</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> that follows an FGN-driven ON/OFF pattern.  <a href="classmodel_1_1_f_g_n_traffic_source.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> variant that follows an FGN-driven ON/OFF pattern.  <a href="classmodel_1_1_f_g_n_traffic_source.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:model" id="r_model"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html">model</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><code><a class="el" href="">TrafficSource</a></code> implementation driven by Fractional Gaussian Noise. </p>
+<p>Converts an FGN time series into ON/OFF durations, enabling the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> to reuse existing scheduling logic without modification. Collaborates with <code><a class="el" href="classutil_1_1_fractional_gaussian_noise.html">util.FractionalGaussianNoise</a></code> and <code><a class="el" href="classmodel_1_1_simulation_parameters.html">model.SimulationParameters</a></code> for generation parameters. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/extensions/\+Multi\+Source\+Manager.java File Reference}
 \hypertarget{_multi_source_manager_8java}{}\label{_multi_source_manager_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/MultiSourceManager.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/MultiSourceManager.java}}
+
+
+Factory-\/like helper that constructs homogeneous or heterogeneous source pools.  
+
+
 {\ttfamily import model.\+FGNTraffic\+Source;}\newline
 {\ttfamily import model.\+Simulation\+Parameters;}\newline
 {\ttfamily import model.\+Traffic\+Source;}\newline
@@ -18,9 +23,17 @@ Include dependency graph for Multi\+Source\+Manager.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classextensions_1_1_multi_source_manager}{extensions.\+Multi\+Source\+Manager}}
-\begin{DoxyCompactList}\small\item\em Utility responsible for constructing collections of {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Encapsulates construction strategies for multiple traffic sources. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceextensions}{extensions}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Factory-\/like helper that constructs homogeneous or heterogeneous source pools. 
+
+The class centralizes creation of {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} instances, supporting both Pareto ON/\+OFF sources with random parameter variation and {\ttfamily \doxylink{classmodel_1_1_f_g_n_traffic_source}{model.\+FGNTraffic\+Source}} objects that leverage Fractional Gaussian Noise thresholds. Collaborates tightly with {\ttfamily \doxylink{classmodel_1_1_simulation_parameters}{model.\+Simulation\+Parameters}} to interpret requested traffic models. Outputs are mutable lists reused by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

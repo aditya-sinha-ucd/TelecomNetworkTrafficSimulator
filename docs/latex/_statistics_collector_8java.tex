@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/core/\+Statistics\+Collector.java File Reference}
 \hypertarget{_statistics_collector_8java}{}\label{_statistics_collector_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/StatisticsCollector.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/StatisticsCollector.java}}
+
+
+Captures time-\/series samples and derives summary metrics.  
+
+
 {\ttfamily import util.\+Math\+Utils;}\newline
 {\ttfamily import util.\+Hurst\+Estimator;}\newline
 {\ttfamily import java.\+io.\+File\+Writer;}\newline
@@ -18,9 +23,17 @@ Include dependency graph for Statistics\+Collector.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}}
-\begin{DoxyCompactList}\small\item\em Collects and computes key simulation statistics over time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Immutable-\/interval statistics sink for the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespacecore}{core}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Captures time-\/series samples and derives summary metrics. 
+
+The collector is fed by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} at a fixed sampling cadence. It stores timestamps and aggregate activity rates, then exposes descriptive statistics (mean, max, deviation) and advanced measures such as the Hurst exponent via {\ttfamily \doxylink{classutil_1_1_hurst_estimator}{util.\+Hurst\+Estimator}}. Outputs are written to CSV or text summaries through export helpers. Collaborates with {\ttfamily \doxylink{classutil_1_1_math_utils}{util.\+Math\+Utils}} for numerical routines. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

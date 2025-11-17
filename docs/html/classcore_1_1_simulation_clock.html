@@ -99,24 +99,25 @@ $(function(){initNavTree('classcore_1_1_simulation_clock.html','','classcore_1_1
 </div><!--header-->
 <div class="contents">
 
-<p>Manages the current simulation time and provides a consistent time reference for all components.  
+<p>Maintains and exposes the current simulation timestamp.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afd2e2f05d8998e16614b364840427c6b" id="r_afd2e2f05d8998e16614b364840427c6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd2e2f05d8998e16614b364840427c6b">SimulationClock</a> ()</td></tr>
-<tr class="memdesc:afd2e2f05d8998e16614b364840427c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new simulation clock starting at time 0.  <br /></td></tr>
+<tr class="memdesc:afd2e2f05d8998e16614b364840427c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a clock initialized to time zero.  <br /></td></tr>
 <tr class="memitem:ac3fcd9acb4e25e432294f6cf49c4b250" id="r_ac3fcd9acb4e25e432294f6cf49c4b250"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3fcd9acb4e25e432294f6cf49c4b250">getTime</a> ()</td></tr>
+<tr class="memdesc:ac3fcd9acb4e25e432294f6cf49c4b250"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the present simulation time.  <br /></td></tr>
 <tr class="memitem:a275160d685e24e4c5ccf7809fbd7ea8f" id="r_a275160d685e24e4c5ccf7809fbd7ea8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a275160d685e24e4c5ccf7809fbd7ea8f">advanceTo</a> (double newTime)</td></tr>
-<tr class="memdesc:a275160d685e24e4c5ccf7809fbd7ea8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the simulation clock to a new time.  <br /></td></tr>
+<tr class="memdesc:a275160d685e24e4c5ccf7809fbd7ea8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the clock to the specified time if it is not in the past.  <br /></td></tr>
 <tr class="memitem:a7d519a3c907ff4f8b5d565a73bb90218" id="r_a7d519a3c907ff4f8b5d565a73bb90218"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d519a3c907ff4f8b5d565a73bb90218">reset</a> ()</td></tr>
-<tr class="memdesc:a7d519a3c907ff4f8b5d565a73bb90218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the simulation clock to zero.  <br /></td></tr>
+<tr class="memdesc:a7d519a3c907ff4f8b5d565a73bb90218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the clock to its initial state.  <br /></td></tr>
 <tr class="memitem:a7f4e4a4934dea5e56b0d9e711e9e9ead" id="r_a7f4e4a4934dea5e56b0d9e711e9e9ead"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f4e4a4934dea5e56b0d9e711e9e9ead">toString</a> ()</td></tr>
-<tr class="memdesc:a7f4e4a4934dea5e56b0d9e711e9e9ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a formatted string for logging.  <br /></td></tr>
+<tr class="memdesc:a7f4e4a4934dea5e56b0d9e711e9e9ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Produces a formatted representation for logging contexts.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages the current simulation time and provides a consistent time reference for all components. </p>
-<p>This class allows multiple modules (e.g., queues, statistics, estimators) to stay synchronized. </p>
+<div class="textblock"><p>Maintains and exposes the current simulation timestamp. </p>
+<p>Provides deterministic timekeeping for queues, collectors, and estimators. It enforces monotonic advancement, ensuring causality in the discrete-event simulation. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afd2e2f05d8998e16614b364840427c6b" name="afd2e2f05d8998e16614b364840427c6b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd2e2f05d8998e16614b364840427c6b">&#9670;&#160;</a></span>SimulationClock()</h2>
@@ -133,7 +134,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new simulation clock starting at time 0. </p>
+<p>Creates a clock initialized to time zero. </p>
 
 </div>
 </div>
@@ -153,11 +154,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Advances the simulation clock to a new time. </p>
-<p>Only moves forward, never backward.</p>
+<p>Advances the clock to the specified time if it is not in the past. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newTime</td><td>the next event time </td></tr>
+    <tr><td class="paramname">newTime</td><td>Next event time supplied by <code><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></code>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -178,7 +178,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the current simulation time </dd></dl>
+
+<p>Reads the present simulation time. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current simulation timestamp in seconds. </dd></dl>
 
 </div>
 </div>
@@ -197,7 +199,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Resets the simulation clock to zero. </p>
+<p>Resets the clock to its initial state. </p>
 
 </div>
 </div>
@@ -216,7 +218,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a formatted string for logging. </p>
+<p>Produces a formatted representation for logging contexts. </p>
+<dl class="section return"><dt>Returns</dt><dd>String with millisecond precision of <code><a class="el" href="">currentTime</a></code>. </dd></dl>
 
 </div>
 </div>

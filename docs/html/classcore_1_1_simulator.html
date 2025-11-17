@@ -99,30 +99,21 @@ $(function(){initNavTree('classcore_1_1_simulator.html','','classcore_1_1_simula
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_main.html" title="Application entry point for the Telecom Network Traffic Simulator.">Main</a> controller for the event-driven telecom traffic simulation.  
+<p>High-level controller for the event-driven simulation engine.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae2ffd756ab11668916a9a321935083fc" id="r_ae2ffd756ab11668916a9a321935083fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2ffd756ab11668916a9a321935083fc">Simulator</a> (<a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a> params)</td></tr>
-<tr class="memdesc:ae2ffd756ab11668916a9a321935083fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classcore_1_1_simulator.html" title="Main controller for the event-driven telecom traffic simulation.">Simulator</a> using the provided configuration parameters.  <br /></td></tr>
+<tr class="memdesc:ae2ffd756ab11668916a9a321935083fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a simulator using the provided configuration.  <br /></td></tr>
 <tr class="memitem:a9896d1cae8f415e9345b0ce300ec4dfe" id="r_a9896d1cae8f415e9345b0ce300ec4dfe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9896d1cae8f415e9345b0ce300ec4dfe">Simulator</a> (<a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a> params, Supplier&lt; <a class="el" href="interfaceio_1_1_output_sink.html">OutputSink</a> &gt; outputSinkSupplier)</td></tr>
-<tr class="memdesc:a9896d1cae8f415e9345b0ce300ec4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows callers (and tests) to inject a custom output sink.  <br /></td></tr>
+<tr class="memdesc:a9896d1cae8f415e9345b0ce300ec4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dependency-injection friendly constructor for supplying sinks.  <br /></td></tr>
 <tr class="memitem:a90408d62b198022449753d0f28fc2127" id="r_a90408d62b198022449753d0f28fc2127"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90408d62b198022449753d0f28fc2127">run</a> ()</td></tr>
-<tr class="memdesc:a90408d62b198022449753d0f28fc2127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the simulation and exports results to organized output files.  <br /></td></tr>
+<tr class="memdesc:a90408d62b198022449753d0f28fc2127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the simulation loop and exports data to organized outputs.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_main.html" title="Application entry point for the Telecom Network Traffic Simulator.">Main</a> controller for the event-driven telecom traffic simulation. </p>
-<p>Responsibilities include: </p><ul>
-<li>
-Initializing either Pareto or FGN-based traffic sources. </li>
-<li>
-Advancing the <code><a class="el" href="classcore_1_1_event_queue.html">EventQueue</a></code> and processing ON/OFF transitions. </li>
-<li>
-Sampling aggregate activity and exporting statistics. </li>
-<li>
-Coordinating optional queue modeling to approximate downstream congestion. </li>
-</ul>
+<div class="textblock"><p>High-level controller for the event-driven simulation engine. </p>
+<p>Acts as the single entry point for running experiments. It initializes traffic models, schedules events, consumes them in chronological order, updates aggregate statistics, and persists results. The simulator consumes <code><a class="el" href="">SimulationParameters</a></code> and produces CSV/summary outputs plus queue analytics. It collaborates with <code><a class="el" href="classcore_1_1_event_queue.html">EventQueue</a></code>, <code><a class="el" href="classcore_1_1_simulation_clock.html">SimulationClock</a></code>, <code><a class="el" href="classcore_1_1_statistics_collector.html">StatisticsCollector</a></code>, and IO helpers. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae2ffd756ab11668916a9a321935083fc" name="ae2ffd756ab11668916a9a321935083fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2ffd756ab11668916a9a321935083fc">&#9670;&#160;</a></span>Simulator() <span class="overload">[1/2]</span></h2>
@@ -139,10 +130,10 @@ Coordinating optional queue modeling to approximate downstream congestion. </li>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="classcore_1_1_simulator.html" title="Main controller for the event-driven telecom traffic simulation.">Simulator</a> using the provided configuration parameters. </p>
+<p>Constructs a simulator using the provided configuration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">params</td><td>immutable snapshot of user-provided simulation settings </td></tr>
+    <tr><td class="paramname">params</td><td>Immutable snapshot of user-provided simulation settings. </td></tr>
   </table>
   </dd>
 </dl>
@@ -168,7 +159,14 @@ Coordinating optional queue modeling to approximate downstream congestion. </li>
       </table>
 </div><div class="memdoc">
 
-<p>Allows callers (and tests) to inject a custom output sink. </p>
+<p>Dependency-injection friendly constructor for supplying sinks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">params</td><td>Simulation settings shared with all subsystems. </td></tr>
+    <tr><td class="paramname">outputSinkSupplier</td><td>Factory invoked per run to create an <code><a class="el" href="interfaceio_1_1_output_sink.html">OutputSink</a></code> implementation (file-based or test double). </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -188,7 +186,8 @@ Coordinating optional queue modeling to approximate downstream congestion. </li>
       </table>
 </div><div class="memdoc">
 
-<p>Runs the simulation and exports results to organized output files. </p>
+<p>Runs the simulation loop and exports data to organized outputs. </p>
+<p>The method drains the <code><a class="el" href="classcore_1_1_event_queue.html">EventQueue</a></code> while the <code><a class="el" href="classcore_1_1_simulation_clock.html">SimulationClock</a></code> is below <code><a class="el" href="">totalSimulationTime</a></code>. For each event it updates the corresponding source, schedules the next event, captures samples, and writes to the <code><a class="el" href="interfaceio_1_1_output_sink.html">OutputSink</a></code>. At completion the method finalizes queue statistics and exports CSV plus summaries. </p>
 
 </div>
 </div>

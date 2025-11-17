@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConsolePrompter.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConsolePrompter.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,255,64"/>
+<area shape="rect" id="Node000001" title="Centralizes console prompting logic and validation rules." alt="" coords="5,5,255,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="71,112,189,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,62,132,97,128,95,128,66"/>
 </map>

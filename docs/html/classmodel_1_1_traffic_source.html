@@ -107,7 +107,7 @@ Inheritance diagram for model.TrafficSource:</div>
 <div class="center"><img src="classmodel_1_1_traffic_source__inherit__graph.png" border="0" usemap="#amodel_8_traffic_source_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="amodel_8_traffic_source_inherit__map" id="amodel_8_traffic_source_inherit__map">
 <area shape="rect" title="Represents a single ON/OFF traffic source in the simulation." alt="" coords="19,5,157,32"/>
-<area shape="rect" href="classmodel_1_1_f_g_n_traffic_source.html" title="TrafficSource that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="5,80,171,107"/>
+<area shape="rect" href="classmodel_1_1_f_g_n_traffic_source.html" title="TrafficSource variant that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="5,80,171,107"/>
 <area shape="poly" title=" " alt="" coords="90,46,90,81,86,79,86,50"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -117,17 +117,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7fa07bfb5b338b43cc6cb5d3a3bbb04a" id="r_a7fa07bfb5b338b43cc6cb5d3a3bbb04a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fa07bfb5b338b43cc6cb5d3a3bbb04a">TrafficSource</a> (int id, double onShape, double onScale, double offShape, double offScale)</td></tr>
 <tr class="memdesc:a7fa07bfb5b338b43cc6cb5d3a3bbb04a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> with given Pareto parameters.  <br /></td></tr>
 <tr class="memitem:aa4e3b925bf2bffc159bedcb17510d843" id="r_aa4e3b925bf2bffc159bedcb17510d843"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcore_1_1_event.html">Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4e3b925bf2bffc159bedcb17510d843">generateNextEvent</a> (double currentTime)</td></tr>
-<tr class="memdesc:aa4e3b925bf2bffc159bedcb17510d843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the next event for this source based on its current state.  <br /></td></tr>
+<tr class="memdesc:aa4e3b925bf2bffc159bedcb17510d843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the next event based on the current state.  <br /></td></tr>
 <tr class="memitem:aaf7909151e413ed8e83b1c6e0feeddd5" id="r_aaf7909151e413ed8e83b1c6e0feeddd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf7909151e413ed8e83b1c6e0feeddd5">processEvent</a> (<a class="el" href="classcore_1_1_event.html">Event</a> event)</td></tr>
 <tr class="memdesc:aaf7909151e413ed8e83b1c6e0feeddd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a state change event (ON or OFF).  <br /></td></tr>
 <tr class="memitem:a40e607dd4f4f1a04d39e41c89ac37f90" id="r_a40e607dd4f4f1a04d39e41c89ac37f90"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40e607dd4f4f1a04d39e41c89ac37f90">isOn</a> ()</td></tr>
+<tr class="memdesc:a40e607dd4f4f1a04d39e41c89ac37f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the source is currently ON.  <br /></td></tr>
 <tr class="memitem:aac5b13f053ea34b108cf1b189232c030" id="r_aac5b13f053ea34b108cf1b189232c030"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac5b13f053ea34b108cf1b189232c030">getId</a> ()</td></tr>
+<tr class="memdesc:aac5b13f053ea34b108cf1b189232c030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of this source.  <br /></td></tr>
 <tr class="memitem:addec51a76b1461dc78eb0c6713764bbf" id="r_addec51a76b1461dc78eb0c6713764bbf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addec51a76b1461dc78eb0c6713764bbf">getNextEventTime</a> ()</td></tr>
+<tr class="memdesc:addec51a76b1461dc78eb0c6713764bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time of the next scheduled event.  <br /></td></tr>
 <tr class="memitem:a6ae2fe5ae6db9946581323984c937998" id="r_a6ae2fe5ae6db9946581323984c937998"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ae2fe5ae6db9946581323984c937998">toString</a> ()</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single ON/OFF traffic source in the simulation. </p>
-<p>Each <a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> alternates between active (ON) and idle (OFF) states. The ON and OFF durations are sampled from Pareto distributions to model self-similar network traffic. </p>
+<p>Alternates between active (ON) and idle (OFF) states with durations drawn from configured distributions. Generates events consumed by the simulator event queue. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7fa07bfb5b338b43cc6cb5d3a3bbb04a" name="a7fa07bfb5b338b43cc6cb5d3a3bbb04a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7fa07bfb5b338b43cc6cb5d3a3bbb04a">&#9670;&#160;</a></span>TrafficSource()</h2>
@@ -164,6 +167,16 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructs a new <a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> with given Pareto parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Unique identifier for the source. </td></tr>
+    <tr><td class="paramname">onShape</td><td>Shape parameter for ON durations. </td></tr>
+    <tr><td class="paramname">onScale</td><td>Scale parameter for ON durations. </td></tr>
+    <tr><td class="paramname">offShape</td><td>Shape parameter for OFF durations. </td></tr>
+    <tr><td class="paramname">offScale</td><td>Scale parameter for OFF durations. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -183,14 +196,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generates the next event for this source based on its current state. </p>
+<p>Generates the next event based on the current state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">currentTime</td><td>the current simulation time </td></tr>
+    <tr><td class="paramname">currentTime</td><td>Current simulation time. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the next event (ON or OFF) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Next <code><a class="el" href="classcore_1_1_event.html">Event</a></code> describing a state change. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classmodel_1_1_f_g_n_traffic_source.html#a961d5a9e771148c260193bca7c749941">model.FGNTrafficSource</a>.</p>
 
@@ -210,7 +223,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the ID of this source. </dd></dl>
+
+<p>Identifier of this source. </p>
+<dl class="section return"><dt>Returns</dt><dd>Unique source ID. </dd></dl>
 
 </div>
 </div>
@@ -228,7 +243,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the time of the next scheduled event. </dd></dl>
+
+<p>Time of the next scheduled event. </p>
+<dl class="section return"><dt>Returns</dt><dd>Absolute timestamp of the upcoming event. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classmodel_1_1_f_g_n_traffic_source.html#a3544936198cc3463029165522d49011a">model.FGNTrafficSource</a>.</p>
 
@@ -248,7 +265,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>true if the source is currently ON. </dd></dl>
+
+<p>Indicates whether the source is currently ON. </p>
+<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> when in the ON state. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classmodel_1_1_f_g_n_traffic_source.html#a594ec49b495721960bfef9a3583aa4a8">model.FGNTrafficSource</a>.</p>
 
@@ -272,7 +291,7 @@ Public Member Functions</h2></td></tr>
 <p>Processes a state change event (ON or OFF). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>event delivered by the simulator that flips the source state </td></tr>
+    <tr><td class="paramname">event</td><td><a class="el" href="classcore_1_1_event.html" title="Captures the time, source, and type of a discrete simulation event.">Event</a> delivered by the simulator that flips the source state. </td></tr>
   </table>
   </dd>
 </dl>

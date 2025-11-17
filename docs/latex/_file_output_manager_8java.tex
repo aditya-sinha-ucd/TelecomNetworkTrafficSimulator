@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+File\+Output\+Manager.java File Reference}
 \hypertarget{_file_output_manager_8java}{}\label{_file_output_manager_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FileOutputManager.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FileOutputManager.java}}
+
+
+Concrete {\ttfamily \doxylink{}{Output\+Sink}} that persists artifacts to disk.  
+
+
 {\ttfamily import core.\+Event;}\newline
 {\ttfamily import core.\+Statistics\+Collector;}\newline
 {\ttfamily import extensions.\+Network\+Queue;}\newline
@@ -30,9 +35,17 @@ Include dependency graph for File\+Output\+Manager.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_file_output_manager}{io.\+File\+Output\+Manager}}
-\begin{DoxyCompactList}\small\item\em Manages all file output operations for the simulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Implements {\ttfamily \doxylink{interfaceio_1_1_output_sink}{Output\+Sink}} using timestamped run directories. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Concrete {\ttfamily \doxylink{}{Output\+Sink}} that persists artifacts to disk. 
+
+Owns per-\/run directories, handles event logs, summaries, CSVs, and metadata files for both simulator and FGN workflows. Centralizing IO keeps {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} and console handlers focused on orchestration while this class manages formatting, file creation, and metadata serialization. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

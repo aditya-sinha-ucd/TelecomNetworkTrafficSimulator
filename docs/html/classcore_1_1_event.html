@@ -99,14 +99,14 @@ $(function(){initNavTree('classcore_1_1_event.html','','classcore_1_1_event-memb
 </div><!--header-->
 <div class="contents">
 
-<p>Represents a discrete event in the simulation.  
+<p>Captures the time, source, and type of a discrete simulation event.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for core.Event:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcore_1_1_event__inherit__graph.png" border="0" usemap="#acore_8_event_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="acore_8_event_inherit__map" id="acore_8_event_inherit__map">
-<area shape="rect" title="Represents a discrete event in the simulation." alt="" coords="38,80,122,107"/>
+<area shape="rect" title="Captures the time, source, and type of a discrete simulation event." alt="" coords="38,80,122,107"/>
 <area shape="rect" title=" " alt="" coords="5,5,155,32"/>
 <area shape="poly" title=" " alt="" coords="82,46,83,81,77,79,78,50"/>
 </map>
@@ -116,7 +116,7 @@ Collaboration diagram for core.Event:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcore_1_1_event__coll__graph.png" border="0" usemap="#acore_8_event_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="acore_8_event_coll__map" id="acore_8_event_coll__map">
-<area shape="rect" title="Represents a discrete event in the simulation." alt="" coords="38,80,122,107"/>
+<area shape="rect" title="Captures the time, source, and type of a discrete simulation event." alt="" coords="38,80,122,107"/>
 <area shape="rect" title=" " alt="" coords="5,5,155,32"/>
 <area shape="poly" title=" " alt="" coords="82,46,83,81,77,79,78,50"/>
 </map>
@@ -125,18 +125,21 @@ Collaboration diagram for core.Event:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a73f5ce29e8a4908f0d6664ea8a51447c" id="r_a73f5ce29e8a4908f0d6664ea8a51447c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73f5ce29e8a4908f0d6664ea8a51447c">Event</a> (double time, int sourceId, <a class="el" href="enumcore_1_1_event_type.html">EventType</a> type)</td></tr>
-<tr class="memdesc:a73f5ce29e8a4908f0d6664ea8a51447c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classcore_1_1_event.html" title="Represents a discrete event in the simulation.">Event</a>.  <br /></td></tr>
+<tr class="memdesc:a73f5ce29e8a4908f0d6664ea8a51447c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new immutable event instance.  <br /></td></tr>
 <tr class="memitem:a4b75390bd424b5d899e38581b177e8d3" id="r_a4b75390bd424b5d899e38581b177e8d3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b75390bd424b5d899e38581b177e8d3">getTime</a> ()</td></tr>
+<tr class="memdesc:a4b75390bd424b5d899e38581b177e8d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exposes the absolute simulation time of the event.  <br /></td></tr>
 <tr class="memitem:a7185363a0ca0a4e391d5935d11c2b038" id="r_a7185363a0ca0a4e391d5935d11c2b038"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7185363a0ca0a4e391d5935d11c2b038">getSourceId</a> ()</td></tr>
+<tr class="memdesc:a7185363a0ca0a4e391d5935d11c2b038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies which <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> scheduled the event.  <br /></td></tr>
 <tr class="memitem:a8e0e77fd16b732d7f5fbaac9f357b4f1" id="r_a8e0e77fd16b732d7f5fbaac9f357b4f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enumcore_1_1_event_type.html">EventType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e0e77fd16b732d7f5fbaac9f357b4f1">getType</a> ()</td></tr>
+<tr class="memdesc:a8e0e77fd16b732d7f5fbaac9f357b4f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reveals the ON/OFF transition type carried by the event.  <br /></td></tr>
 <tr class="memitem:ac707fff7e79d7aaf9098f2b9130ff318" id="r_ac707fff7e79d7aaf9098f2b9130ff318"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac707fff7e79d7aaf9098f2b9130ff318">compareTo</a> (<a class="el" href="#a73f5ce29e8a4908f0d6664ea8a51447c">Event</a> other)</td></tr>
-<tr class="memdesc:ac707fff7e79d7aaf9098f2b9130ff318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares this event to another based on simulation time.  <br /></td></tr>
+<tr class="memdesc:ac707fff7e79d7aaf9098f2b9130ff318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders events chronologically for use in <code><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></code>.  <br /></td></tr>
 <tr class="memitem:a38f23c84fa8018f7ec54382a00105ba6" id="r_a38f23c84fa8018f7ec54382a00105ba6"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38f23c84fa8018f7ec54382a00105ba6">toString</a> ()</td></tr>
-<tr class="memdesc:a38f23c84fa8018f7ec54382a00105ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a readable string representation of the event, useful for debugging or logging simulation progress.  <br /></td></tr>
+<tr class="memdesc:a38f23c84fa8018f7ec54382a00105ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a concise textual representation for logging/debugging.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a discrete event in the simulation. </p>
-<p>Events are processed chronologically by the <a class="el" href="classcore_1_1_simulator.html" title="Main controller for the event-driven telecom traffic simulation.">Simulator</a> through the <a class="el" href="classcore_1_1_event_queue.html" title="Manages the event scheduling and ordering for the simulation.">EventQueue</a>. Each event is generated by a TrafficSource and determines when it switches state (ON or OFF). </p>
+<div class="textblock"><p>Captures the time, source, and type of a discrete simulation event. </p>
+<p>Collaborates with <code><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></code> (for ordering) and <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> (for execution). Inputs include the event timestamp, the originating source ID, and the <code><a class="el" href="enumcore_1_1_event_type.html">core.EventType</a></code> describing the ON/OFF transition. The class outputs this structured information via accessors and comparison logic. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a73f5ce29e8a4908f0d6664ea8a51447c" name="a73f5ce29e8a4908f0d6664ea8a51447c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a73f5ce29e8a4908f0d6664ea8a51447c">&#9670;&#160;</a></span>Event()</h2>
@@ -162,12 +165,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="classcore_1_1_event.html" title="Represents a discrete event in the simulation.">Event</a>. </p>
+<p>Constructs a new immutable event instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">time</td><td>the simulation time when the event occurs </td></tr>
-    <tr><td class="paramname">sourceId</td><td>the ID of the traffic source </td></tr>
-    <tr><td class="paramname">type</td><td>the type of event (ON/OFF) </td></tr>
+    <tr><td class="paramname">time</td><td>Simulation time when the event occurs. </td></tr>
+    <tr><td class="paramname">sourceId</td><td>Identifier of the <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> that scheduled the event. </td></tr>
+    <tr><td class="paramname">type</td><td><code><a class="el" href="enumcore_1_1_event_type.html">EventType</a></code> describing whether the source switches ON or OFF at <code class="JavaDocCode">time</code>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -190,15 +193,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compares this event to another based on simulation time. </p>
-<p>This allows events to be ordered in the priority queue so that the earliest event is always processed first.</p>
+<p>Orders events chronologically for use in <code><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">other</td><td>the event to compare against </td></tr>
+    <tr><td class="paramname">other</td><td>The event being compared. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a negative value if this event is earlier, positive if later, 0 if equal </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Negative when this event occurs earlier, positive when later, and zero for simultaneous events. </dd></dl>
 
 </div>
 </div>
@@ -216,7 +218,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the ID of the traffic source associated with this event </dd></dl>
+
+<p>Identifies which <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> scheduled the event. </p>
+<dl class="section return"><dt>Returns</dt><dd>Zero-based source identifier as used by the simulator internals. </dd></dl>
 
 </div>
 </div>
@@ -234,7 +238,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the simulation time of the event </dd></dl>
+
+<p>Exposes the absolute simulation time of the event. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcore_1_1_event.html" title="Captures the time, source, and type of a discrete simulation event.">Event</a> timestamp expressed in seconds. </dd></dl>
 
 </div>
 </div>
@@ -252,7 +258,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the type of event (ON/OFF) </dd></dl>
+
+<p>Reveals the ON/OFF transition type carried by the event. </p>
+<dl class="section return"><dt>Returns</dt><dd><code><a class="el" href="enumcore_1_1_event_type.html#a977af585cadce9d53fda0403ec2ae554">EventType#ON</a></code> or <code><a class="el" href="enumcore_1_1_event_type.html#a67b34b3971958425f504c80a9bc6664a">EventType#OFF</a></code> depending on the direction of the state transition. </dd></dl>
 
 </div>
 </div>
@@ -271,7 +279,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a readable string representation of the event, useful for debugging or logging simulation progress. </p>
+<p>Builds a concise textual representation for logging/debugging. </p>
+<dl class="section return"><dt>Returns</dt><dd>Human-readable string summarizing time, source, and type. </dd></dl>
 
 </div>
 </div>

@@ -4,7 +4,6 @@
  * @details Used to characterize the self-similarity of recorded aggregate rates
  *          within {@link core.StatisticsCollector} and FGN workflows. Outputs a
  *          value in [0,1] indicating persistence or anti-persistence.
- * @date 2024-05-30
  */
 package util;
 

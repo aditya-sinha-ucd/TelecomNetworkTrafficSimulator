@@ -1,12 +1,25 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/core/\+Simulation\+Clock.java File Reference}
 \hypertarget{_simulation_clock_8java}{}\label{_simulation_clock_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/SimulationClock.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/SimulationClock.java}}
+
+
+Shared notion of simulation time across the core subsystems.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classcore_1_1_simulation_clock}{core.\+Simulation\+Clock}}
-\begin{DoxyCompactList}\small\item\em Manages the current simulation time and provides a consistent time reference for all components. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Maintains and exposes the current simulation timestamp. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespacecore}{core}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Shared notion of simulation time across the core subsystems. 
+
+The clock is advanced monotonically by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} as it processes {\ttfamily \doxylink{classcore_1_1_event}{core.\+Event}} objects from the {\ttfamily \doxylink{classcore_1_1_event_queue}{core.\+Event\+Queue}}. Other collaborators such as {\ttfamily \doxylink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}} consult the clock to compute durations, rates, and time-\/weighted averages. Inputs consist of the next event time, while outputs are time reads through {\ttfamily \doxylink{}{get\+Time()}}. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

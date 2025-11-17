@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/util/\+Hurst\+Estimator.java File Reference}
 \hypertarget{_hurst_estimator_8java}{}\label{_hurst_estimator_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/HurstEstimator.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/HurstEstimator.java}}
+
+
+Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent.  
+
+
 {\ttfamily import java.\+util.\+List;}\newline
 Include dependency graph for Hurst\+Estimator.\+java\+:
 \nopagebreak
@@ -13,9 +18,15 @@ Include dependency graph for Hurst\+Estimator.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classutil_1_1_hurst_estimator}{util.\+Hurst\+Estimator}}
-\begin{DoxyCompactList}\small\item\em Estimates the Hurst exponent (H) of a time series. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Estimates the Hurst exponent (H) of a time series via R/S analysis. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceutil}{util}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent. 
+
+Used to characterize the self-\/similarity of recorded aggregate rates within {\ttfamily \doxylink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}} and FGN workflows. Outputs a value in \mbox{[}0,1\mbox{]} indicating persistence or anti-\/persistence. 

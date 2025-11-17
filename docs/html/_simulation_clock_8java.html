@@ -98,17 +98,23 @@ $(function(){initNavTree('_simulation_clock_8java.html','',''); });
   <div class="headertitle"><div class="title">SimulationClock.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Shared notion of simulation time across the core subsystems.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:core_2ESimulationClock" id="r_core_2ESimulationClock"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1_simulation_clock.html">core.SimulationClock</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages the current simulation time and provides a consistent time reference for all components.  <a href="classcore_1_1_simulation_clock.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maintains and exposes the current simulation timestamp.  <a href="classcore_1_1_simulation_clock.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:core" id="r_core"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecore.html">core</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Shared notion of simulation time across the core subsystems. </p>
+<p>The clock is advanced monotonically by <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> as it processes <code><a class="el" href="classcore_1_1_event.html">core.Event</a></code> objects from the <code><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></code>. Other collaborators such as <code><a class="el" href="classcore_1_1_statistics_collector.html">core.StatisticsCollector</a></code> consult the clock to compute durations, rates, and time-weighted averages. Inputs consist of the next event time, while outputs are time reads through <code><a class="el" href="">getTime()</a></code>. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

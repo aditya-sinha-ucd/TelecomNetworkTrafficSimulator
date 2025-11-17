@@ -5,7 +5,6 @@
  *          {@link util.FractionalGaussianNoise} to derive sample sequences.
  *          Encapsulates Hurst exponent, variance, sampling cadence, ON/OFF
  *          threshold, and RNG seed.
- * @date 2024-05-30
  */
 package model;
 

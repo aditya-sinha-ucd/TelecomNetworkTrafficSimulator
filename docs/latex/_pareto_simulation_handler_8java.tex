@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+Pareto\+Simulation\+Handler.java File Reference}
 \hypertarget{_pareto_simulation_handler_8java}{}\label{_pareto_simulation_handler_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ParetoSimulationHandler.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ParetoSimulationHandler.java}}
+
+
+Console workflow for the classic Pareto ON/\+OFF simulation mode.  
+
+
 {\ttfamily import core.\+Simulator;}\newline
 {\ttfamily import model.\+Simulation\+Parameters;}\newline
 {\ttfamily import java.\+io.\+IOException;}\newline
@@ -16,9 +21,17 @@ Include dependency graph for Pareto\+Simulation\+Handler.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_pareto_simulation_handler}{io.\+Pareto\+Simulation\+Handler}}
-\begin{DoxyCompactList}\small\item\em Handles the complete workflow for the Pareto ON/\+OFF mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for Pareto-\/driven sources. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Console workflow for the classic Pareto ON/\+OFF simulation mode. 
+
+Collects configuration data, constructs {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}, and reports completion to the user. Supports both manual and file-\/based parameter entry. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

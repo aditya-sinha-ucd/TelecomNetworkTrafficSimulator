@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/extensions/\+Network\+Queue.java File Reference}
 \hypertarget{_network_queue_8java}{}\label{_network_queue_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/NetworkQueue.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/NetworkQueue.java}}
+
+
+Lightweight single-\/server queue approximation for downstream effects.  
+
+
 {\ttfamily import java.\+util.\+Array\+Deque;}\newline
 {\ttfamily import java.\+util.\+Deque;}\newline
 Include dependency graph for Network\+Queue.\+java\+:
@@ -14,9 +19,17 @@ Include dependency graph for Network\+Queue.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classextensions_1_1_network_queue}{extensions.\+Network\+Queue}}
-\begin{DoxyCompactList}\small\item\em Simple single-\/server queue approximation used to capture downstream latency. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Deterministic single-\/server queue used for coarse congestion modeling. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceextensions}{extensions}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Lightweight single-\/server queue approximation for downstream effects. 
+
+Used by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} to translate aggregate ON rates into latency/throughput metrics. The queue models deterministic service with configurable rate μ, tracks arrivals, departures, waiting time, and drop statistics, and exposes averages for reporting. Collaborates closely with {\ttfamily \doxylink{classextensions_1_1_queue_element}{extensions.\+Queue\+Element}} objects which capture per-\/packet timing. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

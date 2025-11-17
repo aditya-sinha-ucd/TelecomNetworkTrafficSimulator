@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/HurstEstimator.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/HurstEstimator.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,249,64"/>
+<area shape="rect" id="Node000001" title="Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent." alt="" coords="5,5,249,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="81,112,173,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,62,129,97,125,95,125,66"/>
 </map>

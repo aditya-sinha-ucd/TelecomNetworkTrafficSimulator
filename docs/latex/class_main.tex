@@ -2,20 +2,20 @@
 \hypertarget{class_main}{}\label{class_main}\index{Main@{Main}}
 
 
-Application entry point for the Telecom Network Traffic Simulator.  
+Entry point that launches the {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}}.  
 
 
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static void \mbox{\hyperlink{class_main_a8a5d0f827edddff706cc0e6740d0579a}{main}} (String\mbox{[}$\,$\mbox{]} args)
-\begin{DoxyCompactList}\small\item\em Launches the console UI loop and blocks until the user exits. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Launches the console UI loop and blocks until termination. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Application entry point for the Telecom Network Traffic Simulator. 
+Entry point that launches the {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}}. 
 
-The {\ttfamily Main} class simply boots the {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}} so that the user can choose between the different simulation modes. 
+The class is intentionally lightweight; its sole responsibility is to instantiate the console user interface which in turn orchestrates configuration loading, simulation execution, and output management. It collaborates directly with {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}} and indirectly with the simulator stack through that interface. The method signature mirrors the standard Java launcher contract. 
 
 \label{doc-func-members}
 \Hypertarget{class_main_doc-func-members}
@@ -28,10 +28,10 @@ void Main.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{ar
 
 
 
-Launches the console UI loop and blocks until the user exits. 
+Launches the console UI loop and blocks until termination. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em args} & standard command-\/line arguments (unused) \\
+{\em args} & Standard command-\/line arguments (unused because configuration is provided interactively or via config files managed by the UI layer). \\
 \hline
 \end{DoxyParams}

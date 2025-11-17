@@ -2,7 +2,7 @@
 \hypertarget{classutil_1_1_random_utils}{}\label{classutil_1_1_random_utils}\index{util.RandomUtils@{util.RandomUtils}}
 
 
-Utility class providing random number generation functions for the simulator, including support for Pareto-\/distributed samples which produce heavy-\/tailed ON/\+OFF durations.  
+Utility class providing random number generation functions for the simulator.  
 
 
 \doxysubsubsection*{Static Public Member Functions}
@@ -17,9 +17,7 @@ static void \mbox{\hyperlink{classutil_1_1_random_utils_ae888b0519537d644ec9f9c8
 
 
 \doxysubsection{Detailed Description}
-Utility class providing random number generation functions for the simulator, including support for Pareto-\/distributed samples which produce heavy-\/tailed ON/\+OFF durations. 
-
-Pareto distribution\+: X = scale / (U\texorpdfstring{$^\wedge$}{\string^}(1/shape)) where U \texorpdfstring{$\sim$}{\string~} Uniform(0, 1) 
+Utility class providing random number generation functions for the simulator. 
 
 \label{doc-func-members}
 \Hypertarget{classutil_1_1_random_utils_doc-func-members}
@@ -36,13 +34,13 @@ Generates a sample from a Pareto distribution.
 
 
 \begin{DoxyParams}{Parameters}
-{\em shape} & the alpha (shape) parameter (\texorpdfstring{$>$}{>} 1 recommended) \\
+{\em shape} & Alpha (shape) parameter (\texorpdfstring{$>$}{>} 0). \\
 \hline
-{\em scale} & the scale (minimum) parameter (\texorpdfstring{$>$}{>} 0) \\
+{\em scale} & Scale (minimum) parameter (\texorpdfstring{$>$}{>} 0). \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a Pareto-\/distributed random sample 
+Pareto-\/distributed random sample. 
 \end{DoxyReturn}
 \Hypertarget{classutil_1_1_random_utils_ae888b0519537d644ec9f9c8c0a498bac}\index{util.RandomUtils@{util.RandomUtils}!setSeed@{setSeed}}
 \index{setSeed@{setSeed}!util.RandomUtils@{util.RandomUtils}}
@@ -56,7 +54,7 @@ Sets a custom random seed for reproducible simulations.
 
 
 \begin{DoxyParams}{Parameters}
-{\em seed} & the seed value \\
+{\em seed} & Seed value applied to the shared RNG. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classutil_1_1_random_utils_a4f9a1cfd2c2b8c98bc5d1c0a70e35daa}\index{util.RandomUtils@{util.RandomUtils}!uniform@{uniform}}
@@ -71,11 +69,11 @@ Generates a uniformly distributed random double in \mbox{[}min, max\mbox{]}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em min} & lower bound \\
+{\em min} & Lower bound. \\
 \hline
-{\em max} & upper bound \\
+{\em max} & Upper bound. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-uniformly distributed random value 
+Uniformly distributed random value. 
 \end{DoxyReturn}

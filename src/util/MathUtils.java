@@ -4,7 +4,6 @@
  * @details Offers mean, variance, standard deviation, and max calculations for
  *          {@link java.util.List} collections of doubles. Primarily consumed by
  *          {@link core.StatisticsCollector} and {@link util.HurstEstimator}.
- * @date 2024-05-30
  */
 package util;
 

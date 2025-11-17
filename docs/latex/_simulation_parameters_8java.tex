@@ -1,10 +1,15 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/model/\+Simulation\+Parameters.java File Reference}
 \hypertarget{_simulation_parameters_8java}{}\label{_simulation_parameters_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/SimulationParameters.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/SimulationParameters.java}}
+
+
+Mutable configuration DTO consumed by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classmodel_1_1_simulation_parameters}{model.\+Simulation\+Parameters}}
-\begin{DoxyCompactList}\small\item\em Holds all configuration options required by the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Encapsulates all configuration options required by the simulator. \end{DoxyCompactList}\item 
 enum \mbox{\hyperlink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{model.\+Simulation\+Parameters.\+Traffic\+Model}}
 \begin{DoxyCompactList}\small\item\em Chooses the underlying traffic model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
@@ -12,3 +17,9 @@ enum \mbox{\hyperlink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{mod
 \item 
 package \mbox{\hyperlink{namespacemodel}{model}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Mutable configuration DTO consumed by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. 
+
+Captures both Pareto and FGN-\/specific options, enabling the console UI to toggle between models via {\ttfamily \doxylink{}{Traffic\+Model}}. Inputs come from {\ttfamily \doxylink{classio_1_1_console_prompter}{io.\+Console\+Prompter}} or configuration files; outputs are read-\/only views accessed by simulation components. 

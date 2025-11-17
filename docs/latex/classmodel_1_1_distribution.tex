@@ -2,12 +2,13 @@
 \hypertarget{classmodel_1_1_distribution}{}\label{classmodel_1_1_distribution}\index{model.Distribution@{model.Distribution}}
 
 
-Abstract base class for probability distributions.  
+Defines the sampling interface for all supported distributions.  
 
 
 
 
-Inheritance diagram for model.\+Distribution\+:\nopagebreak
+Inheritance diagram for model.\+Distribution\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,9 +23,7 @@ abstract double \mbox{\hyperlink{classmodel_1_1_distribution_ae58ad69acb13985794
 
 
 \doxysubsection{Detailed Description}
-Abstract base class for probability distributions. 
-
-Defines the interface for all distribution types used in the simulator (e.\+g., Pareto, Exponential, etc.). 
+Defines the sampling interface for all supported distributions. 
 
 \label{doc-func-members}
 \Hypertarget{classmodel_1_1_distribution_doc-func-members}
@@ -40,7 +39,7 @@ abstract double model.\+Distribution.\+sample (\begin{DoxyParamCaption}{}{}\end{
 Generates a random sample from this distribution. 
 
 \begin{DoxyReturn}{Returns}
-a randomly sampled value (must be positive) 
+Randomly sampled positive value. 
 \end{DoxyReturn}
 
 

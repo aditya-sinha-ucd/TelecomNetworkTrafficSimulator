@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/model/\+Traffic\+Source.java File Reference}
 \hypertarget{_traffic_source_8java}{}\label{_traffic_source_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/TrafficSource.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/TrafficSource.java}}
+
+
+Models an ON/\+OFF traffic source backed by configurable distributions.  
+
+
 {\ttfamily import core.\+Event;}\newline
 {\ttfamily import core.\+Event\+Type;}\newline
 Include dependency graph for Traffic\+Source.\+java\+:
@@ -20,3 +25,9 @@ class \mbox{\hyperlink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}}
 \item 
 package \mbox{\hyperlink{namespacemodel}{model}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Models an ON/\+OFF traffic source backed by configurable distributions. 
+
+Collaborates with {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} to emit {\ttfamily \doxylink{classcore_1_1_event}{core.\+Event}} objects and responds to processed events to update internal state. Default behavior uses {\ttfamily \doxylink{classmodel_1_1_pareto_distribution}{model.\+Pareto\+Distribution}} to generate heavy-\/tailed durations, but tests can inject custom distributions. 

@@ -1,12 +1,23 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/model/\+Distribution.java File Reference}
 \hypertarget{_distribution_8java}{}\label{_distribution_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/Distribution.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/Distribution.java}}
+
+
+Abstract base class for probability distributions used by sources.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classmodel_1_1_distribution}{model.\+Distribution}}
-\begin{DoxyCompactList}\small\item\em Abstract base class for probability distributions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Defines the sampling interface for all supported distributions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespacemodel}{model}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for probability distributions used by sources. 
+
+Establishes the contract satisfied by concrete distributions such as {\ttfamily \doxylink{classmodel_1_1_pareto_distribution}{model.\+Pareto\+Distribution}}. Collaborators include {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}}, which relies on {\ttfamily \doxylink{}{sample()}} to determine ON/\+OFF durations. 

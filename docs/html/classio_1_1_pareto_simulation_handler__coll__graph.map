@@ -1,5 +1,5 @@
 <map id="io.ParetoSimulationHandler" name="io.ParetoSimulationHandler">
-<area shape="rect" id="Node000001" title="Handles the complete workflow for the Pareto ON/OFF mode." alt="" coords="5,80,185,107"/>
-<area shape="rect" id="Node000002" href="$interfaceio_1_1_simulation_mode_handler.html" title="Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode." alt="" coords="8,5,182,32"/>
+<area shape="rect" id="Node000001" title="Implements SimulationModeHandler for Pareto&#45;driven sources." alt="" coords="5,80,185,107"/>
+<area shape="rect" id="Node000002" href="$interfaceio_1_1_simulation_mode_handler.html" title="Contract for launching a particular simulation or data&#45;generation mode." alt="" coords="8,5,182,32"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,46,97,81,93,79,93,50"/>
 </map>

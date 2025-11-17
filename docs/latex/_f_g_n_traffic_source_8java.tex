@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/model/\+FGNTraffic\+Source.java File Reference}
 \hypertarget{_f_g_n_traffic_source_8java}{}\label{_f_g_n_traffic_source_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/FGNTrafficSource.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/model/FGNTrafficSource.java}}
+
+
+{\ttfamily \doxylink{}{Traffic\+Source}} implementation driven by Fractional Gaussian Noise.  
+
+
 {\ttfamily import core.\+Event;}\newline
 {\ttfamily import core.\+Event\+Type;}\newline
 {\ttfamily import util.\+Fractional\+Gaussian\+Noise;}\newline
@@ -17,9 +22,15 @@ Include dependency graph for FGNTraffic\+Source.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classmodel_1_1_f_g_n_traffic_source}{model.\+FGNTraffic\+Source}}
-\begin{DoxyCompactList}\small\item\em \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} that follows an FGN-\/driven ON/\+OFF pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmodel_1_1_traffic_source}{Traffic\+Source} variant that follows an FGN-\/driven ON/\+OFF pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespacemodel}{model}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+{\ttfamily \doxylink{}{Traffic\+Source}} implementation driven by Fractional Gaussian Noise. 
+
+Converts an FGN time series into ON/\+OFF durations, enabling the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} to reuse existing scheduling logic without modification. Collaborates with {\ttfamily \doxylink{classutil_1_1_fractional_gaussian_noise}{util.\+Fractional\+Gaussian\+Noise}} and {\ttfamily \doxylink{classmodel_1_1_simulation_parameters}{model.\+Simulation\+Parameters}} for generation parameters. 

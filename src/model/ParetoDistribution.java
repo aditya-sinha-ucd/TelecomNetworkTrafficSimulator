@@ -4,7 +4,6 @@
  * @details Provides inverse-transform sampling for generating ON/OFF durations
  *          consumed by {@link model.TrafficSource} instances. The distribution
  *          is parameterized by shape α and scale β, matching textbook Pareto.
- * @date 2024-05-30
  */
 package model;
 

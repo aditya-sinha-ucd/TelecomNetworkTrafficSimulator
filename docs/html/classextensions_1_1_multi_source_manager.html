@@ -99,20 +99,21 @@ $(function(){initNavTree('classextensions_1_1_multi_source_manager.html','','cla
 </div><!--header-->
 <div class="contents">
 
-<p>Utility responsible for constructing collections of <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> objects.  
+<p>Encapsulates construction strategies for multiple traffic sources.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f8c717a47fb470a13b084e3fb36f11e" id="r_a5f8c717a47fb470a13b084e3fb36f11e"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classmodel_1_1_traffic_source.html">TrafficSource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f8c717a47fb470a13b084e3fb36f11e">generateSources</a> (int count, double baseOnShape, double baseOnScale, double baseOffShape, double baseOffScale, double variation)</td></tr>
-<tr class="memdesc:a5f8c717a47fb470a13b084e3fb36f11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a list of Pareto-based traffic sources with per-parameter variation.  <br /></td></tr>
+<tr class="memdesc:a5f8c717a47fb470a13b084e3fb36f11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds Pareto-based traffic sources with per-parameter variation.  <br /></td></tr>
 <tr class="memitem:a21ad913dbb4424a363fc7fcc35702cc6" id="r_a21ad913dbb4424a363fc7fcc35702cc6"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classmodel_1_1_traffic_source.html">TrafficSource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21ad913dbb4424a363fc7fcc35702cc6">generateFGNSources</a> (<a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a> params)</td></tr>
-<tr class="memdesc:a21ad913dbb4424a363fc7fcc35702cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds FGN-thresholded sources using the global simulation parameters.  <br /></td></tr>
+<tr class="memdesc:a21ad913dbb4424a363fc7fcc35702cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds FGN-thresholded sources using the global parameters.  <br /></td></tr>
 <tr class="memitem:ab9dc749a7a73d790a36fa46681ad1fb6" id="r_ab9dc749a7a73d790a36fa46681ad1fb6"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classmodel_1_1_traffic_source.html">TrafficSource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9dc749a7a73d790a36fa46681ad1fb6">getSources</a> ()</td></tr>
+<tr class="memdesc:ab9dc749a7a73d790a36fa46681ad1fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exposes the last generated list of sources.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utility responsible for constructing collections of <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> objects. </p>
-<p>Depending on the <code><a class="el" href="classmodel_1_1_simulation_parameters.html">model.SimulationParameters</a></code>, it can build either classic Pareto ON/OFF sources or <code><a class="el" href="classmodel_1_1_f_g_n_traffic_source.html">model.FGNTrafficSource</a></code> instances. </p>
+<div class="textblock"><p>Encapsulates construction strategies for multiple traffic sources. </p>
+<p>Maintains an internally reused list to minimize allocations. Inputs are either explicit Pareto parameters or a <code><a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a></code> bundle for FGN. Outputs are lists of fully initialized <code><a class="el" href="classmodel_1_1_traffic_source.html">TrafficSource</a></code> implementations ready for scheduling. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a21ad913dbb4424a363fc7fcc35702cc6" name="a21ad913dbb4424a363fc7fcc35702cc6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a21ad913dbb4424a363fc7fcc35702cc6">&#9670;&#160;</a></span>generateFGNSources()</h2>
@@ -129,14 +130,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Builds FGN-thresholded sources using the global simulation parameters. </p>
+<p>Builds FGN-thresholded sources using the global parameters. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">params</td><td>simulation configuration containing FGN settings </td></tr>
+    <tr><td class="paramname">params</td><td>Simulation configuration containing FGN settings such as Hurst exponent and threshold policies. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>list of <code><a class="el" href="classmodel_1_1_f_g_n_traffic_source.html">FGNTrafficSource</a></code> instances </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>List of <code><a class="el" href="classmodel_1_1_f_g_n_traffic_source.html">FGNTrafficSource</a></code> instances. </dd></dl>
 
 </div>
 </div>
@@ -179,19 +180,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Builds a list of Pareto-based traffic sources with per-parameter variation. </p>
+<p>Builds Pareto-based traffic sources with per-parameter variation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">count</td><td>number of sources to create </td></tr>
-    <tr><td class="paramname">baseOnShape</td><td>baseline ON-shape (alpha) parameter </td></tr>
-    <tr><td class="paramname">baseOnScale</td><td>baseline ON-scale parameter </td></tr>
-    <tr><td class="paramname">baseOffShape</td><td>baseline OFF-shape parameter </td></tr>
-    <tr><td class="paramname">baseOffScale</td><td>baseline OFF-scale parameter </td></tr>
-    <tr><td class="paramname">variation</td><td>relative variation applied to each parameter (e.g., 0.15 = ±15%) </td></tr>
+    <tr><td class="paramname">count</td><td>Number of sources to create. </td></tr>
+    <tr><td class="paramname">baseOnShape</td><td>Baseline ON-shape (alpha) parameter. </td></tr>
+    <tr><td class="paramname">baseOnScale</td><td>Baseline ON-scale parameter. </td></tr>
+    <tr><td class="paramname">baseOffShape</td><td>Baseline OFF-shape parameter. </td></tr>
+    <tr><td class="paramname">baseOffScale</td><td>Baseline OFF-scale parameter. </td></tr>
+    <tr><td class="paramname">variation</td><td>Relative variation applied to each parameter (e.g., <code class="JavaDocCode">0.15 = ±15%</code>). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>mutable list of configured traffic sources </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Mutable list of configured traffic sources. </dd></dl>
 
 </div>
 </div>
@@ -209,7 +210,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the last generated list of sources (mutable) </dd></dl>
+
+<p>Exposes the last generated list of sources. </p>
+<dl class="section return"><dt>Returns</dt><dd>Mutable list that callers may further inspect. </dd></dl>
 
 </div>
 </div>

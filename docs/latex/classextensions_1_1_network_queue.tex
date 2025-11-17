@@ -2,40 +2,40 @@
 \hypertarget{classextensions_1_1_network_queue}{}\label{classextensions_1_1_network_queue}\index{extensions.NetworkQueue@{extensions.NetworkQueue}}
 
 
-Simple single-\/server queue approximation used to capture downstream latency.  
+Deterministic single-\/server queue used for coarse congestion modeling.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classextensions_1_1_network_queue_ab02d76244c36826c5cc21d600d14bafb}{Network\+Queue}} (double service\+Rate)
-\begin{DoxyCompactList}\small\item\em Creates a queue with a given service rate. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Creates a queue with the provided service rate. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classextensions_1_1_network_queue_ae7d5e433fb3b1c50848ff9dffec7feee}{process\+Until}} (double t)
 \begin{DoxyCompactList}\small\item\em Processes departures and service progress until the specified time. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classextensions_1_1_network_queue_ac2def965576502968c8093d7e37a4687}{enqueue\+Bulk}} (double t, int count)
 \begin{DoxyCompactList}\small\item\em Enqueues multiple arrivals at the same time instant. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classextensions_1_1_network_queue_ad93aafed5ef022486e5b998c0c656af2}{enqueue}} (double t)
-\begin{DoxyCompactList}\small\item\em Wrapper for single-\/packet enqueue to match \doxylink{_simulator_8java}{Simulator.\+java}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Wrapper for single-\/packet enqueues to match {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} usage. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classextensions_1_1_network_queue_a5e5de730f486483e01f35ddd5b0dc66c}{get\+Avg\+Waiting\+Time}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Average waiting time experienced by served packets. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classextensions_1_1_network_queue_a0ac144070ce40b5c3427d0c330debbfb}{get\+Avg\+System\+Time}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Average total time spent in the system (waiting + service). \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classextensions_1_1_network_queue_a49aa7b620e47da24731e00e00a2a1425}{get\+Queue\+Length}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Instantaneous number of packets waiting. \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classextensions_1_1_network_queue_a1ddab09c5581125e16a08eca608eacd4}{get\+Total\+Served}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Total packets completed by the server. \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classextensions_1_1_network_queue_a6f3dbf3d4daea8a8ae001e3dd986f9e6}{get\+Total\+Dropped}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Packets dropped due to capacity (always zero currently). \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classextensions_1_1_network_queue_ace9f836bda56ed1143a21053713e8144}{get\+Total\+Arrived}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Cumulative arrivals injected into the queue. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classextensions_1_1_network_queue_adba9e711cfa1e6f5e5a06c5d6ede9ac7}{to\+String}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Provides a human-\/readable snapshot of queue metrics. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Simple single-\/server queue approximation used to capture downstream latency. 
+Deterministic single-\/server queue used for coarse congestion modeling. 
 
-The queue assumes deterministic service with rate {\ttfamily µ} and keeps track of cumulative waiting/system times as well as arrival/serviced counters so that the simulator can report queueing metrics alongside traffic stats. 
+Accepts bulk arrivals from {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}, advances service progress over time, and aggregates waiting/system time metrics for diagnostic reporting. 
 
 \label{doc-constructors}
 \Hypertarget{classextensions_1_1_network_queue_doc-constructors}
@@ -48,13 +48,18 @@ extensions.\+Network\+Queue.\+Network\+Queue (\begin{DoxyParamCaption}\item[{dou
 
 
 
-Creates a queue with a given service rate. 
+Creates a queue with the provided service rate. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em service\+Rate} & packets served per second (must be \texorpdfstring{$>$}{>} 0) \\
+{\em service\+Rate} & Packets served per second (must be \texorpdfstring{$>$}{>} 0). \\
 \hline
 \end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Illegal\+Argument\+Exception} & if the service rate is not positive. \\
+\hline
+\end{DoxyExceptions}
 
 
 \label{doc-func-members}
@@ -68,8 +73,13 @@ void extensions.\+Network\+Queue.\+enqueue (\begin{DoxyParamCaption}\item[{doubl
 
 
 
-Wrapper for single-\/packet enqueue to match \doxylink{_simulator_8java}{Simulator.\+java}. 
+Wrapper for single-\/packet enqueues to match {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} usage. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em t} & Arrival timestamp of the packet. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classextensions_1_1_network_queue_ac2def965576502968c8093d7e37a4687}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!enqueueBulk@{enqueueBulk}}
 \index{enqueueBulk@{enqueueBulk}!extensions.NetworkQueue@{extensions.NetworkQueue}}
 \doxysubsubsection{\texorpdfstring{enqueueBulk()}{enqueueBulk()}}
@@ -82,9 +92,9 @@ Enqueues multiple arrivals at the same time instant.
 
 
 \begin{DoxyParams}{Parameters}
-{\em t} & arrival time \\
+{\em t} & Arrival time shared by the bulk arrivals. \\
 \hline
-{\em count} & number of packets to enqueue \\
+{\em count} & Number of packets to enqueue. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classextensions_1_1_network_queue_a0ac144070ce40b5c3427d0c330debbfb}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getAvgSystemTime@{getAvgSystemTime}}
@@ -93,8 +103,12 @@ Enqueues multiple arrivals at the same time instant.
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a0ac144070ce40b5c3427d0c330debbfb} 
 double extensions.\+Network\+Queue.\+get\+Avg\+System\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Average total time spent in the system (waiting + service). 
+
 \begin{DoxyReturn}{Returns}
-average total time spent in the system 
+Mean sojourn time for served packets. 
 \end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a5e5de730f486483e01f35ddd5b0dc66c}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getAvgWaitingTime@{getAvgWaitingTime}}
 \index{getAvgWaitingTime@{getAvgWaitingTime}!extensions.NetworkQueue@{extensions.NetworkQueue}}
@@ -102,8 +116,12 @@ average total time spent in the system
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a5e5de730f486483e01f35ddd5b0dc66c} 
 double extensions.\+Network\+Queue.\+get\+Avg\+Waiting\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Average waiting time experienced by served packets. 
+
 \begin{DoxyReturn}{Returns}
-average waiting time experienced by served packets 
+Mean queue-\/only delay (seconds). 
 \end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a49aa7b620e47da24731e00e00a2a1425}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getQueueLength@{getQueueLength}}
 \index{getQueueLength@{getQueueLength}!extensions.NetworkQueue@{extensions.NetworkQueue}}
@@ -111,8 +129,12 @@ average waiting time experienced by served packets
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a49aa7b620e47da24731e00e00a2a1425} 
 int extensions.\+Network\+Queue.\+get\+Queue\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Instantaneous number of packets waiting. 
+
 \begin{DoxyReturn}{Returns}
-instantaneous number of packets waiting 
+Queue length including the job in service if any. 
 \end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_ace9f836bda56ed1143a21053713e8144}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getTotalArrived@{getTotalArrived}}
 \index{getTotalArrived@{getTotalArrived}!extensions.NetworkQueue@{extensions.NetworkQueue}}
@@ -120,8 +142,12 @@ instantaneous number of packets waiting
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_ace9f836bda56ed1143a21053713e8144} 
 long extensions.\+Network\+Queue.\+get\+Total\+Arrived (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Cumulative arrivals injected into the queue. 
+
 \begin{DoxyReturn}{Returns}
-cumulative arrivals injected into the queue 
+Total enqueued packet count. 
 \end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a6f3dbf3d4daea8a8ae001e3dd986f9e6}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getTotalDropped@{getTotalDropped}}
 \index{getTotalDropped@{getTotalDropped}!extensions.NetworkQueue@{extensions.NetworkQueue}}
@@ -129,8 +155,12 @@ cumulative arrivals injected into the queue
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a6f3dbf3d4daea8a8ae001e3dd986f9e6} 
 long extensions.\+Network\+Queue.\+get\+Total\+Dropped (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Packets dropped due to capacity (always zero currently). 
+
 \begin{DoxyReturn}{Returns}
-packets dropped due to capacity (always zero currently) 
+Number of arrivals rejected. 
 \end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_a1ddab09c5581125e16a08eca608eacd4}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!getTotalServed@{getTotalServed}}
 \index{getTotalServed@{getTotalServed}!extensions.NetworkQueue@{extensions.NetworkQueue}}
@@ -138,8 +168,12 @@ packets dropped due to capacity (always zero currently)
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_a1ddab09c5581125e16a08eca608eacd4} 
 long extensions.\+Network\+Queue.\+get\+Total\+Served (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Total packets completed by the server. 
+
 \begin{DoxyReturn}{Returns}
-total packets completed 
+Cumulative departures count. 
 \end{DoxyReturn}
 \Hypertarget{classextensions_1_1_network_queue_ae7d5e433fb3b1c50848ff9dffec7feee}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!processUntil@{processUntil}}
 \index{processUntil@{processUntil}!extensions.NetworkQueue@{extensions.NetworkQueue}}
@@ -153,7 +187,7 @@ Processes departures and service progress until the specified time.
 
 
 \begin{DoxyParams}{Parameters}
-{\em t} & simulation time horizon to advance to \\
+{\em t} & Simulation time horizon to advance to. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classextensions_1_1_network_queue_adba9e711cfa1e6f5e5a06c5d6ede9ac7}\index{extensions.NetworkQueue@{extensions.NetworkQueue}!toString@{toString}}
@@ -162,3 +196,10 @@ Processes departures and service progress until the specified time.
 {\footnotesize\ttfamily \label{classextensions_1_1_network_queue_adba9e711cfa1e6f5e5a06c5d6ede9ac7} 
 String extensions.\+Network\+Queue.\+to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Provides a human-\/readable snapshot of queue metrics. 
+
+\begin{DoxyReturn}{Returns}
+String summarizing arrivals, departures, drops, and averages. 
+\end{DoxyReturn}

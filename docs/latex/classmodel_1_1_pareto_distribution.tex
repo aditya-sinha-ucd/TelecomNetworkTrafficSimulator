@@ -7,7 +7,8 @@ Implements the Pareto (Type I) heavy-\/tailed distribution.
 
 
 
-Inheritance diagram for model.\+Pareto\+Distribution\+:\nopagebreak
+Inheritance diagram for model.\+Pareto\+Distribution\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,7 +17,8 @@ Inheritance diagram for model.\+Pareto\+Distribution\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for model.\+Pareto\+Distribution\+:\nopagebreak
+Collaboration diagram for model.\+Pareto\+Distribution\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,17 +33,13 @@ Collaboration diagram for model.\+Pareto\+Distribution\+:\nopagebreak
 double \mbox{\hyperlink{classmodel_1_1_pareto_distribution_ad0e08d76f088a94df73355f7e086da98}{sample}} ()
 \begin{DoxyCompactList}\small\item\em Generates a random sample using inverse transform sampling. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_pareto_distribution_a2cff948f47deee0048dd0cf38e04834d}{get\+Shape}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Shape parameter α. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_pareto_distribution_aa632f65f25165daf89d41dc34ca72f46}{get\+Scale}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Scale parameter β. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Implements the Pareto (Type I) heavy-\/tailed distribution. 
-
-Probability Density Function\+: f(x) = (alpha \texorpdfstring{$\ast$}{*} scale\texorpdfstring{$^\wedge$}{\string^}alpha) / x\texorpdfstring{$^\wedge$}{\string^}(alpha + 1), for x \texorpdfstring{$>$}{>}= scale 
-
-Used for modeling ON and OFF durations of traffic sources. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_pareto_distribution_doc-constructors}
@@ -58,9 +56,9 @@ Constructs a Pareto distribution with given parameters.
 
 
 \begin{DoxyParams}{Parameters}
-{\em shape} & shape parameter α (must be \texorpdfstring{$>$}{>} 0) \\
+{\em shape} & Shape parameter α (must be \texorpdfstring{$>$}{>} 0). \\
 \hline
-{\em scale} & scale parameter β (must be \texorpdfstring{$>$}{>} 0) \\
+{\em scale} & Scale parameter β (must be \texorpdfstring{$>$}{>} 0). \\
 \hline
 \end{DoxyParams}
 
@@ -74,8 +72,12 @@ Constructs a Pareto distribution with given parameters.
 {\footnotesize\ttfamily \label{classmodel_1_1_pareto_distribution_aa632f65f25165daf89d41dc34ca72f46} 
 double model.\+Pareto\+Distribution.\+get\+Scale (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Scale parameter β. 
+
 \begin{DoxyReturn}{Returns}
-scale parameter β 
+Minimum value parameter. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_pareto_distribution_a2cff948f47deee0048dd0cf38e04834d}\index{model.ParetoDistribution@{model.ParetoDistribution}!getShape@{getShape}}
 \index{getShape@{getShape}!model.ParetoDistribution@{model.ParetoDistribution}}
@@ -83,8 +85,12 @@ scale parameter β
 {\footnotesize\ttfamily \label{classmodel_1_1_pareto_distribution_a2cff948f47deee0048dd0cf38e04834d} 
 double model.\+Pareto\+Distribution.\+get\+Shape (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Shape parameter α. 
+
 \begin{DoxyReturn}{Returns}
-shape parameter α 
+Alpha value used during construction. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_pareto_distribution_ad0e08d76f088a94df73355f7e086da98}\index{model.ParetoDistribution@{model.ParetoDistribution}!sample@{sample}}
 \index{sample@{sample}!model.ParetoDistribution@{model.ParetoDistribution}}
@@ -96,7 +102,10 @@ double model.\+Pareto\+Distribution.\+sample (\begin{DoxyParamCaption}{}{}\end{D
 
 Generates a random sample using inverse transform sampling. 
 
-Formula\+: X = β / (U)\texorpdfstring{$^\wedge$}{\string^}(1/α), where U \texorpdfstring{$\sim$}{\string~} Uniform(0,1) 
+\begin{DoxyReturn}{Returns}
+Random sample drawn from the Pareto distribution. 
+\end{DoxyReturn}
+
 
 Reimplemented from \mbox{\hyperlink{classmodel_1_1_distribution_ae58ad69acb139857940a5ff5a152355b}{model.\+Distribution}}.
 

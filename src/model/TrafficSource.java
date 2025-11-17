@@ -5,7 +5,6 @@
  *          objects and responds to processed events to update internal state.
  *          Default behavior uses {@link model.ParetoDistribution} to generate
  *          heavy-tailed durations, but tests can inject custom distributions.
- * @date 2024-05-30
  */
 package model;
 

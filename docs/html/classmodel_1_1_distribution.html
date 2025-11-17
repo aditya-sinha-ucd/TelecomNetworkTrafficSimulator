@@ -99,14 +99,14 @@ $(function(){initNavTree('classmodel_1_1_distribution.html','','classmodel_1_1_d
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract base class for probability distributions.  
+<p>Defines the sampling interface for all supported distributions.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for model.Distribution:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodel_1_1_distribution__inherit__graph.png" border="0" usemap="#amodel_8_distribution_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="amodel_8_distribution_inherit__map" id="amodel_8_distribution_inherit__map">
-<area shape="rect" title="Abstract base class for probability distributions." alt="" coords="24,5,151,32"/>
+<area shape="rect" title="Defines the sampling interface for all supported distributions." alt="" coords="24,5,151,32"/>
 <area shape="rect" href="classmodel_1_1_pareto_distribution.html" title="Implements the Pareto (Type I) heavy&#45;tailed distribution." alt="" coords="5,80,170,107"/>
 <area shape="poly" title=" " alt="" coords="89,46,90,81,85,79,86,50"/>
 </map>
@@ -118,8 +118,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae58ad69acb139857940a5ff5a152355b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random sample from this distribution.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract base class for probability distributions. </p>
-<p>Defines the interface for all distribution types used in the simulator (e.g., Pareto, Exponential, etc.). </p>
+<div class="textblock"><p>Defines the sampling interface for all supported distributions. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ae58ad69acb139857940a5ff5a152355b" name="ae58ad69acb139857940a5ff5a152355b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae58ad69acb139857940a5ff5a152355b">&#9670;&#160;</a></span>sample()</h2>
@@ -145,7 +144,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Generates a random sample from this distribution. </p>
-<dl class="section return"><dt>Returns</dt><dd>a randomly sampled value (must be positive) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Randomly sampled positive value. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classmodel_1_1_pareto_distribution.html#ad0e08d76f088a94df73355f7e086da98">model.ParetoDistribution</a>.</p>
 

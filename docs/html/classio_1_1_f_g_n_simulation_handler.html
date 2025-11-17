@@ -99,15 +99,15 @@ $(function(){initNavTree('classio_1_1_f_g_n_simulation_handler.html','','classio
 </div><!--header-->
 <div class="contents">
 
-<p>Handles console interaction and execution for the FGN generator mode.  
+<p>Implements <code><a class="el" href="interfaceio_1_1_simulation_mode_handler.html">SimulationModeHandler</a></code> for the FGN generator mode.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for io.FGNSimulationHandler:</div>
 <div class="dyncontent">
 <div class="center"><img src="classio_1_1_f_g_n_simulation_handler__inherit__graph.png" border="0" usemap="#aio_8_f_g_n_simulation_handler_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="aio_8_f_g_n_simulation_handler_inherit__map" id="aio_8_f_g_n_simulation_handler_inherit__map">
-<area shape="rect" title="Handles console interaction and execution for the FGN generator mode." alt="" coords="7,80,177,107"/>
-<area shape="rect" href="interfaceio_1_1_simulation_mode_handler.html" title="Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode." alt="" coords="5,5,179,32"/>
+<area shape="rect" title="Implements SimulationModeHandler for the FGN generator mode." alt="" coords="7,80,177,107"/>
+<area shape="rect" href="interfaceio_1_1_simulation_mode_handler.html" title="Contract for launching a particular simulation or data&#45;generation mode." alt="" coords="5,5,179,32"/>
 <area shape="poly" title=" " alt="" coords="94,46,94,81,90,79,90,50"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -116,8 +116,8 @@ Collaboration diagram for io.FGNSimulationHandler:</div>
 <div class="dyncontent">
 <div class="center"><img src="classio_1_1_f_g_n_simulation_handler__coll__graph.png" border="0" usemap="#aio_8_f_g_n_simulation_handler_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="aio_8_f_g_n_simulation_handler_coll__map" id="aio_8_f_g_n_simulation_handler_coll__map">
-<area shape="rect" title="Handles console interaction and execution for the FGN generator mode." alt="" coords="7,80,177,107"/>
-<area shape="rect" href="interfaceio_1_1_simulation_mode_handler.html" title="Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode." alt="" coords="5,5,179,32"/>
+<area shape="rect" title="Implements SimulationModeHandler for the FGN generator mode." alt="" coords="7,80,177,107"/>
+<area shape="rect" href="interfaceio_1_1_simulation_mode_handler.html" title="Contract for launching a particular simulation or data&#45;generation mode." alt="" coords="5,5,179,32"/>
 <area shape="poly" title=" " alt="" coords="94,46,94,81,90,79,90,50"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -125,12 +125,13 @@ Collaboration diagram for io.FGNSimulationHandler:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad68bf9ed457ff2313bd91bc41f00aecb" id="r_ad68bf9ed457ff2313bd91bc41f00aecb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad68bf9ed457ff2313bd91bc41f00aecb">FGNSimulationHandler</a> (<a class="el" href="classio_1_1_console_prompter.html">ConsolePrompter</a> prompter)</td></tr>
+<tr class="memdesc:ad68bf9ed457ff2313bd91bc41f00aecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a handler bound to the shared <code><a class="el" href="classio_1_1_console_prompter.html">ConsolePrompter</a></code>.  <br /></td></tr>
 <tr class="memitem:ad8a7f9c99e70076e78a79b76e2666c7c" id="r_ad8a7f9c99e70076e78a79b76e2666c7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8a7f9c99e70076e78a79b76e2666c7c">run</a> ()</td></tr>
-<tr class="memdesc:ad8a7f9c99e70076e78a79b76e2666c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the configured simulation or generation workflow.  <br /></td></tr>
+<tr class="memdesc:ad8a7f9c99e70076e78a79b76e2666c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the FGN generation workflow from prompt to export.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Handles console interaction and execution for the FGN generator mode. </p>
-<p>Responsible for parameter gathering, invoking <code><a class="el" href="classutil_1_1_fractional_gaussian_noise.html">util.FractionalGaussianNoise</a></code>, and exporting all generated series/summary artifacts. </p>
+<div class="textblock"><p>Implements <code><a class="el" href="interfaceio_1_1_simulation_mode_handler.html">SimulationModeHandler</a></code> for the FGN generator mode. </p>
+<p>Responsibilities include parameter gathering (interactive or file based), generator invocation, metadata logging, and artifact export. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad68bf9ed457ff2313bd91bc41f00aecb" name="ad68bf9ed457ff2313bd91bc41f00aecb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad68bf9ed457ff2313bd91bc41f00aecb">&#9670;&#160;</a></span>FGNSimulationHandler()</h2>
@@ -146,9 +147,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a handler bound to the shared <code><a class="el" href="classio_1_1_console_prompter.html">ConsolePrompter</a></code>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">prompter</td><td>shared console input helper </td></tr>
+    <tr><td class="paramname">prompter</td><td>Shared console input helper. </td></tr>
   </table>
   </dd>
 </dl>
@@ -171,7 +174,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes the configured simulation or generation workflow. </p>
+<p>Executes the FGN generation workflow from prompt to export. </p>
 
 <p>Implements <a class="el" href="interfaceio_1_1_simulation_mode_handler.html#a9d6a128f79038b59c1bfa212d11911ef">io.SimulationModeHandler</a>.</p>
 

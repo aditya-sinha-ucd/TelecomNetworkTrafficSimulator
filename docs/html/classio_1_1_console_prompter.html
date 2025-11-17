@@ -99,18 +99,19 @@ $(function(){initNavTree('classio_1_1_console_prompter.html','','classio_1_1_con
 </div><!--header-->
 <div class="contents">
 
-<p>Utility class responsible for prompting and validating console input.  
+<p>Wraps <code><a class="el" href="">Scanner</a></code> to collect validated user responses.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a16c45e4fbe57f295375120435620305b" id="r_a16c45e4fbe57f295375120435620305b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16c45e4fbe57f295375120435620305b">ConsolePrompter</a> (Scanner scanner)</td></tr>
+<tr class="memdesc:a16c45e4fbe57f295375120435620305b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a prompter bound to a shared <code><a class="el" href="">Scanner</a></code> instance.  <br /></td></tr>
 <tr class="memitem:a5d313b59e0210a7f5315bd64bc3f34c4" id="r_a5d313b59e0210a7f5315bd64bc3f34c4"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d313b59e0210a7f5315bd64bc3f34c4">promptLine</a> (String message)</td></tr>
 <tr class="memdesc:a5d313b59e0210a7f5315bd64bc3f34c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays a prompt and returns the entered line.  <br /></td></tr>
 <tr class="memitem:a01e4d27794962d63f0e4516ad28bb179" id="r_a01e4d27794962d63f0e4516ad28bb179"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01e4d27794962d63f0e4516ad28bb179">promptPositiveDouble</a> (String message)</td></tr>
 <tr class="memdesc:a01e4d27794962d63f0e4516ad28bb179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a strictly positive double value.  <br /></td></tr>
 <tr class="memitem:af534b74f3886ea30ed6cd0bf3485eb73" id="r_af534b74f3886ea30ed6cd0bf3485eb73"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af534b74f3886ea30ed6cd0bf3485eb73">promptDouble</a> (String message)</td></tr>
-<tr class="memdesc:af534b74f3886ea30ed6cd0bf3485eb73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a generic double value.  <br /></td></tr>
+<tr class="memdesc:af534b74f3886ea30ed6cd0bf3485eb73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads an arbitrary double value.  <br /></td></tr>
 <tr class="memitem:a15d6a0d024fae9c3e9ef7be0f56181e2" id="r_a15d6a0d024fae9c3e9ef7be0f56181e2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15d6a0d024fae9c3e9ef7be0f56181e2">promptDoubleInRange</a> (String message, double minExclusive, double maxExclusive)</td></tr>
 <tr class="memdesc:a15d6a0d024fae9c3e9ef7be0f56181e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a double within an exclusive range.  <br /></td></tr>
 <tr class="memitem:ac88e93614f2e5f96c3fa03f19641d82c" id="r_ac88e93614f2e5f96c3fa03f19641d82c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac88e93614f2e5f96c3fa03f19641d82c">promptPositiveInt</a> (String message)</td></tr>
@@ -119,8 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:acd4910225e8f9e41669a6bd8127629cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a yes/no response.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Utility class responsible for prompting and validating console input. </p>
-<p>Centralizing all console parsing keeps the UI code small and allows the quit command to be handled consistently anywhere a prompt is shown. </p>
+<div class="textblock"><p>Wraps <code><a class="el" href="">Scanner</a></code> to collect validated user responses. </p>
+<p>Supports prompting for positive numbers, bounded doubles, integers, and yes/no answers. Collaborates exclusively with the console UI and signals exit when the user types <span class="tt">quit</span> or <span class="tt">q</span>. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a16c45e4fbe57f295375120435620305b" name="a16c45e4fbe57f295375120435620305b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16c45e4fbe57f295375120435620305b">&#9670;&#160;</a></span>ConsolePrompter()</h2>
@@ -136,9 +137,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a prompter bound to a shared <code><a class="el" href="">Scanner</a></code> instance. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scanner</td><td>input source shared with the console UI </td></tr>
+    <tr><td class="paramname">scanner</td><td>Input source shared with the console UI. </td></tr>
   </table>
   </dd>
 </dl>
@@ -161,7 +164,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reads a generic double value. </p>
+<p>Reads an arbitrary double value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Prompt displayed to the user. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Parsed double result. </dd></dl>
 
 </div>
 </div>
@@ -190,6 +200,15 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reads a double within an exclusive range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Prompt displayed to the user. </td></tr>
+    <tr><td class="paramname">minExclusive</td><td>Lower bound (exclusive). </td></tr>
+    <tr><td class="paramname">maxExclusive</td><td>Upper bound (exclusive). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Double value strictly within the bounds. </dd></dl>
 
 </div>
 </div>
@@ -209,6 +228,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Displays a prompt and returns the entered line. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Prompt shown to the user. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>User-entered string (trimmed) unless a quit command terminates the app. </dd></dl>
 
 </div>
 </div>
@@ -228,6 +254,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reads a strictly positive double value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Prompt shown to the user. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Positive double supplied via the console. </dd></dl>
 
 </div>
 </div>
@@ -247,6 +280,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reads a strictly positive integer value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Prompt displayed to the user. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Positive integer provided via the console. </dd></dl>
 
 </div>
 </div>
@@ -266,6 +306,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reads a yes/no response. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Prompt displayed to the user. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> for yes, <code class="JavaDocCode">false</code> for no. </dd></dl>
 
 </div>
 </div>

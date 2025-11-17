@@ -98,17 +98,23 @@ $(function(){initNavTree('_distribution_8java.html','',''); });
   <div class="headertitle"><div class="title">Distribution.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Abstract base class for probability distributions used by sources.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:model_2EDistribution" id="r_model_2EDistribution"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_distribution.html">model.Distribution</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for probability distributions.  <a href="classmodel_1_1_distribution.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the sampling interface for all supported distributions.  <a href="classmodel_1_1_distribution.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:model" id="r_model"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemodel.html">model</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract base class for probability distributions used by sources. </p>
+<p>Establishes the contract satisfied by concrete distributions such as <code><a class="el" href="classmodel_1_1_pareto_distribution.html">model.ParetoDistribution</a></code>. Collaborators include <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code>, which relies on <code><a class="el" href="">sample()</a></code> to determine ON/OFF durations. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

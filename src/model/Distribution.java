@@ -5,7 +5,6 @@
  *          {@link model.ParetoDistribution}. Collaborators include
  *          {@link model.TrafficSource}, which relies on {@link #sample()} to
  *          determine ON/OFF durations.
- * @date 2024-05-30
  */
 package model;
 

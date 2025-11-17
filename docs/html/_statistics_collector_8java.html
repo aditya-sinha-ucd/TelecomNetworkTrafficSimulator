@@ -98,6 +98,9 @@ $(function(){initNavTree('_statistics_collector_8java.html','',''); });
   <div class="headertitle"><div class="title">StatisticsCollector.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Captures time-series samples and derives summary metrics.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>import util.MathUtils;</code><br />
 <code>import util.HurstEstimator;</code><br />
 <code>import java.io.FileWriter;</code><br />
@@ -109,7 +112,7 @@ Include dependency graph for StatisticsCollector.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_statistics_collector_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2core_2_statistics_collector_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2core_2_statistics_collector_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2core_2_statistics_collector_8java">
-<area shape="rect" title=" " alt="" coords="281,5,551,64"/>
+<area shape="rect" title="Captures time&#45;series samples and derives summary metrics." alt="" coords="281,5,551,64"/>
 <area shape="rect" title=" " alt="" coords="5,112,104,139"/>
 <area shape="poly" title=" " alt="" coords="299,67,119,111,118,106,298,62"/>
 <area shape="rect" title=" " alt="" coords="128,112,258,139"/>
@@ -128,13 +131,16 @@ Include dependency graph for StatisticsCollector.java:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:core_2EStatisticsCollector" id="r_core_2EStatisticsCollector"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1_statistics_collector.html">core.StatisticsCollector</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects and computes key simulation statistics over time.  <a href="classcore_1_1_statistics_collector.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Immutable-interval statistics sink for the simulator.  <a href="classcore_1_1_statistics_collector.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:core" id="r_core"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecore.html">core</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Captures time-series samples and derives summary metrics. </p>
+<p>The collector is fed by <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> at a fixed sampling cadence. It stores timestamps and aggregate activity rates, then exposes descriptive statistics (mean, max, deviation) and advanced measures such as the Hurst exponent via <code><a class="el" href="classutil_1_1_hurst_estimator.html">util.HurstEstimator</a></code>. Outputs are written to CSV or text summaries through export helpers. Collaborates with <code><a class="el" href="classutil_1_1_math_utils.html">util.MathUtils</a></code> for numerical routines. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

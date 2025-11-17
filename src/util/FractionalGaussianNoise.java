@@ -5,7 +5,6 @@
  *          Hurst exponent and standard deviation. Emphasizes reproducibility via
  *          dependency injection of {@link java.util.Random} and guards against
  *          numerical instabilities in FFT computations.
- * @date 2024-05-30
  */
 package util;
 

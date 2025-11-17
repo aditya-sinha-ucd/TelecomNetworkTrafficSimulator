@@ -2,30 +2,30 @@
 \hypertarget{classmodel_1_1_f_g_n_generation_parameters}{}\label{classmodel_1_1_f_g_n_generation_parameters}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}}
 
 
-Holds the configuration required to generate a Fractional Gaussian Noise time-\/series from the console or a configuration file.  
+Stores the configuration required to generate a Fractional Gaussian Noise time-\/series.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_a07d69b3088f106dd44e51480bf507050}{FGNGeneration\+Parameters}} (double hurst, double sigma, int sample\+Count, double sampling\+Interval, double threshold, long seed)
-\item 
+\begin{DoxyCompactList}\small\item\em Builds a parameter bundle populated with generator settings. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_ade04841519b59a16ee6ff593db7caeed}{get\+Hurst}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Desired Hurst exponent. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_acdf1e274f67f86dc23e3629272cfafa3}{get\+Sigma}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Standard deviation of the generated series. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_ae857bc96a44cde2570d5cf58d660bc4c}{get\+Sample\+Count}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Number of samples to produce. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_a3b7bff5c074cd1b6ad508007c65e4f57}{get\+Sampling\+Interval}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Spacing between samples. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_aec8238b406cf939453ba880aa83d5afd}{get\+Threshold}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Threshold applied when deriving ON/\+OFF states. \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_a4a80bb1bd3ef1833b3a424a10aedbea4}{get\+Seed}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Random seed for reproducibility. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Holds the configuration required to generate a Fractional Gaussian Noise time-\/series from the console or a configuration file. 
+Stores the configuration required to generate a Fractional Gaussian Noise time-\/series. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_doc-constructors}
@@ -37,18 +37,22 @@ Holds the configuration required to generate a Fractional Gaussian Noise time-\/
 model.\+FGNGeneration\+Parameters.\+FGNGeneration\+Parameters (\begin{DoxyParamCaption}\item[{double}]{hurst}{, }\item[{double}]{sigma}{, }\item[{int}]{sample\+Count}{, }\item[{double}]{sampling\+Interval}{, }\item[{double}]{threshold}{, }\item[{long}]{seed}{}\end{DoxyParamCaption})}
 
 
+
+Builds a parameter bundle populated with generator settings. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em hurst} & Hurst exponent for the generated process \\
+{\em hurst} & Hurst exponent for the generated process. \\
 \hline
-{\em sigma} & standard deviation \\
+{\em sigma} & Standard deviation. \\
 \hline
-{\em sample\+Count} & number of samples to generate \\
+{\em sample\+Count} & Number of samples to generate. \\
 \hline
-{\em sampling\+Interval} & spacing between samples (seconds) \\
+{\em sampling\+Interval} & Spacing between samples (seconds). \\
 \hline
-{\em threshold} & value used to derive ON/\+OFF states \\
+{\em threshold} & Value used to derive ON/\+OFF states. \\
 \hline
-{\em seed} & random seed for reproducibility \\
+{\em seed} & Random seed for reproducibility. \\
 \hline
 \end{DoxyParams}
 
@@ -62,8 +66,12 @@ model.\+FGNGeneration\+Parameters.\+FGNGeneration\+Parameters (\begin{DoxyParamC
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_ade04841519b59a16ee6ff593db7caeed} 
 double model.\+FGNGeneration\+Parameters.\+get\+Hurst (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Desired Hurst exponent. 
+
 \begin{DoxyReturn}{Returns}
-desired Hurst exponent 
+Target H value. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_ae857bc96a44cde2570d5cf58d660bc4c}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSampleCount@{getSampleCount}}
 \index{getSampleCount@{getSampleCount}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
@@ -71,8 +79,12 @@ desired Hurst exponent
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_ae857bc96a44cde2570d5cf58d660bc4c} 
 int model.\+FGNGeneration\+Parameters.\+get\+Sample\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Number of samples to produce. 
+
 \begin{DoxyReturn}{Returns}
-number of samples to produce 
+Positive sample count. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_a3b7bff5c074cd1b6ad508007c65e4f57}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSamplingInterval@{getSamplingInterval}}
 \index{getSamplingInterval@{getSamplingInterval}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
@@ -80,8 +92,12 @@ number of samples to produce
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_a3b7bff5c074cd1b6ad508007c65e4f57} 
 double model.\+FGNGeneration\+Parameters.\+get\+Sampling\+Interval (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Spacing between samples. 
+
 \begin{DoxyReturn}{Returns}
-spacing between samples 
+Sampling interval in seconds. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_a4a80bb1bd3ef1833b3a424a10aedbea4}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSeed@{getSeed}}
 \index{getSeed@{getSeed}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
@@ -89,8 +105,12 @@ spacing between samples
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_a4a80bb1bd3ef1833b3a424a10aedbea4} 
 long model.\+FGNGeneration\+Parameters.\+get\+Seed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Random seed for reproducibility. 
+
 \begin{DoxyReturn}{Returns}
-random seed 
+Seed value. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_acdf1e274f67f86dc23e3629272cfafa3}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getSigma@{getSigma}}
 \index{getSigma@{getSigma}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
@@ -98,8 +118,12 @@ random seed
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_acdf1e274f67f86dc23e3629272cfafa3} 
 double model.\+FGNGeneration\+Parameters.\+get\+Sigma (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Standard deviation of the generated series. 
+
 \begin{DoxyReturn}{Returns}
-standard deviation 
+Sigma value. 
 \end{DoxyReturn}
 \Hypertarget{classmodel_1_1_f_g_n_generation_parameters_aec8238b406cf939453ba880aa83d5afd}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getThreshold@{getThreshold}}
 \index{getThreshold@{getThreshold}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
@@ -107,6 +131,10 @@ standard deviation
 {\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_aec8238b406cf939453ba880aa83d5afd} 
 double model.\+FGNGeneration\+Parameters.\+get\+Threshold (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Threshold applied when deriving ON/\+OFF states. 
+
 \begin{DoxyReturn}{Returns}
-threshold applied when deriving ON/\+OFF states 
+Numeric threshold. 
 \end{DoxyReturn}

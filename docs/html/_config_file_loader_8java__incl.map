@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConfigFileLoader.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConfigFileLoader.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="278,5,524,64"/>
+<area shape="rect" id="Node000001" title="Utility for reading simulation parameters from simple config files." alt="" coords="278,5,524,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,159,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="298,67,143,110,142,105,296,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="183,112,309,139"/>

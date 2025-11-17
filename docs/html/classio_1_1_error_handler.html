@@ -99,7 +99,7 @@ $(function(){initNavTree('classio_1_1_error_handler.html','','classio_1_1_error_
 </div><!--header-->
 <div class="contents">
 
-<p>Simple centralized error handler.  
+<p>Provides helpers for printing warnings and terminating failures.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -110,8 +110,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:aee8449654c86101e376cb43af852c236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a warning message (non-fatal).  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple centralized error handler. </p>
-<p>Used for consistent printing of error messages and graceful program termination. </p>
+<div class="textblock"><p>Provides helpers for printing warnings and terminating failures. </p>
+<p>Offers two static methods: <code><a class="el" href="#a625c308710b6c7707909869a49a7a8df">handleError(String, boolean)</a></code> for fatal/non-fatal errors and <code><a class="el" href="#aee8449654c86101e376cb43af852c236">warn(String)</a></code> for advisory messages. Inputs are user-facing strings; outputs are console messages and optional JVM termination. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a625c308710b6c7707909869a49a7a8df" name="a625c308710b6c7707909869a49a7a8df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a625c308710b6c7707909869a49a7a8df">&#9670;&#160;</a></span>handleError()</h2>
@@ -143,8 +143,8 @@ Static Public Member Functions</h2></td></tr>
 <p>Prints an error message and optionally exits. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">message</td><td>message to display </td></tr>
-    <tr><td class="paramname">fatal</td><td>if true, terminates the program </td></tr>
+    <tr><td class="paramname">message</td><td>Message to display. </td></tr>
+    <tr><td class="paramname">fatal</td><td>If <code class="JavaDocCode">true</code>, terminates the program with exit code 1. </td></tr>
   </table>
   </dd>
 </dl>
@@ -177,7 +177,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Prints a warning message (non-fatal). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">message</td><td>message to display </td></tr>
+    <tr><td class="paramname">message</td><td>Message to display. </td></tr>
   </table>
   </dd>
 </dl>

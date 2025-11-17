@@ -5,7 +5,6 @@
  *          constructs the {@link io.ConsoleUI} and hands off execution to its
  *          interactive loop. No simulation logic lives here; instead this class
  *          simply wires user interaction with the rest of the system.
- * @date 2024-05-30
  */
 import io.ConsoleUI;
 

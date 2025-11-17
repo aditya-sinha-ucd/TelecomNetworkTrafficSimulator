@@ -2,12 +2,13 @@
 \hypertarget{classio_1_1_pareto_simulation_handler}{}\label{classio_1_1_pareto_simulation_handler}\index{io.ParetoSimulationHandler@{io.ParetoSimulationHandler}}
 
 
-Handles the complete workflow for the Pareto ON/\+OFF mode.  
+Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for Pareto-\/driven sources.  
 
 
 
 
-Inheritance diagram for io.\+Pareto\+Simulation\+Handler\+:\nopagebreak
+Inheritance diagram for io.\+Pareto\+Simulation\+Handler\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -16,7 +17,8 @@ Inheritance diagram for io.\+Pareto\+Simulation\+Handler\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for io.\+Pareto\+Simulation\+Handler\+:\nopagebreak
+Collaboration diagram for io.\+Pareto\+Simulation\+Handler\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -27,15 +29,15 @@ Collaboration diagram for io.\+Pareto\+Simulation\+Handler\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classio_1_1_pareto_simulation_handler_a70cb36fd33107c7a65b993ac52a834fe}{Pareto\+Simulation\+Handler}} (\mbox{\hyperlink{classio_1_1_console_prompter}{Console\+Prompter}} prompter)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a handler bound to the shared input helper. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classio_1_1_pareto_simulation_handler_ab597c9e77f1988ac767abb7b5b85773a}{run}} ()
-\begin{DoxyCompactList}\small\item\em Executes the configured simulation or generation workflow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Drives the Pareto simulation from prompts to execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Handles the complete workflow for the Pareto ON/\+OFF mode. 
+Implements {\ttfamily \doxylink{interfaceio_1_1_simulation_mode_handler}{Simulation\+Mode\+Handler}} for Pareto-\/driven sources. 
 
-Responsibilities include collecting parameters (manually or via file), instantiating {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}, and reporting completion. 
+Responsibilities include collecting parameters, instantiating the simulator, and handling error conditions gracefully. 
 
 \label{doc-constructors}
 \Hypertarget{classio_1_1_pareto_simulation_handler_doc-constructors}
@@ -47,8 +49,12 @@ Responsibilities include collecting parameters (manually or via file), instantia
 io.\+Pareto\+Simulation\+Handler.\+Pareto\+Simulation\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classio_1_1_console_prompter}{Console\+Prompter}}}]{prompter}{}\end{DoxyParamCaption})}
 
 
+
+Creates a handler bound to the shared input helper. 
+
+
 \begin{DoxyParams}{Parameters}
-{\em prompter} & shared input helper used by the console UI \\
+{\em prompter} & Shared input helper used by the console UI. \\
 \hline
 \end{DoxyParams}
 
@@ -64,7 +70,7 @@ void io.\+Pareto\+Simulation\+Handler.\+run (\begin{DoxyParamCaption}{}{}\end{Do
 
 
 
-Executes the configured simulation or generation workflow. 
+Drives the Pareto simulation from prompts to execution. 
 
 
 

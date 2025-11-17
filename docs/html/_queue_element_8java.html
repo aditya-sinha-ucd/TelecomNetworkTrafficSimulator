@@ -98,17 +98,23 @@ $(function(){initNavTree('_queue_element_8java.html','',''); });
   <div class="headertitle"><div class="title">QueueElement.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data container for individual packets in <code><a class="el" href="classextensions_1_1_network_queue.html">extensions.NetworkQueue</a></code>.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:extensions_2EQueueElement" id="r_extensions_2EQueueElement"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classextensions_1_1_queue_element.html">extensions.QueueElement</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single packet or flow unit in the <a class="el" href="classextensions_1_1_network_queue.html" title="Simple single-server queue approximation used to capture downstream latency.">NetworkQueue</a>.  <a href="classextensions_1_1_queue_element.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single packet or flow unit in the queue.  <a href="classextensions_1_1_queue_element.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:extensions" id="r_extensions"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceextensions.html">extensions</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data container for individual packets in <code><a class="el" href="classextensions_1_1_network_queue.html">extensions.NetworkQueue</a></code>. </p>
+<p>Stores arrival, service start, and departure timestamps so that the queue can compute waiting and system times. Collaborates exclusively with <code><a class="el" href="">NetworkQueue</a></code>, which mutates the service/departure times as service progresses. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

@@ -107,11 +107,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad32220db3f2449c9244f436d06f4ce7a" id="r_ad32220db3f2449c9244f436d06f4ce7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad32220db3f2449c9244f436d06f4ce7a">ConsoleUI</a> ()</td></tr>
 <tr class="memdesc:ad32220db3f2449c9244f436d06f4ce7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a UI backed by <code><a class="el" href="">java.util.Scanner</a></code>-based prompts.  <br /></td></tr>
 <tr class="memitem:a55923120b39f925736bf1d2a8bba41fd" id="r_a55923120b39f925736bf1d2a8bba41fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55923120b39f925736bf1d2a8bba41fd">start</a> ()</td></tr>
-<tr class="memdesc:a55923120b39f925736bf1d2a8bba41fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the console-driven interaction and launches the simulator.  <br /></td></tr>
+<tr class="memdesc:a55923120b39f925736bf1d2a8bba41fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the console-driven interaction and launches simulations.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handles all console interaction with the user. </p>
-<p>The UI delegates the heavy lifting to <code><a class="el" href="interfaceio_1_1_simulation_mode_handler.html">SimulationModeHandler</a></code> implementations so that this class focuses purely on prompting and dispatching simulation modes. </p>
+<p>Focuses on prompting and dispatching simulation modes while delegating heavy lifting to <code><a class="el" href="interfaceio_1_1_simulation_mode_handler.html">SimulationModeHandler</a></code> implementations. Input: user menu selections and parameters via the <code><a class="el" href="classio_1_1_console_prompter.html">ConsolePrompter</a></code>. Output: triggered simulation runs and user feedback. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad32220db3f2449c9244f436d06f4ce7a" name="ad32220db3f2449c9244f436d06f4ce7a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad32220db3f2449c9244f436d06f4ce7a">&#9670;&#160;</a></span>ConsoleUI()</h2>
@@ -148,7 +148,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Starts the console-driven interaction and launches the simulator. </p>
+<p>Starts the console-driven interaction and launches simulations. </p>
+<p>Loops until the user declines another run. For each cycle the UI asks for a mode, invokes the corresponding handler, then prompts whether to continue. </p>
 
 </div>
 </div>

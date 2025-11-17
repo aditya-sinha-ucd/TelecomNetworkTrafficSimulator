@@ -1,12 +1,25 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+Simulation\+Mode\+Handler.java File Reference}
 \hypertarget{_simulation_mode_handler_8java}{}\label{_simulation_mode_handler_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/SimulationModeHandler.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/SimulationModeHandler.java}}
+
+
+Strategy interface describing console-\/driven simulation workflows.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 interface \mbox{\hyperlink{interfaceio_1_1_simulation_mode_handler}{io.\+Simulation\+Mode\+Handler}}
-\begin{DoxyCompactList}\small\item\em Strategy interface that encapsulates the prompts and workflow for a specific console simulation mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Contract for launching a particular simulation or data-\/generation mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Strategy interface describing console-\/driven simulation workflows. 
+
+Implementations guide the user through parameter input and invoke the appropriate simulator components (e.\+g., Pareto vs. FGN). The UI depends on this abstraction to add new modes without changing the dispatcher logic. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

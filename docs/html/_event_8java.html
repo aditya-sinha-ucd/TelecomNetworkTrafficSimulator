@@ -98,17 +98,23 @@ $(function(){initNavTree('_event_8java.html','',''); });
   <div class="headertitle"><div class="title">Event.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Immutable representation of a discrete simulator event.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:core_2EEvent" id="r_core_2EEvent"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1_event.html">core.Event</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a discrete event in the simulation.  <a href="classcore_1_1_event.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures the time, source, and type of a discrete simulation event.  <a href="classcore_1_1_event.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:core" id="r_core"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecore.html">core</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Immutable representation of a discrete simulator event. </p>
+<p>Events are the atomic units processed by <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> through the <code><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></code>. Each event indicates when a <code><a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></code> transitions between <code><a class="el" href="enummodel_1_1_source_state.html">model.SourceState</a></code> states, effectively driving the ON/OFF workload generation pipeline. Instances are lightweight value objects ordered by <code><a class="el" href="">compareTo(Event)</a></code> for chronological scheduling. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

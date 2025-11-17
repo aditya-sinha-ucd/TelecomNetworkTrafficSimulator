@@ -1,5 +1,10 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/io/\+Console\+Prompter.java File Reference}
 \hypertarget{_console_prompter_8java}{}\label{_console_prompter_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConsolePrompter.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConsolePrompter.java}}
+
+
+Centralizes console prompting logic and validation rules.  
+
+
 {\ttfamily import java.\+util.\+Scanner;}\newline
 Include dependency graph for Console\+Prompter.\+java\+:
 \nopagebreak
@@ -13,9 +18,17 @@ Include dependency graph for Console\+Prompter.\+java\+:
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classio_1_1_console_prompter}{io.\+Console\+Prompter}}
-\begin{DoxyCompactList}\small\item\em Utility class responsible for prompting and validating console input. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Wraps {\ttfamily \doxylink{}{Scanner}} to collect validated user responses. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceio}{io}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Centralizes console prompting logic and validation rules. 
+
+Works alongside {\ttfamily \doxylink{classio_1_1_console_u_i}{io.\+Console\+UI}} to request numeric/text input while providing consistent handling of quit commands. Encapsulating user input parsing keeps UI flow logic tidy and testable. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

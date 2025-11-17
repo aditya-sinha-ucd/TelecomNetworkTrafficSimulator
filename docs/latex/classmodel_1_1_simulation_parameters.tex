@@ -2,12 +2,13 @@
 \hypertarget{classmodel_1_1_simulation_parameters}{}\label{classmodel_1_1_simulation_parameters}\index{model.SimulationParameters@{model.SimulationParameters}}
 
 
-Holds all configuration options required by the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}.  
+Encapsulates all configuration options required by the simulator.  
 
 
 
 
-Collaboration diagram for model.\+Simulation\+Parameters\+:\nopagebreak
+Collaboration diagram for model.\+Simulation\+Parameters\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,11 +24,11 @@ enum \mbox{\hyperlink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{Tra
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classmodel_1_1_simulation_parameters_ae86d5088333168c53e180b8003c9d253}{Simulation\+Parameters}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Creates an empty parameter bag to be populated manually. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aabb8ec77d39c135379a8363fbe04109c}{Simulation\+Parameters}} (double total\+Time, int num\+Sources, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_afdf4f5d783f5c1b497872edd9cda10ab}{on\+Shape}}, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aad1f68603f865c07fc69f71f0cbb69cf}{on\+Scale}}, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a477b320a7bf5bfe48670648e3def6c3e}{off\+Shape}}, double \mbox{\hyperlink{classmodel_1_1_simulation_parameters_aad85e229495951434a819c9831938cc5}{off\+Scale}})
-\item 
+\begin{DoxyCompactList}\small\item\em Populates key Pareto settings via constructor arguments. \end{DoxyCompactList}\item 
 String \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a45ed8617f642ce6c2b430102d0930249}{to\+String}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Produces a descriptive string containing key parameter values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -65,9 +66,9 @@ long \mbox{\hyperlink{classmodel_1_1_simulation_parameters_a3957d82cdf98c07a5f37
 
 
 \doxysubsection{Detailed Description}
-Holds all configuration options required by the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. 
+Encapsulates all configuration options required by the simulator. 
 
-The structure covers both the classic Pareto ON/\+OFF model and the optional FGN-\/thresholded model, allowing callers to switch behavior with {\ttfamily \doxylink{enummodel_1_1_simulation_parameters_1_1_traffic_model}{Traffic\+Model}}. 
+Provides convenience constructors and sensible defaults so UI code can populate it incrementally. Serves as the primary input to the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} constructor. 
 
 \label{doc-constructors}
 \Hypertarget{classmodel_1_1_simulation_parameters_doc-constructors}
@@ -78,12 +79,35 @@ The structure covers both the classic Pareto ON/\+OFF model and the optional FGN
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_ae86d5088333168c53e180b8003c9d253} 
 model.\+Simulation\+Parameters.\+Simulation\+Parameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Creates an empty parameter bag to be populated manually. 
+
 \Hypertarget{classmodel_1_1_simulation_parameters_aabb8ec77d39c135379a8363fbe04109c}\index{model.SimulationParameters@{model.SimulationParameters}!SimulationParameters@{SimulationParameters}}
 \index{SimulationParameters@{SimulationParameters}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{SimulationParameters()}{SimulationParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_aabb8ec77d39c135379a8363fbe04109c} 
 model.\+Simulation\+Parameters.\+Simulation\+Parameters (\begin{DoxyParamCaption}\item[{double}]{total\+Time}{, }\item[{int}]{num\+Sources}{, }\item[{double}]{on\+Shape}{, }\item[{double}]{on\+Scale}{, }\item[{double}]{off\+Shape}{, }\item[{double}]{off\+Scale}{}\end{DoxyParamCaption})}
 
+
+
+Populates key Pareto settings via constructor arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em total\+Time} & Total simulated time horizon in seconds. \\
+\hline
+{\em num\+Sources} & Number of traffic sources in the experiment. \\
+\hline
+{\em on\+Shape} & Pareto shape for ON durations. \\
+\hline
+{\em on\+Scale} & Pareto scale for ON durations. \\
+\hline
+{\em off\+Shape} & Pareto shape for OFF durations. \\
+\hline
+{\em off\+Scale} & Pareto scale for OFF durations. \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}
@@ -99,12 +123,22 @@ model.\+Simulation\+Parameters.\+Simulation\+Parameters (\begin{DoxyParamCaption
 
 Convenience factory mirroring the UI prompts. 
 
+\begin{DoxyReturn}{Returns}
+Populated {\ttfamily \doxylink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} with Pareto inputs set. 
+\end{DoxyReturn}
 \Hypertarget{classmodel_1_1_simulation_parameters_a45ed8617f642ce6c2b430102d0930249}\index{model.SimulationParameters@{model.SimulationParameters}!toString@{toString}}
 \index{toString@{toString}!model.SimulationParameters@{model.SimulationParameters}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
 {\footnotesize\ttfamily \label{classmodel_1_1_simulation_parameters_a45ed8617f642ce6c2b430102d0930249} 
 String model.\+Simulation\+Parameters.\+to\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
+
+
+Produces a descriptive string containing key parameter values. 
+
+\begin{DoxyReturn}{Returns}
+Readable representation of the configuration. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

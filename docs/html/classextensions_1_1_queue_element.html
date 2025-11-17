@@ -99,7 +99,7 @@ $(function(){initNavTree('classextensions_1_1_queue_element.html','','classexten
 </div><!--header-->
 <div class="contents">
 
-<p>Represents a single packet or flow unit in the <a class="el" href="classextensions_1_1_network_queue.html" title="Simple single-server queue approximation used to capture downstream latency.">NetworkQueue</a>.  
+<p>Represents a single packet or flow unit in the queue.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -107,18 +107,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a599695de4da8ecd295e85eb74cfbfbd3" id="r_a599695de4da8ecd295e85eb74cfbfbd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a599695de4da8ecd295e85eb74cfbfbd3">QueueElement</a> (double arrivalTime)</td></tr>
 <tr class="memdesc:a599695de4da8ecd295e85eb74cfbfbd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a queue element that arrives at the specified time.  <br /></td></tr>
 <tr class="memitem:ae6cc43653c75a36a6f5c2f0180c9df39" id="r_ae6cc43653c75a36a6f5c2f0180c9df39"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6cc43653c75a36a6f5c2f0180c9df39">getArrivalTime</a> ()</td></tr>
+<tr class="memdesc:ae6cc43653c75a36a6f5c2f0180c9df39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrival time of the packet.  <br /></td></tr>
 <tr class="memitem:a5402a2a9f568145802af4cd5aa9db5b0" id="r_a5402a2a9f568145802af4cd5aa9db5b0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5402a2a9f568145802af4cd5aa9db5b0">getServiceStartTime</a> ()</td></tr>
+<tr class="memdesc:a5402a2a9f568145802af4cd5aa9db5b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moment when service begins, or -1 if not yet started.  <br /></td></tr>
 <tr class="memitem:ab97db7a275082494be25175199a454fa" id="r_ab97db7a275082494be25175199a454fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab97db7a275082494be25175199a454fa">setServiceStartTime</a> (double t)</td></tr>
 <tr class="memdesc:ab97db7a275082494be25175199a454fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records the moment service begins.  <br /></td></tr>
 <tr class="memitem:a819cb1034a92ab91868731184b774e32" id="r_a819cb1034a92ab91868731184b774e32"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a819cb1034a92ab91868731184b774e32">getDepartureTime</a> ()</td></tr>
+<tr class="memdesc:a819cb1034a92ab91868731184b774e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Departure time, or -1 if still in the system.  <br /></td></tr>
 <tr class="memitem:a62cdb1c746ff0eae6f3808c67640d938" id="r_a62cdb1c746ff0eae6f3808c67640d938"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62cdb1c746ff0eae6f3808c67640d938">setDepartureTime</a> (double t)</td></tr>
 <tr class="memdesc:a62cdb1c746ff0eae6f3808c67640d938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records when the packet leaves the queueing system.  <br /></td></tr>
 <tr class="memitem:a126c18c3471ed14a408b53d54bbc91ce" id="r_a126c18c3471ed14a408b53d54bbc91ce"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a126c18c3471ed14a408b53d54bbc91ce">getTotalDelay</a> ()</td></tr>
+<tr class="memdesc:a126c18c3471ed14a408b53d54bbc91ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total time spent in the system (waiting + service).  <br /></td></tr>
 <tr class="memitem:aaa1757100a37b5dc0e91b94d4cacc221" id="r_aaa1757100a37b5dc0e91b94d4cacc221"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa1757100a37b5dc0e91b94d4cacc221">getWaitingTime</a> ()</td></tr>
+<tr class="memdesc:aaa1757100a37b5dc0e91b94d4cacc221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waiting time before service begins.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a single packet or flow unit in the <a class="el" href="classextensions_1_1_network_queue.html" title="Simple single-server queue approximation used to capture downstream latency.">NetworkQueue</a>. </p>
-<p>Stores arrival, service, and departure times. </p>
+<div class="textblock"><p>Represents a single packet or flow unit in the queue. </p>
+<p>Acts as a mutable record used during deterministic service calculations. Inputs: arrival time via constructor; outputs: derived delays queried by <code><a class="el" href="classextensions_1_1_network_queue.html">NetworkQueue</a></code>. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a599695de4da8ecd295e85eb74cfbfbd3" name="a599695de4da8ecd295e85eb74cfbfbd3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a599695de4da8ecd295e85eb74cfbfbd3">&#9670;&#160;</a></span>QueueElement()</h2>
@@ -138,7 +143,7 @@ Public Member Functions</h2></td></tr>
 <p>Creates a queue element that arrives at the specified time. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">arrivalTime</td><td>timestamp when the packet reaches the queue </td></tr>
+    <tr><td class="paramname">arrivalTime</td><td>Timestamp when the packet reaches the queue. </td></tr>
   </table>
   </dd>
 </dl>
@@ -160,7 +165,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>arrival time of the packet </dd></dl>
+
+<p>Arrival time of the packet. </p>
+<dl class="section return"><dt>Returns</dt><dd>Timestamp provided at construction. </dd></dl>
 
 </div>
 </div>
@@ -178,7 +185,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>departure time, or -1 if still in the system </dd></dl>
+
+<p>Departure time, or -1 if still in the system. </p>
+<dl class="section return"><dt>Returns</dt><dd>Service completion timestamp. </dd></dl>
 
 </div>
 </div>
@@ -196,7 +205,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>moment when service begins, or -1 if not yet started </dd></dl>
+
+<p>Moment when service begins, or -1 if not yet started. </p>
+<dl class="section return"><dt>Returns</dt><dd>Service start timestamp. </dd></dl>
 
 </div>
 </div>
@@ -214,7 +225,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>total time spent in the system (service + waiting) </dd></dl>
+
+<p>Total time spent in the system (waiting + service). </p>
+<dl class="section return"><dt>Returns</dt><dd>Sojourn time in seconds; zero if departure not set. </dd></dl>
 
 </div>
 </div>
@@ -232,7 +245,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>waiting time before service begins </dd></dl>
+
+<p>Waiting time before service begins. </p>
+<dl class="section return"><dt>Returns</dt><dd>Waiting duration; zero if service not started. </dd></dl>
 
 </div>
 </div>
@@ -252,6 +267,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Records when the packet leaves the queueing system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Departure timestamp. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -271,6 +292,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Records the moment service begins. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Service start timestamp. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

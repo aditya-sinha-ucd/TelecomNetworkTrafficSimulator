@@ -98,6 +98,9 @@ $(function(){initNavTree('_config_file_loader_8java.html','',''); });
   <div class="headertitle"><div class="title">ConfigFileLoader.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Utility for reading simulation parameters from simple config files.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>import java.io.BufferedReader;</code><br />
 <code>import java.io.FileReader;</code><br />
 <code>import java.io.IOException;</code><br />
@@ -108,7 +111,7 @@ Include dependency graph for ConfigFileLoader.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_config_file_loader_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2io_2_config_file_loader_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2io_2_config_file_loader_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2io_2_config_file_loader_8java">
-<area shape="rect" title=" " alt="" coords="278,5,524,64"/>
+<area shape="rect" title="Utility for reading simulation parameters from simple config files." alt="" coords="278,5,524,64"/>
 <area shape="rect" title=" " alt="" coords="5,112,159,139"/>
 <area shape="poly" title=" " alt="" coords="298,67,143,110,142,105,296,62"/>
 <area shape="rect" title=" " alt="" coords="183,112,309,139"/>
@@ -125,13 +128,16 @@ Include dependency graph for ConfigFileLoader.java:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:io_2EConfigFileLoader" id="r_io_2EConfigFileLoader"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classio_1_1_config_file_loader.html">io.ConfigFileLoader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads simulation parameters from a simple text or JSON-like configuration file.  <a href="classio_1_1_config_file_loader.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses textual configuration files into parameter maps.  <a href="classio_1_1_config_file_loader.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:io" id="r_io"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceio.html">io</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Utility for reading simulation parameters from simple config files. </p>
+<p>Supports <span class="tt">key=value</span> and JSON-like syntaxes, ignoring comments and formatting characters. Converts numeric values into a <code><a class="el" href="">java.util.Map</a></code> so higher layers (e.g., <code><a class="el" href="classio_1_1_console_u_i.html">io.ConsoleUI</a></code>) can hydrate <code><a class="el" href="classmodel_1_1_simulation_parameters.html">model.SimulationParameters</a></code>. Inputs are file paths and outputs are string-to-double mappings. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

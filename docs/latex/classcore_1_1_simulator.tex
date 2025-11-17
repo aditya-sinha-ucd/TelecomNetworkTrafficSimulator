@@ -2,30 +2,24 @@
 \hypertarget{classcore_1_1_simulator}{}\label{classcore_1_1_simulator}\index{core.Simulator@{core.Simulator}}
 
 
-\doxylink{class_main}{Main} controller for the event-\/driven telecom traffic simulation.  
+High-\/level controller for the event-\/driven simulation engine.  
 
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcore_1_1_simulator_ae2ffd756ab11668916a9a321935083fc}{Simulator}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params)
-\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provided configuration parameters. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructs a simulator using the provided configuration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcore_1_1_simulator_a9896d1cae8f415e9345b0ce300ec4dfe}{Simulator}} (\mbox{\hyperlink{classmodel_1_1_simulation_parameters}{Simulation\+Parameters}} params, Supplier$<$ \mbox{\hyperlink{interfaceio_1_1_output_sink}{Output\+Sink}} $>$ output\+Sink\+Supplier)
-\begin{DoxyCompactList}\small\item\em Allows callers (and tests) to inject a custom output sink. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Dependency-\/injection friendly constructor for supplying sinks. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcore_1_1_simulator_a90408d62b198022449753d0f28fc2127}{run}} ()
-\begin{DoxyCompactList}\small\item\em Runs the simulation and exports results to organized output files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Runs the simulation loop and exports data to organized outputs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-\doxylink{class_main}{Main} controller for the event-\/driven telecom traffic simulation. 
+High-\/level controller for the event-\/driven simulation engine. 
 
-Responsibilities include\+: 
-\begin{DoxyItemize}
-\item Initializing either Pareto or FGN-\/based traffic sources. 
-\item Advancing the {\ttfamily \doxylink{classcore_1_1_event_queue}{Event\+Queue}} and processing ON/\+OFF transitions. 
-\item Sampling aggregate activity and exporting statistics. 
-\item Coordinating optional queue modeling to approximate downstream congestion. 
-\end{DoxyItemize}
+Acts as the single entry point for running experiments. It initializes traffic models, schedules events, consumes them in chronological order, updates aggregate statistics, and persists results. The simulator consumes {\ttfamily \doxylink{}{Simulation\+Parameters}} and produces CSV/summary outputs plus queue analytics. It collaborates with {\ttfamily \doxylink{classcore_1_1_event_queue}{Event\+Queue}}, {\ttfamily \doxylink{classcore_1_1_simulation_clock}{Simulation\+Clock}}, {\ttfamily \doxylink{classcore_1_1_statistics_collector}{Statistics\+Collector}}, and IO helpers. 
 
 \label{doc-constructors}
 \Hypertarget{classcore_1_1_simulator_doc-constructors}
@@ -38,11 +32,11 @@ core.\+Simulator.\+Simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{cl
 
 
 
-Constructs a new \doxylink{classcore_1_1_simulator}{Simulator} using the provided configuration parameters. 
+Constructs a simulator using the provided configuration. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em params} & immutable snapshot of user-\/provided simulation settings \\
+{\em params} & Immutable snapshot of user-\/provided simulation settings. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classcore_1_1_simulator_a9896d1cae8f415e9345b0ce300ec4dfe}\index{core.Simulator@{core.Simulator}!Simulator@{Simulator}}
@@ -53,8 +47,15 @@ core.\+Simulator.\+Simulator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{cl
 
 
 
-Allows callers (and tests) to inject a custom output sink. 
+Dependency-\/injection friendly constructor for supplying sinks. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Simulation settings shared with all subsystems. \\
+\hline
+{\em output\+Sink\+Supplier} & Factory invoked per run to create an {\ttfamily \doxylink{interfaceio_1_1_output_sink}{Output\+Sink}} implementation (file-\/based or test double). \\
+\hline
+\end{DoxyParams}
 
 
 \label{doc-func-members}
@@ -68,5 +69,6 @@ void core.\+Simulator.\+run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})
 
 
 
-Runs the simulation and exports results to organized output files. 
+Runs the simulation loop and exports data to organized outputs. 
 
+The method drains the {\ttfamily \doxylink{classcore_1_1_event_queue}{Event\+Queue}} while the {\ttfamily \doxylink{classcore_1_1_simulation_clock}{Simulation\+Clock}} is below {\ttfamily \doxylink{}{total\+Simulation\+Time}}. For each event it updates the corresponding source, schedules the next event, captures samples, and writes to the {\ttfamily \doxylink{interfaceio_1_1_output_sink}{Output\+Sink}}. At completion the method finalizes queue statistics and exports CSV plus summaries. 

@@ -1,12 +1,25 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/extensions/\+Queue\+Element.java File Reference}
 \hypertarget{_queue_element_8java}{}\label{_queue_element_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/QueueElement.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/extensions/QueueElement.java}}
+
+
+Data container for individual packets in {\ttfamily \doxylink{classextensions_1_1_network_queue}{extensions.\+Network\+Queue}}.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classextensions_1_1_queue_element}{extensions.\+Queue\+Element}}
-\begin{DoxyCompactList}\small\item\em Represents a single packet or flow unit in the \doxylink{classextensions_1_1_network_queue}{Network\+Queue}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Represents a single packet or flow unit in the queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespaceextensions}{extensions}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Data container for individual packets in {\ttfamily \doxylink{classextensions_1_1_network_queue}{extensions.\+Network\+Queue}}. 
+
+Stores arrival, service start, and departure timestamps so that the queue can compute waiting and system times. Collaborates exclusively with {\ttfamily \doxylink{}{Network\+Queue}}, which mutates the service/departure times as service progresses. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

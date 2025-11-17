@@ -99,14 +99,14 @@ $(function(){initNavTree('classmodel_1_1_f_g_n_traffic_source.html','','classmod
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> that follows an FGN-driven ON/OFF pattern.  
+<p><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> variant that follows an FGN-driven ON/OFF pattern.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for model.FGNTrafficSource:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodel_1_1_f_g_n_traffic_source__inherit__graph.png" border="0" usemap="#amodel_8_f_g_n_traffic_source_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
 <map name="amodel_8_f_g_n_traffic_source_inherit__map" id="amodel_8_f_g_n_traffic_source_inherit__map">
-<area shape="rect" title="TrafficSource that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="5,80,171,107"/>
+<area shape="rect" title="TrafficSource variant that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="5,80,171,107"/>
 <area shape="rect" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation." alt="" coords="19,5,157,32"/>
 <area shape="poly" title=" " alt="" coords="90,46,90,81,86,79,86,50"/>
 </map>
@@ -116,7 +116,7 @@ Collaboration diagram for model.FGNTrafficSource:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmodel_1_1_f_g_n_traffic_source__coll__graph.png" border="0" usemap="#amodel_8_f_g_n_traffic_source_coll__map" loading="lazy" alt="Collaboration graph"/></div>
 <map name="amodel_8_f_g_n_traffic_source_coll__map" id="amodel_8_f_g_n_traffic_source_coll__map">
-<area shape="rect" title="TrafficSource that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="5,80,171,107"/>
+<area shape="rect" title="TrafficSource variant that follows an FGN&#45;driven ON/OFF pattern." alt="" coords="5,80,171,107"/>
 <area shape="rect" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation." alt="" coords="19,5,157,32"/>
 <area shape="poly" title=" " alt="" coords="90,46,90,81,86,79,86,50"/>
 </map>
@@ -125,21 +125,24 @@ Collaboration diagram for model.FGNTrafficSource:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a94eee91b60846d52d199a8e17d5198a5" id="r_a94eee91b60846d52d199a8e17d5198a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94eee91b60846d52d199a8e17d5198a5">FGNTrafficSource</a> (int id, <a class="el" href="classmodel_1_1_simulation_parameters.html">SimulationParameters</a> params)</td></tr>
+<tr class="memdesc:a94eee91b60846d52d199a8e17d5198a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an FGN-backed source that replays a deterministic schedule.  <br /></td></tr>
 <tr class="memitem:a961d5a9e771148c260193bca7c749941" id="r_a961d5a9e771148c260193bca7c749941"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcore_1_1_event.html">Event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a961d5a9e771148c260193bca7c749941">generateNextEvent</a> (double currentTime)</td></tr>
-<tr class="memdesc:a961d5a9e771148c260193bca7c749941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the next event time based on the next FGN duration.  <br /></td></tr>
+<tr class="memdesc:a961d5a9e771148c260193bca7c749941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next event time based on the next FGN duration.  <br /></td></tr>
 <tr class="memitem:a2b7236b8275eb4fa5dd75acf609e79cf" id="r_a2b7236b8275eb4fa5dd75acf609e79cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b7236b8275eb4fa5dd75acf609e79cf">processEvent</a> (<a class="el" href="classcore_1_1_event.html">Event</a> event)</td></tr>
-<tr class="memdesc:a2b7236b8275eb4fa5dd75acf609e79cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update current state when the simulator delivers the flip.  <br /></td></tr>
+<tr class="memdesc:a2b7236b8275eb4fa5dd75acf609e79cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates current state when the simulator delivers the flip.  <br /></td></tr>
 <tr class="memitem:a594ec49b495721960bfef9a3583aa4a8" id="r_a594ec49b495721960bfef9a3583aa4a8"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a594ec49b495721960bfef9a3583aa4a8">isOn</a> ()</td></tr>
+<tr class="memdesc:a594ec49b495721960bfef9a3583aa4a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the FGN schedule is currently ON.  <br /></td></tr>
 <tr class="memitem:a3544936198cc3463029165522d49011a" id="r_a3544936198cc3463029165522d49011a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3544936198cc3463029165522d49011a">getNextEventTime</a> ()</td></tr>
+<tr class="memdesc:a3544936198cc3463029165522d49011a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp of the next scheduled state change event.  <br /></td></tr>
 <tr class="inherit_header pub_methods_classmodel_1_1_traffic_source"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classmodel_1_1_traffic_source')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classmodel_1_1_traffic_source.html">model.TrafficSource</a></td></tr>
 <tr class="memitem:a7fa07bfb5b338b43cc6cb5d3a3bbb04a inherit pub_methods_classmodel_1_1_traffic_source" id="r_a7fa07bfb5b338b43cc6cb5d3a3bbb04a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_traffic_source.html#a7fa07bfb5b338b43cc6cb5d3a3bbb04a">TrafficSource</a> (int id, double onShape, double onScale, double offShape, double offScale)</td></tr>
 <tr class="memdesc:a7fa07bfb5b338b43cc6cb5d3a3bbb04a inherit pub_methods_classmodel_1_1_traffic_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> with given Pareto parameters.  <br /></td></tr>
 <tr class="memitem:aac5b13f053ea34b108cf1b189232c030 inherit pub_methods_classmodel_1_1_traffic_source" id="r_aac5b13f053ea34b108cf1b189232c030"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_traffic_source.html#aac5b13f053ea34b108cf1b189232c030">getId</a> ()</td></tr>
+<tr class="memdesc:aac5b13f053ea34b108cf1b189232c030 inherit pub_methods_classmodel_1_1_traffic_source"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of this source.  <br /></td></tr>
 <tr class="memitem:a6ae2fe5ae6db9946581323984c937998 inherit pub_methods_classmodel_1_1_traffic_source" id="r_a6ae2fe5ae6db9946581323984c937998"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1_traffic_source.html#a6ae2fe5ae6db9946581323984c937998">toString</a> ()</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> that follows an FGN-driven ON/OFF pattern. </p>
-<p>The constructor converts an FGN series to a binary sequence using a threshold, run-length encodes the sequence into durations, and then replays those durations so the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code> can continue operating without code changes. </p>
+<div class="textblock"><p><a class="el" href="classmodel_1_1_traffic_source.html" title="Represents a single ON/OFF traffic source in the simulation.">TrafficSource</a> variant that follows an FGN-driven ON/OFF pattern. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a94eee91b60846d52d199a8e17d5198a5" name="a94eee91b60846d52d199a8e17d5198a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a94eee91b60846d52d199a8e17d5198a5">&#9670;&#160;</a></span>FGNTrafficSource()</h2>
@@ -159,10 +162,12 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructs an FGN-backed source that replays a deterministic schedule. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>source identifier reused by the simulator </td></tr>
-    <tr><td class="paramname">params</td><td>simulation parameters containing all FGN settings </td></tr>
+    <tr><td class="paramname">id</td><td>Source identifier reused by the simulator. </td></tr>
+    <tr><td class="paramname">params</td><td>Simulation parameters containing all FGN settings. </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,7 +190,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return the next event time based on the next FGN duration. </p>
+<p>Returns the next event time based on the next FGN duration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">currentTime</td><td>Current simulation time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code><a class="el" href="classcore_1_1_event.html">Event</a></code> that flips the source state. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_traffic_source.html#aa4e3b925bf2bffc159bedcb17510d843">model.TrafficSource</a>.</p>
 
@@ -205,7 +217,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>timestamp of the next scheduled state change event </dd></dl>
+
+<p>Timestamp of the next scheduled state change event. </p>
+<dl class="section return"><dt>Returns</dt><dd>Absolute time of the next flip. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_traffic_source.html#addec51a76b1461dc78eb0c6713764bbf">model.TrafficSource</a>.</p>
 
@@ -225,7 +239,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> when the FGN schedule is currently ON </dd></dl>
+
+<p>Indicates whether the FGN schedule is currently ON. </p>
+<dl class="section return"><dt>Returns</dt><dd><code class="JavaDocCode">true</code> if the state is ON. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_traffic_source.html#a40e607dd4f4f1a04d39e41c89ac37f90">model.TrafficSource</a>.</p>
 
@@ -246,7 +262,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Update current state when the simulator delivers the flip. </p>
+<p>Updates current state when the simulator delivers the flip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">event</td><td><a class="el" href="classcore_1_1_event.html" title="Captures the time, source, and type of a discrete simulation event.">Event</a> representing the new state. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented from <a class="el" href="classmodel_1_1_traffic_source.html#aaf7909151e413ed8e83b1c6e0feeddd5">model.TrafficSource</a>.</p>
 

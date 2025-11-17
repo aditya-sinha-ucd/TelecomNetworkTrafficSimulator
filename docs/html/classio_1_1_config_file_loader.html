@@ -99,7 +99,7 @@ $(function(){initNavTree('classio_1_1_config_file_loader.html','','classio_1_1_c
 </div><!--header-->
 <div class="contents">
 
-<p>Loads simulation parameters from a simple text or JSON-like configuration file.  
+<p>Parses textual configuration files into parameter maps.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -110,24 +110,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6a4fa1a79d7bc89141163af5ccedc409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints loaded parameters to the console for confirmation.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Loads simulation parameters from a simple text or JSON-like configuration file. </p>
-<p>Supported formats (key=value per line or JSON-style): </p><pre>
-totalTime=1000
-numSources=50
-onShape=1.5
-onScale=1.0
-offShape=1.2
-offScale=2.0
-</pre><p> or </p><pre>
-{
-  "totalTime": 1000,
-  "numSources": 50,
-  "onShape": 1.5,
-  "onScale": 1.0,
-  "offShape": 1.2,
-  "offScale": 2.0
-}
-</pre><p> Lines starting with '#' are treated as comments. </p>
+<div class="textblock"><p>Parses textual configuration files into parameter maps. </p>
+<p>Consumed by the console UI when users opt to load settings from disk. The loader sanitizes input lines, splits on <span class="tt">=</span> or <span class="tt">:</span>, and handles both plain text and JSON-like structures. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ae77d02f8d1b35090bf2e34479757a802" name="ae77d02f8d1b35090bf2e34479757a802"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae77d02f8d1b35090bf2e34479757a802">&#9670;&#160;</a></span>loadConfig()</h2>
@@ -155,14 +139,14 @@ offScale=2.0
 <p>Reads simulation parameters from a configuration file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>path to the configuration file </td></tr>
+    <tr><td class="paramname">path</td><td>Path to the configuration file. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a Map&lt;String, Double&gt; containing numeric parameters </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Map containing numeric parameters keyed by name. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IOException</td><td>if the file cannot be read </td></tr>
+    <tr><td class="paramname">IOException</td><td>If the file cannot be read. </td></tr>
   </table>
   </dd>
 </dl>
@@ -195,7 +179,7 @@ offScale=2.0
 <p>Prints loaded parameters to the console for confirmation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">params</td><td>the map of loaded parameters </td></tr>
+    <tr><td class="paramname">params</td><td>Map of loaded parameters. </td></tr>
   </table>
   </dd>
 </dl>

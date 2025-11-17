@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConsoleUI.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/ConsoleUI.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,216,64"/>
+<area shape="rect" id="Node000001" title="Primary CLI entry point for the Telecom Network Traffic Simulator." alt="" coords="5,5,216,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="51,112,170,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,62,113,97,108,95,109,66"/>
 </map>

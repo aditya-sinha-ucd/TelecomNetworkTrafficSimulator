@@ -99,7 +99,7 @@ $(function(){initNavTree('classutil_1_1_hurst_estimator.html','','classutil_1_1_
 </div><!--header-->
 <div class="contents">
 
-<p>Estimates the Hurst exponent (H) of a time series.  
+<p>Estimates the Hurst exponent (H) of a time series via R/S analysis.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -108,14 +108,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a69505ebc8531e67ec3cb78a7f2feb11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimates the Hurst exponent using the R/S analysis.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Estimates the Hurst exponent (H) of a time series. </p>
-<p>The Hurst exponent measures the degree of self-similarity or long-range dependence in the simulated traffic. </p>
-<p>Common interpretation:</p><ul>
-<li>H ≈ 0.5 → random (no correlation, Poisson-like)</li>
-<li>H &gt; 0.5 → persistent / self-similar (bursty traffic)</li>
-<li>H &lt; 0.5 → anti-persistent (alternating patterns) </li>
-</ul>
-<p>This implementation uses a simple Rescaled Range (R/S) method. </p>
+<div class="textblock"><p>Estimates the Hurst exponent (H) of a time series via R/S analysis. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a69505ebc8531e67ec3cb78a7f2feb11c" name="a69505ebc8531e67ec3cb78a7f2feb11c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69505ebc8531e67ec3cb78a7f2feb11c">&#9670;&#160;</a></span>estimateHurst()</h2>
@@ -143,11 +136,11 @@ Static Public Member Functions</h2></td></tr>
 <p>Estimates the Hurst exponent using the R/S analysis. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>list of recorded activity rates (0–1) </td></tr>
+    <tr><td class="paramname">data</td><td>List of recorded activity rates (0–1). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>estimated Hurst exponent in range [0, 1] </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Estimated Hurst exponent in range [0, 1]. </dd></dl>
 
 </div>
 </div>

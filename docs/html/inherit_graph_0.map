@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" title=" " alt="" coords="5,5,112,32"/>
-<area shape="rect" id="Node000001" href="$interfaceio_1_1_output_sink.html" title="Small abstraction around simulation output destinations." alt="" coords="160,5,260,32"/>
+<area shape="rect" id="Node000001" href="$interfaceio_1_1_output_sink.html" title="Contract for saving events, summaries, and FGN outputs." alt="" coords="160,5,260,32"/>
 <area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="127,16,162,18,156,19,128,21"/>
-<area shape="rect" id="Node000002" href="$classio_1_1_file_output_manager.html" title="Manages all file output operations for the simulator." alt="" coords="308,5,453,32"/>
+<area shape="rect" id="Node000002" href="$classio_1_1_file_output_manager.html" title="Implements OutputSink using timestamped run directories." alt="" coords="308,5,453,32"/>
 <area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="275,16,310,19,305,19,275,21"/>
 </map>

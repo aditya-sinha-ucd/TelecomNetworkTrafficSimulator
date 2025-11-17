@@ -2,7 +2,7 @@
 \hypertarget{classutil_1_1_hurst_estimator}{}\label{classutil_1_1_hurst_estimator}\index{util.HurstEstimator@{util.HurstEstimator}}
 
 
-Estimates the Hurst exponent (H) of a time series.  
+Estimates the Hurst exponent (H) of a time series via R/S analysis.  
 
 
 \doxysubsubsection*{Static Public Member Functions}
@@ -13,18 +13,7 @@ static double \mbox{\hyperlink{classutil_1_1_hurst_estimator_a69505ebc8531e67ec3
 
 
 \doxysubsection{Detailed Description}
-Estimates the Hurst exponent (H) of a time series. 
-
-The Hurst exponent measures the degree of self-\/similarity or long-\/range dependence in the simulated traffic. 
-
-Common interpretation\+:
-\begin{DoxyItemize}
-\item H ≈ 0.\+5 → random (no correlation, Poisson-\/like)
-\item H \texorpdfstring{$>$}{>} 0.\+5 → persistent / self-\/similar (bursty traffic)
-\item H \texorpdfstring{$<$}{<} 0.\+5 → anti-\/persistent (alternating patterns) 
-\end{DoxyItemize}
-
-This implementation uses a simple Rescaled Range (R/S) method. 
+Estimates the Hurst exponent (H) of a time series via R/S analysis. 
 
 \label{doc-func-members}
 \Hypertarget{classutil_1_1_hurst_estimator_doc-func-members}
@@ -41,9 +30,9 @@ Estimates the Hurst exponent using the R/S analysis.
 
 
 \begin{DoxyParams}{Parameters}
-{\em data} & list of recorded activity rates (0–1) \\
+{\em data} & List of recorded activity rates (0–1). \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-estimated Hurst exponent in range \mbox{[}0, 1\mbox{]} 
+Estimated Hurst exponent in range \mbox{[}0, 1\mbox{]}. 
 \end{DoxyReturn}

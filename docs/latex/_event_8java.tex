@@ -1,12 +1,25 @@
 \doxysection{C\+:/\+Users/user/\+Idea\+Projects/\+Telecom Network Traffic Simulator/src/core/\+Event.java File Reference}
 \hypertarget{_event_8java}{}\label{_event_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/Event.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/core/Event.java}}
+
+
+Immutable representation of a discrete simulator event.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classcore_1_1_event}{core.\+Event}}
-\begin{DoxyCompactList}\small\item\em Represents a discrete event in the simulation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Captures the time, source, and type of a discrete simulation event. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
 package \mbox{\hyperlink{namespacecore}{core}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Immutable representation of a discrete simulator event. 
+
+Events are the atomic units processed by {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}} through the {\ttfamily \doxylink{classcore_1_1_event_queue}{core.\+Event\+Queue}}. Each event indicates when a {\ttfamily \doxylink{classmodel_1_1_traffic_source}{model.\+Traffic\+Source}} transitions between {\ttfamily \doxylink{enummodel_1_1_source_state}{model.\+Source\+State}} states, effectively driving the ON/\+OFF workload generation pipeline. Instances are lightweight value objects ordered by {\ttfamily \doxylink{}{compare\+To(\+Event)}} for chronological scheduling. \begin{DoxyDate}{Date}
+2024-\/05-\/30 
+\end{DoxyDate}

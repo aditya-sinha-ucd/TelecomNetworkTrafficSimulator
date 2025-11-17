@@ -98,13 +98,16 @@ $(function(){initNavTree('_event_queue_8java.html','',''); });
   <div class="headertitle"><div class="title">EventQueue.java File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Priority-queue backed scheduler used by the simulator core.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>import java.util.PriorityQueue;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for EventQueue.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_event_queue_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2core_2_event_queue_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2core_2_event_queue_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2core_2_event_queue_8java">
-<area shape="rect" title=" " alt="" coords="5,5,241,64"/>
+<area shape="rect" title="Priority&#45;queue backed scheduler used by the simulator core." alt="" coords="5,5,241,64"/>
 <area shape="rect" title=" " alt="" coords="48,112,198,139"/>
 <area shape="poly" title=" " alt="" coords="125,62,125,97,121,95,121,66"/>
 </map>
@@ -113,13 +116,16 @@ Include dependency graph for EventQueue.java:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:core_2EEventQueue" id="r_core_2EEventQueue"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcore_1_1_event_queue.html">core.EventQueue</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages the event scheduling and ordering for the simulation.  <a href="classcore_1_1_event_queue.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thin wrapper around <code><a class="el" href="">PriorityQueue</a></code> tailored for simulation.  <a href="classcore_1_1_event_queue.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:core" id="r_core"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecore.html">core</a></td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Priority-queue backed scheduler used by the simulator core. </p>
+<p>Encapsulates a <code><a class="el" href="">java.util.PriorityQueue</a></code> of <code><a class="el" href="classcore_1_1_event.html">core.Event</a></code> instances ordered by time. The queue is the primary collaborator of <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>, supplying it with the next chronological event to execute. Inputs are <code><a class="el" href="">Event</a></code> objects produced by traffic sources, and outputs are the same events delivered in sorted order for processing. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

@@ -1,5 +1,5 @@
 <map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FGNSimulationHandler.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FGNSimulationHandler.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="387,5,669,64"/>
+<area shape="rect" id="Node000001" title="Console workflow that generates Fractional Gaussian Noise time series." alt="" coords="387,5,669,64"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,112,224,139"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="395,67,189,111,188,106,393,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="248,112,437,139"/>
