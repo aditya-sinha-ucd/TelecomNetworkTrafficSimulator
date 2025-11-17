@@ -40,8 +40,8 @@ public class SimulationFlowSystemTest {
         Set<String> existingRuns = new HashSet<>(listRunDirectories());
 
         Map<String, Double> loaded = ConfigFileLoader.loadConfig(config.toString());
-        assertEquals(6.0, loaded.get("totalTime"));
-        assertEquals(2.0, loaded.get("numSources"));
+        assertEquals(6.0, loaded.get("totalTime"), 1e-6);
+        assertEquals(2.0, loaded.get("numSources"), 1e-6);
 
         SimulationParameters params = new SimulationParameters(
                 loaded.get("totalTime"),

@@ -3,9 +3,15 @@ package core;
 import model.*;
 import util.RandomUtils;
 import io.FileOutputManager;
+import io.OutputSink;
 import extensions.MultiSourceManager;
 import extensions.NetworkQueue;
 import io.ErrorHandler;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +36,7 @@ public class Simulator {
     private final EventQueue eventQueue;
     private final SimulationClock clock;
     private final StatisticsCollector stats;
-    private final FileOutputManager outputManager;
+    private final Supplier<OutputSink> outputSinkSupplier;
     private final MultiSourceManager multiSourceManager;
     private final NetworkQueue networkQueue;
 
@@ -53,16 +59,21 @@ public class Simulator {
      * @param params immutable snapshot of user-provided simulation settings
      */
     public Simulator(SimulationParameters params) {
+        this(params, () -> new FileOutputManager(defaultMetadata(params)));
+    }
+
+    /**
+     * Allows callers (and tests) to inject a custom output sink.
+     */
+    public Simulator(SimulationParameters params, Supplier<OutputSink> outputSinkSupplier) {
         this.params = params;
         this.totalSimulationTime = params.totalSimulationTime;
         this.numSources = params.numberOfSources;
+        this.outputSinkSupplier = Objects.requireNonNull(outputSinkSupplier, "outputSinkSupplier");
 
         this.eventQueue = new EventQueue();
         this.clock = new SimulationClock();
         this.stats = new StatisticsCollector(params.samplingInterval);
-
-        // Initialize output manager (creates its own per-run folder)
-        this.outputManager = new FileOutputManager();
 
         // Initialize managers
         this.multiSourceManager = new MultiSourceManager();
@@ -97,51 +108,66 @@ public class Simulator {
      */
     public void run() {
         System.out.println("Starting simulation...");
-        String runDir = outputManager.getRunDirectory();
 
-        while (!eventQueue.isEmpty() && clock.getTime() < totalSimulationTime) {
-            Event event = eventQueue.nextEvent();
-            if (event == null) break;
+        try (OutputSink outputManager = outputSinkSupplier.get()) {
+            String runDir = outputManager.getRunDirectory();
 
-            double eventTime = event.getTime();
-            recordSamplesBefore(Math.min(eventTime, totalSimulationTime));
+            while (!eventQueue.isEmpty() && clock.getTime() < totalSimulationTime) {
+                Event event = eventQueue.nextEvent();
+                if (event == null) break;
 
-            clock.advanceTo(eventTime);
-            if (clock.getTime() > totalSimulationTime) break;
+                double eventTime = event.getTime();
+                recordSamplesBefore(Math.min(eventTime, totalSimulationTime));
 
-            try {
-                // Process source event
-                TrafficSource src = sources.get(event.getSourceId());
-                src.processEvent(event);
+                clock.advanceTo(eventTime);
+                if (clock.getTime() > totalSimulationTime) break;
 
-                // Log to event log
-                outputManager.logEvent(event);
+                try {
+                    // Process source event
+                    TrafficSource src = sources.get(event.getSourceId());
+                    src.processEvent(event);
 
-                // Schedule next state-change event
-                Event next = src.generateNextEvent(clock.getTime());
-                eventQueue.addEvent(next);
+                    // Log to event log
+                    outputManager.logEvent(event);
 
-                // Update aggregate rate for future sampling
-                lastRecordedRate = computeAggregateRate();
+                    // Schedule next state-change event
+                    Event next = src.generateNextEvent(clock.getTime());
+                    eventQueue.addEvent(next);
 
-            } catch (Exception e) {
-                ErrorHandler.handleError("Error processing event: " + e.getMessage(), false);
+                    // Update aggregate rate for future sampling
+                    lastRecordedRate = computeAggregateRate();
+
+                } catch (Exception e) {
+                    ErrorHandler.handleError("Error processing event: " + e.getMessage(), false);
+                }
             }
+
+            // Capture any remaining samples through the end of the simulation window
+            recordRemainingSamples();
+            networkQueue.processUntil(totalSimulationTime);
+
+            System.out.println("Simulation complete!");
+            stats.printSummary();
+
+            // === Export clean, organized outputs ===
+            stats.exportToCSV(runDir + "traffic_data.csv");
+            outputManager.saveSummary(stats, networkQueue);
+
+            System.out.printf("Results saved to: %s%n", runDir);
         }
+    }
 
-        // Capture any remaining samples through the end of the simulation window
-        recordRemainingSamples();
-        networkQueue.processUntil(totalSimulationTime);
-
-        System.out.println("Simulation complete!");
-        stats.printSummary();
-
-        // === Export clean, organized outputs ===
-        stats.exportToCSV(runDir + "traffic_data.csv");
-        outputManager.saveSummary(stats, networkQueue);
-        outputManager.close();
-
-        System.out.printf("Results saved to: %s%n", runDir);
+    /**
+     * Builds the default metadata map injected into {@link FileOutputManager}
+     * so that each Pareto/FGN simulation run documents its configuration.
+     */
+    private static Map<String, String> defaultMetadata(SimulationParameters params) {
+        Map<String, String> metadata = new LinkedHashMap<>();
+        metadata.put("mode", params.trafficModel.name());
+        metadata.put("sources", Integer.toString(params.numberOfSources));
+        metadata.put("simulationTime", Double.toString(params.totalSimulationTime));
+        metadata.put("samplingInterval", Double.toString(params.samplingInterval));
+        return metadata;
     }
 
     /**
