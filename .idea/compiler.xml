@@ -2,11 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+      <profile name="Default" enabled="true">
+        <sourceOutputDir name="out/production/generated" />
+        <sourceTestOutputDir name="out/test/generated" />
         <outputRelativeToContentRoot value="true" />
-        <module name="network-traffic-simulator" />
       </profile>
     </annotationProcessing>
   </component>

@@ -203,6 +203,17 @@ public class Simulator {
         metadata.put("sources", Integer.toString(params.numberOfSources));
         metadata.put("simulationTime", Double.toString(params.totalSimulationTime));
         metadata.put("samplingInterval", Double.toString(params.samplingInterval));
+        if (params.trafficModel == SimulationParameters.TrafficModel.FGN_THRESHOLD) {
+            metadata.put("hurst", Double.toString(params.hurst));
+            metadata.put("sigma", Double.toString(params.fgnSigma));
+            metadata.put("threshold", Double.toString(params.fgnThreshold));
+            metadata.put("fgnSeed", Long.toString(params.fgnSeed));
+        } else {
+            metadata.put("onShape", Double.toString(params.onShape));
+            metadata.put("onScale", Double.toString(params.onScale));
+            metadata.put("offShape", Double.toString(params.offShape));
+            metadata.put("offScale", Double.toString(params.offScale));
+        }
         return metadata;
     }
 
