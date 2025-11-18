@@ -36,7 +36,7 @@ public class ConsoleUI {
      */
     private void printBanner() {
         System.out.println("===============================================");
-        System.out.println("     TELECOM NETWORK TRAFFIC SIMULATOR 2025     ");
+        System.out.println("      TELECOM NETWORK TRAFFIC SIMULATOR        ");
         System.out.println("===============================================");
         System.out.println("Type 'quit' or 'q' at any prompt to exit.");
         System.out.println();
