@@ -25,6 +25,8 @@ public class FractionalGaussianNoiseTest {
 
         // Check not all zeros
         boolean allZero = true;
+
+        // Use a tolerance of 1e-6 to ensure not all values are zero
         for (double v : samples)
             if (Math.abs(v) > 1e-6) { allZero = false; break; }
 
@@ -32,7 +34,22 @@ public class FractionalGaussianNoiseTest {
     }
 
     /**
-     * @brief Verifies invalid constructor parameters throw {@link IllegalArgumentException}.
+     * Creates a Fractional Gaussian Noise generator.
+     *
+     * <p><b>Invalid parameter rules:</b>
+     * <ul>
+     *   <li><b>H ≤ 0.5</b> — The Hurst exponent must be in (0.5, 1).
+     *       Values ≤ 0.5 do not produce long-memory FGN and would break the algorithm.</li>
+     *
+     *   <li><b>sigma ≤ 0</b> — Standard deviation must be strictly positive.
+     *       A zero or negative σ makes no mathematical sense and would result in a
+     *       degenerate or invalid covariance structure.</li>
+     *
+     *   <li>The seed may be any long value and is always valid.</li>
+     * </ul>
+     *
+     * <p>If any invalid parameter is provided, the constructor throws
+     * {@link IllegalArgumentException} to prevent constructing a broken generator.</p>
      */
     @Test
     void testInvalidParametersThrowException() {
