@@ -1,6 +1,9 @@
 /**
  * @file test/core/SimulatorTest.java
  * @brief Integration-style tests for {@link core.Simulator} and its collaborators.
+ * These tests validate end-to-end simulation behavior for both Pareto and
+ * Fractional Gaussian Noise (FGN) models. They also verify that the simulator
+ * can work with dependency-injected output sinks for improved modularity.
  */
 package core;
 
@@ -29,7 +32,7 @@ public class SimulatorTest {
      */
     @Test
     void testSimulatorRunsSuccessfully() {
-        // Step 1: Create simulation parameters
+        // Step 1: Configure Pareto-based simulation parameters
         SimulationParameters params = new SimulationParameters(
                 50.0,   // total simulation time [s]
                 5,      // number of sources
@@ -57,7 +60,7 @@ public class SimulatorTest {
      */
     @Test
     void testSimulatorHandlesFGNModel() {
-        // First Step: Configure FGN-based model
+        // Step 1: Configure FGN-based model parameters
         SimulationParameters params = new SimulationParameters(
                 20.0,  // short run
                 3,     // fewer sources for faster test
@@ -68,7 +71,7 @@ public class SimulatorTest {
         params.fgnSigma = 1.0;
         params.fgnThreshold = 0.0;
 
-        // Second Step: Run FGN simulation
+        // Step 2: Run FGN simulation
         Simulator sim = new Simulator(params);
 
         assertDoesNotThrow(sim::run,
@@ -76,21 +79,27 @@ public class SimulatorTest {
     }
 
     /**
-     * @brief Confirms a custom {@link OutputSink} can be injected and observed.
+     * @brief Confirms a custom {@link OutputSink} can be injected and observed
+     * with correct events, summarizes, and close() calls.
      */
     @Test
     void testSimulatorUsesInjectedOutputSink() throws Exception {
+        // Step 1: Configure test parameters
         SimulationParameters params = new SimulationParameters(
-                15.0,
+                15.0, // shorter runtime
                 4,
                 1.4, 1.0, 1.2, 2.0
         );
         params.samplingInterval = 0.5;
 
+        // Step 2: Create temporary directory for isolated test output
         Path tempRoot = Files.createTempDirectory("simulator-output-test");
         Path runDir = tempRoot.resolve("injected-run");
+        // Atomic reference for recording created sink
         AtomicReference<RecordingSink> sinkRef = new AtomicReference<>();
 
+
+        // Step 3: Construct simulator with a custom sink supplier (dependency injection)
         Simulator simulator = new Simulator(params, () -> {
             try {
                 RecordingSink sink = new RecordingSink(runDir);
@@ -101,9 +110,11 @@ public class SimulatorTest {
             }
         });
 
+        // Run simulation safely and verify no runtime exceptions occur
         assertDoesNotThrow(simulator::run,
                 "Simulator should be able to run with a custom sink");
 
+        // Step 4: Verify sink behavior and side effects
         RecordingSink sink = sinkRef.get();
         assertNotNull(sink, "Supplier should expose the created sink");
         assertTrue(sink.summarySaved, "Summary should be written through the sink");
@@ -112,6 +123,7 @@ public class SimulatorTest {
         assertTrue(Files.exists(runDir.resolve("traffic_data.csv")),
                 "CSV export should target the injected run directory");
 
+        // Cleanup temporary directories to avoid pollution
         deleteRecursively(tempRoot);
     }
 

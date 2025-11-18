@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EventQueueTest {
 
     private EventQueue queue;
+    /** Tolerance for floating-point comparison**/
     private static final double EPSILON = 1e-9;
 
     /**
