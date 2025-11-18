@@ -88,4 +88,12 @@ public class FGNGenerationParameters {
     public long getSeed() {
         return seed;
     }
+
+    /**
+     * @brief Computes the total duration covered by the generated samples.
+     * @return Total time horizon ({@code samples * samplingInterval}).
+     */
+    public double getTotalDuration() {
+        return sampleCount * samplingInterval;
+    }
 }
