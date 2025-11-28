@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,29 +100,29 @@ $(function(){initNavTree('_f_g_n_simulation_handler_8java.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Console workflow that generates Fractional Gaussian Noise time series.  
+<p>Console workflow that configures FGN-driven simulations.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>import model.FGNGenerationParameters;</code><br />
-<code>import util.FractionalGaussianNoise;</code><br />
+<div class="textblock"><code>import core.Simulator;</code><br />
+<code>import model.FGNGenerationParameters;</code><br />
+<code>import model.SimulationParameters;</code><br />
 <code>import java.io.IOException;</code><br />
-<code>import java.util.LinkedHashMap;</code><br />
 <code>import java.util.Map;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FGNSimulationHandler.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_f_g_n_simulation_handler_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2io_2_f_g_n_simulation_handler_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2io_2_f_g_n_simulation_handler_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2io_2_f_g_n_simulation_handler_8java">
-<area shape="rect" title="Console workflow that generates Fractional Gaussian Noise time series." alt="" coords="387,5,669,64"/>
-<area shape="rect" title=" " alt="" coords="5,112,224,139"/>
-<area shape="poly" title=" " alt="" coords="395,67,189,111,188,106,393,62"/>
-<area shape="rect" title=" " alt="" coords="248,112,437,139"/>
-<area shape="poly" title=" " alt="" coords="470,64,383,108,382,102,465,65"/>
-<area shape="rect" title=" " alt="" coords="460,112,596,139"/>
-<area shape="poly" title=" " alt="" coords="530,62,530,98,526,94,526,66"/>
-<area shape="rect" title=" " alt="" coords="619,112,783,139"/>
-<area shape="poly" title=" " alt="" coords="585,62,666,105,660,104,583,67"/>
-<area shape="rect" title=" " alt="" coords="807,112,902,139"/>
-<area shape="poly" title=" " alt="" coords="634,62,796,108,791,107,634,67"/>
+<area shape="rect" title="Console workflow that configures FGN&#45;driven simulations." alt="" coords="330,5,612,64"/>
+<area shape="rect" title=" " alt="" coords="5,112,111,139"/>
+<area shape="poly" title=" " alt="" coords="338,67,127,112,125,107,337,62"/>
+<area shape="rect" title=" " alt="" coords="134,112,352,139"/>
+<area shape="poly" title=" " alt="" coords="400,64,291,109,289,103,395,65"/>
+<area shape="rect" title=" " alt="" coords="377,112,566,139"/>
+<area shape="poly" title=" " alt="" coords="473,62,473,98,469,94,469,66"/>
+<area shape="rect" title=" " alt="" coords="589,112,724,139"/>
+<area shape="poly" title=" " alt="" coords="532,62,619,105,614,105,531,67"/>
+<area shape="rect" title=" " alt="" coords="749,112,844,139"/>
+<area shape="poly" title=" " alt="" coords="577,62,738,107,733,108,577,67"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -135,8 +136,8 @@ Packages</h2></td></tr>
 <tr class="memitem:io" id="r_io"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceio.html">io</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Console workflow that generates Fractional Gaussian Noise time series. </p>
-<p>Guides the user through configuration, invokes <code><a class="el" href="classutil_1_1_fractional_gaussian_noise.html">util.FractionalGaussianNoise</a></code>, and exports the resulting samples via <code><a class="el" href="classio_1_1_file_output_manager.html">io.FileOutputManager</a></code>. Collaborates with <code><a class="el" href="">ConsolePrompter</a></code> for input collection and <code><a class="el" href="">ConfigFileLoader</a></code> for optional file-based parameters. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
+<div class="textblock"><p>Console workflow that configures FGN-driven simulations. </p>
+<p>Guides the user through configuration, builds <code><a class="el" href="classmodel_1_1_f_g_n_generation_parameters.html">model.FGNGenerationParameters</a></code>, converts them into <code><a class="el" href="classmodel_1_1_simulation_parameters.html">model.SimulationParameters</a></code>, and invokes the <code><a class="el" href="classcore_1_1_simulator.html">core.Simulator</a></code>. Collaborates with <code><a class="el" href="">ConsolePrompter</a></code> for input collection and <code><a class="el" href="">ConfigFileLoader</a></code> for optional file-based parameters. </p><dl class="section date"><dt>Date</dt><dd>2024-05-30 </dd></dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

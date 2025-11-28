@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"classmodel_1_1_f_g_n_traffic_source.html#a961d5a9e771148c260193bca7c749941":[1,0,3,2,1],
+"classmodel_1_1_pareto_distribution.html":[0,0,3,3],
 "classmodel_1_1_pareto_distribution.html":[1,0,3,3],
 "classmodel_1_1_pareto_distribution.html#a1a52757cd271a9106c94b645dedd8103":[0,0,3,3,0],
 "classmodel_1_1_pareto_distribution.html#a1a52757cd271a9106c94b645dedd8103":[1,0,3,3,0],

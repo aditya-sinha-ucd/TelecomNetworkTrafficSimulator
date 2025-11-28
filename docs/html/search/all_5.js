@@ -32,7 +32,8 @@ var searchData=
   ['gettotalarrived_29',['getTotalArrived',['../classextensions_1_1_network_queue.html#ace9f836bda56ed1143a21053713e8144',1,'extensions::NetworkQueue']]],
   ['gettotaldelay_30',['getTotalDelay',['../classextensions_1_1_queue_element.html#a126c18c3471ed14a408b53d54bbc91ce',1,'extensions::QueueElement']]],
   ['gettotaldropped_31',['getTotalDropped',['../classextensions_1_1_network_queue.html#a6f3dbf3d4daea8a8ae001e3dd986f9e6',1,'extensions::NetworkQueue']]],
-  ['gettotalserved_32',['getTotalServed',['../classextensions_1_1_network_queue.html#a1ddab09c5581125e16a08eca608eacd4',1,'extensions::NetworkQueue']]],
-  ['gettype_33',['getType',['../classcore_1_1_event.html#a8e0e77fd16b732d7f5fbaac9f357b4f1',1,'core::Event']]],
-  ['getwaitingtime_34',['getWaitingTime',['../classextensions_1_1_queue_element.html#aaa1757100a37b5dc0e91b94d4cacc221',1,'extensions::QueueElement']]]
+  ['gettotalduration_32',['getTotalDuration',['../classmodel_1_1_f_g_n_generation_parameters.html#a010a373ab23df5432625adbc9522580a',1,'model::FGNGenerationParameters']]],
+  ['gettotalserved_33',['getTotalServed',['../classextensions_1_1_network_queue.html#a1ddab09c5581125e16a08eca608eacd4',1,'extensions::NetworkQueue']]],
+  ['gettype_34',['getType',['../classcore_1_1_event.html#a8e0e77fd16b732d7f5fbaac9f357b4f1',1,'core::Event']]],
+  ['getwaitingtime_35',['getWaitingTime',['../classextensions_1_1_queue_element.html#aaa1757100a37b5dc0e91b94d4cacc221',1,'extensions::QueueElement']]]
 ];

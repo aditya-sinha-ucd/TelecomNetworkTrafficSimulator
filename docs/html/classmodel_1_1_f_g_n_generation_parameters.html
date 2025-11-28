@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -118,6 +119,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aec8238b406cf939453ba880aa83d5afd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Threshold applied when deriving ON/OFF states.  <br /></td></tr>
 <tr class="memitem:a4a80bb1bd3ef1833b3a424a10aedbea4" id="r_a4a80bb1bd3ef1833b3a424a10aedbea4"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a80bb1bd3ef1833b3a424a10aedbea4">getSeed</a> ()</td></tr>
 <tr class="memdesc:a4a80bb1bd3ef1833b3a424a10aedbea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random seed for reproducibility.  <br /></td></tr>
+<tr class="memitem:a010a373ab23df5432625adbc9522580a" id="r_a010a373ab23df5432625adbc9522580a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a010a373ab23df5432625adbc9522580a">getTotalDuration</a> ()</td></tr>
+<tr class="memdesc:a010a373ab23df5432625adbc9522580a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the total duration covered by the generated samples.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores the configuration required to generate a Fractional Gaussian Noise time-series. </p>
@@ -294,6 +297,26 @@ Public Member Functions</h2></td></tr>
 
 <p>Threshold applied when deriving ON/OFF states. </p>
 <dl class="section return"><dt>Returns</dt><dd>Numeric threshold. </dd></dl>
+
+</div>
+</div>
+<a id="a010a373ab23df5432625adbc9522580a" name="a010a373ab23df5432625adbc9522580a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a010a373ab23df5432625adbc9522580a">&#9670;&#160;</a></span>getTotalDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double model.FGNGenerationParameters.getTotalDuration </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the total duration covered by the generated samples. </p>
+<dl class="section return"><dt>Returns</dt><dd>Total time horizon (<code class="JavaDocCode">samples * samplingInterval</code>). </dd></dl>
 
 </div>
 </div>

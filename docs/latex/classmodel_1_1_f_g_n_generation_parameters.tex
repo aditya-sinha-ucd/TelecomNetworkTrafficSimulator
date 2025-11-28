@@ -21,7 +21,9 @@ double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_a3b7bff5c074c
 double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_aec8238b406cf939453ba880aa83d5afd}{get\+Threshold}} ()
 \begin{DoxyCompactList}\small\item\em Threshold applied when deriving ON/\+OFF states. \end{DoxyCompactList}\item 
 long \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_a4a80bb1bd3ef1833b3a424a10aedbea4}{get\+Seed}} ()
-\begin{DoxyCompactList}\small\item\em Random seed for reproducibility. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Random seed for reproducibility. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classmodel_1_1_f_g_n_generation_parameters_a010a373ab23df5432625adbc9522580a}{get\+Total\+Duration}} ()
+\begin{DoxyCompactList}\small\item\em Computes the total duration covered by the generated samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -137,4 +139,17 @@ Threshold applied when deriving ON/\+OFF states.
 
 \begin{DoxyReturn}{Returns}
 Numeric threshold. 
+\end{DoxyReturn}
+\Hypertarget{classmodel_1_1_f_g_n_generation_parameters_a010a373ab23df5432625adbc9522580a}\index{model.FGNGenerationParameters@{model.FGNGenerationParameters}!getTotalDuration@{getTotalDuration}}
+\index{getTotalDuration@{getTotalDuration}!model.FGNGenerationParameters@{model.FGNGenerationParameters}}
+\doxysubsubsection{\texorpdfstring{getTotalDuration()}{getTotalDuration()}}
+{\footnotesize\ttfamily \label{classmodel_1_1_f_g_n_generation_parameters_a010a373ab23df5432625adbc9522580a} 
+double model.\+FGNGeneration\+Parameters.\+get\+Total\+Duration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Computes the total duration covered by the generated samples. 
+
+\begin{DoxyReturn}{Returns}
+Total time horizon ({\ttfamily samples \texorpdfstring{$\ast$}{*} sampling\+Interval}). 
 \end{DoxyReturn}

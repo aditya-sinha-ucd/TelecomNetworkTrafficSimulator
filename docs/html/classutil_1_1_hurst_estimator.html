@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,16 +100,22 @@ $(function(){initNavTree('classutil_1_1_hurst_estimator.html','','classutil_1_1_
 </div><!--header-->
 <div class="contents">
 
-<p>Estimates the Hurst exponent (H) of a time series via R/S analysis.  
+<p>Static utility class implementing Hurst exponent estimation.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a69505ebc8531e67ec3cb78a7f2feb11c" id="r_a69505ebc8531e67ec3cb78a7f2feb11c"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69505ebc8531e67ec3cb78a7f2feb11c">estimateHurst</a> (List&lt; Double &gt; data)</td></tr>
-<tr class="memdesc:a69505ebc8531e67ec3cb78a7f2feb11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimates the Hurst exponent using the R/S analysis.  <br /></td></tr>
+<tr class="memdesc:a69505ebc8531e67ec3cb78a7f2feb11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate H using the Rescaled-Range (R/S) analysis.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Estimates the Hurst exponent (H) of a time series via R/S analysis. </p>
+<div class="textblock"><p>Static utility class implementing Hurst exponent estimation. </p>
+<p>Uses the classical R/S method:</p><ul>
+<li>Split the series into segments of size N_k</li>
+<li>Compute R/S for each segment</li>
+<li>Average R/S over segments</li>
+<li>Regress log(R/S) against log(N_k) </li>
+</ul>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a69505ebc8531e67ec3cb78a7f2feb11c" name="a69505ebc8531e67ec3cb78a7f2feb11c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69505ebc8531e67ec3cb78a7f2feb11c">&#9670;&#160;</a></span>estimateHurst()</h2>
@@ -133,14 +140,14 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Estimates the Hurst exponent using the R/S analysis. </p>
+<p>Estimate H using the Rescaled-Range (R/S) analysis. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>List of recorded activity rates (0–1). </td></tr>
+    <tr><td class="paramname">data</td><td>Time-series values (double). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Estimated Hurst exponent in range [0, 1]. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Estimated Hurst exponent in (0,1). Returns 0.5 if insufficient data. </dd></dl>
 
 </div>
 </div>

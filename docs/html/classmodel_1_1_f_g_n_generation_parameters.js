@@ -6,5 +6,6 @@ var classmodel_1_1_f_g_n_generation_parameters =
     [ "getSamplingInterval", "classmodel_1_1_f_g_n_generation_parameters.html#a3b7bff5c074cd1b6ad508007c65e4f57", null ],
     [ "getSeed", "classmodel_1_1_f_g_n_generation_parameters.html#a4a80bb1bd3ef1833b3a424a10aedbea4", null ],
     [ "getSigma", "classmodel_1_1_f_g_n_generation_parameters.html#acdf1e274f67f86dc23e3629272cfafa3", null ],
-    [ "getThreshold", "classmodel_1_1_f_g_n_generation_parameters.html#aec8238b406cf939453ba880aa83d5afd", null ]
+    [ "getThreshold", "classmodel_1_1_f_g_n_generation_parameters.html#aec8238b406cf939453ba880aa83d5afd", null ],
+    [ "getTotalDuration", "classmodel_1_1_f_g_n_generation_parameters.html#a010a373ab23df5432625adbc9522580a", null ]
 ];

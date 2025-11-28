@@ -20,6 +20,7 @@
 <script type="text/javascript">
   $(function() { init_search(); });
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -99,32 +100,35 @@ $(function(){initNavTree('_hurst_estimator_8java.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent.  
+<p>Computes the Hurst exponent H using classical Rescaled Range (R/S) analysis.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>import java.util.List;</code><br />
+<div class="textblock"><code>import java.util.ArrayList;</code><br />
+<code>import java.util.List;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for HurstEstimator.java:</div>
 <div class="dyncontent">
 <div class="center"><img src="_hurst_estimator_8java__incl.png" border="0" usemap="#a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2util_2_hurst_estimator_8java" loading="lazy" alt=""/></div>
 <map name="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2util_2_hurst_estimator_8java" id="a_c_1_2_users_2user_2_idea_projects_2_telecom_01_network_01_traffic_01_simulator_2src_2util_2_hurst_estimator_8java">
-<area shape="rect" title="Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent." alt="" coords="5,5,249,64"/>
-<area shape="rect" title=" " alt="" coords="81,112,173,139"/>
-<area shape="poly" title=" " alt="" coords="129,62,129,97,125,95,125,66"/>
+<area shape="rect" title="Computes the Hurst exponent H using classical Rescaled Range (R/S) analysis." alt="" coords="10,5,254,64"/>
+<area shape="rect" title=" " alt="" coords="5,112,128,139"/>
+<area shape="poly" title=" " alt="" coords="113,63,87,101,83,98,108,66"/>
+<area shape="rect" title=" " alt="" coords="152,112,243,139"/>
+<area shape="poly" title=" " alt="" coords="154,62,182,100,176,99,152,67"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:util_2EHurstEstimator" id="r_util_2EHurstEstimator"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classutil_1_1_hurst_estimator.html">util.HurstEstimator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimates the Hurst exponent (H) of a time series via R/S analysis.  <a href="classutil_1_1_hurst_estimator.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static utility class implementing Hurst exponent estimation.  <a href="classutil_1_1_hurst_estimator.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Packages</h2></td></tr>
 <tr class="memitem:util" id="r_util"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html">util</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent. </p>
-<p>Used to characterize the self-similarity of recorded aggregate rates within <code><a class="el" href="classcore_1_1_statistics_collector.html">core.StatisticsCollector</a></code> and FGN workflows. Outputs a value in [0,1] indicating persistence or anti-persistence. </p>
+<div class="textblock"><p>Computes the Hurst exponent H using classical Rescaled Range (R/S) analysis. </p>
+<p>This implementation fixes segmentation, cumulative deviations, averaging across windows, and linear regression. It produces stable and correct H estimates for long-memory processes such as FGN. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

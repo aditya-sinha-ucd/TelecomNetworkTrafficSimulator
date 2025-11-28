@@ -2,13 +2,13 @@
 \hypertarget{_f_g_n_simulation_handler_8java}{}\label{_f_g_n_simulation_handler_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FGNSimulationHandler.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/FGNSimulationHandler.java}}
 
 
-Console workflow that generates Fractional Gaussian Noise time series.  
+Console workflow that configures FGN-\/driven simulations.  
 
 
+{\ttfamily import core.\+Simulator;}\newline
 {\ttfamily import model.\+FGNGeneration\+Parameters;}\newline
-{\ttfamily import util.\+Fractional\+Gaussian\+Noise;}\newline
+{\ttfamily import model.\+Simulation\+Parameters;}\newline
 {\ttfamily import java.\+io.\+IOException;}\newline
-{\ttfamily import java.\+util.\+Linked\+Hash\+Map;}\newline
 {\ttfamily import java.\+util.\+Map;}\newline
 Include dependency graph for FGNSimulation\+Handler.\+java\+:
 \nopagebreak
@@ -31,8 +31,8 @@ package \mbox{\hyperlink{namespaceio}{io}}
 
 
 \doxysubsection{Detailed Description}
-Console workflow that generates Fractional Gaussian Noise time series. 
+Console workflow that configures FGN-\/driven simulations. 
 
-Guides the user through configuration, invokes {\ttfamily \doxylink{classutil_1_1_fractional_gaussian_noise}{util.\+Fractional\+Gaussian\+Noise}}, and exports the resulting samples via {\ttfamily \doxylink{classio_1_1_file_output_manager}{io.\+File\+Output\+Manager}}. Collaborates with {\ttfamily \doxylink{}{Console\+Prompter}} for input collection and {\ttfamily \doxylink{}{Config\+File\+Loader}} for optional file-\/based parameters. \begin{DoxyDate}{Date}
+Guides the user through configuration, builds {\ttfamily \doxylink{classmodel_1_1_f_g_n_generation_parameters}{model.\+FGNGeneration\+Parameters}}, converts them into {\ttfamily \doxylink{classmodel_1_1_simulation_parameters}{model.\+Simulation\+Parameters}}, and invokes the {\ttfamily \doxylink{classcore_1_1_simulator}{core.\+Simulator}}. Collaborates with {\ttfamily \doxylink{}{Console\+Prompter}} for input collection and {\ttfamily \doxylink{}{Config\+File\+Loader}} for optional file-\/based parameters. \begin{DoxyDate}{Date}
 2024-\/05-\/30 
 \end{DoxyDate}

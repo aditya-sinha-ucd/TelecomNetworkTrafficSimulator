@@ -2,23 +2,24 @@
 \hypertarget{_hurst_estimator_8java}{}\label{_hurst_estimator_8java}\index{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/HurstEstimator.java@{C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/util/HurstEstimator.java}}
 
 
-Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent.  
+Computes the Hurst exponent H using classical Rescaled Range (R/S) analysis.  
 
 
+{\ttfamily import java.\+util.\+Array\+List;}\newline
 {\ttfamily import java.\+util.\+List;}\newline
 Include dependency graph for Hurst\+Estimator.\+java\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=263pt]{_hurst_estimator_8java__incl}
+\includegraphics[width=266pt]{_hurst_estimator_8java__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classutil_1_1_hurst_estimator}{util.\+Hurst\+Estimator}}
-\begin{DoxyCompactList}\small\item\em Estimates the Hurst exponent (H) of a time series via R/S analysis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Static utility class implementing Hurst exponent estimation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Packages}
 \begin{DoxyCompactItemize}
 \item 
@@ -27,6 +28,6 @@ package \mbox{\hyperlink{namespaceutil}{util}}
 
 
 \doxysubsection{Detailed Description}
-Provides a simple Rescaled Range (R/S) estimator for the Hurst exponent. 
+Computes the Hurst exponent H using classical Rescaled Range (R/S) analysis. 
 
-Used to characterize the self-\/similarity of recorded aggregate rates within {\ttfamily \doxylink{classcore_1_1_statistics_collector}{core.\+Statistics\+Collector}} and FGN workflows. Outputs a value in \mbox{[}0,1\mbox{]} indicating persistence or anti-\/persistence. 
+This implementation fixes segmentation, cumulative deviations, averaging across windows, and linear regression. It produces stable and correct H estimates for long-\/memory processes such as FGN. 
