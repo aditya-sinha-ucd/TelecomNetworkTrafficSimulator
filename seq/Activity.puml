@@ -1,0 +1,43 @@
+@startuml
+start
+
+:Read input parameters (ConsoleUI);
+:Validate input;
+if (Input valid?) then (yes)
+  :Create SimulationParameters;
+else (no)
+  :Show error message;
+  :Reprompt user or quit;
+  stop
+endif
+
+:Initialise Simulator;
+note right
+  • Create event queue
+  • Create traffic sources
+  • Set mode (Pareto / FGN)
+end note
+
+repeat
+  :More events/time remaining?;
+  if (Continue simulation?) then (yes)
+    :Get next event from EventQueue;
+    :Advance simulation time;
+    :Update source / queue state;
+    :Generate traffic sample;
+    :Update StatisticsCollector
+     (rates, peaks, time-series);
+  else (no)
+    break
+  endif
+repeat while (Continue simulation?)
+
+:Write outputs (FileOutputManager);
+note right
+  • CSV time-series
+  • Event log
+  • Summary stats + Hurst estimate
+end note
+
+stop
+@enduml
