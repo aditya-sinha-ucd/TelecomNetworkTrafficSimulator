@@ -18,6 +18,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.Random;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,27 +34,39 @@ public class SimulatorTest {
      */
     @Test
     void testSimulatorRunsSuccessfully() {
-        // Step 1: Configure Pareto-based simulation parameters
+        // Use non-deterministic randomness so parameters vary on each test run.
+        Random r = new Random();
+
+        // Randomised but safe parameter ranges
+        double totalTime = 20 + r.nextDouble() * 80;   // 20–100 seconds
+        int sources = 1 + r.nextInt(20);               // 1–20 sources
+
+        double onAlpha = 1.1 + r.nextDouble() * 1.5;   // 1.1–2.6
+        double onScale = 0.5 + r.nextDouble() * 2.0;   // 0.5–2.5
+
+        double offAlpha = 1.1 + r.nextDouble() * 1.5;  // 1.1–2.6
+        double offScale = 0.5 + r.nextDouble() * 2.0;  // 0.5–2.5
+
+        // Step 1: Configure parameters
         SimulationParameters params = new SimulationParameters(
-                50.0,   // total simulation time [s]
-                5,      // number of sources
-                1.5,    // ON shape (Pareto alpha)
-                1.0,    // ON scale
-                1.2,    // OFF shape
-                2.0     // OFF scale
+                totalTime,
+                sources,
+                onAlpha,
+                onScale,
+                offAlpha,
+                offScale
         );
 
-        // Optional fine-tuning
-        params.samplingInterval = 1.0;
+        params.samplingInterval = 0.5 + r.nextDouble(); // 0.5–1.5
         params.trafficModel = SimulationParameters.TrafficModel.PARETO_ON_OFF;
-        params.randomSeed = 42L;
+        params.randomSeed = r.nextLong();
 
-        // Step 2: Create simulator instance
+        // Step 2: Create simulator
         Simulator sim = new Simulator(params);
 
-        // tep 3: Verify that it runs without throwing any exceptions -
+        // Step 3: Assert simulator runs without exceptions
         assertDoesNotThrow(sim::run,
-                "Simulator should complete a full run without exceptions");
+                "Simulator should complete successfully with randomized parameters");
     }
 
     /**
@@ -60,23 +74,34 @@ public class SimulatorTest {
      */
     @Test
     void testSimulatorHandlesFGNModel() {
-        // Step 1: Configure FGN-based model parameters
+        // Use non-deterministic randomness so parameters vary on each test run.
+        Random r = new Random();
+
+        // Step 1: Configure randomised but safe FGN parameters
+        double totalTime = 10 + r.nextDouble() * 40;     // 10–50 seconds
+        int sources = 1 + r.nextInt(5);                   // 1–5 sources (fast test)
+
         SimulationParameters params = new SimulationParameters(
-                20.0,  // short run
-                3,     // fewer sources for faster test
-                1.5, 1.0, 1.2, 2.0
+                totalTime,
+                sources,
+                1.5, 1.0, 1.2, 2.0    // not used in FGN mode
         );
+
         params.trafficModel = SimulationParameters.TrafficModel.FGN_THRESHOLD;
-        params.hurst = 0.8;
-        params.fgnSigma = 1.0;
-        params.fgnThreshold = 0.0;
+
+        params.hurst = 0.6 + r.nextDouble() * 0.3;       // H = 0.6–0.9
+        params.fgnSigma = 0.5 + r.nextDouble() * 2.0;    // σ = 0.5–2.5
+        params.fgnThreshold = -0.25 + r.nextDouble() * 0.5; // threshold = -0.25–0.25
+        params.samplingInterval = 0.05 + r.nextDouble() * 0.2; // 0.05–0.25 s
+        params.randomSeed = r.nextLong();
 
         // Step 2: Run FGN simulation
         Simulator sim = new Simulator(params);
 
         assertDoesNotThrow(sim::run,
-                "FGN-based Simulator should run without throwing exceptions");
+                "FGN-based Simulator should run with randomized parameters");
     }
+
 
     /**
      * @brief Confirms a custom {@link OutputSink} can be injected and observed
