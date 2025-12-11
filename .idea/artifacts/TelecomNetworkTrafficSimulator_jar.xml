@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TelecomNetworkTrafficSimulator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TelecomNetworkTrafficSimulator_jar</output-path>
+    <root id="archive" name="TelecomNetworkTrafficSimulator.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="network-traffic-simulator" />
+    </root>
+  </artifact>
+</component>
