@@ -1,0 +1,9 @@
+<map id="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/OutputSink.java" name="C:/Users/user/IdeaProjects/Telecom Network Traffic Simulator/src/io/OutputSink.java">
+<area shape="rect" id="Node000001" title="Interface describing how simulation artifacts are persisted." alt="" coords="86,5,300,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,90,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,64,82,106,80,101,143,65"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="114,112,272,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,62,195,97,191,95,191,66"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="296,112,471,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="255,62,345,105,340,105,254,67"/>
+</map>

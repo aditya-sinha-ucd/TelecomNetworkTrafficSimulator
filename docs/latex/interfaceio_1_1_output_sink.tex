@@ -1,0 +1,144 @@
+\doxysection{io.\+Output\+Sink Interface Reference}
+\hypertarget{interfaceio_1_1_output_sink}{}\label{interfaceio_1_1_output_sink}\index{io.OutputSink@{io.OutputSink}}
+
+
+Contract for saving events, summaries, and FGN outputs.  
+
+
+
+
+Inheritance diagram for io.\+Output\+Sink\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{interfaceio_1_1_output_sink__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for io.\+Output\+Sink\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{interfaceio_1_1_output_sink__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{interfaceio_1_1_output_sink_a04b309b5e0f81f20c915b1cf9eb04d9e}{get\+Run\+Directory}} ()
+\begin{DoxyCompactList}\small\item\em Provides the run directory where artifacts will be stored. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfaceio_1_1_output_sink_aadf75eca6b2ec14bcdf42c3ee99b8907}{log\+Event}} (\mbox{\hyperlink{classcore_1_1_event}{Event}} event)
+\begin{DoxyCompactList}\small\item\em Records an event transition for traceability. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfaceio_1_1_output_sink_a15170bb5ff306424c0534e678f1dcd23}{save\+Summary}} (\mbox{\hyperlink{classcore_1_1_statistics_collector}{Statistics\+Collector}} stats, \mbox{\hyperlink{classextensions_1_1_network_queue}{Network\+Queue}} queue)
+\begin{DoxyCompactList}\small\item\em Persists simulator statistics and queue metrics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfaceio_1_1_output_sink_aafc8d45d0791924f35b970af3c15022c}{save\+FGNResults}} (double\mbox{[}$\,$\mbox{]} series, double H, double sigma, double sampling\+Interval, double threshold)
+\begin{DoxyCompactList}\small\item\em Persists Fractional Gaussian Noise generation artifacts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfaceio_1_1_output_sink_aed4ca742b1f8b5bffa2504a0a5239a0c}{close}} ()
+\begin{DoxyCompactList}\small\item\em Ensures any buffered content is flushed and files are closed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contract for saving events, summaries, and FGN outputs. 
+
+\label{doc-func-members}
+\Hypertarget{interfaceio_1_1_output_sink_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfaceio_1_1_output_sink_aed4ca742b1f8b5bffa2504a0a5239a0c}\index{io.OutputSink@{io.OutputSink}!close@{close}}
+\index{close@{close}!io.OutputSink@{io.OutputSink}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{interfaceio_1_1_output_sink_aed4ca742b1f8b5bffa2504a0a5239a0c} 
+void io.\+Output\+Sink.\+close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Ensures any buffered content is flushed and files are closed. 
+
+
+
+Implemented in \mbox{\hyperlink{classio_1_1_file_output_manager_a41772efb869410efcea0a227b684383a}{io.\+File\+Output\+Manager}}.
+
+\Hypertarget{interfaceio_1_1_output_sink_a04b309b5e0f81f20c915b1cf9eb04d9e}\index{io.OutputSink@{io.OutputSink}!getRunDirectory@{getRunDirectory}}
+\index{getRunDirectory@{getRunDirectory}!io.OutputSink@{io.OutputSink}}
+\doxysubsubsection{\texorpdfstring{getRunDirectory()}{getRunDirectory()}}
+{\footnotesize\ttfamily \label{interfaceio_1_1_output_sink_a04b309b5e0f81f20c915b1cf9eb04d9e} 
+String io.\+Output\+Sink.\+get\+Run\+Directory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Provides the run directory where artifacts will be stored. 
+
+\begin{DoxyReturn}{Returns}
+Absolute or relative folder path containing every artifact for the run. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classio_1_1_file_output_manager_ae796887c8772421829f5de50b1fd50bc}{io.\+File\+Output\+Manager}}.
+
+\Hypertarget{interfaceio_1_1_output_sink_aadf75eca6b2ec14bcdf42c3ee99b8907}\index{io.OutputSink@{io.OutputSink}!logEvent@{logEvent}}
+\index{logEvent@{logEvent}!io.OutputSink@{io.OutputSink}}
+\doxysubsubsection{\texorpdfstring{logEvent()}{logEvent()}}
+{\footnotesize\ttfamily \label{interfaceio_1_1_output_sink_aadf75eca6b2ec14bcdf42c3ee99b8907} 
+void io.\+Output\+Sink.\+log\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcore_1_1_event}{Event}}}]{event}{}\end{DoxyParamCaption})}
+
+
+
+Records an event transition for traceability. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \doxylink{classcore_1_1_event}{Event} being logged. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classio_1_1_file_output_manager_a16b7dd5f27d59c3118326897f8f02f07}{io.\+File\+Output\+Manager}}.
+
+\Hypertarget{interfaceio_1_1_output_sink_aafc8d45d0791924f35b970af3c15022c}\index{io.OutputSink@{io.OutputSink}!saveFGNResults@{saveFGNResults}}
+\index{saveFGNResults@{saveFGNResults}!io.OutputSink@{io.OutputSink}}
+\doxysubsubsection{\texorpdfstring{saveFGNResults()}{saveFGNResults()}}
+{\footnotesize\ttfamily \label{interfaceio_1_1_output_sink_aafc8d45d0791924f35b970af3c15022c} 
+void io.\+Output\+Sink.\+save\+FGNResults (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{series}{, }\item[{double}]{H}{, }\item[{double}]{sigma}{, }\item[{double}]{sampling\+Interval}{, }\item[{double}]{threshold}{}\end{DoxyParamCaption})}
+
+
+
+Persists Fractional Gaussian Noise generation artifacts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em series} & Generated time-\/series samples. \\
+\hline
+{\em H} & Target Hurst exponent used for generation. \\
+\hline
+{\em sigma} & Standard deviation of the sequence. \\
+\hline
+{\em sampling\+Interval} & Spacing between consecutive samples (seconds). \\
+\hline
+{\em threshold} & Numeric threshold separating ON/\+OFF states for logging. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classio_1_1_file_output_manager_af552798fa19bb2286230ede9a25719d8}{io.\+File\+Output\+Manager}}.
+
+\Hypertarget{interfaceio_1_1_output_sink_a15170bb5ff306424c0534e678f1dcd23}\index{io.OutputSink@{io.OutputSink}!saveSummary@{saveSummary}}
+\index{saveSummary@{saveSummary}!io.OutputSink@{io.OutputSink}}
+\doxysubsubsection{\texorpdfstring{saveSummary()}{saveSummary()}}
+{\footnotesize\ttfamily \label{interfaceio_1_1_output_sink_a15170bb5ff306424c0534e678f1dcd23} 
+void io.\+Output\+Sink.\+save\+Summary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcore_1_1_statistics_collector}{Statistics\+Collector}}}]{stats}{, }\item[{\mbox{\hyperlink{classextensions_1_1_network_queue}{Network\+Queue}}}]{queue}{}\end{DoxyParamCaption})}
+
+
+
+Persists simulator statistics and queue metrics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stats} & Computed traffic statistics for the run. \\
+\hline
+{\em queue} & Aggregate queue metrics captured alongside traffic stats. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classio_1_1_file_output_manager_a5f4410cf4bd6cea176e312d30de52e95}{io.\+File\+Output\+Manager}}.
+
